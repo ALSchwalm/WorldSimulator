@@ -16,12 +16,16 @@ namespace Event
 	enum EventType
 	{
 		BIRTH_EVENT,
+
+		//Insert events befor this
 		NUM_OF_EVENTS
 	};
 
 
 	class BaseEvent {
 	public:
+		virtual ~BaseEvent(){};
+
 		virtual std::string getEventName() = 0;
 		virtual EventType getEventType() = 0;
 
