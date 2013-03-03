@@ -9,18 +9,10 @@
 #include <vector>
 #include "Individual/Person.h"
 #include "Event/BirthEvent.h"
+#include "Utils/Markov.h"
 
 int main()
 {
-	using namespace Event;
-	Individual::Person *p;
-
-	BirthEvent * e = new BirthEvent();
-
-	p = e->run();
-
-	std::cout << "test" << p->getName();
-
 	return 0;
 }
 
