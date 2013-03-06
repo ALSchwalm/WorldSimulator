@@ -35,7 +35,7 @@ namespace Time {
 		Month getMonth() {return month;}
 		Day getDay() {return day;}
 
-		bool operator ==(Date&);
+		bool operator ==(Date);
 
 	private:
 		unsigned int year;

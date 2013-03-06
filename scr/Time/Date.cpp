@@ -18,9 +18,9 @@ namespace Time {
 	}
 
 
-	bool Date::operator ==(Date & rhs)
+	bool Date::operator ==(Date rhs)
 	{
-		if (rhs.day == this->day &&
+		if (rhs.day == this->day 	 &&
 			rhs.month == this->month &&
 			rhs.year == this->year)
 			return true;
