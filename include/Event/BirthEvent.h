@@ -8,8 +8,10 @@
 #ifndef BIRTHEVENT_H_
 #define BIRTHEVENT_H_
 
+#include <Event/Event.h>
 #include <Event/BaseEvent.h>
 #include <Individual/Person.h>
+#include <Location/BaseLocation.h>
 
 namespace Event
 {
@@ -17,16 +19,21 @@ namespace Event
 	class BirthEvent : public BaseEvent
 	{
 	public:
-		BirthEvent();
+		BirthEvent(
+				std::shared_ptr<Individual::BaseIndividual>,
+				std::shared_ptr<Location::BaseLocation>);
+		~BirthEvent();
 
 		EventType getEventType() { return EventType::BIRTH_EVENT;};
 		std::string getEventName() {return name;};
 
-		Individual::Person * run();
+		void run();
 
 
 	private:
 		std::string name;
+		std::shared_ptr<Location::BaseLocation> birthPlace;
+		std::shared_ptr<Individual::BaseIndividual> individual;
 
 	};
 

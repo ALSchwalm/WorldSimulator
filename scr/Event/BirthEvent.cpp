@@ -6,18 +6,29 @@
  */
 
 #include "Event/BirthEvent.h"
+#include <iostream> //TODO remove this
 
 namespace Event {
 
-BirthEvent::BirthEvent() :
-		name("Birth")
-{
-}
+	BirthEvent::BirthEvent(
+			std::shared_ptr<Individual::BaseIndividual> i,
+			std::shared_ptr<Location::BaseLocation> l) :
+			name("Birth"),
+			birthPlace(l),
+			individual(i)
+	{
+	}
 
-Individual::Person * BirthEvent::run()
-{
-	return new Individual::Person();
-}
+	BirthEvent::~BirthEvent()
+	{
+		std::cout << "BirthEvent deleted" << std::endl;
+	}
+
+	void BirthEvent::run()
+	{
+		individual->addEvent(std::shared_ptr<Event::BirthEvent>(this));
+		birthPlace->addIndividual(individual);
+	}
 
 
 } /* namespace Event */

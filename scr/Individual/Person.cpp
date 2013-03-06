@@ -7,17 +7,15 @@
 
 #include "Individual/Person.h"
 
-using namespace Individual;
+namespace Individual
+{
 
-Person::Person() :
-	age(0),
-	name("")
+Person::Person()
 {
 }
 
-Person::Person(std::string s) :
-	age(0),
-	name(s)
+Person::Person(std::string s) : BaseIndividual(s)
 {
 }
 
+}

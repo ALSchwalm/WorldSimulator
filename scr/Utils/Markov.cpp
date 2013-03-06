@@ -5,21 +5,22 @@
  *      Author: Adam
  */
 
-#include "Utils/Markov.h"
+#include "Utils\Markov.h"
 #include <algorithm>
 #include <fstream>
 #include <random>
 #include <time.h>
 #include <cstdlib>
 
+
 using namespace Util;
 
 
 std::map<char, std::vector<char> > Markov::MarkovMap;
 
-Markov * Markov::getInstance()
+Markov & Markov::getInstance()
 {
-	static Markov * m = new Markov();
+	static Markov m;
 	return m;
 }
 

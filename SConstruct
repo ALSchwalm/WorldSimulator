@@ -41,6 +41,8 @@ if not COMP_INCLUDES_INTO_CCFLAGS:
 
 env.Append(CFLAGS=C_FLAGS, CXXFLAGS=CXX_FLAGS)
 env.Append(CXXFLAGS=['-std=c++0x'])
+LIBRARIES = ['pdcurses']
+LIBRARY_PATHS = ['lib/']
 env.Append(CPPPATH=["include"])
 env.Replace(CCFLAGS='') # otherwise we have /nolink in Windows there
 env.Decider(DECIDER)

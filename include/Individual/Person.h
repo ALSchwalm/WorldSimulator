@@ -8,28 +8,20 @@
 #ifndef PERSON_H_
 #define PERSON_H_
 
+#include "Event/Event.h"
 #include "Event/BaseEvent.h"
+#include "Individual/BaseIndividual.h"
 #include <string>
 
 namespace Individual
 {
-	class Person {
+	class Person : public BaseIndividual
+	{
 	public:
 		Person();
 		Person(std::string name);
 
-		virtual unsigned int getAge() {return age;};
-		virtual const std::string getName() {return name;};
-
-		virtual const Event::EventHistory & getHistory() {return history;};
-
-		virtual void addEvent(Event::BaseEvent *e) {history.push_back(e);};
-
-	private:
-		unsigned int age;
-		const std::string name;
-
-		Event::EventHistory history;
+		IndividualType getIndividualType() {return IndividualType::CITIZEN;}
 
 	};
 }

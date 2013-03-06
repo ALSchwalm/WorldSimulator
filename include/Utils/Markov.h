@@ -16,7 +16,7 @@ namespace Util
 {
 	class Markov {
 	public:
-		static Markov * getInstance();
+		static Markov & getInstance();
 
 		std::string getWord(bool properName=0);
 		std::string getWord(unsigned int, bool properName=0);

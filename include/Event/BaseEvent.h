@@ -5,23 +5,14 @@
  *      Author: Adam
  */
 
-#ifndef EVENT_H_
-#define EVENT_H_
+#ifndef BASE_EVENT_H_
+#define BASE_EVENT_H_
 
+#include <Event/Event.h>
 #include <string>
-#include <vector>
 
 namespace Event
 {
-	enum EventType
-	{
-		BIRTH_EVENT,
-
-		//Insert events befor this
-		NUM_OF_EVENTS
-	};
-
-
 	class BaseEvent {
 	public:
 		virtual ~BaseEvent(){};
@@ -29,8 +20,9 @@ namespace Event
 		virtual std::string getEventName() = 0;
 		virtual EventType getEventType() = 0;
 
+		virtual void run() = 0;
+
 	};
 
-	typedef std::vector<BaseEvent*> EventHistory;
 }
 #endif /* EVENT_H_ */
