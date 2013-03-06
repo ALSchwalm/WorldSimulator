@@ -21,11 +21,15 @@ namespace Event
 	public:
 		BirthEvent(
 				std::shared_ptr<Individual::BaseIndividual>,
-				std::shared_ptr<Location::BaseLocation>);
+				std::shared_ptr<Location::BaseLocation>,
+				Time::Date
+		);
 		~BirthEvent();
 
 		EventType getEventType() { return EventType::BIRTH_EVENT;};
 		std::string getEventName() {return name;};
+
+		Time::Date getExecutionDate() {return executionDate;}
 
 		void run();
 
@@ -34,6 +38,7 @@ namespace Event
 		std::string name;
 		std::shared_ptr<Location::BaseLocation> birthPlace;
 		std::shared_ptr<Individual::BaseIndividual> individual;
+		Time::Date executionDate;
 
 	};
 

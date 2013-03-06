@@ -12,10 +12,12 @@ namespace Event {
 
 	BirthEvent::BirthEvent(
 			std::shared_ptr<Individual::BaseIndividual> i,
-			std::shared_ptr<Location::BaseLocation> l) :
+			std::shared_ptr<Location::BaseLocation> l,
+			Time::Date d) :
 			name("Birth"),
 			birthPlace(l),
-			individual(i)
+			individual(i),
+			executionDate(d)
 	{
 	}
 

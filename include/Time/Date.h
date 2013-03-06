@@ -14,26 +14,31 @@ namespace Time {
 		unsigned int value;
 	};
 
-	struct Month{
-			unsigned int value;
+	enum Month
+	{
+		January,
+		February
 	};
 
-	struct Day{
-			unsigned int value;
+	enum Day
+	{
+		Sunday,
+		Monday
 	};
-
 
 	class Date {
 
 	public:
-		Date(Year year, Month month, Day day);
+		Date(unsigned int year, Month month, Day day);
 
-		Year getYear() {return year;}
+		unsigned int getYear() {return year;}
 		Month getMonth() {return month;}
 		Day getDay() {return day;}
 
+		bool operator ==(Date&);
+
 	private:
-		Year year;
+		unsigned int year;
 		Month month;
 		Day day;
 	};

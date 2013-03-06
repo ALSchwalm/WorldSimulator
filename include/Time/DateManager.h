@@ -9,10 +9,16 @@ namespace Time
 	public:
 		static DateManager & getInstance();
 
+		Date now;
+
 	private:
-		DateManager(){};
+		DateManager();
 
 	};
+
+
+	//shorthand for Time::DateManager::getInstance().now
+	inline Date now() {return DateManager::getInstance().now;}
 }
 
 

@@ -9,12 +9,22 @@
 
 namespace Time {
 
-	Date::Date(Year _year, Month _month, Day _day) :
+	Date::Date(unsigned int _year, Month _month, Day _day) :
 		year(_year),
 		month(_month),
 		day(_day)
 	{
 
+	}
+
+
+	bool Date::operator ==(Date & rhs)
+	{
+		if (rhs.day == this->day &&
+			rhs.month == this->month &&
+			rhs.year == this->year)
+			return true;
+		return false;
 	}
 
 } /* namespace Time */

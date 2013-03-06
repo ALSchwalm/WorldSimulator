@@ -9,6 +9,7 @@
 #define BASE_EVENT_H_
 
 #include <Event/Event.h>
+#include <Time/Date.h>
 #include <string>
 
 namespace Event
@@ -19,6 +20,7 @@ namespace Event
 
 		virtual std::string getEventName() = 0;
 		virtual EventType getEventType() = 0;
+		virtual Time::Date getExecutionDate() = 0;
 
 		virtual void run() = 0;
 

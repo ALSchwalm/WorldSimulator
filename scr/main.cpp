@@ -10,22 +10,27 @@
 #include "Event/EventQueue.h"
 #include "Individual/Person.h"
 #include "Location/Village.h"
+#include "Time/DateManager.h"
 
 #include <iostream>
 
 int main()
 {
+	auto p2 = std::make_shared<Individual::Person>("test Person 2");
 	auto p = std::make_shared<Individual::Person>("test Person");
+
 	auto l = std::make_shared<Location::Village>("test Location");
 
-	auto e = std::make_shared<Event::BirthEvent>(p, l);
+	auto e = std::make_shared<Event::BirthEvent>(p, l, Time::now());
+	auto e2 = std::make_shared<Event::BirthEvent>(p2, l, Time::now());
 
-//	Event::EventQueue::getInstance().addEvent(e);
-//	Event::EventQueue::getInstance().execute();
+	Event::EventQueue::getInstance().addEvent(e2);
+	Event::EventQueue::getInstance().addEvent(e);
 
-	e->run();
+	Event::EventQueue::getInstance().execute();
 
-	std::cout << l->getIndividuals()[0]->getName() << std::endl;
+	for (auto person : l->getIndividuals() )
+		std::cout << person->getName() << std::endl;
 
 	return 0;
 }
