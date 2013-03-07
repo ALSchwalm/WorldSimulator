@@ -8,6 +8,8 @@
 #ifndef DATE_H_
 #define DATE_H_
 
+#include <iostream>
+
 namespace Time {
 
 	struct Year{
@@ -17,13 +19,32 @@ namespace Time {
 	enum Month
 	{
 		January,
-		February
+		February,
+		March,
+		April,
+		May,
+		June,
+		July,
+		August,
+		September,
+		October,
+		November,
+		December,
+
+		NUM_OF_MONTHS
 	};
 
 	enum Day
 	{
 		Sunday,
-		Monday
+		Monday,
+		Tuesday,
+		Wednesday,
+		Thursday,
+		Friday,
+		Saturday,
+
+		NUM_OF_DAYS
 	};
 
 	class Date {
@@ -36,11 +57,18 @@ namespace Time {
 		Day getDay() {return day;}
 
 		bool operator ==(Date);
+		Date & operator++();
+
+		friend std::ostream& operator<<(std::ostream &out, Date &d);
 
 	private:
+
+		static const unsigned int DAYS_PER_MONTH = 30;
+
 		unsigned int year;
 		Month month;
 		Day day;
+		unsigned int dayValue;
 	};
 
 } /* namespace Time */

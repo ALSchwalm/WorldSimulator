@@ -9,19 +9,21 @@ namespace Time
 	public:
 		static DateManager & getInstance();
 
+		void nextDay() {++now;}
+
 		Date now;
 
 	private:
 		DateManager();
 
+		const unsigned int DAYS_PER_SECOND = 5;
+
 	};
 
 
 	//shorthand for Time::DateManager::getInstance().now
-	inline Date now() {return DateManager::getInstance().now;}
+	inline Date & now() {return DateManager::getInstance().now;}
 }
-
-
 
 
 #endif

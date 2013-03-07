@@ -2,7 +2,7 @@
 ## Scons
 #################
 
-*.dblite
+.sconsign.dblite
 
 #################
 ## Eclipse

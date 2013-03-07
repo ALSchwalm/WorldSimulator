@@ -1,10 +1,6 @@
-#ifndef EVENTQUEUE_H_
-#define EVENTQUEUE_H_
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
-#include <memory>
+const double POP_GROWTH_RATE = 0.01;
 
-template <typename N>
-using shared = std::shared_ptr<N>;
-
-
-#endif
+#endif // GLOBAL_H

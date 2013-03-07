@@ -10,6 +10,7 @@ DateManager & DateManager::getInstance()
 }
 
 DateManager::DateManager() :
-		now (Date(0, Month::January, Day::Sunday))
+		now (Date(1, Month::January, Day::Sunday))
 {
+
 }
