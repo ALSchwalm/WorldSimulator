@@ -11,7 +11,9 @@
 #include "Individual/BaseIndividual.h"
 #include <memory>
 
-namespace Location {
+namespace Location
+{
+	typedef std::shared_ptr<BaseLocation> Location_ptr;
 
 	enum LocationType
 	{
@@ -29,7 +31,7 @@ namespace Location {
 
 		virtual std::string getName() = 0;
 		virtual LocationType getLocationType() = 0;
-		virtual void addIndividual(std::shared_ptr<Individual::BaseIndividual>) = 0;
+		virtual void addIndividual(Individual::Individual_ptr) = 0;
 
 	private:
 

@@ -10,10 +10,12 @@
 
 #include <Event/Event.h>
 #include <Time/Date.h>
-#include <string>
+#include <memory>
 
 namespace Event
 {
+	typedef std::shared_ptr<BaseEvent> Event_ptr;
+
 	class BaseEvent {
 	public:
 		virtual ~BaseEvent(){};

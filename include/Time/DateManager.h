@@ -16,8 +16,6 @@ namespace Time
 	private:
 		DateManager();
 
-		const unsigned int DAYS_PER_SECOND = 5;
-
 	};
 
 

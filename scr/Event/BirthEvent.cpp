@@ -6,6 +6,7 @@
  */
 
 #include "Event/BirthEvent.h"
+#include "Relationship/Relationship.h"
 #include <iostream> //TODO remove this
 
 namespace Event {
@@ -28,7 +29,12 @@ namespace Event {
 
 	void BirthEvent::run()
 	{
-		individual->addEvent(std::shared_ptr<Event::BirthEvent>(this));
+		typedef Relationship::Relationship<Individual::BaseIndividual, Location::BaseLocation> rel;
+
+		auto tempRelationship = std::make_shared<rel>(individual, birthPlace, Relationship::RelationshipType::BIRTHPLACE);
+
+		individual->addLocationRelationship(birthPlace, tempRelationship);
+		individual->addEvent(std::shared_ptr<BirthEvent>(this));
 		birthPlace->addIndividual(individual);
 	}
 

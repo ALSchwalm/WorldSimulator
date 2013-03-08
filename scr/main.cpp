@@ -12,32 +12,27 @@
 #include "Location/Village.h"
 #include "Time/DateManager.h"
 #include "Time/TimeManager.h"
+#include "Relationship/Relationship.h"
 
 #include <iostream>
 
 int main()
 {
-//	auto p2 = std::make_shared<Individual::Person>("test Person 2");
-//	auto p = std::make_shared<Individual::Person>("test Person");
-//
-//	auto l = std::make_shared<Location::Village>("test Location");
-//
-//	auto e = std::make_shared<Event::BirthEvent>(p, l, Time::now());
-//	auto e2 = std::make_shared<Event::BirthEvent>(p2, l, Time::now());
-//
-//	Event::EventQueue::getInstance().addEvent(e2);
-//	Event::EventQueue::getInstance().addEvent(e);
-//
-//	Event::EventQueue::getInstance().execute();
-//
-//	for (auto person : l->getIndividuals() )
-//		std::cout << person->getName() << std::endl;
+	auto p2 = std::make_shared<Individual::Person>("test Person 2");
+	auto p = std::make_shared<Individual::Person>("test Person");
 
-	while (true)
-	{
-		Time::TimeManager::getInstance().capFPS();
-		Time::TimeManager::getInstance().tick();
-	}
+	auto l = std::make_shared<Location::Village>("test Location");
+
+	auto e = std::make_shared<Event::BirthEvent>(p, l, Time::now());
+	auto e2 = std::make_shared<Event::BirthEvent>(p2, l, Time::now());
+
+	Event::EventQueue::getInstance().addEvent(e2);
+	Event::EventQueue::getInstance().addEvent(e);
+
+	Event::EventQueue::getInstance().execute();
+
+	for (auto person : l->getIndividuals() )
+		std::cout << person->getName() << " -> " << Relationship::getRelationshipAsString(person->getLocationRelationships(l)[0]->getType())  << std::endl;
 
 	return 0;
 }
