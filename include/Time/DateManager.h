@@ -18,7 +18,6 @@ namespace Time
 
 	};
 
-
 	//shorthand for Time::DateManager::getInstance().now
 	inline Date & now() {return DateManager::getInstance().now;}
 }
