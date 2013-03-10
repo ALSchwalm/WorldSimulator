@@ -19,7 +19,7 @@ namespace Individual
 	{
 	public:
 		Person();
-		Person(std::string name);
+		Person(std::string name, Location_ptr location);
 
 		IndividualType getIndividualType() {return IndividualType::CITIZEN;}
 

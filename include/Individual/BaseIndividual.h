@@ -3,6 +3,7 @@
 
 #include "Individual/Individual.h"
 #include "Event/Event.h"
+#include "Action/GoalTree.h"
 #include <string>
 #include <map>
 #include <utility>
@@ -33,8 +34,15 @@ namespace Individual
 	protected:
 		virtual ~BaseIndividual(){}
 
-		BaseIndividual() : age(0), name("DefaultName"){}
-		BaseIndividual(std::string _name) : age(0), name(_name){}
+		BaseIndividual() :
+			age(0),
+			name("DefaultName"),
+			currentLocation (nullptr){}
+
+		BaseIndividual(std::string _name, Location_ptr _location=nullptr) :
+			age(0),
+			name(_name),
+			currentLocation(_location){}
 
 		typedef Relationship::Relationship<BaseIndividual, BaseIndividual > IIR;
 		typedef Relationship::Relationship<BaseIndividual, Location::BaseLocation > ILR;
@@ -44,9 +52,15 @@ namespace Individual
 
 		unsigned int age;
 		const std::string name;
+		Location_ptr currentLocation;
 
 		Event::EventHistory history;
+
+		Action::GoalTree goalTree;
 	public:
+
+		virtual Location_ptr getCurrentLocation() { return currentLocation; }
+		virtual void setCurrentLocation( Location_ptr c ) { currentLocation = c;}
 
 		virtual unsigned int getAge() {return age;}
 		virtual const std::string getName() {return name;}

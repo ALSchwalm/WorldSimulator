@@ -3,12 +3,14 @@
 
 #include <vector>
 #include <memory>
-#include "Task/GoalTree.h"
-#include "Task/BaseTask.h"
+#include "Action/Task.h"
 
-namespace Task
+namespace Action
 {
-	typedef std::shared_ptr<Goal> Goal_ptr;
+	class GoalTree;
+	class Task;
+	typedef std::shared_ptr<Task> Task_ptr;
+
 
 	enum GoalType
 	{
@@ -25,6 +27,7 @@ namespace Task
 		Goal(std::vector<Task_ptr>, GoalType g);
 
 		bool execute();
+		void taskFinished();
 
 	private:
 		GoalType goalType;
@@ -33,4 +36,7 @@ namespace Task
 
 	};
 
+	typedef std::shared_ptr<Goal> Goal_ptr;
 }
+
+#endif

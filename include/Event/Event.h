@@ -11,6 +11,7 @@ namespace Event
 	enum EventType
 	{
 		BIRTH_EVENT,
+		END_TASK_EVENT,
 
 		//Insert events before this
 		EVENT_ERROR,

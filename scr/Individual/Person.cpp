@@ -14,7 +14,7 @@ Person::Person()
 {
 }
 
-Person::Person(std::string s) : BaseIndividual(s)
+Person::Person(std::string s, Location_ptr location) : BaseIndividual(s, location)
 {
 }
 

@@ -20,9 +20,9 @@ namespace Event
 	{
 	public:
 		BirthEvent(
+				Time::Date,
 				std::shared_ptr<Individual::BaseIndividual>,
-				std::shared_ptr<Location::BaseLocation>,
-				Time::Date
+				std::shared_ptr<Location::BaseLocation>
 		);
 		~BirthEvent();
 

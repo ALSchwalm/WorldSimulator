@@ -18,13 +18,15 @@
 
 int main()
 {
-	auto p2 = std::make_shared<Individual::Person>("test Person 2");
-	auto p = std::make_shared<Individual::Person>("test Person");
+
 
 	auto l = std::make_shared<Location::Village>("test Location");
 
-	auto e = std::make_shared<Event::BirthEvent>(p, l, Time::now());
-	auto e2 = std::make_shared<Event::BirthEvent>(p2, l, Time::now());
+	auto p2 = std::make_shared<Individual::Person>("test Person 2", l);
+	auto p = std::make_shared<Individual::Person>("test Person", l);
+
+	auto e = std::make_shared<Event::BirthEvent>(Time::now(), p, l);
+	auto e2 = std::make_shared<Event::BirthEvent>(Time::now(), p2, l);
 
 	Event::EventQueue::getInstance().addEvent(e2);
 	Event::EventQueue::getInstance().addEvent(e);
