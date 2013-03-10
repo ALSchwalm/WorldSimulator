@@ -3,9 +3,10 @@
 
 using namespace Action;
 
-Goal::Goal(std::vector<Task_ptr> _taskList, GoalType _goalType) :
+Goal::Goal(std::vector<Task_ptr> _taskList, GoalType _goalType, unsigned int _priority) :
 		goalType(_goalType),
-		taskList(_taskList)
+		taskList(_taskList),
+		priority(_priority)
 {
 
 }

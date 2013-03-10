@@ -2,7 +2,6 @@
 #define BASETASK_H_
 
 #include <memory>
-#include "Action/GoalTree.h"
 #include "Action/Goal.h"
 #include "Event/BaseEvent.h"
 

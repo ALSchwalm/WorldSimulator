@@ -24,12 +24,15 @@ namespace Action
 	{
 
 	public:
-		Goal(std::vector<Task_ptr>, GoalType g);
+		Goal(std::vector<Task_ptr>, GoalType g, unsigned int p = 0);
 
 		bool execute();
 		void taskFinished();
 
+		unsigned int getPriority() {return priority;}
+
 	private:
+		unsigned int priority;
 		GoalType goalType;
 		std::shared_ptr<GoalTree> tree;
 		std::vector<Task_ptr> taskList;

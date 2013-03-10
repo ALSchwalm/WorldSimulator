@@ -1,15 +1,13 @@
 #ifndef GOALTREE_H_
 #define GOALTREE_H_
 
-#include <vector>
+#include <set>
 #include <memory>
 #include "Action/Goal.h"
 
 
 namespace Action
 {
-	class Goal;
-	typedef std::shared_ptr<Goal> Goal_ptr;
 
 
 	class GoalTree
@@ -26,7 +24,16 @@ namespace Action
 
 	private:
 		Goal_ptr currentGoal;
-		std::vector<Goal_ptr> goals;
+
+
+		struct priority
+		{
+			bool operator() ( const Goal_ptr & lhs, const Goal_ptr & rhs) const {
+				return lhs->getPriority() < rhs->getPriority();
+			}
+		};
+
+		std::set<Goal_ptr, priority> goals;
 
 
 	};
