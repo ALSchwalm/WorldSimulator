@@ -19,13 +19,13 @@ namespace Time
 	private:
         TimeManager();
 
-        double dTimeLastFrame;
-        double dTimeLastFPS;
-        double dTimeLastTick;
-        double dTimeRemainder;
+        double timeLastFrame;
+        double timeLastFPS;
+        double timeLastTick;
+        double timeRemainder;
 
         const unsigned int MAX_FPS = 100;
-        const unsigned int DAYS_PER_SECOND = 5;
+        const unsigned int MINUTES_PER_SECOND = 50;
 	};
 }
 

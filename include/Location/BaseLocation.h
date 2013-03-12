@@ -32,6 +32,7 @@ namespace Location
 		virtual std::string getName() = 0;
 		virtual LocationType getLocationType() = 0;
 		virtual void addIndividual(Individual::Individual_ptr) = 0;
+		std::map<std::string, bool> attributes;
 
 	private:
 

@@ -4,6 +4,21 @@
 #include <vector>
 #include <memory>
 #include "Action/Task.h"
+#include "Item/BaseItem.h"
+
+namespace Individual
+{
+	class BaseIndividual;
+	typedef std::shared_ptr<BaseIndividual> Individual_ptr;
+}
+
+namespace Location
+{
+	class BaseLocation;
+	typedef std::shared_ptr<BaseLocation> Location_ptr;
+}
+
+
 
 namespace Action
 {
@@ -15,9 +30,29 @@ namespace Action
 	enum GoalType
 	{
 		GET_FOOD,
+		GET_ITEM,
 
 		NUM_OF_GOALS
 	};
+
+	class GoalRequest
+	{
+	public:
+		GoalRequest(GoalType g) :
+			goalType(g),
+			location(nullptr),
+			individual(nullptr),
+			item(nullptr){}
+
+		GoalType goalType;
+		Location::Location_ptr location;
+		Individual::Individual_ptr individual;
+		Item::Item_ptr item;
+
+	};
+
+	typedef std::shared_ptr<GoalRequest> GoalRequest_ptr;
+
 
 	//This is not a base class
 	class Goal
@@ -32,10 +67,11 @@ namespace Action
 		unsigned int getPriority() {return priority;}
 
 	private:
-		unsigned int priority;
-		GoalType goalType;
-		std::shared_ptr<GoalTree> tree;
 		std::vector<Task_ptr> taskList;
+		GoalType goalType;
+		unsigned int priority;
+		std::shared_ptr<GoalTree> tree;
+
 
 	};
 

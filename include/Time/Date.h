@@ -12,10 +12,6 @@
 
 namespace Time {
 
-	struct Year{
-		unsigned int value;
-	};
-
 	enum Month
 	{
 		January,
@@ -50,7 +46,7 @@ namespace Time {
 	class Date {
 
 	public:
-		Date(unsigned int year, Month month, Day day);
+		Date(unsigned int year, Month month, Day day, unsigned short hour=0, unsigned short minute=0);
 
 		unsigned int getYear() {return year;}
 		Month getMonth() {return month;}
@@ -68,7 +64,9 @@ namespace Time {
 		unsigned int year;
 		Month month;
 		Day day;
-		unsigned int dayValue;
+		unsigned short hour;
+		unsigned short minute;
+		unsigned int dayValue; //as in, the 18th day of the month
 	};
 
 } /* namespace Time */

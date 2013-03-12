@@ -17,46 +17,46 @@ TimeManager & TimeManager::getInstance()
 
 TimeManager::TimeManager()
 {
-    this->dTimeLastFrame = ((float)clock())/CLOCKS_PER_SEC; //Damn son, look at all these floatin clocks
-    this->dTimeLastFPS = ((float)clock())/CLOCKS_PER_SEC;
-    this->dTimeLastTick = ((float)clock())/CLOCKS_PER_SEC;
-    this->dTimeRemainder = 0;
+    timeLastFrame = ((float)clock())/CLOCKS_PER_SEC;
+    timeLastFPS = ((float)clock())/CLOCKS_PER_SEC;
+    timeLastTick = ((float)clock())/CLOCKS_PER_SEC;
+    timeRemainder = 0;
 }
 
 void TimeManager::capFPS()
 {
-    double dCurrentTime = ((float)clock())/CLOCKS_PER_SEC;
-    if (  (dCurrentTime - dTimeLastFrame) < 1.0f/MAX_FPS ) //inverse of FPS is SPF, which is the unit of deltatime, as capFPS is called every frame
+    double currentTime = ((float)clock())/CLOCKS_PER_SEC;
+    if (  (currentTime - timeLastFrame) < 1.0f/MAX_FPS ) //inverse of FPS is SPF, which is the unit of deltatime, as capFPS is called every frame
     {
-        Sleep( ((1.0f/MAX_FPS) - (dCurrentTime - dTimeLastFrame)) *1000);
+        Sleep( ((1.0f/MAX_FPS) - (currentTime - timeLastFrame)) *1000);
     }
-    this->dTimeLastFrame = ((float)clock())/CLOCKS_PER_SEC;
+    timeLastFrame = ((float)clock())/CLOCKS_PER_SEC;
 }
 
 int TimeManager::getFPS()
 {
-    double dCurrentTime = ((float)clock())/CLOCKS_PER_SEC;
-    double dDeltaTime = (dCurrentTime - dTimeLastFPS);
-    this->dTimeLastFPS = dCurrentTime;
-    return 1 / dDeltaTime; //the reverse of the logic for capFPS, inverse SPF is FPS
+    double currentTime = ((float)clock())/CLOCKS_PER_SEC;
+    double deltaTime = (currentTime - timeLastFPS);
+    timeLastFPS = currentTime;
+    return 1 / deltaTime; //the reverse of the logic for capFPS, inverse SPF is FPS
 }
 
 void TimeManager::tick()
 {
     double dCurrentTime = ((float)clock())/CLOCKS_PER_SEC;
 
-    dTimeRemainder += (dCurrentTime - dTimeLastTick);
+    timeRemainder += (dCurrentTime - timeLastTick);
 
-    if (dTimeRemainder > 1.0f / DAYS_PER_SECOND)
+    if (timeRemainder > 1.0f / MINUTES_PER_SECOND)
     {
-        unsigned int iTempDivisor = dTimeRemainder  / (1.0f / DAYS_PER_SECOND);
-        for (unsigned int i = 0; i < iTempDivisor; i++)
+        unsigned int tempDivisor = timeRemainder  / (1.0f / MINUTES_PER_SECOND);
+        for (unsigned int i = 0; i < tempDivisor; i++)
         {
         	std::cout << now() << std::endl;
-        	DateManager::getInstance().nextDay();
+        	DateManager::getInstance().nextMinute();
         }
-        dTimeRemainder -= iTempDivisor * (1.0f / DAYS_PER_SECOND);
+        timeRemainder -= tempDivisor * (1.0f / MINUTES_PER_SECOND);
 
     }
-    this->dTimeLastTick = ((float)clock())/CLOCKS_PER_SEC;
+    timeLastTick = ((float)clock())/CLOCKS_PER_SEC;
 }

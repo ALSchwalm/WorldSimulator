@@ -9,13 +9,14 @@
 
 namespace Time {
 
-	Date::Date(unsigned int _year, Month _month, Day _day) :
+	Date::Date(unsigned int _year, Month _month, Day _day, unsigned short _hour, unsigned short _minute) :
 		year(_year),
 		month(_month),
 		day(_day),
+		hour(_hour),
+		minute(_minute),
 		dayValue(0)
 	{
-
 	}
 
 
@@ -23,14 +24,37 @@ namespace Time {
 	{
 		if (rhs.day == this->day 	 &&
 			rhs.month == this->month &&
-			rhs.year == this->year)
+			rhs.year == this->year   &&
+			rhs.hour == this->hour   &&
+			rhs.minute == this->minute)
 			return true;
 		return false;
 	}
 
 	Date & Date::operator++()
 	{
-		dayValue++;
+		++minute;
+
+		if (minute >= 60 )
+		{
+			++hour;
+			minute %= 60;
+			if (hour >= 24)
+			{
+				++dayValue;
+				hour %= 24;
+			}
+			else
+			{
+				return *this;
+			}
+		}
+		else
+		{
+			return *this;
+		}
+
+
 		unsigned int temp_month = static_cast<Month> (month);
 
 		if ( dayValue+1 > DAYS_PER_MONTH )
@@ -129,7 +153,7 @@ namespace Time {
 			break;
 		}
 
-		out << out_day << " the " << d.dayValue+1 << " of " << out_month << ", " << d.year;
+		out << out_day << " the " << d.dayValue+1 << " of " << out_month << ", " << d.year << " " << d.hour << ":" << d.minute;
 
 		return out;
 	}

@@ -39,7 +39,7 @@ namespace Individual
 			name("DefaultName"),
 			currentLocation (nullptr){}
 
-		BaseIndividual(std::string _name, Location_ptr _location=nullptr) :
+		BaseIndividual(std::string _name, Location_ptr _location) :
 			age(0),
 			name(_name),
 			currentLocation(_location){}
@@ -53,6 +53,7 @@ namespace Individual
 		unsigned int age;
 		const std::string name;
 		Location_ptr currentLocation;
+		std::map<std::string, bool> attributes;
 
 		Event::EventHistory history;
 
@@ -69,22 +70,22 @@ namespace Individual
 
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
-		virtual void addIndividualRelationship(Individual_ptr b, shared_ptr<IIR> r)
+		void addIndividualRelationship(Individual_ptr b, shared_ptr<IIR> r)
 		{
 			IndividualRelationships[b].push_back(r);
 		}
 
-		virtual void addLocationRelationship(Location_ptr b, shared_ptr<ILR> r)
+		void addLocationRelationship(Location_ptr b, shared_ptr<ILR> r)
 		{
 			LocationRelationships[b].push_back(r);
 		}
 
-		virtual std::vector<shared_ptr<IIR>> getIndividualRelationships(Individual_ptr i)
+		std::vector<shared_ptr<IIR>> getIndividualRelationships(Individual_ptr i)
 		{
 			return IndividualRelationships[i];
 		}
 
-		virtual std::vector<shared_ptr<ILR>> getLocationRelationships(Location_ptr l)
+		std::vector<shared_ptr<ILR>> getLocationRelationships(Location_ptr l)
 		{
 			return LocationRelationships[l];
 		}
