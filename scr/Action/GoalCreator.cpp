@@ -31,9 +31,12 @@ std::vector<Task_ptr> GoalCreator::createGoal(GoalRequest request,
 		return getFood(individual);
 		break;
 	default:
-		throw 2;
+		std::cerr << "Invalid goalType";
+		break;
 	}
 
+	//silence compiler warning about no return in non-void
+	return *(new std::vector<Task_ptr>);
 }
 
 std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual)

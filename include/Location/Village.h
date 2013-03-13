@@ -18,25 +18,14 @@ namespace Location {
 	class Village: public BaseLocation
 	{
 	public:
-		Village();
-		Village(std::string _name);
+		Village(Location_ptr);
+		Village(Location_ptr l, std::string _name);
 
-
-		std::string getName() {return name;}
 		LocationType getLocationType(){return Location::VILLAGE_LOCATION;}
-
-		void addIndividual(std::shared_ptr<Individual::BaseIndividual> i) {
-			individuals.push_back(i);
-		}
-
-		const Individual::IndividualList & getIndividuals() {return individuals;}
 
 
 	private:
-		typedef std::vector<std::shared_ptr<Individual::BaseIndividual>> IndividualList;
 
-		Individual::IndividualList individuals;
-		std::string name;
 
 	};
 

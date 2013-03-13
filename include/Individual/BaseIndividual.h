@@ -70,6 +70,8 @@ namespace Individual
 
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
+		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
+
 		void addIndividualRelationship(Individual_ptr b, shared_ptr<IIR> r)
 		{
 			IndividualRelationships[b].push_back(r);

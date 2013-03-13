@@ -10,6 +10,7 @@
 #include "Event/EventQueue.h"
 #include "Individual/Person.h"
 #include "Location/Village.h"
+#include "Location/World.h"
 #include "Time/DateManager.h"
 #include "Time/TimeManager.h"
 #include "Relationship/Relationship.h"
@@ -21,10 +22,10 @@ int main()
 {
 
 
-	auto l = std::make_shared<Location::Village>("test Location");
+	auto l = std::make_shared<Location::Village>(Location::World::getInstance(), "test Location");
 
 	auto p = std::make_shared<Individual::Person>("test Person 2", l);
-	//Action::GoalCreator::getInstance().createGoal(Action::GoalType::NUM_OF_GOALS, p, 0);
+	Action::GoalCreator::getInstance().createGoal(Action::GoalType::GET_FOOD, p, 0);
 
 //	while (true)
 //	{

@@ -15,16 +15,17 @@ GoalTree::~GoalTree()
 
 void GoalTree::execute()
 {
-	(*goals.begin())->execute();
+	(*goalHeap.begin())->execute();
 }
 
 void GoalTree::goalFinished()
 {
 	//TODO This may need to be goals.back() or goals.end() - 1
-	goals.erase(goals.begin());
+	goalHeap.erase(goalHeap.begin());
+
 }
 
 void GoalTree::addGoal(Goal_ptr goal)
 {
-	goals.insert(goal);
+	goalHeap.insert(goal);
 }

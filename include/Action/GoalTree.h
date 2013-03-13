@@ -23,8 +23,6 @@ namespace Action
 		void addGoal(Goal_ptr goal);
 
 	private:
-		Goal_ptr currentGoal;
-
 
 		struct priority
 		{
@@ -33,7 +31,7 @@ namespace Action
 			}
 		};
 
-		std::set<Goal_ptr, priority> goals;
+		std::set<Goal_ptr, priority> goalHeap;
 
 
 	};

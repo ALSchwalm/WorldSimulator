@@ -5,17 +5,17 @@
  *      Author: Adam
  */
 
+#include "Location/BaseLocation.h"
 #include "Location/Village.h"
 
 using namespace Location;
 
-Village::Village()
+Village::Village(Location_ptr l) : BaseLocation(l)
 {
 
 }
 
-Village::Village(std::string _name):
-	name(_name)
+Village::Village(Location_ptr l, std::string _name): BaseLocation(l, _name)
 {
 
 }

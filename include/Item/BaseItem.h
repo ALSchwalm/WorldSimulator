@@ -4,6 +4,7 @@
 #include <memory>
 #include <map>
 #include <string>
+#include <vector>
 
 namespace Item
 {
@@ -15,6 +16,7 @@ namespace Item
 		virtual ~BaseItem();
 
 		std::string getName() {return name;}
+		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
 
 	private:
@@ -23,12 +25,10 @@ namespace Item
 		std::string name;
 		std::map<std::string, bool> attributes;
 
-
-
 	};
 
 	typedef std::shared_ptr<BaseItem> Item_ptr;
-
+	typedef std::vector<Item_ptr> ItemList;
 }
 
 #endif
