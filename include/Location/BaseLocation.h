@@ -38,6 +38,7 @@ namespace Location
 
 		const Individual::IndividualList & getIndividuals() {return individuals;}
 		const Item::ItemList & getItems() {return items;}
+		const std::vector<Location_ptr> & getLocations() {return locations;}
 
 
 		virtual void addItem(Item::Item_ptr i) { items.push_back(i); }
@@ -49,22 +50,27 @@ namespace Location
 		//Typically, locations are wrapped in shared_ptr so addIndividual is more appropriate
 		virtual void operator+=(Individual::Individual_ptr rhs){individuals.push_back(rhs);	}
 
+		virtual void addLocation(Location::Location_ptr l) { locations.push_back(l); }
+
+		virtual void operator+=(Location::Location_ptr rhs) { locations.push_back(rhs); }
+
+
+		//These should only be used by GoalCreator
+		Location_ptr cameFrom;
+		unsigned int distance;
+
 	protected:
-		BaseLocation(Location_ptr l) : parentLocation(l) {};
-		BaseLocation(Location_ptr l, std::string _name) : parentLocation(l), name(_name){}
+		BaseLocation(Location_ptr l) : distance(0) {locations.push_back(l);}
+		BaseLocation(Location_ptr l, std::string _name) : distance(0), name(_name) {locations.push_back(l);}
 
 	private:
-
-		Location_ptr parentLocation;
-		std::vector<Location_ptr> childLocations;
 
 		std::map<std::string, bool> attributes;
 		std::string name;
 
+		std::vector<Location_ptr> locations;
 		std::vector<Individual::Individual_ptr> individuals;
 		std::vector<Item::Item_ptr> items;
-
-
 
 
 	};

@@ -13,14 +13,16 @@ namespace Item
 	{
 	public:
 
-		virtual ~BaseItem();
+		virtual ~BaseItem(){};
 
 		std::string getName() {return name;}
+		void setAttribute(std::string s) {attributes[s] = true;}
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
-
+		//TODO move this back to private
+		BaseItem(){}
 	private:
-		BaseItem();
+
 
 		std::string name;
 		std::map<std::string, bool> attributes;

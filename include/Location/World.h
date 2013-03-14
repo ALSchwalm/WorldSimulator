@@ -10,7 +10,8 @@ namespace Location
 	class World : public BaseLocation
 	{
 	public:
-		Location_ptr & getInstance();
+		~World();
+		static Location_ptr getInstance();
 
 		//override these functions to throw errors if they are called on a "world"
 		void addItem(Item::Item_ptr i);
@@ -20,11 +21,8 @@ namespace Location
 
 
 	private:
-
-		static World world;
-
 		World();
-		~World();
+
 	};
 
 

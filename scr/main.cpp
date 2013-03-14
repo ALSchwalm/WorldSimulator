@@ -23,9 +23,17 @@ int main()
 
 
 	auto l = std::make_shared<Location::Village>(Location::World::getInstance(), "test Location");
+	auto l2 = std::make_shared<Location::Village>(l, "test Location2");
 
-	auto p = std::make_shared<Individual::Person>("test Person 2", l);
-	Action::GoalCreator::getInstance().createGoal(Action::GoalType::GET_FOOD, p, 0);
+	auto item = std::make_shared<Item::BaseItem>();
+	item->setAttribute("edible");
+	l->addLocation(l2);
+
+	l2->addItem(item);
+
+
+	auto p = std::make_shared<Individual::Person>("test Person 2", l2);
+	p->addGoal(Action::GoalCreator::getInstance().createGoal(Action::GoalType::GET_FOOD, p, 0));
 
 //	while (true)
 //	{

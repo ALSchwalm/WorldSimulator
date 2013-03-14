@@ -6,21 +6,16 @@
 using namespace Location;
 
 //There can only be one world (for now)
-Location_ptr & World::getInstance()
+Location_ptr World::getInstance()
 {
-	return make_shared<
+	static World world;
+	return std::make_shared<World>(world);
 }
 
 
-World::World() : BaseLocation(nullptr)
-{
+World::World() : BaseLocation(nullptr, "World") {}
 
-}
-
-World::~World()
-{
-
-}
+World::~World() {}
 
 void World::addItem(Item::Item_ptr i)
 {

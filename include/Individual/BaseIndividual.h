@@ -70,7 +70,10 @@ namespace Individual
 
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
+		void addGoal(Action::Goal_ptr g) {goalTree.addGoal(g);}
+
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
+
 
 		void addIndividualRelationship(Individual_ptr b, shared_ptr<IIR> r)
 		{
