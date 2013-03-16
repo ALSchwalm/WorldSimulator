@@ -23,7 +23,6 @@ namespace Location {
 
 		LocationType getLocationType(){return Location::VILLAGE_LOCATION;}
 
-
 	private:
 
 

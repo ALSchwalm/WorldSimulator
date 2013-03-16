@@ -11,6 +11,7 @@
 #include "Individual/BaseIndividual.h"
 #include "Item/BaseItem.h"
 #include <memory>
+#include <unordered_set>
 
 namespace Location
 {
@@ -38,37 +39,36 @@ namespace Location
 
 		const Individual::IndividualList & getIndividuals() {return individuals;}
 		const Item::ItemList & getItems() {return items;}
-		const std::vector<Location_ptr> & getLocations() {return locations;}
+		const std::unordered_set<Location_ptr> & getLocations() {return locations;}
 
 
+		//Typically, locations are wrapped in shared_ptr so add<Type> is more appropriate
 		virtual void addItem(Item::Item_ptr i) { items.push_back(i); }
-
 		virtual void operator+=(Item::Item_ptr rhs)	{items.push_back(rhs);}
 
 		virtual void addIndividual(Individual::Individual_ptr i){individuals.push_back(i);}
-
-		//Typically, locations are wrapped in shared_ptr so addIndividual is more appropriate
 		virtual void operator+=(Individual::Individual_ptr rhs){individuals.push_back(rhs);	}
 
-		virtual void addLocation(Location::Location_ptr l) { locations.push_back(l); }
+		void addLocation(Location::Location_ptr l);
+		void operator+=(Location::Location_ptr rhs);
 
-		virtual void operator+=(Location::Location_ptr rhs) { locations.push_back(rhs); }
-
+		void addOnewayLocation (Location::Location_ptr l);
 
 		//These should only be used by GoalCreator
 		Location_ptr cameFrom;
 		unsigned int distance;
 
 	protected:
-		BaseLocation(Location_ptr l) : distance(0) {locations.push_back(l);}
-		BaseLocation(Location_ptr l, std::string _name) : distance(0), name(_name) {locations.push_back(l);}
+		BaseLocation(Location_ptr l) : distance(0) {addLocation(l);}
+		BaseLocation(Location_ptr l, std::string _name) : distance(0), name(_name) {addLocation(l);}
 
+		std::unordered_set<Location_ptr> locations;
 	private:
 
 		std::map<std::string, bool> attributes;
 		std::string name;
 
-		std::vector<Location_ptr> locations;
+
 		std::vector<Individual::Individual_ptr> individuals;
 		std::vector<Item::Item_ptr> items;
 

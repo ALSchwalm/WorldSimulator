@@ -20,7 +20,7 @@ namespace Item
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
 		//TODO move this back to private
-		BaseItem(){}
+		BaseItem() : name("Unnamed Item"){}
 	private:
 
 

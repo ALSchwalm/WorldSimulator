@@ -21,9 +21,15 @@ namespace Action
 
 	private:
 
+		struct distance
+		{
+			bool operator() ( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const {
+				return lhs->distance < rhs->distance;
+			}
+		};
 		std::vector<Task_ptr> search(Location::Location_ptr, std::vector<std::string> attributeList, unsigned int maxDistance);
-
-		std::vector<Location::Location_ptr> dijkstra(std::vector<Location::Location_ptr> locationList, std::vector<std::string> attributeList, unsigned int maxDistance);
+		std::vector<Location::Location_ptr> traceBack(Location::Location_ptr l);
+		std::vector<Location::Location_ptr> dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance);
 		Item::Item_ptr getItemFromAttributes(Location::Location_ptr location, std::vector<std::string> attributeList);
 		std::vector<Task_ptr> getFood(Individual::Individual_ptr individual);
 

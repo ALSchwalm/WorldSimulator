@@ -2,6 +2,7 @@
 #include "Action/GoalCreator.h"
 #include <cassert>
 #include <memory>
+#include <unordered_set>
 
 using namespace Action;
 
@@ -50,57 +51,86 @@ std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual
 std::vector<Task_ptr> GoalCreator::search(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance)
 {
 	std::vector<Location::Location_ptr> locationList;
-	locationList.push_back(startLocation);
-	locationList = dijkstra(locationList, attributeList, maxDistance);
+
+	locationList = dijkstra(startLocation, attributeList, maxDistance);
 	if (locationList.size() < 1)
 	{
 		std::cout << "not found" << std::endl;
 	}
+	std::cout << "found" << std::endl;
 	for (auto location : locationList)
 	{
-		std::cout << location->getName() << std::endl;
+		std::cout << location->getName() << "->";
 	}
+	std::cout << std::endl;
 
 }
 
 //TODO find a way to do this without copying vectors
-std::vector<Location::Location_ptr> GoalCreator::dijkstra(std::vector<Location::Location_ptr> locationList, std::vector<std::string> attributeList, unsigned int maxDistance)
+std::vector<Location::Location_ptr> GoalCreator::dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance)
 {
 	std::vector<Location::Location_ptr> outputList;
-	outputList.push_back(locationList[0]);
+	std::unordered_set<Location::Location_ptr> closedSet;
+	std::set<Location::Location_ptr, distance> openSet;
 
-	for (auto currentLocation : locationList)
+	outputList.push_back(startLocation);
+	if (getItemFromAttributes(startLocation, attributeList) == nullptr)
+		closedSet.insert(startLocation);
+	else
+		return outputList;
+
+	for (auto location : startLocation->getLocations())
 	{
-		if ( getItemFromAttributes(currentLocation, attributeList) == nullptr )
+		location->cameFrom = startLocation;
+		location->distance = 1;
+		openSet.insert(location);
+
+	}
+	while (openSet.size() > 0)
+	{
+		auto location = (*openSet.begin());
+		std::cout << location->getName() << std::endl;
+
+		if (getItemFromAttributes(location, attributeList) != nullptr)
 		{
-			if (currentLocation->distance < maxDistance && currentLocation->getLocations().size() != 0)
-			{
-				for (auto nextLocation : currentLocation->getLocations())
-				{
-					nextLocation->distance += 1;
-					nextLocation->cameFrom = currentLocation;
-					locationList.push_back(nextLocation);
-				}
-			}
-		}
-		else
-		{
-			Location::Location_ptr location = currentLocation;
-			while ( location != locationList[0])
-			{
-				outputList.push_back(location);
-				location = location->cameFrom;
-			}
-			return outputList;
+			std::cout << "tracing back" << std::endl;
+			return traceBack(location);
 		}
 
+		for (auto nextLocation : location->getLocations())
+		{
+			if (closedSet.find(nextLocation) == closedSet.end())
+			{
+				std::cout << "child: " << nextLocation->getName() << std::endl;
+				nextLocation->cameFrom = location;
+				nextLocation->distance = location->distance+1;
+				openSet.insert(nextLocation);
+			}
+		}
+		closedSet.insert(location);
+		openSet.erase(location);
 	}
 	outputList.clear();
 	return outputList;
+
 }
+
+std::vector<Location::Location_ptr> GoalCreator::traceBack(Location::Location_ptr l)
+{
+	std::vector<Location::Location_ptr> outputList;
+	outputList.push_back(l);
+	while(l->cameFrom != nullptr)
+	{
+		outputList.push_back(l->cameFrom);
+		l = l->cameFrom;
+	}
+	return outputList;
+}
+
 
 Item::Item_ptr GoalCreator::getItemFromAttributes(Location::Location_ptr location, std::vector<std::string> attributeList)
 {
+	std::cout << "searching: " << location->getName() << " with " << location->getItems().size() << " items at " << location.get() << std::endl;
 	bool found;
 	for ( auto item : location->getItems())
 	{
@@ -108,7 +138,9 @@ Item::Item_ptr GoalCreator::getItemFromAttributes(Location::Location_ptr locatio
 		for ( auto attribute : attributeList)
 		{
 			if (!item->hasAttribute(attribute))
+			{
 				found = false;
+			}
 		}
 		if (found)
 			return item;
