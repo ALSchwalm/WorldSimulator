@@ -3,6 +3,7 @@
 
 #include "Individual/Individual.h"
 #include "Event/Event.h"
+#include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
 #include <string>
 #include <map>
@@ -50,6 +51,7 @@ namespace Individual
 		std::map<Individual_ptr, std::vector<shared_ptr<IIR>> > IndividualRelationships;
 		std::map<Location_ptr, std::vector<shared_ptr<ILR>> > LocationRelationships;
 
+		std::vector<Item::Item_ptr> items;
 		unsigned int age;
 		const std::string name;
 		Location_ptr currentLocation;
@@ -60,20 +62,18 @@ namespace Individual
 		Action::GoalTree goalTree;
 	public:
 
-		virtual Location_ptr getCurrentLocation() { return currentLocation; }
-		virtual void setCurrentLocation( Location_ptr c ) { currentLocation = c;}
+		Location_ptr getCurrentLocation() { return currentLocation; }
+		void setCurrentLocation( Location_ptr c ) { currentLocation = c;}
 
-		virtual unsigned int getAge() {return age;}
-		virtual const std::string getName() {return name;}
-		virtual const Event::EventHistory & getHistory(){return history;}
-		virtual void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
-
+		unsigned int getAge() {return age;}
+		const std::string getName() {return name;}
+		const Event::EventHistory & getHistory(){return history;}
+		const std::vector<Item::Item_ptr> & getItems() {return items;}
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
+		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
 		void addGoal(Action::Goal_ptr g) {goalTree.addGoal(g);}
-
-		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
-
+		void addItem(Item::Item_ptr i) {items.push_back(i);}
 
 		void addIndividualRelationship(Individual_ptr b, shared_ptr<IIR> r)
 		{
@@ -95,6 +95,8 @@ namespace Individual
 			return LocationRelationships[l];
 		}
 
+		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
+		bool removeItem(Item::Item_ptr i);
 
 	};
 

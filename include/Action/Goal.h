@@ -59,10 +59,13 @@ namespace Action
 	{
 
 	public:
+		Goal(GoalType g, unsigned int p = 0);
 		Goal(std::vector<Task_ptr>, GoalType g, unsigned int p = 0);
 
 		bool execute();
 		void taskFinished();
+
+		void setTasks(std::vector<Task_ptr> _taskList){taskList = _taskList;}
 
 		unsigned int getPriority() {return priority;}
 

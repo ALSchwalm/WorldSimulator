@@ -13,9 +13,8 @@ namespace Event {
 	EndTaskEvent::EndTaskEvent(
 			Time::Date d,
 			Action::Task_ptr _callBackTask) :
-			name("EndTask"),
-			callBackTask(_callBackTask),
-			executionDate(d)
+			BaseEvent(d, "EndTask"),
+			callBackTask(_callBackTask)
 	{
 	}
 

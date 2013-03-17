@@ -5,6 +5,7 @@
 #include "Individual/BaseIndividual.h"
 #include "Location/BaseLocation.h"
 #include <vector>
+#include <utility>
 
 namespace Action
 {
@@ -27,14 +28,17 @@ namespace Action
 				return lhs->distance < rhs->distance;
 			}
 		};
-		std::vector<Task_ptr> search(Location::Location_ptr, std::vector<std::string> attributeList, unsigned int maxDistance);
+
+		std::vector<Task_ptr> search(Individual::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance);
 		std::vector<Location::Location_ptr> traceBack(Location::Location_ptr l);
-		std::vector<Location::Location_ptr> dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance);
+		std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance);
 		Item::Item_ptr getItemFromAttributes(Location::Location_ptr location, std::vector<std::string> attributeList);
 		std::vector<Task_ptr> getFood(Individual::Individual_ptr individual);
 
 		GoalCreator();
 		~GoalCreator();
+
+		Action::Goal_ptr currentGoal;
 
 	};
 

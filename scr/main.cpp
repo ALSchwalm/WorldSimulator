@@ -47,25 +47,5 @@ int main()
 	auto p = std::make_shared<Individual::Person>("test Person", l);
 	p->addGoal(Action::GoalCreator::getInstance().createGoal(Action::GoalType::GET_FOOD, p, 0));
 
-//	while (true)
-//	{
-//		Time::TimeManager::getInstance().capFPS();
-//		Time::TimeManager::getInstance().tick();
-//	}
-
-
-//	auto p = std::make_shared<Individual::Person>("test Person", l);
-//
-//	auto e = std::make_shared<Event::BirthEvent>(Time::now(), p, l);
-//	auto e2 = std::make_shared<Event::BirthEvent>(Time::now(), p2, l);
-//
-//	Event::EventQueue::getInstance().addEvent(e2);
-//	Event::EventQueue::getInstance().addEvent(e);
-//
-//	Event::EventQueue::getInstance().execute();
-//
-//	for (auto person : l->getIndividuals() )
-//		std::cout << person->getName() << " -> " << Relationship::getRelationshipAsString(person->getLocationRelationships(l)[0]->getType())  << std::endl;
-
 	return 0;
 }

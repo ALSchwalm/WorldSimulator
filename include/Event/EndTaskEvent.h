@@ -26,17 +26,12 @@ namespace Event
 		~EndTaskEvent();
 
 		EventType getEventType() { return EventType::END_TASK_EVENT;};
-		std::string getEventName() {return name;};
-
-		Time::Date getExecutionDate() {return executionDate;}
 
 		void run();
 
 
 	private:
-		std::string name;
 		Action::Task_ptr callBackTask;
-		Time::Date executionDate;
 
 	};
 

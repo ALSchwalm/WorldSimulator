@@ -12,6 +12,7 @@ namespace Event
 	{
 		BIRTH_EVENT,
 		END_TASK_EVENT,
+		MOVE_EVENT,
 
 		//Insert events before this
 		EVENT_ERROR,

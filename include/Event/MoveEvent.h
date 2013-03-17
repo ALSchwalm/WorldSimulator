@@ -1,12 +1,5 @@
-/*
- * BirthEvent.h
- *
- *  Created on: Mar 2, 2013
- *      Author: Adam
- */
-
-#ifndef BIRTHEVENT_H_
-#define BIRTHEVENT_H_
+#ifndef MOEVEVENT_H_
+#define MOVEEVENT_H_
 
 #include <Event/Event.h>
 #include <Event/BaseEvent.h>
@@ -16,27 +9,28 @@
 namespace Event
 {
 
-	class BirthEvent : public BaseEvent
+	class MoveEvent : public BaseEvent
 	{
 	public:
-		BirthEvent(
+		MoveEvent(
 				std::shared_ptr<Individual::BaseIndividual>,
 				std::shared_ptr<Location::BaseLocation>
 		);
 
-		BirthEvent(
+		MoveEvent(
 				Time::Date,
 				std::shared_ptr<Individual::BaseIndividual>,
 				std::shared_ptr<Location::BaseLocation>
 		);
-		~BirthEvent();
+		~MoveEvent();
 
-		EventType getEventType() { return EventType::BIRTH_EVENT;};
+		EventType getEventType() { return EventType::MOVE_EVENT;};
+
 		void run();
 
 
 	private:
-		std::shared_ptr<Location::BaseLocation> birthPlace;
+		std::shared_ptr<Location::BaseLocation> newLocation;
 		std::shared_ptr<Individual::BaseIndividual> individual;
 
 	};

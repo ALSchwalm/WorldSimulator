@@ -1,5 +1,6 @@
 
 #include "Action/GoalCreator.h"
+#include "Event/MoveEvent.h"
 #include <cassert>
 #include <memory>
 #include <unordered_set>
@@ -24,13 +25,16 @@ Goal_ptr GoalCreator::createGoal(GoalRequest request,
 												Individual::Individual_ptr individual,
 												unsigned int priority)
 {
+	currentGoal = std::make_shared<Action::Goal>(request.goalType, priority);
+
 	switch (request.goalType)
 	{
 	case GET_FOOD:
 		assert (request.item == nullptr);
 		assert (request.individual == nullptr);
 		assert (request.location == nullptr);
-		return std::make_shared<Goal>(getFood(individual), request.goalType, priority);
+		currentGoal->setTasks(getFood(individual));
+		return currentGoal;
 		break;
 	default:
 		std::cerr << "Error: Invalid goalType";
@@ -43,41 +47,47 @@ Goal_ptr GoalCreator::createGoal(GoalRequest request,
 
 std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual)
 {
+	std::vector<Action::Task_ptr> taskList;
+
 	std::vector<std::string> attributeList;
 	attributeList.push_back("edible");
-	return search(individual->getCurrentLocation(), attributeList, 5);
+	taskList = search(individual, attributeList, 5);
+
+	return taskList;
 }
 
-std::vector<Task_ptr> GoalCreator::search(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance)
+std::vector<Task_ptr> GoalCreator::search(Individual::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance)
 {
+
+	auto startLocation = individual->getCurrentLocation();
+	std::vector<Action::Task_ptr> taskList;
 	std::vector<Location::Location_ptr> locationList;
 
-	locationList = dijkstra(startLocation, attributeList, maxDistance);
-	if (locationList.size() < 1)
-	{
-		std::cout << "not found" << std::endl;
-	}
-	std::cout << "found" << std::endl;
+	auto search_result = dijkstra(startLocation, attributeList, maxDistance);
+	locationList = search_result.second;
+
 	for (auto location : locationList)
 	{
-		std::cout << location->getName() << "->";
+		auto newEvent = std::make_shared<Event::MoveEvent>(individual, location);
+		taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
 	}
-	std::cout << std::endl;
 
+	return taskList;
 }
 
 //TODO find a way to do this without copying vectors
-std::vector<Location::Location_ptr> GoalCreator::dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance)
+std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance)
 {
 	std::vector<Location::Location_ptr> outputList;
 	std::unordered_set<Location::Location_ptr> closedSet;
 	std::set<Location::Location_ptr, distance> openSet;
 
 	outputList.push_back(startLocation);
+	auto foundItem = getItemFromAttributes(startLocation, attributeList);
 	if (getItemFromAttributes(startLocation, attributeList) == nullptr)
 		closedSet.insert(startLocation);
 	else
-		return outputList;
+		return std::make_pair(foundItem, outputList);
 
 	for (auto location : startLocation->getLocations())
 	{
@@ -91,17 +101,16 @@ std::vector<Location::Location_ptr> GoalCreator::dijkstra(Location::Location_ptr
 		auto location = (*openSet.begin());
 		std::cout << location->getName() << std::endl;
 
-		if (getItemFromAttributes(location, attributeList) != nullptr)
+		foundItem = getItemFromAttributes(location, attributeList);
+		if (foundItem != nullptr)
 		{
-			std::cout << "tracing back" << std::endl;
-			return traceBack(location);
+			return std::make_pair(foundItem, traceBack(location));
 		}
 
 		for (auto nextLocation : location->getLocations())
 		{
-			if (closedSet.find(nextLocation) == closedSet.end())
+			if (closedSet.find(nextLocation) == closedSet.end() && location->distance+1 < maxDistance)
 			{
-				std::cout << "child: " << nextLocation->getName() << std::endl;
 				nextLocation->cameFrom = location;
 				nextLocation->distance = location->distance+1;
 				openSet.insert(nextLocation);
@@ -111,7 +120,7 @@ std::vector<Location::Location_ptr> GoalCreator::dijkstra(Location::Location_ptr
 		openSet.erase(location);
 	}
 	outputList.clear();
-	return outputList;
+	return std::make_pair(nullptr, outputList);
 
 }
 

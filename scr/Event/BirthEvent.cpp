@@ -10,15 +10,22 @@
 #include <iostream> //TODO remove this
 
 namespace Event {
+	BirthEvent::BirthEvent(
+			std::shared_ptr<Individual::BaseIndividual> i,
+			std::shared_ptr<Location::BaseLocation> l) :
+			BaseEvent("Birth"),
+			birthPlace(l),
+			individual(i)
+	{
+	}
 
 	BirthEvent::BirthEvent(
 			Time::Date d,
 			std::shared_ptr<Individual::BaseIndividual> i,
 			std::shared_ptr<Location::BaseLocation> l) :
-			name("Birth"),
+			BaseEvent(d, "Birth"),
 			birthPlace(l),
-			individual(i),
-			executionDate(d)
+			individual(i)
 	{
 	}
 
