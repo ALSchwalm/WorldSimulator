@@ -1,4 +1,4 @@
-#ifndef MOEVEVENT_H_
+#ifndef MOVEEVENT_H_
 #define MOVEEVENT_H_
 
 #include <Event/Event.h>
@@ -36,4 +36,4 @@ namespace Event
 	};
 
 }
-#endif /* BIRTHEVENT_H_ */
+#endif

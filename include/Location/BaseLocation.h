@@ -41,6 +41,7 @@ namespace Location
 		const Item::ItemList & getItems() {return items;}
 		const std::unordered_set<Location_ptr> & getLocations() {return locations;}
 
+		bool removeItem(Item::Item_ptr i);
 
 		//Typically, locations are wrapped in shared_ptr so add<Type> is more appropriate
 		virtual void addItem(Item::Item_ptr i) { items.push_back(i); }

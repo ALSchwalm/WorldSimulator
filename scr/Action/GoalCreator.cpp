@@ -1,6 +1,7 @@
 
 #include "Action/GoalCreator.h"
 #include "Event/MoveEvent.h"
+#include "Event/PickupEvent.h"
 #include <cassert>
 #include <memory>
 #include <unordered_set>
@@ -51,12 +52,12 @@ std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual
 
 	std::vector<std::string> attributeList;
 	attributeList.push_back("edible");
-	taskList = search(individual, attributeList, 5);
+	taskList = findItemFromAttributes(individual, attributeList, 5);
 
 	return taskList;
 }
 
-std::vector<Task_ptr> GoalCreator::search(Individual::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance)
+std::vector<Task_ptr> GoalCreator::findItemFromAttributes(Individual::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance)
 {
 
 	auto startLocation = individual->getCurrentLocation();
@@ -71,6 +72,9 @@ std::vector<Task_ptr> GoalCreator::search(Individual::Individual_ptr individual,
 		auto newEvent = std::make_shared<Event::MoveEvent>(individual, location);
 		taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
 	}
+
+	auto newEvent = std::make_shared<Event::PickupEvent>(search_result.first, individual);
+	taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
 
 	return taskList;
 }
@@ -139,7 +143,6 @@ std::vector<Location::Location_ptr> GoalCreator::traceBack(Location::Location_pt
 
 Item::Item_ptr GoalCreator::getItemFromAttributes(Location::Location_ptr location, std::vector<std::string> attributeList)
 {
-	std::cout << "searching: " << location->getName() << " with " << location->getItems().size() << " items at " << location.get() << std::endl;
 	bool found;
 	for ( auto item : location->getItems())
 	{

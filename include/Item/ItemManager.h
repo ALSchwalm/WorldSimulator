@@ -11,10 +11,18 @@ namespace Item
 	class ItemManager
 	{
 	public:
-		ItemManager & getInstance();
+		static ItemManager & getInstance();
 
 		template <typename T, typename U>
-		bool moveItem(Item_ptr, T source, U destination);
+		bool moveItem(Item_ptr item, T source, U destination)
+		{
+			if (source->removeItem(item))
+			{
+				destination->addItem(item);
+				return true;
+			}
+			return false;
+		}
 
 	private:
 		ItemManager();

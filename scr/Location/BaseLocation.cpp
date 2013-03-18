@@ -1,4 +1,5 @@
 #include "Location/BaseLocation.h"
+#include <algorithm>
 
 using namespace Location;
 
@@ -18,4 +19,18 @@ void BaseLocation::addOnewayLocation (Location::Location_ptr l)
 {
 	if (l.get() != this)
 		locations.insert(l);
+}
+
+bool BaseLocation::removeItem(Item::Item_ptr i)
+{
+	if (std::find(items.begin(), items.end(), i) == items.end())
+	{
+		return false;
+	}
+	else
+	{
+		items.erase(std::find(items.begin(), items.end(), i));
+		return true;
+	}
+
 }
