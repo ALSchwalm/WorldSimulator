@@ -14,6 +14,7 @@
 
 namespace Event
 {
+
 	typedef std::shared_ptr<BaseEvent> Event_ptr;
 
 	class BaseEvent
@@ -27,15 +28,19 @@ namespace Event
 		virtual Time::Date getExecutionDate(){return executionDate;}
 		virtual void setExecutionDate(Time::Date newDate) {executionDate = newDate;}
 
+		virtual void * getSource(){ return nullptr; }
+
 		virtual void run();
 
 	protected:
-		BaseEvent(std::string s) : executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)), name(s){}
-		BaseEvent(Time::Date t, std::string s) : executionDate(t), name(s){}
+		BaseEvent(std::string s) : source(nullptr), executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)), name(s){}
+		BaseEvent(Time::Date t, std::string s) : source(nullptr), executionDate(t), name(s){}
 
+		void * source;
 	private:
 		Time::Date executionDate;
 		std::string name;
+
 
 
 	};

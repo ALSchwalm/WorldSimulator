@@ -8,6 +8,7 @@ namespace Event {
 			newLocation(l),
 			individual(i)
 	{
+		source = (void *)i.get();
 	}
 
 	MoveEvent::MoveEvent(
@@ -18,6 +19,7 @@ namespace Event {
 			newLocation(l),
 			individual(i)
 	{
+		source = (void *)i.get();
 	}
 
 	MoveEvent::~MoveEvent()
