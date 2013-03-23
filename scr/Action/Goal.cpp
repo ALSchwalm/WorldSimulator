@@ -29,5 +29,11 @@ bool Goal::execute()
 
 void Goal::taskFinished()
 {
+	taskList.pop_back();
+	this->execute();
+}
 
+void Goal::interrupt()
+{
+	taskList.back()->interrupt();
 }

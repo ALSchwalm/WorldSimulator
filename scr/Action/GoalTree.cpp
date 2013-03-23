@@ -27,6 +27,6 @@ void GoalTree::goalFinished()
 
 void GoalTree::addGoal(Goal_ptr goal)
 {
-	if (goal->getPriority() > (*goalHeap.begin())->getPriority() ) //FIXME goalHeap may be empty
+	if (goalHeap.size() != 0 && goal->getPriority() > (*goalHeap.begin())->getPriority())
 		goalHeap.insert(goal);
 }

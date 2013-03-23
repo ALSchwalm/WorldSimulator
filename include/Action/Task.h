@@ -20,10 +20,12 @@ namespace Action
 		//returns false if preconditions are not satisfied
 		bool run();
 		void finished();
+		void interrupt();
 
 	private:
 		Event::Event_ptr event;
 		Goal_ptr goal;
+		bool interrupted; //stop EndtaskEvent from creating problems
 
 	};
 

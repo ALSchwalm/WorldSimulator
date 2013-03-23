@@ -68,6 +68,7 @@ namespace Action
 		void setTasks(std::vector<Task_ptr> _taskList){taskList = _taskList;}
 
 		unsigned int getPriority() {return priority;}
+		void interrupt(); //TODO return bool for uninterruptable tasks?
 
 	private:
 		std::vector<Task_ptr> taskList;

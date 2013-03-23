@@ -8,8 +8,9 @@
 #ifndef EVENTQUEUE_H_
 #define EVENTQUEUE_H_
 
-#include <vector>
+#include <list>
 #include <memory>
+#include <algorithm>
 #include "Event/BaseEvent.h"
 #include "Time/DateManager.h"
 
@@ -26,12 +27,14 @@ namespace Event {
 			return queue.front();
 		}
 
-		void addEvent(std::shared_ptr<BaseEvent> e) {queue.push_back(e);}
+		void addEvent(Event::Event_ptr e) {queue.push_back(e);}
+
+		void removeEvent(Event::Event_ptr e) { queue.erase(std::remove(queue.begin(), queue.end(), e)); }
 
 	private:
 		EventQueue();
 
-		std::vector<std::shared_ptr<BaseEvent>> queue;
+		std::list<std::shared_ptr<BaseEvent>> queue;
 
 	};
 
