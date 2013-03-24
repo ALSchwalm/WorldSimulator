@@ -35,8 +35,15 @@ namespace Event
 		void interrupt();
 
 	protected:
-		BaseEvent(std::string s) : source(nullptr), executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)), name(s){}
-		BaseEvent(Time::Date t, std::string s) : source(nullptr), executionDate(t), name(s){}
+		BaseEvent(std::string s) :
+			source(nullptr),
+			executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)),
+			name(s){}
+
+		BaseEvent(Time::Date t, std::string s) :
+			source(nullptr),
+			executionDate(t),
+			name(s){}
 
 		void * source;
 	private:

@@ -4,6 +4,7 @@
 #include "Event/PickupEvent.h"
 #include <cassert>
 #include <memory>
+#include <algorithm>
 #include <unordered_set>
 
 using namespace Action;
@@ -37,6 +38,12 @@ Goal_ptr GoalCreator::createGoal(GoalRequest request,
 		currentGoal->setTasks(getFood(individual));
 		return currentGoal;
 		break;
+	case GET_ITEM:
+		assert (request.item != nullptr);
+		assert (request.individual == nullptr);
+		assert (request.location == nullptr);
+		currentGoal->setTasks(getItem(individual, request.item));
+		return currentGoal;
 	default:
 		std::cerr << "Error: Invalid goalType";
 		break;
@@ -53,6 +60,28 @@ std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual
 	std::vector<std::string> attributeList;
 	attributeList.push_back("edible");
 	taskList = findItemFromAttributes(individual, attributeList, 5);
+
+	return taskList;
+}
+
+std::vector<Task_ptr> GoalCreator::getItem(Individual::Individual_ptr individual, Item::Item_ptr item)
+{
+	std::vector<Action::Task_ptr> taskList;
+
+	auto startLocation = individual->getCurrentLocation();
+	std::vector<Location::Location_ptr> locationList;
+
+	auto search_result = dijkstra(startLocation, item, 5);
+	locationList = search_result.second;
+
+	for (auto location : locationList)
+	{
+		auto newEvent = std::make_shared<Event::MoveEvent>(individual, location);
+		taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
+	}
+
+	auto newEvent = std::make_shared<Event::PickupEvent>(search_result.first, individual);
+	taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
 
 	return taskList;
 }
@@ -88,7 +117,7 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 
 	outputList.push_back(startLocation);
 	auto foundItem = getItemFromAttributes(startLocation, attributeList);
-	if (getItemFromAttributes(startLocation, attributeList) == nullptr)
+	if (foundItem == nullptr)
 		closedSet.insert(startLocation);
 	else
 		return std::make_pair(foundItem, outputList);
@@ -109,6 +138,56 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 		if (foundItem != nullptr)
 		{
 			return std::make_pair(foundItem, traceBack(location));
+		}
+
+		for (auto nextLocation : location->getLocations())
+		{
+			if (closedSet.find(nextLocation) == closedSet.end() && location->distance+1 < maxDistance)
+			{
+				nextLocation->cameFrom = location;
+				nextLocation->distance = location->distance+1;
+				openSet.insert(nextLocation);
+			}
+		}
+		closedSet.insert(location);
+		openSet.erase(location);
+	}
+	outputList.clear();
+	return std::make_pair(nullptr, outputList);
+
+}
+
+//TODO find a way to do this without copying vectors
+std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijkstra(Location::Location_ptr startLocation, Item::Item_ptr item, unsigned int maxDistance)
+{
+	std::vector<Location::Location_ptr> outputList;
+	std::unordered_set<Location::Location_ptr> closedSet;
+	std::set<Location::Location_ptr, distance> openSet;
+
+	outputList.push_back(startLocation);
+
+	auto foundItem = std::find(startLocation->getItems().begin(), startLocation->getItems().end(), item);
+	if (foundItem == startLocation->getItems().end())
+		closedSet.insert(startLocation);
+	else
+		return std::make_pair(*foundItem, outputList);
+
+	for (auto location : startLocation->getLocations())
+	{
+		location->cameFrom = startLocation;
+		location->distance = 1;
+		openSet.insert(location);
+
+	}
+	while (openSet.size() > 0)
+	{
+		auto location = (*openSet.begin());
+		std::cout << location->getName() << std::endl;
+
+		foundItem = std::find(location->getItems().begin(), location->getItems().end(), item);
+		if (foundItem != location->getItems().end())
+		{
+			return std::make_pair(*foundItem, traceBack(location));
 		}
 
 		for (auto nextLocation : location->getLocations())
