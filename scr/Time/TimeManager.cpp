@@ -52,7 +52,6 @@ void TimeManager::tick()
         unsigned int tempDivisor = timeRemainder  / (1.0f / MINUTES_PER_SECOND);
         for (unsigned int i = 0; i < tempDivisor; i++)
         {
-        	std::cout << now() << std::endl;
         	DateManager::getInstance().nextMinute();
         }
         timeRemainder -= tempDivisor * (1.0f / MINUTES_PER_SECOND);

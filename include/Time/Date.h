@@ -43,7 +43,10 @@ namespace Time {
 		NUM_OF_DAYS
 	};
 
+
+
 	class Date {
+	friend Date operator+(Date, int);
 
 	public:
 		Date(unsigned int year, Month month, Day day, unsigned short hour=0, unsigned short minute=0);
@@ -54,6 +57,7 @@ namespace Time {
 
 		bool operator ==(Date);
 		Date & operator++();
+
 
 		friend std::ostream& operator<<(std::ostream &out, Date &d);
 
@@ -68,6 +72,7 @@ namespace Time {
 		unsigned short minute;
 		unsigned int dayValue; //as in, the 18th day of the month
 	};
+
 
 } /* namespace Time */
 #endif /* DATE_H_ */

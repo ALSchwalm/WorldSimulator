@@ -28,7 +28,8 @@ namespace Event {
 
 	void MoveEvent::run()
 	{
-		individual->setCurrentLocation(newLocation);
+		if (individual->getCurrentLocation()->getLocations().find(newLocation) !=  individual->getCurrentLocation()->getLocations().end())
+			individual->setCurrentLocation(newLocation);
 	}
 
 } /* namespace Event */

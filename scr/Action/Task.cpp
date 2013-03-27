@@ -18,7 +18,7 @@ Task::~Task()
 
 bool Task::run()
 {
-	event->setExecutionDate(Time::now());
+	event->setExecutionDate(Time::now()+3);
 	//TODO check for preconditions here
 
 	Event::EventQueue::getInstance().addEvent(event);

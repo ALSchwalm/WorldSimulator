@@ -27,23 +27,36 @@ Goal_ptr GoalCreator::createGoal(GoalRequest request,
 												Individual::Individual_ptr individual,
 												unsigned int priority)
 {
+	//Create empty goal and fill it once tasks have been determined
 	currentGoal = std::make_shared<Action::Goal>(request.goalType, priority);
 
 	switch (request.goalType)
 	{
 	case GET_FOOD:
+	{
 		assert (request.item == nullptr);
 		assert (request.individual == nullptr);
 		assert (request.location == nullptr);
-		currentGoal->setTasks(getFood(individual));
+		auto get_food = getFood(individual);
+		if (get_food.size() == 0)
+			break;
+		currentGoal->setTasks(get_food);
 		return currentGoal;
 		break;
+	}
+
 	case GET_ITEM:
+	{
 		assert (request.item != nullptr);
 		assert (request.individual == nullptr);
 		assert (request.location == nullptr);
-		currentGoal->setTasks(getItem(individual, request.item));
+		auto get_item = getItem(individual, request.item);
+		if (get_item.size() == 0)
+			break;
+		currentGoal->setTasks(get_item);
 		return currentGoal;
+	}
+
 	default:
 		std::cerr << "Error: Invalid goalType";
 		break;
@@ -86,6 +99,7 @@ std::vector<Task_ptr> GoalCreator::getItem(Individual::Individual_ptr individual
 	return taskList;
 }
 
+//Returns an empty vector if unable to find item
 std::vector<Task_ptr> GoalCreator::findItemFromAttributes(Individual::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance)
 {
 
@@ -94,6 +108,13 @@ std::vector<Task_ptr> GoalCreator::findItemFromAttributes(Individual::Individual
 	std::vector<Location::Location_ptr> locationList;
 
 	auto search_result = dijkstra(startLocation, attributeList, maxDistance);
+
+	//Returns an empty vector if unable to find item
+	if (!search_result.first)
+	{
+		return taskList;
+	}
+
 	locationList = search_result.second;
 
 	for (auto location : locationList)
@@ -132,7 +153,6 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 	while (openSet.size() > 0)
 	{
 		auto location = (*openSet.begin());
-		std::cout << location->getName() << std::endl;
 
 		foundItem = getItemFromAttributes(location, attributeList);
 		if (foundItem != nullptr)
@@ -182,7 +202,6 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 	while (openSet.size() > 0)
 	{
 		auto location = (*openSet.begin());
-		std::cout << location->getName() << std::endl;
 
 		foundItem = std::find(location->getItems().begin(), location->getItems().end(), item);
 		if (foundItem != location->getItems().end())
@@ -216,6 +235,7 @@ std::vector<Location::Location_ptr> GoalCreator::traceBack(Location::Location_pt
 		outputList.push_back(l->cameFrom);
 		l = l->cameFrom;
 	}
+	outputList.push_back(l);
 	return outputList;
 }
 

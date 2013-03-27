@@ -14,6 +14,7 @@ namespace Event
 		END_TASK_EVENT,
 		MOVE_EVENT,
 		PICKUP_EVENT,
+		INTERRUPT_EVENT,
 
 		//Insert events before this
 		EVENT_ERROR,

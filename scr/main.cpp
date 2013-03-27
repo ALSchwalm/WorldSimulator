@@ -22,43 +22,39 @@
 
 int main()
 {
-	Item::Item_ptr item = std::make_shared<Item::BaseItem>();
+	auto l = std::make_shared<Location::Village>(Location::World::getInstance(), "test Location");
+	auto l2 = std::make_shared<Location::Village>(l, "test Location2");
+
+	auto item = std::make_shared<Item::BaseItem>();
 	item->setAttribute("edible");
 
-	Condition::ConditionList c;
+	l2->addItem(item);
 
-	c.addCondition(Condition::HAS_ATTRIBUTE, item, "edible");
+	auto p = std::make_shared<Individual::Person>("test Person", l);
+	auto p2 = std::make_shared<Individual::Person>("test Person 2", l);
 
-	if (c.isSatisfied())
+	auto t = Action::GoalCreator::getInstance().createGoal(Action::GoalType::GET_FOOD, p, 0);
+	if (t == nullptr)
+		std::cout << "Unable to find food." << std::endl;
+	else
+		p->addGoal(t);
+
+	p->goalTree.execute();
+	//std::cout << Event::EventQueue::getInstance();
+
+	Time::Date temp(Time::now()+3);
+
+	while (true)
 	{
-		std::cout << "success" << std::endl;
+		std::cout << Event::EventQueue::getInstance().getNextEvent()->getEventName() << std::endl;
+		Event::EventQueue::getInstance().execute();
+		Time::TimeManager::getInstance().capFPS();
+		Time::TimeManager::getInstance().tick();
+		std::cout << p->getCurrentLocation()->getName() << std::endl;
+		std::cout << Time::DateManager::getInstance().now << std::endl;
+//		if (temp == Time::now())
+//			break;
 	}
-
-
-//	auto l = std::make_shared<Location::Village>(Location::World::getInstance(), "test Location");
-//	auto l2 = std::make_shared<Location::Village>(l, "test Location2");
-//
-//	std::cout << "l at "  << l.get() << std::endl;
-//	for (auto location : l->getLocations())
-//		std::cout << location->getName() << std::endl;
-//	std::cout << std::endl;
-//	std::cout << "l2 at " << l2.get() << std::endl;
-//	for (auto location : l2->getLocations())
-//		std::cout << location->getName() << std::endl;
-//	std::cout << std::endl;
-//
-//	auto item = std::make_shared<Item::BaseItem>();
-//	item->setAttribute("edible");
-//
-//
-//	for (auto item : l2->getItems())
-//	{
-//		std::cout << item->getName() << std::endl;
-//	}
-//
-//
-//	auto p = std::make_shared<Individual::Person>("test Person", l);
-//	p->addGoal(Action::GoalCreator::getInstance().createGoal(Action::GoalType::GET_FOOD, p, 0));
 
 	return 0;
 }

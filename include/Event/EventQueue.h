@@ -22,7 +22,7 @@ namespace Event {
 
 		void execute();
 
-		std::shared_ptr<BaseEvent> getNextEvent()
+		Event_ptr getNextEvent()
 		{
 			return queue.front();
 		}

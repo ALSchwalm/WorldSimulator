@@ -9,6 +9,14 @@
 
 namespace Time {
 
+	Date operator+(Date d, int x)
+	{
+		Date temp(d);
+		for (int i=0; i < x; ++i)
+			++temp;
+		return temp;
+	}
+
 	Date::Date(unsigned int _year, Month _month, Day _day, unsigned short _hour, unsigned short _minute) :
 		year(_year),
 		month(_month),
