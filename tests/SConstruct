@@ -1,0 +1,28 @@
+import os
+import re
+import glob
+import sys
+import fnmatch
+
+env = Environment()
+
+env.Replace(CCFLAGS = [])
+Tool('mingw')(env) # Prefer MinGW over other compilers like cl.exe
+
+env.Append(LIBPATH = ['../lib'])
+env.Append(CXXFLAGS=['-Wall', '-std=gnu++0x'])
+env.Append(LIBS = ['GoogleTest'])
+env.Append(CPPPATH=['include', '../include', '.'])
+
+
+object_list = []
+for root, dirnames, filenames in os.walk('../Debug'):
+	for filename in fnmatch.filter(filenames, '*.o'):
+		if filename != 'main.o':
+			object_list.append(os.path.join(root, filename))
+
+matches = Glob('*.cpp')
+
+object_list.append(env.Object(source = matches))
+
+env.Program(target = "tests.exe", source = object_list)

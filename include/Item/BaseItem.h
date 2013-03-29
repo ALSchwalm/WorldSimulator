@@ -19,8 +19,9 @@ namespace Item
 		void setAttribute(std::string s) {attributes[s] = true;}
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
-		//TODO move this back to private
+	protected:
 		BaseItem() : name("Unnamed Item"){}
+		BaseItem(std::string _name) : name(_name){}
 	private:
 
 

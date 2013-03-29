@@ -41,13 +41,14 @@ if not COMP_INCLUDES_INTO_CCFLAGS:
 
 env.Append(CFLAGS=C_FLAGS, CXXFLAGS=CXX_FLAGS)
 env.Append(CXXFLAGS=['-std=c++0x'])
-LIBRARIES = ['pdcurses']
+LIBRARIES = ['pdcurses', 'GoogleTest']
 LIBRARY_PATHS = ['lib/']
 env.Append(CPPPATH=["include"])
 env.Replace(CCFLAGS='') # otherwise we have /nolink in Windows there
 env.Decider(DECIDER)
 env['SHOBJSUFFIX'] = '.o' # SCons otherwise uses .os suffix for Cygwin and MacOS X
 
+excludes = "tests/*.cpp"
 
 # Initialize variables
 ARTIFACT_NAME = os.path.join(BUILD_CONFIGURATION, BUILD_ARTIFACT_NAME)
@@ -85,6 +86,7 @@ post = Action(execute_post_build_action, POST_BUILD_DESC)
 # Search source directories for files
 main_source_dir = os.path.abspath('.')
 for subdir, excludes in SOURCE_PATHS.iteritems():
+    excludes.append("tests") #there is a separate file for compiling tests
     if subdir == PROJECT_NAME:
         sconscript_path = 'SConscript'
         source_dir = main_source_dir

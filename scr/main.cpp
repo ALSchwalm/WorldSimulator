@@ -15,17 +15,18 @@
 #include "Time/TimeManager.h"
 #include "Relationship/Relationship.h"
 #include "Condition/Condition.h"
-
+#include "Item/Weapon.h"
 #include <cassert>
 #include <iostream>
 #include <utility>
+
 
 int main()
 {
 	auto l = std::make_shared<Location::Village>(Location::World::getInstance(), "test Location");
 	auto l2 = std::make_shared<Location::Village>(l, "test Location2");
 
-	auto item = std::make_shared<Item::BaseItem>();
+	auto item = std::make_shared<Item::Weapon>("testWeapon");
 	item->setAttribute("edible");
 
 	l2->addItem(item);
@@ -55,6 +56,8 @@ int main()
 //		if (temp == Time::now())
 //			break;
 	}
+
+
 
 	return 0;
 }
