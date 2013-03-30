@@ -40,7 +40,7 @@ int main()
 	else
 		p->addGoal(t);
 
-	p->goalTree.execute();
+	//p->goalTree.execute();
 	//std::cout << Event::EventQueue::getInstance();
 
 	Time::Date temp(Time::now()+3);

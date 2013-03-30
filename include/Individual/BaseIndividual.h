@@ -59,9 +59,9 @@ namespace Individual
 
 		Event::EventHistory history;
 
-
+		Action::GoalTree goalTree;
 	public:
-		Action::GoalTree goalTree; //TODO make private
+
 
 		Location_ptr getCurrentLocation() { return currentLocation; }
 		void setCurrentLocation( Location_ptr c ) { currentLocation = c;}

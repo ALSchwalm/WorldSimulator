@@ -22,7 +22,7 @@ for root, dirnames, filenames in os.walk('../Debug'):
 			object_list.append(os.path.join(root, filename))
 
 matches = Glob('*.cpp')
-
-object_list.append(env.Object(source = matches))
+for match in matches:
+	object_list.append(env.Object(target="obj/" + os.path.splitext(str(match))[0] + '.o', source=match))
 
 env.Program(target = "tests.exe", source = object_list)
