@@ -47,5 +47,6 @@ void GoalTree::addGoal(Goal_ptr goal)
 	else
 	{
 		goalHeap.insert(goal);
+		execute();
 	}
 }

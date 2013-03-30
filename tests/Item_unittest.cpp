@@ -1,19 +1,17 @@
 
-#include <limits.h>
 #include "Item/BaseItem.h"
 #include "Item/Weapon.h"
 
 #include "gtest/gtest.h"
 
 
-// Tests factorial of negative numbers.
-TEST(ItemTest, HasAttribute) {
-	// This test is named "Negative", and belongs to the "FactorialTest"
-	// test case.
-	auto i = std::make_shared<Item::Weapon>("TestWeapon");
+TEST(ItemTest, HasAttribute)
+{
 
-	i->setAttribute("old");
+	auto item = std::make_shared<Item::Weapon>("TestWeapon");
 
-	EXPECT_TRUE(i->hasAttribute("old"));
-	EXPECT_FALSE(i->hasAttribute("other"));
+	item->setAttribute("old");
+
+	EXPECT_TRUE(item->hasAttribute("old"));
+	EXPECT_FALSE(item->hasAttribute("other"));
 }

@@ -35,7 +35,8 @@ namespace Location
 
 		virtual LocationType getLocationType(){return LocationType::LOCATION_ERROR;}
 
-		virtual bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
+		void setAttribute(std::string s) {attributes[s] = true;}
+		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
 		const Individual::IndividualList & getIndividuals() {return individuals;}
 		const Item::ItemList & getItems() {return items;}

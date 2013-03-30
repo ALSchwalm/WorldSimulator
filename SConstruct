@@ -142,3 +142,7 @@ if COMP_INCLUDES_INTO_CCFLAGS:
     else:
         print "Unexpected default SHCXXCOM"
         Exit(1)
+		
+		
+os.chdir("tests/")
+os.system("scons")

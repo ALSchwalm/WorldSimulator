@@ -54,7 +54,6 @@ namespace Action
 	typedef std::shared_ptr<GoalRequest> GoalRequest_ptr;
 
 
-	//This is not a base class
 	class Goal
 	{
 

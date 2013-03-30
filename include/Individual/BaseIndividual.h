@@ -96,6 +96,7 @@ namespace Individual
 			return LocationRelationships[l];
 		}
 
+		void setAttribute(std::string s) {attributes[s] = true;}
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 		bool removeItem(Item::Item_ptr i);
 

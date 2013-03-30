@@ -68,12 +68,12 @@ Goal_ptr GoalCreator::createGoal(GoalRequest request,
 
 std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual)
 {
-	std::vector<Action::Task_ptr> taskList;
 
 	std::vector<std::string> attributeList;
 	attributeList.push_back("edible");
-	taskList = findItemFromAttributes(individual, attributeList, 5);
 
+	std::vector<Action::Task_ptr> taskList = findItemFromAttributes(individual, attributeList, 5);
+	std::reverse(taskList.begin(), taskList.end());
 	return taskList;
 }
 
@@ -143,11 +143,17 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 	else
 		return std::make_pair(foundItem, outputList);
 
+	startLocation->cameFrom = nullptr;
+	startLocation->distance = 0;
+
 	for (auto location : startLocation->getLocations())
 	{
-		location->cameFrom = startLocation;
-		location->distance = 1;
-		openSet.insert(location);
+		if (location != nullptr)
+		{
+			location->cameFrom = startLocation;
+			location->distance = 1;
+			openSet.insert(location);
+		}
 
 	}
 	while (openSet.size() > 0)
@@ -162,7 +168,7 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 
 		for (auto nextLocation : location->getLocations())
 		{
-			if (closedSet.find(nextLocation) == closedSet.end() && location->distance+1 < maxDistance)
+			if (nextLocation != nullptr && closedSet.find(nextLocation) == closedSet.end() && location->distance+1 < maxDistance)
 			{
 				nextLocation->cameFrom = location;
 				nextLocation->distance = location->distance+1;
@@ -176,6 +182,8 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 	return std::make_pair(nullptr, outputList);
 
 }
+
+
 
 //TODO find a way to do this without copying vectors
 std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijkstra(Location::Location_ptr startLocation, Item::Item_ptr item, unsigned int maxDistance)
@@ -192,12 +200,17 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 	else
 		return std::make_pair(*foundItem, outputList);
 
+	startLocation->cameFrom = nullptr;
+	startLocation->distance = 0;
+
 	for (auto location : startLocation->getLocations())
 	{
-		location->cameFrom = startLocation;
-		location->distance = 1;
-		openSet.insert(location);
-
+		if (location != nullptr)
+		{
+			location->cameFrom = startLocation;
+			location->distance = 1;
+			openSet.insert(location);
+		}
 	}
 	while (openSet.size() > 0)
 	{
@@ -211,7 +224,7 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 
 		for (auto nextLocation : location->getLocations())
 		{
-			if (closedSet.find(nextLocation) == closedSet.end() && location->distance+1 < maxDistance)
+			if (nextLocation != nullptr && closedSet.find(nextLocation) == closedSet.end() && location->distance+1 < maxDistance)
 			{
 				nextLocation->cameFrom = location;
 				nextLocation->distance = location->distance+1;
