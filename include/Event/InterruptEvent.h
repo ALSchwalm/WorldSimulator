@@ -15,14 +15,16 @@ namespace Event
 		InterruptEvent(
 				Individual::Individual_ptr,
 				Individual::Individual_ptr,
-				Action::Goal_ptr
+				Action::GoalRequest,
+				unsigned int
 		);
 
 		InterruptEvent(
 				Time::Date,
 				Individual::Individual_ptr,
 				Individual::Individual_ptr,
-				Action::Goal_ptr
+				Action::GoalRequest,
+				unsigned int
 		);
 		~InterruptEvent();
 
@@ -35,8 +37,8 @@ namespace Event
 		Individual::Individual_ptr source;
 		Individual::Individual_ptr interrupted;
 
-		Action::Goal_ptr goal;
-
+		Action::GoalRequest goalRequest;
+		unsigned int priority;
 	};
 
 }

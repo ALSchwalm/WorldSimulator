@@ -8,30 +8,40 @@
 
 namespace Action
 {
+	struct GoalWrapper
+	{
+		GoalWrapper(GoalRequest _goalReqest,  unsigned int _priority) :
+			goalRequest(_goalReqest),
+			priority(_priority){}
 
+		GoalRequest goalRequest;
+		unsigned int priority;
+	};
 
 	class GoalTree
 	{
 	public:
-		GoalTree();
+		GoalTree(Individual::Individual_ptr);
 		~GoalTree();
 
 		void execute();
 		void goalFinished();
 		void goalInterruped(){};
 
-		void addGoal(Goal_ptr goal);
+		void addGoal(GoalRequest, unsigned int);
 
 	private:
-
 		struct priority
 		{
-			bool operator() ( const Goal_ptr & lhs, const Goal_ptr & rhs) const {
-				return lhs->getPriority() < rhs->getPriority();
+			bool operator() ( const GoalWrapper & lhs, const GoalWrapper & rhs) const {
+				return lhs.priority < rhs.priority;
 			}
 		};
 
-		std::set<Goal_ptr, priority> goalHeap;
+		Individual::Individual_ptr owner; //Individual who has this goalTree
+
+		Goal_ptr currentGoal;
+		std::set<GoalWrapper, priority> goalHeap;
 
 
 	};

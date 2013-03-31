@@ -1,12 +1,14 @@
 
 #include "Action/GoalTree.h"
+#include "Action/GoalCreator.h"
 #include <cassert>
 
 #include <iostream> //TODO remove this
 
 using namespace Action;
 
-GoalTree::GoalTree()
+GoalTree::GoalTree(Individual::Individual_ptr _individual) :
+		owner(_individual)
 {
 
 }
@@ -18,35 +20,40 @@ GoalTree::~GoalTree()
 
 void GoalTree::execute()
 {
-	(*goalHeap.begin())->execute();
+	GoalWrapper temp = (*goalHeap.begin());
+	currentGoal = GoalCreator::getInstance().createGoal(temp.goalRequest, owner, temp.priority);
+
+	goalHeap.erase(goalHeap.begin());
+
+	assert(currentGoal != nullptr);
+
+	currentGoal->execute();
 }
 
 void GoalTree::goalFinished()
 {
-	//TODO This may need to be goals.back() or goals.end() - 1
-	goalHeap.erase(goalHeap.begin());
 	if (goalHeap.begin() != goalHeap.end())
-		(*goalHeap.begin())->execute();
+		execute();
 
 }
 
-void GoalTree::addGoal(Goal_ptr goal)
+void GoalTree::addGoal(GoalRequest _goalRequest,  unsigned int _priority)
 {
-	assert(goal != nullptr);
-
 	if (goalHeap.size() != 0)
 	{
-		if (goal->getPriority() > (*goalHeap.begin())->getPriority())
+		if (_priority > currentGoal->getPriority())
 		{
-			auto temp = *goalHeap.begin();
-			goalHeap.insert(goal);
-			temp->interrupt();
+			goalHeap.insert(GoalWrapper(_goalRequest, _priority));
+
+			//Interrupt will call up to goalFinished, which will execute the new goalHeap.begin()
+			currentGoal->interrupt();
+
 			std::cout << "interrupted" << std::endl;
 		}
 	}
 	else
 	{
-		goalHeap.insert(goal);
+		goalHeap.insert(GoalWrapper(_goalRequest, _priority));
 		execute();
 	}
 }

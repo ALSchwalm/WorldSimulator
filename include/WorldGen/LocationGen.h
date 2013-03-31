@@ -3,7 +3,7 @@
 
 
 #include "Location/BaseLocation.h"
-#include "Location/World.h"
+
 
 
 namespace WorldGen

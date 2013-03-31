@@ -33,17 +33,17 @@ namespace Individual
 	class BaseIndividual
 	{
 	protected:
-		virtual ~BaseIndividual(){}
-
 		BaseIndividual() :
 			age(0),
 			name("DefaultName"),
-			currentLocation (nullptr){}
+			currentLocation (nullptr),
+			goalTree(std::make_shared<BaseIndividual>(*this)){}
 
 		BaseIndividual(std::string _name, Location_ptr _location) :
 			age(0),
 			name(_name),
-			currentLocation(_location){}
+			currentLocation(_location),
+			goalTree(std::make_shared<BaseIndividual>(*this)){}
 
 		typedef Relationship::Relationship<BaseIndividual, BaseIndividual > IIR;
 		typedef Relationship::Relationship<BaseIndividual, Location::BaseLocation > ILR;
@@ -61,7 +61,7 @@ namespace Individual
 
 		Action::GoalTree goalTree;
 	public:
-
+		virtual ~BaseIndividual(){}
 
 		Location_ptr getCurrentLocation() { return currentLocation; }
 		void setCurrentLocation( Location_ptr c ) { currentLocation = c;}
@@ -73,9 +73,12 @@ namespace Individual
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
 		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
-		void addGoal(Action::Goal_ptr g) {goalTree.addGoal(g);}
 		void addItem(Item::Item_ptr i) {items.push_back(i);}
 
+		void addGoal(Action::GoalRequest _goalRequest, unsigned int _priority)
+		{
+			goalTree.addGoal(_goalRequest,  _priority);
+		}
 		void addIndividualRelationship(Individual_ptr b, shared_ptr<IIR> r)
 		{
 			IndividualRelationships[b].push_back(r);

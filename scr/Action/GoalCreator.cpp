@@ -24,8 +24,8 @@ GoalCreator::~GoalCreator()
 }
 
 Goal_ptr GoalCreator::createGoal(GoalRequest request,
-												Individual::Individual_ptr individual,
-												unsigned int priority)
+								Individual::Individual_ptr individual,
+								unsigned int priority)
 {
 	//Create empty goal and fill it once tasks have been determined
 	currentGoal = std::make_shared<Action::Goal>(request.goalType, priority);

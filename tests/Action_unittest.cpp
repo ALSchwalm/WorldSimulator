@@ -23,9 +23,7 @@ TEST(ActionTest, GetFood)
 
 	location2->addItem(item);
 
-	auto goal = Action::GoalCreator::getInstance().createGoal(Action::GoalType::GET_FOOD, individual, 0);
-
-	individual->addGoal(goal);
+	individual->addGoal(Action::GoalType::GET_FOOD, 0);
 
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent() != nullptr);
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE_EVENT);
