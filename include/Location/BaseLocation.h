@@ -5,8 +5,8 @@
  *      Author: Adam
  */
 
-#ifndef LOCATION_H_
-#define LOCATION_H_
+#ifndef BASELOCATION_H_
+#define BASELOCATION_H_
 
 #include "Individual/BaseIndividual.h"
 #include "Item/BaseItem.h"

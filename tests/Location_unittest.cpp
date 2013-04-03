@@ -1,10 +1,10 @@
 #include "gtest/gtest.h"
 
 #include <algorithm>
+
 #include "Location/BaseLocation.h"
 #include "Location/Village.h"
 #include "Location/World.h"
-#include "Location/LocationManager.h"
 #include "Item/Weapon.h"
 
 TEST(LocationTest, HasAttribute)
@@ -45,13 +45,13 @@ TEST(LocationTest, RemoveItems)
 	EXPECT_FALSE(location->removeItem(item2));
 }
 
-TEST(LocationTest, AddLocation)
+TEST(LocationTest, AddLocationStandard)
 {
 
 	auto location = std::make_shared<Location::Village>("TestVillage");
 	auto location2 = std::make_shared<Location::Village>("TestVillage2");
 
-	Location::LocationManager::getInstance().addLocation(location, location2);
+	Location::addLocations(location, location2);
 
 	EXPECT_TRUE(std::count(location->getLocations().begin(), location->getLocations().end(), location2) == 1);
 	EXPECT_TRUE(std::count(location2->getLocations().begin(), location->getLocations().end(), location) == 1);
@@ -64,7 +64,7 @@ TEST(LocationTest, AddLocationWorld)
 
 	auto location = std::make_shared<Location::Village>("TestVillage");
 
-	Location::LocationManager::getInstance().addLocation(Location::World::getInstance(), location);
+	Location::addLocations(Location::World::getInstance(), location);
 
 	EXPECT_TRUE(std::count(location->getLocations().begin(), location->getLocations().end(), Location::World::getInstance()) == 1);
 	EXPECT_TRUE(std::count(Location::World::getInstance()->getLocations().begin(), Location::World::getInstance()->getLocations().end(), location) == 1);

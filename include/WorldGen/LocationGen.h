@@ -4,8 +4,6 @@
 
 #include "Location/BaseLocation.h"
 
-
-
 namespace WorldGen
 {
 	class LocationGen

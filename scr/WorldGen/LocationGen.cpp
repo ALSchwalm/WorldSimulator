@@ -2,7 +2,7 @@
 #include "WorldGen/LocationGen.h"
 #include "Location/World.h"
 #include "Location/Region.h"
-#include "Location/LocationManager.h"
+#include "Location/Location.h"
 #include "Utils/Markov.h"
 
 #include <cstdlib>
@@ -23,7 +23,7 @@ void LocationGen::seed()
 	for (unsigned int i = 0; i < numberRegions; ++i)
 	{
 		auto region = std::make_shared<Location::Region>( Utils::Markov::getInstance().getProperWord());
-		Location::LocationManager::getInstance().addLocation(Location::World::getInstance(), region);
+		Location::addLocations(Location::World::getInstance(), region);
 	}
 }
 
