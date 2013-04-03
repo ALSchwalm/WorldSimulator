@@ -2,9 +2,12 @@
 #include "WorldGen/LocationGen.h"
 #include "Location/World.h"
 #include "Location/Region.h"
+#include "Location/LocationManager.h"
+#include "Utils/Markov.h"
 
 #include <cstdlib>
 #include <memory>
+#include <iostream> //TODO remove this
 
 using namespace WorldGen;
 
@@ -19,9 +22,8 @@ void LocationGen::seed()
 	unsigned int numberRegions = (rand() % 5 + 1);
 	for (unsigned int i = 0; i < numberRegions; ++i)
 	{
-		Location::World::getInstance()->addLocation(
-				std::make_shared<Location::Region>("TempRegion")
-				);
+		auto region = std::make_shared<Location::Region>( Utils::Markov::getInstance().getProperWord());
+		Location::LocationManager::getInstance().addLocation(Location::World::getInstance(), region);
 	}
 }
 

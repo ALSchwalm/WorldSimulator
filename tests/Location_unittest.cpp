@@ -3,12 +3,14 @@
 #include <algorithm>
 #include "Location/BaseLocation.h"
 #include "Location/Village.h"
+#include "Location/World.h"
+#include "Location/LocationManager.h"
 #include "Item/Weapon.h"
 
 TEST(LocationTest, HasAttribute)
 {
 
-	auto location = std::make_shared<Location::Village>(nullptr, "TestVillage");
+	auto location = std::make_shared<Location::Village>("TestVillage");
 
 	location->setAttribute("test");
 
@@ -19,7 +21,7 @@ TEST(LocationTest, HasAttribute)
 TEST(LocationTest, AddItems)
 {
 
-	auto location = std::make_shared<Location::Village>(nullptr, "TestVillage");
+	auto location = std::make_shared<Location::Village>("TestVillage");
 	auto item = std::make_shared<Item::Weapon>("TestWeapon");
 	auto item2 = std::make_shared<Item::Weapon>("TestWeapon2");
 
@@ -32,7 +34,7 @@ TEST(LocationTest, AddItems)
 TEST(LocationTest, RemoveItems)
 {
 
-	auto location = std::make_shared<Location::Village>(nullptr, "TestVillage");
+	auto location = std::make_shared<Location::Village>("TestVillage");
 	auto item = std::make_shared<Item::Weapon>("TestWeapon");
 	auto item2 = std::make_shared<Item::Weapon>("TestWeapon2");
 
@@ -46,11 +48,26 @@ TEST(LocationTest, RemoveItems)
 TEST(LocationTest, AddLocation)
 {
 
-	auto location = std::make_shared<Location::Village>(nullptr, "TestVillage");
-	auto location2 = std::make_shared<Location::Village>(location, "TestVillage2");
+	auto location = std::make_shared<Location::Village>("TestVillage");
+	auto location2 = std::make_shared<Location::Village>("TestVillage2");
+
+	Location::LocationManager::getInstance().addLocation(location, location2);
 
 	EXPECT_TRUE(std::count(location->getLocations().begin(), location->getLocations().end(), location2) == 1);
 	EXPECT_TRUE(std::count(location2->getLocations().begin(), location->getLocations().end(), location) == 1);
 	EXPECT_FALSE(std::count(location->getLocations().begin(), location->getLocations().end(), location) != 0);
 	EXPECT_FALSE(std::count(location2->getLocations().begin(), location->getLocations().end(), location2) != 0);
+}
+
+TEST(LocationTest, AddLocationWorld)
+{
+
+	auto location = std::make_shared<Location::Village>("TestVillage");
+
+	Location::LocationManager::getInstance().addLocation(Location::World::getInstance(), location);
+
+	EXPECT_TRUE(std::count(location->getLocations().begin(), location->getLocations().end(), Location::World::getInstance()) == 1);
+	EXPECT_TRUE(std::count(Location::World::getInstance()->getLocations().begin(), Location::World::getInstance()->getLocations().end(), location) == 1);
+	EXPECT_FALSE(std::count(location->getLocations().begin(), location->getLocations().end(), location) != 0);
+	EXPECT_FALSE(std::count(Location::World::getInstance()->getLocations().begin(), Location::World::getInstance()->getLocations().end(), Location::World::getInstance()) != 0);
 }

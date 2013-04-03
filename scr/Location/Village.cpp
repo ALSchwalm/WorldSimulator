@@ -10,12 +10,12 @@
 
 using namespace Location;
 
-Village::Village(Location_ptr l) : BaseLocation(l)
+Village::Village() : BaseLocation()
 {
 
 }
 
-Village::Village(Location_ptr l, std::string _name): BaseLocation(l, _name)
+Village::Village(std::string _name): BaseLocation(_name)
 {
 
 }

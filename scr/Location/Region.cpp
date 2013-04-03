@@ -10,3 +10,5 @@ RegionType Region::getRandomRegionType()
 {
 	return static_cast<RegionType>(rand() % RegionType::NUM_OF_REGIONS);
 }
+
+

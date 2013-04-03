@@ -13,6 +13,8 @@
 #include <memory>
 #include <unordered_set>
 
+#include <iostream> //TODO remove this
+
 namespace Location
 {
 	typedef std::shared_ptr<BaseLocation> Location_ptr;
@@ -55,17 +57,16 @@ namespace Location
 		void addLocation(Location::Location_ptr l);
 		void operator+=(Location::Location_ptr rhs);
 
-		void addOnewayLocation (Location::Location_ptr l);
-
 		//These should only be used by GoalCreator
 		Location_ptr cameFrom;
 		unsigned int distance;
 
 	protected:
-		BaseLocation(Location_ptr l) : distance(0) {addLocation(l);}
-		BaseLocation(Location_ptr l, std::string _name) : distance(0), name(_name) {addLocation(l);}
+		BaseLocation() : distance(0) {}
+		BaseLocation(std::string _name) : distance(0), name(_name) {}
 
 		std::unordered_set<Location_ptr> locations;
+
 	private:
 
 		std::map<std::string, bool> attributes;

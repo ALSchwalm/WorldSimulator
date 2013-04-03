@@ -8,15 +8,6 @@
 
 namespace Action
 {
-	struct GoalWrapper
-	{
-		GoalWrapper(GoalRequest _goalReqest,  unsigned int _priority) :
-			goalRequest(_goalReqest),
-			priority(_priority){}
-
-		GoalRequest goalRequest;
-		unsigned int priority;
-	};
 
 	class GoalTree
 	{
@@ -31,6 +22,17 @@ namespace Action
 		void addGoal(GoalRequest, unsigned int);
 
 	private:
+
+		struct GoalWrapper
+		{
+			GoalWrapper(GoalRequest _goalReqest,  unsigned int _priority) :
+				goalRequest(_goalReqest),
+				priority(_priority){}
+
+			GoalRequest goalRequest;
+			unsigned int priority;
+		};
+
 		struct priority
 		{
 			bool operator() ( const GoalWrapper & lhs, const GoalWrapper & rhs) const {
@@ -42,6 +44,7 @@ namespace Action
 
 		Goal_ptr currentGoal;
 		std::set<GoalWrapper, priority> goalHeap;
+
 
 
 	};

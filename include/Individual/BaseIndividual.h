@@ -61,7 +61,6 @@ namespace Individual
 
 		Action::GoalTree goalTree;
 	public:
-		virtual ~BaseIndividual(){}
 
 		Location_ptr getCurrentLocation() { return currentLocation; }
 		void setCurrentLocation( Location_ptr c ) { currentLocation = c;}

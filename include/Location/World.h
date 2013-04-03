@@ -10,6 +10,7 @@ namespace Location
 	class World : public BaseLocation
 	{
 	public:
+		World();
 		~World();
 		static Location_ptr getInstance();
 
@@ -21,7 +22,7 @@ namespace Location
 
 
 	private:
-		World();
+
 
 	};
 

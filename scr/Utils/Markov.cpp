@@ -5,15 +5,15 @@
  *      Author: Adam
  */
 
-#include "Utils\Markov.h"
+#include "Utils/Markov.h"
 #include <algorithm>
 #include <fstream>
 #include <random>
 #include <time.h>
 #include <cstdlib>
+#include <iostream> //TODO remove this
 
-
-using namespace Util;
+using namespace Utils;
 
 
 std::map<char, std::vector<char> > Markov::MarkovMap;
@@ -31,7 +31,7 @@ Markov::Markov()
 
     ifstream fFile;
     string name = "";
-    std::string letters = "abcdefghijklmnopqrstuvwxyz";
+    const std::string letters = "abcdefghijklmnopqrstuvwxyz";
     vector<string> names;
 
    	fFile.open("names.txt");
@@ -55,13 +55,14 @@ Markov::Markov()
 
 std::string Markov::getWord(unsigned int size, bool properName)
 {
-	std::string letters = "abcdefghijklmnopqrstuvwxyz";
-	char letter = letters[rand()%26];
-	std::string word;
+	const std::string letters = "abcdefghijklmnopqrstuvwxyz";
+	std::string word = "";
+
+	int letter = letters[rand()%letters.size()];
 
 	for (unsigned int i=0; i < size; ++i)
 	{
-		letter = MarkovMap[letter][(rand()%MarkovMap[letter].size())];
+		letter = MarkovMap[letter][rand()%MarkovMap[letter].size()];
 		word += letter;
 	}
 

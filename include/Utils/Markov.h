@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace Util
+namespace Utils
 {
 	class Markov {
 	public:

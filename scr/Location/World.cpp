@@ -8,14 +8,20 @@ using namespace Location;
 //There can only be one world (for now)
 Location_ptr World::getInstance()
 {
-	static World world;
-	return std::make_shared<World>(world);
+	static auto world = std::make_shared<World>();
+	return world;
 }
 
 
-World::World() : BaseLocation(nullptr, "World") {}
+World::World() : BaseLocation("World")
+{
 
-World::~World() {}
+}
+
+World::~World()
+{
+
+}
 
 void World::addItem(Item::Item_ptr i)
 {
