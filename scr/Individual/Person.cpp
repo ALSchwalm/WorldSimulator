@@ -10,7 +10,7 @@
 namespace Individual
 {
 
-Person::Person()
+Person::Person(std::string s) : BaseIndividual(s)
 {
 }
 

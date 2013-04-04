@@ -33,11 +33,11 @@ namespace Individual
 	class BaseIndividual
 	{
 	protected:
-		BaseIndividual() :
+		BaseIndividual(std::string _name) :
 			age(0),
-			name("DefaultName"),
+			name(_name),
 			currentLocation (nullptr),
-			goalTree(std::make_shared<BaseIndividual>(*this)){}
+			goalTree(std::make_shared<BaseIndividual>(*this)){} //FIXME review this
 
 		BaseIndividual(std::string _name, Location_ptr _location) :
 			age(0),
@@ -61,6 +61,7 @@ namespace Individual
 
 		Action::GoalTree goalTree;
 	public:
+		virtual ~BaseIndividual(){}
 
 		Location_ptr getCurrentLocation() { return currentLocation; }
 		void setCurrentLocation( Location_ptr c ) { currentLocation = c;}

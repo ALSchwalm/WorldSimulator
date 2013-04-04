@@ -23,6 +23,7 @@ namespace Location
 	{
 		VILLAGE_LOCATION,
 		REGION_LOCATION,
+		TERRAIN_LOCATION,
 
 		//insert before this
 		LOCATION_ERROR,
@@ -57,7 +58,7 @@ namespace Location
 		void addLocation(Location::Location_ptr l);
 		void operator+=(Location::Location_ptr rhs);
 
-		//These should only be used by GoalCreator
+		//FIXME These should only be used by GoalCreator
 		Location_ptr cameFrom;
 		unsigned int distance;
 

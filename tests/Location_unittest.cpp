@@ -5,6 +5,7 @@
 #include "Location/BaseLocation.h"
 #include "Location/Village.h"
 #include "Location/World.h"
+#include "Location/Location.h"
 #include "Item/Weapon.h"
 
 TEST(LocationTest, HasAttribute)
