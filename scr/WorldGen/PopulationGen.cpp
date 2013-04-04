@@ -5,15 +5,13 @@
 #include <cstdlib>
 #include <memory>
 
-using namespace WorldGen;
-
-PopulationGen & PopulationGen::getInstance()
+namespace WorldGen
 {
-	static PopulationGen populationGen;
-	return populationGen;
-}
+	namespace PopulationGen
+	{
 
-void PopulationGen::seed()
+
+void seed()
 {
 	for (auto region : Location::World::getInstance()->getLocations())
 	{
@@ -21,7 +19,7 @@ void PopulationGen::seed()
 		{
 			if (city->hasAttribute("habitable"))
 			{
-				for (int i=0; i < rand()%200 + 100; ++i)
+				for (unsigned int i=0; i < rand() % (INITIAL_MAX_POPULATION - INITIAL_MIN_POPULATION) + INITIAL_MIN_POPULATION; ++i)
 				{
 					city->addIndividual(std::make_shared<Individual::Person>(Utils::Markov::getInstance().getProperWord()));
 				}
@@ -30,7 +28,6 @@ void PopulationGen::seed()
 	}
 }
 
-PopulationGen::PopulationGen()
-{
 
+	}
 }

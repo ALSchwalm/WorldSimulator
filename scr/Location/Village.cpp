@@ -10,12 +10,7 @@
 
 using namespace Location;
 
-Village::Village() : BaseLocation()
-{
-	setAttribute("habitable");
-}
-
 Village::Village(std::string _name): BaseLocation(_name)
 {
-
+	setAttribute("habitable");
 }

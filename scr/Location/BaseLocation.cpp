@@ -27,5 +27,30 @@ bool BaseLocation::removeItem(Item::Item_ptr i)
 		items.erase(std::find(items.begin(), items.end(), i));
 		return true;
 	}
+}
 
+const std::unordered_set<Location_ptr> BaseLocation::getLocationsByAttribute(std::string s)
+{
+	std::unordered_set<Location_ptr> temp;
+	for (auto location : locations)
+	{
+		if (location->hasAttribute(s))
+		{
+			temp.insert(location);
+		}
+	}
+	return temp;
+}
+
+const std::unordered_set<Location_ptr> BaseLocation::getLocationsByType(LocationType l)
+{
+	std::unordered_set<Location_ptr> temp;
+	for (auto location : locations)
+	{
+		if (location->getLocationType() == l)
+		{
+			temp.insert(location);
+		}
+	}
+	return temp;
 }

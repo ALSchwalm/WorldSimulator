@@ -6,14 +6,12 @@
 
 namespace WorldGen
 {
-	class PopulationGen
+	namespace PopulationGen
 	{
-	public:
-		static PopulationGen & getInstance();
-		static void seed();
+		void seed();
 
-	private:
-		PopulationGen();
+		const unsigned int INITIAL_MAX_POPULATION = 300; //population per city
+		const unsigned int INITIAL_MIN_POPULATION = 100;
 
 	};
 }

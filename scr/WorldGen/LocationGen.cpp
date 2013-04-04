@@ -11,13 +11,12 @@
 
 using namespace WorldGen;
 
-LocationGen & LocationGen::getInstance()
+namespace WorldGen
 {
-	static LocationGen locationGen;
-	return locationGen;
-}
+	namespace LocationGen
+	{
 
-void LocationGen::seed()
+void seed()
 {
 	unsigned int numberRegions = (rand() % 5) + 1;
 	for (unsigned int i = 0; i < numberRegions; ++i)
@@ -35,10 +34,7 @@ void LocationGen::seed()
 			Location::addLocations(region, city);
 		}
 	}
-
 }
 
-LocationGen::LocationGen()
-{
-
+	}
 }

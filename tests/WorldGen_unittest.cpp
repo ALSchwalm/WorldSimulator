@@ -22,16 +22,14 @@ TEST(WorldGenTest, SeedLocations)
 
 TEST(WorldGenTest, SeedPopulation)
 {
+	WorldGen::PopulationGen::seed();
 
 	for (auto region : Location::World::getInstance()->getLocations())
 	{
-		for (auto city : region->getLocations())
+		for (auto city : region->getLocationsByAttribute("habitable"))
 		{
-			if (city->hasAttribute("habitable"))
-			{
-				EXPECT_TRUE(city->getIndividuals().size() > 0);
-				EXPECT_TRUE(city->getIndividuals().size() < 300);
-			}
+				EXPECT_TRUE(city->getIndividuals().size() >= 100);
+				EXPECT_TRUE(city->getIndividuals().size() <= 300);
 		}
 
 	}

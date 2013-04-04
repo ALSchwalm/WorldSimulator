@@ -45,6 +45,8 @@ namespace Location
 		const Individual::IndividualList & getIndividuals() {return individuals;}
 		const Item::ItemList & getItems() {return items;}
 		const std::unordered_set<Location_ptr> & getLocations() {return locations;}
+		const std::unordered_set<Location_ptr> getLocationsByAttribute(std::string s);
+		const std::unordered_set<Location_ptr> getLocationsByType(LocationType);
 
 		bool removeItem(Item::Item_ptr i);
 
@@ -63,7 +65,6 @@ namespace Location
 		unsigned int distance;
 
 	protected:
-		BaseLocation() : distance(0) {}
 		BaseLocation(std::string _name) : distance(0), name(_name) {}
 
 		std::unordered_set<Location_ptr> locations;
@@ -72,7 +73,6 @@ namespace Location
 
 		std::map<std::string, bool> attributes;
 		std::string name;
-
 
 		std::vector<Individual::Individual_ptr> individuals;
 		std::vector<Item::Item_ptr> items;

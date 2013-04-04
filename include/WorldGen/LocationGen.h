@@ -6,14 +6,9 @@
 
 namespace WorldGen
 {
-	class LocationGen
+	namespace LocationGen
 	{
-	public:
-		static LocationGen & getInstance();
-		static void seed();
-
-	private:
-		LocationGen();
+		void seed();
 
 	};
 }

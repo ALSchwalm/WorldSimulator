@@ -18,7 +18,6 @@ namespace Location {
 	class Village: public BaseLocation
 	{
 	public:
-		Village();
 		Village(std::string _name);
 
 		LocationType getLocationType(){return Location::VILLAGE_LOCATION;}
