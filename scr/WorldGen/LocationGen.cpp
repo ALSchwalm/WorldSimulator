@@ -19,7 +19,7 @@ LocationGen & LocationGen::getInstance()
 
 void LocationGen::seed()
 {
-	unsigned int numberRegions = (rand() % 5 + 1);
+	unsigned int numberRegions = (rand() % 5) + 1;
 	for (unsigned int i = 0; i < numberRegions; ++i)
 	{
 		auto region = std::make_shared<Location::Region>( Utils::Markov::getInstance().getProperWord());
@@ -28,7 +28,7 @@ void LocationGen::seed()
 
 	for (auto region : Location::World::getInstance()->getLocations())
 	{
-		unsigned int numberCities = (rand() % 10 + 1);
+		unsigned int numberCities = (rand() % 10) + 1;
 		for (unsigned int i=0; i < numberCities; ++i) //TODO assign nationality here
 		{
 			auto city = std::make_shared<Location::Village>(Utils::Markov::getInstance().getProperWord());

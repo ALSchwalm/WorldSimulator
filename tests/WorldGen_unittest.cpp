@@ -4,12 +4,14 @@
 #include "gtest/gtest.h"
 
 #include <vector>
+#include <iostream> //TODO remove this
 
 TEST(WorldGenTest, SeedLocations)
 {
 	WorldGen::LocationGen::seed();
 
-	EXPECT_TRUE(Location::World::getInstance()->getLocations().size() > 0 && Location::World::getInstance()->getLocations().size() < 6);
+	EXPECT_TRUE(Location::World::getInstance()->getLocations().size() > 0);
+	EXPECT_TRUE(Location::World::getInstance()->getLocations().size() < 6);
 
 	for (auto region : Location::World::getInstance()->getLocations())
 	{
@@ -20,18 +22,9 @@ TEST(WorldGenTest, SeedLocations)
 
 TEST(WorldGenTest, SeedPopulation)
 {
-	WorldGen::LocationGen::seed();
-
-	EXPECT_TRUE(Location::World::getInstance()->getLocations().size() > 0 && Location::World::getInstance()->getLocations().size() < 6);
-
-	WorldGen::PopulationGen::seed();
-
 
 	for (auto region : Location::World::getInstance()->getLocations())
 	{
-		EXPECT_TRUE(region->getLocations().size() > 0);
-		EXPECT_TRUE(region->getLocations().size() <= 11);
-
 		for (auto city : region->getLocations())
 		{
 			if (city->hasAttribute("habitable"))
