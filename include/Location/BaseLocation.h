@@ -21,9 +21,10 @@ namespace Location
 
 	enum LocationType
 	{
-		VILLAGE_LOCATION,
-		REGION_LOCATION,
-		TERRAIN_LOCATION,
+		VILLAGE,
+		REGION,
+		WORLD,
+		TERRAIN,
 
 		//insert before this
 		LOCATION_ERROR,

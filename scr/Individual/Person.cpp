@@ -10,11 +10,11 @@
 namespace Individual
 {
 
-Person::Person(std::string s) : BaseIndividual(s)
+Person::Person(std::string s, bool _isMale=true) : BaseIndividual(s, _isMale)
 {
 }
 
-Person::Person(std::string s, Location_ptr location) : BaseIndividual(s, location)
+Person::Person(std::string s, Location_ptr location, bool _isMale=true) : BaseIndividual(s, location, _isMale)
 {
 }
 

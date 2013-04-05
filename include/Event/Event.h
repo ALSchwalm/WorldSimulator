@@ -10,11 +10,11 @@ namespace Event
 
 	enum EventType
 	{
-		BIRTH_EVENT,
-		END_TASK_EVENT,
-		MOVE_EVENT,
-		PICKUP_EVENT,
-		INTERRUPT_EVENT,
+		BIRTH,
+		END_TASK,
+		MOVE,
+		PICKUP,
+		INTERRUPT,
 
 		//Insert events before this
 		EVENT_ERROR,

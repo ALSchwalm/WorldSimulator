@@ -30,7 +30,7 @@ namespace Location {
 			regionType(_regionType)
 			{};
 
-		LocationType getLocationType(){return Location::REGION_LOCATION;}
+		LocationType getLocationType(){return Location::REGION;}
 		RegionType getRegionType() {return regionType;}
 
 

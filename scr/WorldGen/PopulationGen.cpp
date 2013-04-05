@@ -21,7 +21,7 @@ void seed()
 			{
 				for (unsigned int i=0; i < rand() % (INITIAL_MAX_POPULATION - INITIAL_MIN_POPULATION) + INITIAL_MIN_POPULATION; ++i)
 				{
-					city->addIndividual(std::make_shared<Individual::Person>(Utils::Markov::getInstance().getProperWord()));
+					city->addIndividual(std::make_shared<Individual::Person>(Utils::Markov::getInstance().getProperWord(), city, rand()%2));
 				}
 			}
 		}

@@ -33,15 +33,17 @@ namespace Individual
 	class BaseIndividual
 	{
 	protected:
-		BaseIndividual(std::string _name) :
+		BaseIndividual(std::string _name, bool _isMale=true) :
 			age(0),
 			name(_name),
+			isMale(_isMale),
 			currentLocation (nullptr),
 			goalTree(std::make_shared<BaseIndividual>(*this)){} //FIXME review this
 
-		BaseIndividual(std::string _name, Location_ptr _location) :
+		BaseIndividual(std::string _name, Location_ptr _location, bool _isMale=true) :
 			age(0),
 			name(_name),
+			isMale(_isMale),
 			currentLocation(_location),
 			goalTree(std::make_shared<BaseIndividual>(*this)){}
 
@@ -54,6 +56,7 @@ namespace Individual
 		std::vector<Item::Item_ptr> items;
 		unsigned int age;
 		const std::string name;
+		bool isMale;
 		Location_ptr currentLocation;
 		std::map<std::string, bool> attributes;
 

@@ -26,7 +26,7 @@ namespace Location
 			virtual ~BaseTerrain(){}
 
 			virtual TerrainType getTerrainType()=0;
-			LocationType getLocationType(){return LocationType::TERRAIN_LOCATION;}
+			LocationType getLocationType(){return LocationType::TERRAIN;}
 
 		protected:
 			BaseTerrain(std::string _name) :

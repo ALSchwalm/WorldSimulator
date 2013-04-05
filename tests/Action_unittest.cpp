@@ -19,7 +19,7 @@ TEST(ActionTest, GetFood)
 
 	Location::addLocations(location, location2);
 
-	auto individual = std::make_shared<Individual::Person>("TestPerson", location);
+	auto individual = std::make_shared<Individual::Person>("TestPerson", location, false);
 	auto item		= std::make_shared<Item::Weapon>("TestWeapon");
 
 	item->setAttribute("edible");
@@ -29,6 +29,6 @@ TEST(ActionTest, GetFood)
 	individual->addGoal(Action::GoalType::GET_FOOD, 0);
 
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent() != nullptr);
-	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE_EVENT);
+	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE);
 
 }

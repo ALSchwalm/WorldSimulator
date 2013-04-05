@@ -28,7 +28,7 @@ namespace Event
 		);
 		~InterruptEvent();
 
-		EventType getEventType() { return EventType::INTERRUPT_EVENT;};
+		EventType getEventType() { return EventType::INTERRUPT;};
 
 		void run();
 

@@ -31,7 +31,7 @@ namespace Event
 		);
 		~BirthEvent();
 
-		EventType getEventType() { return EventType::BIRTH_EVENT;};
+		EventType getEventType() { return EventType::BIRTH;};
 		void run();
 
 

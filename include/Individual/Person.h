@@ -18,8 +18,8 @@ namespace Individual
 	class Person : public BaseIndividual
 	{
 	public:
-		Person(std::string name);
-		Person(std::string name, Location_ptr location);
+		Person(std::string name, bool);
+		Person(std::string name, Location_ptr location, bool);
 
 		IndividualType getIndividualType() {return IndividualType::CITIZEN;}
 

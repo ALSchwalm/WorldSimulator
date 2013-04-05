@@ -20,6 +20,7 @@ namespace Relationship
 		NUM_OF_RELATIONSHIPS
 	};
 
+	//TODO this probably shouldn't be inlined
 	inline std::string getRelationshipAsString (RelationshipType r)
 	{
 		switch(r)

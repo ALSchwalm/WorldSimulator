@@ -25,7 +25,7 @@ namespace Event
 		);
 		~EndTaskEvent();
 
-		EventType getEventType() { return EventType::END_TASK_EVENT;};
+		EventType getEventType() { return EventType::END_TASK;}
 
 		void run();
 
