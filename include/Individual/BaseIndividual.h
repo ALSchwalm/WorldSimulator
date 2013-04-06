@@ -5,6 +5,7 @@
 #include "Event/Event.h"
 #include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
+#include "Relationship/Relationship.h"
 #include <string>
 #include <map>
 #include <utility>
@@ -18,16 +19,8 @@ namespace Location
 	typedef shared_ptr<BaseLocation> Location_ptr;
 }
 
-namespace Relationship
-{
-	template <typename T, typename U>
-	class Relationship;
-}
-
-
 namespace Individual
 {
-	typedef std::shared_ptr<BaseIndividual> Individual_ptr;
 	using Location::Location_ptr;
 
 	class BaseIndividual
@@ -47,11 +40,9 @@ namespace Individual
 			currentLocation(_location),
 			goalTree(std::make_shared<BaseIndividual>(*this)){}
 
-		typedef Relationship::Relationship<BaseIndividual, BaseIndividual > IIR;
-		typedef Relationship::Relationship<BaseIndividual, Location::BaseLocation > ILR;
 
-		std::map<Individual_ptr, std::vector<shared_ptr<IIR>> > IndividualRelationships;
-		std::map<Location_ptr, std::vector<shared_ptr<ILR>> > LocationRelationships;
+		Relationship::RelationshipMap<Individual_ptr> IndividualRelationshipMap;
+		Relationship::RelationshipMap<Location_ptr> LocationRelationshipMap;
 
 		std::vector<Item::Item_ptr> items;
 		unsigned int age;
@@ -73,41 +64,24 @@ namespace Individual
 		const std::string getName() {return name;}
 		const Event::EventHistory & getHistory(){return history;}
 		const std::vector<Item::Item_ptr> & getItems() {return items;}
+		Relationship::RelationshipMap<Individual_ptr> & getIndividualRelationshipMap() {return IndividualRelationshipMap;}
+		Relationship::RelationshipMap<Location_ptr> & getLocationRelationshipMap() {return LocationRelationshipMap;}
+
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
 		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
 		void addItem(Item::Item_ptr i) {items.push_back(i);}
-
-		void addGoal(Action::GoalRequest _goalRequest, unsigned int _priority)
-		{
-			goalTree.addGoal(_goalRequest,  _priority);
-		}
-		void addIndividualRelationship(Individual_ptr b, shared_ptr<IIR> r)
-		{
-			IndividualRelationships[b].push_back(r);
-		}
-
-		void addLocationRelationship(Location_ptr b, shared_ptr<ILR> r)
-		{
-			LocationRelationships[b].push_back(r);
-		}
-
-		std::vector<shared_ptr<IIR>> getIndividualRelationships(Individual_ptr i)
-		{
-			return IndividualRelationships[i];
-		}
-
-		std::vector<shared_ptr<ILR>> getLocationRelationships(Location_ptr l)
-		{
-			return LocationRelationships[l];
-		}
+		void addGoal(Action::GoalRequest _goalRequest, unsigned int _priority);
+		void addRelationship(Location_ptr location, Relationship::RelationshipType rel);
+		void addRelationship(Individual_ptr individual, Relationship::RelationshipType rel);
 
 		void setAttribute(std::string s) {attributes[s] = true;}
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 		bool removeItem(Item::Item_ptr i);
 
 	};
-
+	typedef std::shared_ptr<BaseIndividual> Individual_ptr;
+	typedef std::vector<std::shared_ptr<Individual::BaseIndividual>> IndividualList;
 
 }
 #endif

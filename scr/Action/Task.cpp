@@ -2,6 +2,7 @@
 #include "Action/Task.h"
 #include "Event/BaseEvent.h"
 #include "Event/EventQueue.h"
+#include "Action/Goal.h"
 
 using namespace Action;
 

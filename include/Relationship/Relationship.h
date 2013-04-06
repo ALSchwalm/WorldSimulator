@@ -4,8 +4,15 @@
 #include <utility>
 #include <memory>
 #include <string>
+#include <algorithm>
+#include <map>
+#include <vector>
 
-using std::shared_ptr;
+namespace Individual
+{
+	class BaseIndividual;
+	typedef std::shared_ptr<BaseIndividual> Individual_ptr;
+}
 
 namespace Relationship
 {
@@ -13,6 +20,8 @@ namespace Relationship
 	{
 		CITIZEN,
 		PARENT,
+		CHILD,
+		FRIEND,
 
 
 		BIRTHPLACE,
@@ -34,20 +43,32 @@ namespace Relationship
 		}
 	}
 
-	template<typename T, typename U>
-	class Relationship
+	void createSymetricRelationship(Individual::Individual_ptr one, Individual::Individual_ptr two, RelationshipType rel);
+	void createASymetricRelationship(Individual::Individual_ptr one, RelationshipType relOne, Individual::Individual_ptr two, RelationshipType relTwo);
+
+	template<typename T>
+	class RelationshipMap
 	{
 	public:
-		Relationship(shared_ptr<T>(m1), shared_ptr<U>(m2), RelationshipType r) :
-			members(std::make_pair(m1, m2)),
-			relType(r){}
+		RelationshipMap(){};
 
-		RelationshipType getType() {return relType;}
-		std::pair<shared_ptr<T>, shared_ptr<U>> getMembers() {return members;}
+		void addRelationship(T t, RelationshipType rel)
+		{
+			relationshipMap[t].push_back(rel);
+		}
+
+		const std::vector<RelationshipType> & getRelationships(T t)
+		{
+			return relationshipMap[t];
+		}
+
+
+		//Warning: this is very slow, do not use often
+		std::vector<T> getInstances(RelationshipType rel);
+
 
 	private:
-		std::pair<shared_ptr<T>, shared_ptr<U>> members;
-		RelationshipType relType;
+		std::map<T, std::vector<RelationshipType> > relationshipMap;
 	};
 
 

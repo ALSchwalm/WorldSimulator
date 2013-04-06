@@ -1,8 +1,8 @@
 
 #include "Action/GoalTree.h"
 #include "Action/GoalCreator.h"
+#include "Action/Goal.h"
 #include <cassert>
-
 #include <iostream> //TODO remove this
 
 using namespace Action;

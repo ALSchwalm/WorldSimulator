@@ -7,10 +7,6 @@
 namespace Individual
 {
 
-	class BaseIndividual;
-
-	typedef std::vector<std::shared_ptr<Individual::BaseIndividual>> IndividualList;
-
 	enum IndividualType
 	{
 		CITIZEN,

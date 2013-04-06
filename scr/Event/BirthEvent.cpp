@@ -36,11 +36,7 @@ namespace Event {
 
 	void BirthEvent::run()
 	{
-		typedef Relationship::Relationship<Individual::BaseIndividual, Location::BaseLocation> rel;
-
-		auto tempRelationship = std::make_shared<rel>(individual, birthPlace, Relationship::RelationshipType::BIRTHPLACE);
-
-		individual->addLocationRelationship(birthPlace, tempRelationship);
+		individual->addRelationship(birthPlace, Relationship::RelationshipType::BIRTHPLACE);
 		individual->addEvent(std::shared_ptr<BirthEvent>(this));
 		birthPlace->addIndividual(individual);
 	}
