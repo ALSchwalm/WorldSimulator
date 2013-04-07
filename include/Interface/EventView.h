@@ -25,14 +25,13 @@ namespace Interface
 	EventView<T>::EventView(T _viewSubject) :
 		View<T>(_viewSubject)
 	{
-		box(this->viewWin, 0, 0);
-		refresh();
+
 	};
 
 	template<typename T>
 	void EventView<T>::refreshView()
 	{
-		unsigned short counter = 1;
+		unsigned int counter = 1;
 		for( auto item : this->viewSubject->getHistory())
 		{
 			mvwprintw(this->viewWin, counter, 4, "EventInfo");

@@ -2,13 +2,12 @@
 #define VIEW_H_
 
 #include <memory>
+#include "Interface/Interface.h"
 #include "Utils/curses.h"
 #include "Utils/panel.h"
 
 namespace Interface
 {
-	void initialize();
-	extern WINDOW * mainwin;
 
 	template<typename T>
 	class View
@@ -31,7 +30,9 @@ namespace Interface
 	View<T>::View(T _viewSubject) :
 		viewSubject(_viewSubject)
 	{
-		viewWin = subwin(mainwin, LINES, COLS, 0, 0);
+		viewWin = subwin(mainwin, LINES-3, COLS, 3, 0);
+		box(viewWin, 0, 0);
+		refresh();
 	}
 
 }

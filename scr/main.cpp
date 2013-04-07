@@ -6,6 +6,8 @@
  */
 
 #include "Interface/View.h"
+#include "Interface/Interface.h"
+#include "Interface/CLI/CLI.h"
 #include "Interface/EventView.h"
 #include "Event/MoveEvent.h"
 #include "Individual/BaseIndividual.h"
@@ -25,6 +27,7 @@ int main()
 
 	while(true)
 	{
+		Interface::CLI::handleInput();
 		v.refreshView();
 	}
 
