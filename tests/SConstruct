@@ -11,7 +11,7 @@ Tool('mingw')(env) # Prefer MinGW over other compilers like cl.exe
 
 env.Append(LIBPATH = ['../lib'])
 env.Append(CXXFLAGS=['-Wall', '-std=gnu++0x'])
-env.Append(LIBS = ['GoogleTest'])
+env.Append(LIBS = ['GoogleTest', 'pdcurses'])
 env.Append(CPPPATH=['include', '../include', '.'])
 
 

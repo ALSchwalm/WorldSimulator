@@ -9,11 +9,10 @@
 #define BASELOCATION_H_
 
 #include "Individual/BaseIndividual.h"
+#include "Event/Event.h"
 #include "Item/BaseItem.h"
 #include <memory>
 #include <unordered_set>
-
-#include <iostream> //TODO remove this
 
 namespace Location
 {
@@ -45,12 +44,14 @@ namespace Location
 
 		const Individual::IndividualList & getIndividuals() {return individuals;}
 		const Item::ItemList & getItems() {return items;}
+		const Event::EventHistory & getHistory(){return history;}
 		const std::unordered_set<Location_ptr> & getLocations() {return locations;}
 		const std::unordered_set<Location_ptr> getLocationsByAttribute(std::string s);
 		const std::unordered_set<Location_ptr> getLocationsByType(LocationType);
 
 		bool removeItem(Item::Item_ptr i);
 
+		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
 		//Typically, locations are wrapped in shared_ptr so add<Type> is more appropriate
 		virtual void addItem(Item::Item_ptr i) { items.push_back(i); }
 		virtual void operator+=(Item::Item_ptr rhs)	{items.push_back(rhs);}
@@ -71,7 +72,7 @@ namespace Location
 		std::unordered_set<Location_ptr> locations;
 
 	private:
-
+		Event::EventHistory history;
 		std::map<std::string, bool> attributes;
 		std::string name;
 

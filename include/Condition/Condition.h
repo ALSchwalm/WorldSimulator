@@ -31,7 +31,7 @@ namespace Condition
 	template<typename T, typename U>
 	void ConditionList::addCondition( bool (*f)(T, U), T t, U u)
 	{
-		std::function<bool()> func = [=]{ return f(t, u); };
+		auto func = [=]{ return f(t, u); };
 		conditions.push_back(func);
 	}
 
