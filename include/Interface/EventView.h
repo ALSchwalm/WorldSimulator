@@ -6,8 +6,6 @@
 #include "Utils/curses.h"
 #include "Utils/panel.h"
 
-#include <cassert> //TODO remove htis
-
 namespace Interface
 {
 	template<typename T>

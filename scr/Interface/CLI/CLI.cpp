@@ -1,5 +1,6 @@
 
 #include "Interface/CLI/CLI.h"
+#include "Interface/CLI/CommandComplete.h"
 #include <string>
 
 namespace Interface
@@ -8,6 +9,7 @@ namespace Interface
 	{
 		WINDOW * CLIwin;
 		WINDOW * lineWin;
+
 		std::string line;
 
 		void initialize()
@@ -27,6 +29,9 @@ namespace Interface
 			char c = wgetch(lineWin);
 			switch(c)
 			{
+			case '?':
+				showHelp(line);
+				break;
 			case 10:
 				wclear(lineWin);
 				break;

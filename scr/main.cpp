@@ -9,6 +9,7 @@
 #include "Interface/CLI/CLI.h"
 #include "Event/MoveEvent.h"
 #include "Location/World.h"
+#include "Interface/CLI/Commands.h"
 #include <memory>
 
 int main()

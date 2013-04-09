@@ -46,9 +46,12 @@ namespace Interface
 		viewSubject(_viewSubject)
 	{
 		this->viewWin = subwin(mainwin, LINES-3, COLS, 3, 0);
+		wclear(viewWin);
 		box(this->viewWin, 0, 0);
 		refresh();
 	}
+
+
 
 }
 #endif
