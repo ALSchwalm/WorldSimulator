@@ -4,6 +4,9 @@
 #include <functional>
 #include <string>
 #include <vector>
+#include <iostream>
+
+#include "Interface/CLI/Token.h"
 
 namespace Interface
 {
@@ -12,31 +15,30 @@ namespace Interface
 		class Command
 		{
 		public:
-			Command(std::string _commandString, bool (*_fn)(), std::string _helpString) :
-				fn(_fn),
-				commandString(_commandString),
-				helpString(_helpString){}
+			Command(std::string _commandString, bool (*_fn)(), std::string _helpString);
 
 			std::string getCommand() {return commandString;}
 			std::string getHelp() {return helpString;}
-			void operator()() {fn();}
+			const std::vector<Token> & getTokens(){return tokens;}
+			void operator()();
 
 		private:
 			bool (*fn)();
 			std::string commandString;
 			std::string helpString;
+			std::vector<Token> tokens;
 		};
 
-		inline bool F()
+		inline bool NO_CALL()
 		{
-			return true;
+			return false;
 		}
 
 		const std::vector<Command> Commands = {
-				Command("show world", F, "shows the world"),
-				Command("show test", F, "shows a test")
+				Command("show", NO_CALL, "Change current view"),
+				Command("show world", NO_CALL, "shows the world") ,
+				Command("show test", NO_CALL, "shows a test")
 		};
-
 
 	}
 }

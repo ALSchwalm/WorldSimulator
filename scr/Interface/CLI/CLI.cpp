@@ -34,6 +34,7 @@ namespace Interface
 				break;
 			case 10:
 				wclear(lineWin);
+				line="";
 				break;
 			case 8:
 				waddch(lineWin, '\b');
