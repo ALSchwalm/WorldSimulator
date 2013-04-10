@@ -16,7 +16,7 @@ namespace Interface
 			space, append an '*'. This will show all possible completions from the current position, as all of the next tokens
 			are eq to the appended '*'.
 			*/
-			if (line.back() == ' ')
+			if (line.back() == ' ' || line.size() == 0)
 				line+="*";
 
 		    std::string buf;

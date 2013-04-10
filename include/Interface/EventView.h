@@ -21,7 +21,7 @@ namespace Interface
 
 	template<typename T>
 	EventView<T>::EventView(T _viewSubject) :
-		View<T>(_viewSubject)
+		View<T>(_viewSubject, _viewSubject->getName())
 	{
 
 	};
@@ -29,7 +29,7 @@ namespace Interface
 	template<typename T>
 	void EventView<T>::refreshView()
 	{
-		unsigned int counter = 1;
+		unsigned int counter = 2;
 		for( auto item : this->viewSubject->getHistory())
 		{
 			mvwprintw(this->viewWin, counter, 4, "EventInfo");

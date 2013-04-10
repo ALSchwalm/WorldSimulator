@@ -20,7 +20,7 @@ namespace Interface
 	};
 
 	HelpView::HelpView(std::vector<CLI::Command> completions) :
-		View<std::vector<CLI::Command>>(completions)
+		View<std::vector<CLI::Command>>(completions, "Help")
 	{
 
 	};
@@ -28,9 +28,9 @@ namespace Interface
 	void HelpView::refreshView()
 	{
 		//Display a header for columns
-		mvwprintw(this->viewWin, 1, 4, "Command:\t\tHelp:");
+		mvwprintw(this->viewWin, 2, 4, "Command:\t\tHelp:");
 
-		unsigned int counter = 3;
+		unsigned int counter = 4;
 		for( auto command : this->viewSubject)
 		{
 			mvwprintw(this->viewWin, counter, 4, command.getCommand().c_str());

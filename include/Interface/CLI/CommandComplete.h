@@ -15,6 +15,7 @@ namespace Interface
 
 		bool isCompletion(std::vector<Token> input, std::vector<Token> completion);
 		std::vector<Command> getPossibleCompletions(std::string input);
+		void callCommand(std::string);
 		void showHelp(std::string input);
 	}
 }

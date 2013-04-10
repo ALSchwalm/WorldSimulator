@@ -10,7 +10,8 @@ namespace Interface
 
 		bool isCompletion(std::vector<Token> input, std::vector<Token> completion)
 		{
-			if (completion.size() != input.size())
+
+			if (completion.size() != input.size()) 		//Drop all 'subcommands'
 			{
 				return false;
 			}
@@ -41,6 +42,11 @@ namespace Interface
 
 			displayView = std::make_shared<HelpView>(completions);
 
+		}
+
+		void callCommand(std::string command)
+		{
+			getPossibleCompletions(command)[0]();
 		}
 
 

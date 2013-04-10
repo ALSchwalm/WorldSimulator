@@ -11,6 +11,7 @@ namespace Interface
 		WINDOW * lineWin;
 
 		std::string line;
+		std::vector<Dialog_ptr> dialogs;
 
 		void initialize()
 		{
@@ -26,6 +27,11 @@ namespace Interface
 
 		void handleInput()
 		{
+			if (dialogs.size() != 0)
+			{
+				dialogs.back()->handleInput();
+				return;
+			}
 			char c = wgetch(lineWin);
 			switch(c)
 			{
@@ -33,6 +39,7 @@ namespace Interface
 				showHelp(line);
 				break;
 			case 10:
+				callCommand(line);
 				wclear(lineWin);
 				line="";
 				break;

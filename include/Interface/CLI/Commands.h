@@ -5,8 +5,11 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cstdlib> //TODO remove this
 
+#include "Interface/CLI/CLI.h"
 #include "Interface/CLI/Token.h"
+#include "Interface/CLI/Dialog/DialogOK.h" //TODO remove this
 
 namespace Interface
 {
@@ -34,10 +37,24 @@ namespace Interface
 			return false;
 		}
 
+		inline bool MakeDialog()
+		{
+			dialogs.push_back(std::make_shared<DialogOK>("test"));
+
+			return true;
+		}
+
+		inline bool cliExit()
+		{
+			exit(0);
+			return true;
+		}
+
 		const std::vector<Command> Commands = {
 				Command("show", NO_CALL, "Change current view"),
-				Command("show world", NO_CALL, "shows the world") ,
-				Command("show test", NO_CALL, "shows a test")
+				Command("show world", NO_CALL, "shows the world"),
+				Command("show test", MakeDialog, "shows a test"),
+				Command("exit", cliExit, "exit the simulation")
 		};
 
 	}
