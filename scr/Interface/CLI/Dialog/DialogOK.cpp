@@ -6,7 +6,7 @@
 using namespace Interface::CLI;
 
 DialogOK::DialogOK(std::string displayText) :
-		Dialog(subwin(mainwin, 4, 10, LINES/2, COLS/2))
+		Dialog(subwin(mainwin, 3, displayText.size()+4, LINES/2, COLS/2-(displayText.size()/2)))
 {
 	mvwprintw(dialogWin, 0, 2, "Error");
 	mvwprintw(dialogWin, 1, 1, displayText.c_str());

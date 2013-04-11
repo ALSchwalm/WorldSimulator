@@ -44,6 +44,12 @@ namespace Interface
 
 		}
 
+		void closeHelp()
+		{
+			displayView = nullptr;
+		}
+
+
 		void callCommand(std::string command)
 		{
 			getPossibleCompletions(command)[0]();

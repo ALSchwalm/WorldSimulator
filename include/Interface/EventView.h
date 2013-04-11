@@ -21,7 +21,7 @@ namespace Interface
 
 	template<typename T>
 	EventView<T>::EventView(T _viewSubject) :
-		View<T>(_viewSubject, _viewSubject->getName())
+		View<T>(_viewSubject, "Event History")
 	{
 
 	};

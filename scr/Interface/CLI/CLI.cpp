@@ -27,16 +27,26 @@ namespace Interface
 
 		void handleInput()
 		{
+			static char prevChar = 'a';
+
 			if (dialogs.size() != 0)
 			{
 				dialogs.back()->handleInput();
 				return;
 			}
+
 			char c = wgetch(lineWin);
 			switch(c)
 			{
 			case '?':
-				showHelp(line);
+				if (prevChar =='?')
+				{
+					closeHelp();
+					prevChar = '\0';
+					return;
+				}
+				else
+					showHelp(line);
 				break;
 			case 10:
 				callCommand(line);
@@ -56,6 +66,9 @@ namespace Interface
 				line += c;
 				break;
 			}
+
+			if (c != ERR)
+				prevChar = c;
 		}
 
 	}

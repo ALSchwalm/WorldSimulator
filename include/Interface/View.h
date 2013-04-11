@@ -14,8 +14,9 @@ namespace Interface
 	{
 	public:
 		virtual void refreshView()=0;
+		virtual void redrawView()=0;
 		virtual ~BaseView(){}
-		BaseView(){} //This should never be used;
+		BaseView(){} //This should only be used by shared_ptr
 
 	};
 	typedef std::shared_ptr<BaseView> View_ptr;
@@ -26,6 +27,7 @@ namespace Interface
 	{
 	public:
 		virtual void refreshView()=0;
+		void redrawView();
 
 		virtual ~View()
 		{
@@ -35,20 +37,30 @@ namespace Interface
 			//a bug with pdcurses. For now we leak memory.
 		}
 	protected:
-		View(T _viewSubject, std::string);
+		View(T _viewSubject, std::string _viewType);
+		std::string viewType;
 		T viewSubject;
 		WINDOW * viewWin;
 	};
 
 
 	template<typename T>
-	View<T>::View(T _viewSubject, std::string title) :
+	View<T>::View(T _viewSubject, std::string _viewType) :
+		viewType(_viewType),
 		viewSubject(_viewSubject)
 	{
 		this->viewWin = subwin(mainwin, LINES-3, COLS, 3, 0);
+		this->redrawView();
+	}
+
+	template<typename T>
+	void View<T>::redrawView()
+	{
 		wclear(viewWin);
 		box(this->viewWin, 0, 0);
-		mvwprintw(this->viewWin, 0, 2, title.c_str());
+		std::string status = CLI::contextAsString(currentContext) + "(" + viewSubject->getName() + "):" + viewType;
+		mvwprintw(this->viewWin, 0, 2, status.c_str());
+
 		refresh();
 	}
 

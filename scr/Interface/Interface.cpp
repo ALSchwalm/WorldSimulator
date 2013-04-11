@@ -10,6 +10,7 @@ namespace Interface
 {
 	WINDOW * mainwin;
 	std::shared_ptr<BaseView> displayView;
+	CLI::Context currentContext;
 
 	void initialize()
 	{
@@ -24,7 +25,7 @@ namespace Interface
 	    noecho();	//do not echo user intput to screen
 
 	    CLI::initialize();
-
+	    currentContext = CLI::Context::LOCATION;
 	    displayView = std::make_shared<EventView<Location::Location_ptr> >(Location::World::getInstance());
 	}
 	void refreshView()

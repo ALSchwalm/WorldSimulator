@@ -1,0 +1,35 @@
+#ifndef CONTEXT_H_
+#define CONTEXT_H_
+
+#include <string>
+
+namespace Interface
+{
+	namespace CLI
+	{
+		enum Context
+		{
+			ALL,
+			LOCATION,
+			INDIVIDUAL,
+
+			NUM_OF_CONTEXTS
+		};
+
+		inline std::string contextAsString(Context c)
+		{
+			switch (c)
+			{
+			case LOCATION:
+				return "Location";
+			case INDIVIDUAL:
+				return "Individual";
+			default:
+				return "Error"; //this should neve be seen
+			}
+		}
+
+	}
+}
+
+#endif

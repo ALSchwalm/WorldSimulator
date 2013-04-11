@@ -9,7 +9,7 @@
 
 #include "Interface/CLI/CLI.h"
 #include "Interface/CLI/Token.h"
-#include "Interface/CLI/Dialog/DialogOK.h" //TODO remove this
+#include "Interface/CLI/Context.h"
 
 namespace Interface
 {
@@ -18,7 +18,7 @@ namespace Interface
 		class Command
 		{
 		public:
-			Command(std::string _commandString, bool (*_fn)(), std::string _helpString);
+			Command(std::string _commandString, bool (*_fn)(), std::string _helpString, Context);
 
 			std::string getCommand() {return commandString;}
 			std::string getHelp() {return helpString;}
@@ -30,6 +30,7 @@ namespace Interface
 			std::string commandString;
 			std::string helpString;
 			std::vector<Token> tokens;
+			Context context;
 		};
 
 		inline bool NO_CALL()
@@ -37,24 +38,17 @@ namespace Interface
 			return false;
 		}
 
-		inline bool MakeDialog()
-		{
-			dialogs.push_back(std::make_shared<DialogOK>("test"));
-
-			return true;
-		}
 
 		inline bool cliExit()
 		{
 			exit(0);
-			return true;
+			return false;
 		}
 
 		const std::vector<Command> Commands = {
-				Command("show", NO_CALL, "Change current view"),
-				Command("show world", NO_CALL, "shows the world"),
-				Command("show test", MakeDialog, "shows a test"),
-				Command("exit", cliExit, "exit the simulation")
+				Command("show", NO_CALL, "Change current view", Context::ALL),
+				Command("show world", NO_CALL, "shows the world", Context::ALL),
+				Command("exit", cliExit, "exit the simulation", Context::ALL)
 		};
 
 	}

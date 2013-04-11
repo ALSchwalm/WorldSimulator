@@ -3,6 +3,7 @@
 
 
 #include "Utils/curses.h"
+#include "Interface/CLI/Context.h"
 #include <memory>
 
 namespace Interface
@@ -11,7 +12,9 @@ namespace Interface
 
 	void initialize();
 	void refreshView();
+
 	extern WINDOW * mainwin;
 	extern std::shared_ptr<BaseView> displayView;
+	extern CLI::Context currentContext;
 }
 #endif

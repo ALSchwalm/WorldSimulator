@@ -17,6 +17,7 @@ namespace Interface
 		std::vector<Command> getPossibleCompletions(std::string input);
 		void callCommand(std::string);
 		void showHelp(std::string input);
+		void closeHelp();
 	}
 }
 
