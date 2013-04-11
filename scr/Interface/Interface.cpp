@@ -10,6 +10,7 @@ namespace Interface
 {
 	WINDOW * mainwin;
 	std::shared_ptr<BaseView> displayView;
+	std::shared_ptr<BaseView> helpView;
 	CLI::Context currentContext;
 
 	void initialize()
@@ -30,6 +31,8 @@ namespace Interface
 	}
 	void refreshView()
 	{
+		if (helpView)
+			helpView->refreshView();
 		displayView->refreshView();
 	}
 

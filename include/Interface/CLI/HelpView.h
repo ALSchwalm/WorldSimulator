@@ -19,14 +19,12 @@ namespace Interface
 		void refreshView();
 	private:
 		WINDOW * viewWin;
-		std::shared_ptr<BaseView> previousView; //view to return to when the help is closed
 		std::vector<CLI::Command> commands;
 	};
 
 	HelpView::HelpView(std::vector<CLI::Command> completions) :
 			commands(completions)
 	{
-		previousView = displayView;
 		this->viewWin = subwin(mainwin, LINES-3, COLS, 3, 0);
 		wclear(viewWin);
 		box(this->viewWin, 0, 0);
@@ -38,9 +36,9 @@ namespace Interface
 
 	HelpView::~HelpView()
 	{
-		displayView = previousView;
-		displayView->redrawView();
-
+		//If this help view is being replaced with another, do not redraw display
+		if (helpView == nullptr)
+			displayView->redrawView();
 	}
 
 	void HelpView::refreshView()

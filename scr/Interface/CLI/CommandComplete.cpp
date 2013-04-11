@@ -40,13 +40,13 @@ namespace Interface
 		{
 			std::vector<Command> completions = getPossibleCompletions(input);
 
-			displayView = std::make_shared<HelpView>(completions);
+			helpView = std::make_shared<HelpView>(completions);
 
 		}
 
 		void closeHelp()
 		{
-			displayView = nullptr;
+			helpView = nullptr;
 		}
 
 

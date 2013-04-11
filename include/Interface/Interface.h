@@ -15,6 +15,7 @@ namespace Interface
 
 	extern WINDOW * mainwin;
 	extern std::shared_ptr<BaseView> displayView;
+	extern std::shared_ptr<BaseView> helpView;
 	extern CLI::Context currentContext;
 }
 #endif
