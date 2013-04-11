@@ -7,21 +7,23 @@
 
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
-#include "Event/MoveEvent.h"
-#include "Location/World.h"
-#include "Interface/CLI/Commands.h"
-#include <memory>
+#include "Time/TimeManager.h"
+#include "WorldGen/LocationGen.h"
+#include "WorldGen/PopulationGen.h"
 
 int main()
 {
+	WorldGen::LocationGen::seed();
+	WorldGen::PopulationGen::seed();
+
 	Interface::initialize();
-	auto e = std::make_shared<Event::MoveEvent>(nullptr, nullptr);
-	Location::World::getInstance()->addEvent(e);
 
 	while(true)
 	{
 		Interface::CLI::handleInput();
 		Interface::refreshView();
+		Time::TimeManager::getInstance().tick();
+		Time::TimeManager::getInstance().capFPS();
 	}
 
 	return 0;

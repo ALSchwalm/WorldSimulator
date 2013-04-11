@@ -1,7 +1,7 @@
 
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
-#include "Interface/EventView.h"
+#include "Interface/GeneralView.h"
 #include "Location/World.h"
 #include <iostream>
 #include <cstdlib>
@@ -27,13 +27,14 @@ namespace Interface
 
 	    CLI::initialize();
 	    currentContext = CLI::Context::LOCATION;
-	    displayView = std::make_shared<EventView<Location::Location_ptr> >(Location::World::getInstance());
+	    displayView = std::make_shared<GeneralView<Location::Location_ptr> >(Location::World::getInstance());
 	}
 	void refreshView()
 	{
 		if (helpView)
 			helpView->refreshView();
-		displayView->refreshView();
+		else
+			displayView->refreshView();
 	}
 
 }

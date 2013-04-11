@@ -38,7 +38,7 @@ namespace Interface
 	{
 		//If this help view is being replaced with another, do not redraw display
 		if (helpView == nullptr)
-			displayView->redrawView();
+			displayView->redrawView(); //otherwise, redraw the display to correct the title
 	}
 
 	void HelpView::refreshView()

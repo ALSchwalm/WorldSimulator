@@ -1,6 +1,7 @@
 #include "Interface/CLI/CommandComplete.h"
 #include "Interface/CLI/Commands.h"
 #include "Interface/CLI/HelpView.h"
+#include "Interface/CLI/Dialog/DialogOK.h"
 #include <memory>
 
 namespace Interface
@@ -52,7 +53,13 @@ namespace Interface
 
 		void callCommand(std::string command)
 		{
-			getPossibleCompletions(command)[0]();
+			auto commandList = getPossibleCompletions(command);
+			if (commandList.size() > 1)
+				dialogs.push_back(std::make_shared<DialogOK>("Ambiguous command."));
+			else if (commandList.size() < 1)
+				dialogs.push_back(std::make_shared<DialogOK>("Unrecognized command."));
+			else
+				commandList[0]();
 		}
 
 
