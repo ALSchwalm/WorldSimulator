@@ -25,7 +25,7 @@ namespace Interface
 			return true;
 		}
 
-		std::vector<Command> getPossibleCompletions(std::string input)
+		const std::vector<Command> getPossibleCompletions(std::string input)
 		{
 			std::vector<Token> tokens = Token::tokenize(input);
 			std::vector<Command> completions;
@@ -35,6 +35,18 @@ namespace Interface
 					completions.push_back(command);
 			}
 			return completions;
+		}
+
+		const std::string cliCompleteCommand(std::string input)
+		{
+			auto completions = getPossibleCompletions(input);
+			if (completions.size()==1)
+			{
+				std::string completion = completions[0].getCommand();
+				return completion.substr(input.size(), completion.size()) + " ";
+			}
+			return "";
+
 		}
 
 		void showHelp(std::string input)
@@ -53,6 +65,10 @@ namespace Interface
 
 		void callCommand(std::string command)
 		{
+			if (command.back() == ' ')
+			{
+				command.pop_back();
+			}
 			auto commandList = getPossibleCompletions(command);
 			if (commandList.size() > 1)
 				dialogs.push_back(std::make_shared<DialogOK>("Ambiguous command."));

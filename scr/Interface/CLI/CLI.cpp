@@ -28,6 +28,7 @@ namespace Interface
 		void handleInput()
 		{
 			static char prevChar = 'a';
+			static std::string completion = "";
 
 			if (dialogs.size() != 0)
 			{
@@ -48,12 +49,21 @@ namespace Interface
 				else
 					showHelp(line);
 				break;
-			case 10:
+			case 27:	//esc
+				callCommand("exit");
+				break;
+			case 10:	//enter
 				callCommand(line);
 				wclear(lineWin);
 				line="";
 				break;
-			case 8:
+			case 9:		//tab
+				completion = cliCompleteCommand(line);
+				line+= completion;
+				waddstr(lineWin, completion.c_str());
+				break;
+
+			case 8:		//backspace
 				waddch(lineWin, '\b');
 				wdelch(lineWin);
 				if (line != "")

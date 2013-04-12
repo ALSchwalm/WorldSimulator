@@ -20,8 +20,8 @@ namespace Interface
 		public:
 			Command(std::string _commandString, bool (*_fn)(), std::string _helpString, Context);
 
-			std::string getCommand() {return commandString;}
-			std::string getHelp() {return helpString;}
+			const std::string getCommand() {return commandString;}
+			const std::string getHelp() {return helpString;}
 			const std::vector<Token> & getTokens(){return tokens;}
 			void operator()();
 
