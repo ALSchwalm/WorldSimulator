@@ -27,8 +27,3 @@ void BaseIndividual::addRelationship(Individual_ptr individual, Relationship::Re
 {
 	IndividualRelationshipMap.addRelationship(individual, rel);
 }
-
-void BaseIndividual::addGoal(Action::GoalRequest _goalRequest, unsigned int _priority)
-{
-	goalTree.addGoal(_goalRequest,  _priority);
-}

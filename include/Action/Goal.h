@@ -12,13 +12,6 @@ namespace Individual
 	typedef std::shared_ptr<BaseIndividual> Individual_ptr;
 }
 
-namespace Location
-{
-	class BaseLocation;
-	typedef std::shared_ptr<BaseLocation> Location_ptr;
-}
-
-
 
 namespace Action
 {
@@ -34,25 +27,6 @@ namespace Action
 
 		NUM_OF_GOALS
 	};
-
-	class GoalRequest
-	{
-	public:
-		GoalRequest(GoalType g) :
-			goalType(g),
-			location(nullptr),
-			individual(nullptr),
-			item(nullptr){}
-
-		GoalType goalType;
-		Location::Location_ptr location;
-		Individual::Individual_ptr individual;
-		Item::Item_ptr item;
-
-	};
-
-	typedef std::shared_ptr<GoalRequest> GoalRequest_ptr;
-
 
 	class Goal
 	{

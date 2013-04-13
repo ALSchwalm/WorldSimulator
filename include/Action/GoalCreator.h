@@ -16,8 +16,20 @@ namespace Action
 	public:
 		static GoalCreator & getInstance();
 
-		//Implicit conversion from GoalType to GoalRequest, can be called with Action::GoalType::{type}
-		Goal_ptr createGoal(GoalRequest, Individual::Individual_ptr, unsigned int priority);
+		template<GoalType g>
+		Goal_ptr createGoal(Individual::Individual_ptr individual, unsigned int priority){
+			return nullptr;
+		}
+
+		template<GoalType g, typename T>
+		Goal_ptr createGoal(T t, Individual::Individual_ptr individual, unsigned int priority){
+			return nullptr;
+		}
+
+		template<GoalType g, typename T, typename U>
+		Goal_ptr createGoal(T t, U u, Individual::Individual_ptr individual, unsigned int priority){
+			return nullptr;
+		}
 
 
 	private:

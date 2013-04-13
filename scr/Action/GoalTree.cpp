@@ -21,7 +21,7 @@ GoalTree::~GoalTree()
 void GoalTree::execute()
 {
 	GoalWrapper temp = (*goalHeap.begin());
-	currentGoal = GoalCreator::getInstance().createGoal(temp.goalRequest, owner, temp.priority);
+	currentGoal = temp.goalFunction();
 
 	goalHeap.erase(goalHeap.begin());
 
@@ -34,26 +34,27 @@ void GoalTree::goalFinished()
 {
 	if (goalHeap.begin() != goalHeap.end())
 		execute();
-
 }
 
-void GoalTree::addGoal(GoalRequest _goalRequest,  unsigned int _priority)
+
+void GoalTree::insertGoal(GoalWrapper g)
 {
 	if (goalHeap.size() != 0)
 	{
-		if (_priority > currentGoal->getPriority())
+		if (g.priority > currentGoal->getPriority())
 		{
-			goalHeap.insert(GoalWrapper(_goalRequest, _priority));
-
-			//Interrupt will call up to goalFinished, which will execute the new goalHeap.begin()
+			goalHeap.insert(g);
 			currentGoal->interrupt();
-
 			std::cout << "interrupted" << std::endl;
+		}
+		else
+		{
+			goalHeap.insert(g);
 		}
 	}
 	else
 	{
-		goalHeap.insert(GoalWrapper(_goalRequest, _priority));
+		goalHeap.insert(g);
 		execute();
 	}
 }

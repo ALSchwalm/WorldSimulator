@@ -4,6 +4,7 @@
 #include <set>
 #include <memory>
 #include "Action/Goal.h"
+#include "Action/GoalCreator.h"
 
 
 namespace Action
@@ -19,19 +20,40 @@ namespace Action
 		void goalFinished();
 		void goalInterruped(){};
 
-		void addGoal(GoalRequest, unsigned int);
+		template<GoalType g>
+		void addGoal(unsigned int _priority)
+		{
+			std::function<Goal_ptr()> func(GoalCreator::getInstance().createGoal<g>(owner, _priority));//;auto func = [&](){ return Action:: };
+			insertGoal(GoalWrapper(func, _priority));
+		}
+
+		template<GoalType g, typename T>
+		void addGoal(T t, unsigned int _priority)
+		{
+			auto func = [&](){ return Action::GoalCreator::getInstance().createGoal<g>(t, owner, _priority); };
+			insertGoal(GoalWrapper(func, _priority));
+		}
+
+		template<GoalType g, typename T, typename U>
+		void addGoal(T t, U u,unsigned int _priority)
+		{
+			auto func = [&](){ return GoalCreator::getInstance().createGoal<g>(t, u, owner, _priority); };
+			insertGoal(GoalWrapper(func, _priority));
+		}
 
 	private:
 
 		struct GoalWrapper
 		{
-			GoalWrapper(GoalRequest _goalReqest,  unsigned int _priority) :
-				goalRequest(_goalReqest),
+			GoalWrapper(std::function<Goal_ptr()> fn,  unsigned int _priority) :
+				goalFunction(fn),
 				priority(_priority){}
 
-			GoalRequest goalRequest;
+			std::function<Goal_ptr()> goalFunction;
 			unsigned int priority;
 		};
+
+		void insertGoal(GoalWrapper);
 
 		struct priority
 		{

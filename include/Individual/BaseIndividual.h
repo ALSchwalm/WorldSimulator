@@ -71,7 +71,17 @@ namespace Individual
 
 		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
 		void addItem(Item::Item_ptr i) {items.push_back(i);}
-		void addGoal(Action::GoalRequest _goalRequest, unsigned int _priority);
+
+
+		template<Action::GoalType g>
+		void addGoal(unsigned int _priority){goalTree.addGoal<g>(_priority);}
+
+		template<Action::GoalType g, typename T>
+		void addGoal(T t, unsigned int _priority){goalTree.addGoal<g>(t, _priority);}
+
+		template<Action::GoalType g, typename T, typename U>
+		void addGoal(T t, U u, unsigned int _priority){goalTree.addGoal<g>(t, u, _priority);}
+
 		void addRelationship(Location_ptr location, Relationship::RelationshipType rel);
 		void addRelationship(Individual_ptr individual, Relationship::RelationshipType rel);
 

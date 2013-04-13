@@ -12,20 +12,19 @@ namespace Event
 	class InterruptEvent : public BaseEvent
 	{
 	public:
-		InterruptEvent(
-				Individual::Individual_ptr,
-				Individual::Individual_ptr,
-				Action::GoalRequest,
-				unsigned int
-		);
-
-		InterruptEvent(
-				Time::Date,
-				Individual::Individual_ptr,
-				Individual::Individual_ptr,
-				Action::GoalRequest,
-				unsigned int
-		);
+//		InterruptEvent(
+//				Individual::Individual_ptr,
+//				Individual::Individual_ptr,
+//				Action::GoalRequest,
+//				unsigned int
+//		);
+//
+//		InterruptEvent(
+//				Time::Date,
+//				Individual::Individual_ptr,
+//				Individual::Individual_ptr,
+// 				unsigned int
+//		);
 		~InterruptEvent();
 
 		EventType getEventType() { return EventType::INTERRUPT;};
@@ -37,7 +36,6 @@ namespace Event
 		Individual::Individual_ptr source;
 		Individual::Individual_ptr interrupted;
 
-		Action::GoalRequest goalRequest;
 		unsigned int priority;
 	};
 
