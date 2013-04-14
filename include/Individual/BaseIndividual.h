@@ -72,7 +72,21 @@ namespace Individual
 		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
 		void addItem(Item::Item_ptr i) {items.push_back(i);}
 
+		void addRelationship(Location_ptr location, Relationship::RelationshipType rel);
+		void addRelationship(Individual_ptr individual, Relationship::RelationshipType rel);
 
+		void setAttribute(std::string s) {attributes[s] = true;}
+		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
+		bool removeItem(Item::Item_ptr i);
+
+		unsigned int calculatePriority(Individual_ptr, Action::GoalType);
+
+		/*
+		 * Goal creation is started here, then passed to the goal tree. The goal tree
+		 * then calls the goalCreator, which fully specializes function templates. This allows
+		 * compile-time checking of the validity of the template/function arguments. For example
+		 * it is not possible to create a GET_FOOD goal, with a BaseEvent type.
+		 */
 		template<Action::GoalType g>
 		void addGoal(unsigned int _priority){goalTree.addGoal<g>(_priority);}
 
@@ -81,13 +95,6 @@ namespace Individual
 
 		template<Action::GoalType g, typename T, typename U>
 		void addGoal(T t, U u, unsigned int _priority){goalTree.addGoal<g>(t, u, _priority);}
-
-		void addRelationship(Location_ptr location, Relationship::RelationshipType rel);
-		void addRelationship(Individual_ptr individual, Relationship::RelationshipType rel);
-
-		void setAttribute(std::string s) {attributes[s] = true;}
-		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
-		bool removeItem(Item::Item_ptr i);
 
 	};
 	typedef std::shared_ptr<BaseIndividual> Individual_ptr;

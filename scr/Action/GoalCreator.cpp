@@ -30,6 +30,8 @@ Goal_ptr GoalCreator::createGoal<GET_FOOD>(Individual::Individual_ptr individual
 {
 	currentGoal = std::make_shared<Action::Goal>(GET_FOOD, priority);
 	auto get_food = getFood(individual);
+	if (get_food.size() == 0)
+		return nullptr;
 	currentGoal->setTasks(get_food);
 	return currentGoal;
 }
@@ -39,53 +41,11 @@ Goal_ptr GoalCreator::createGoal<GET_ITEM>(Item::Item_ptr item, Individual::Indi
 {
 	currentGoal = std::make_shared<Action::Goal>(GET_ITEM, priority);
 	auto get_item = getItem(individual, item);
+	if (get_item.size() == 0)
+		return nullptr;
 	currentGoal->setTasks(get_item);
 	return currentGoal;
 }
-
-
-//Goal_ptr GoalCreator::createGoal(GoalRequest request,
-//								Individual::Individual_ptr individual,
-//								unsigned int priority)
-//{
-//	//Create empty goal and fill it once tasks have been determined
-//	currentGoal = std::make_shared<Action::Goal>(request.goalType, priority);
-//
-//	switch (request.goalType)
-//	{
-//	case GET_FOOD:
-//	{
-//		assert (request.item == nullptr);
-//		assert (request.individual == nullptr);
-//		assert (request.location == nullptr);
-//		auto get_food = getFood(individual);
-//		if (get_food.size() == 0)
-//			break;
-//		currentGoal->setTasks(get_food);
-//		return currentGoal;
-//		break;
-//	}
-//
-//	case GET_ITEM:
-//	{
-//		assert (request.item != nullptr);
-//		assert (request.individual == nullptr);
-//		assert (request.location == nullptr);
-//		auto get_item = getItem(individual, request.item);
-//		if (get_item.size() == 0)
-//			break;
-//		currentGoal->setTasks(get_item);
-//		return currentGoal;
-//	}
-//
-//	default:
-//		std::cerr << "Error: Invalid goalType";
-//		break;
-//	}
-//
-//	//silence compiler warning about no return in non-void
-//	return nullptr;
-//}
 
 std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual)
 {

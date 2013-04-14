@@ -27,3 +27,11 @@ void BaseIndividual::addRelationship(Individual_ptr individual, Relationship::Re
 {
 	IndividualRelationshipMap.addRelationship(individual, rel);
 }
+
+unsigned int BaseIndividual::calculatePriority(Individual_ptr individual, Action::GoalType goalType)
+{
+	//TODO relationships can be both positive and negative, so size is not a good metric
+	if (IndividualRelationshipMap.getRelationships(individual).size() != 0)
+		return 10;
+	return 0;
+}
