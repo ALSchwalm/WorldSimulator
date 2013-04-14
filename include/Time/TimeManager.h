@@ -1,13 +1,15 @@
 #ifndef TIMEMANAGER_H_
 #define TIMEMANAGER_H_
 
-#include "Utils/Global.h"
 #include "Time/DateManager.h"
+
 
 namespace Time
 {
 	class TimeManager
 	{
+
+
 	public:
 
 		static TimeManager & getInstance();
@@ -24,8 +26,9 @@ namespace Time
         double timeLastTick;
         double timeRemainder;
 
-        const unsigned int MAX_FPS = 100;
-        const unsigned int MINUTES_PER_SECOND = 50;
+        static const unsigned int MAX_FPS;				//These values set by ini file
+        static const unsigned int MINUTES_PER_SECOND;
+
 	};
 }
 

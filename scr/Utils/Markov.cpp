@@ -11,7 +11,7 @@
 #include <random>
 #include <time.h>
 #include <cstdlib>
-#include <iostream> //TODO remove this
+#include <iostream>
 
 using namespace Utils;
 
@@ -35,6 +35,11 @@ Markov::Markov()
     vector<string> names;
 
    	fFile.open("names.txt");
+   	if (!fFile.is_open())
+   	{
+   		cerr << "Error opening names.txt" << std::endl;
+   		exit(0);
+   	}
 
     while (fFile >> name)
     {

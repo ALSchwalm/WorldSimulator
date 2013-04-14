@@ -20,7 +20,12 @@ TEST(ActionTest, GetFood)
 	Location::addLocations(location, location2);
 
 	auto individual = std::make_shared<Individual::Person>("TestPerson", location, false);
-	auto item		= std::make_shared<Item::Weapon>("TestWeapon");
+
+	/*
+	 * Goal creation is fully specialized, so to find a Weapon, you must call addGoal
+	 * with a shared_ptr<BaseItem>.
+	 */
+	std::shared_ptr<Item::BaseItem>item = std::make_shared<Item::Weapon>("TestWeapon");
 
 	item->setAttribute("edible");
 

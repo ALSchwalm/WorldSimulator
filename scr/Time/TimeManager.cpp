@@ -1,9 +1,9 @@
 
 #include "Time/TimeManager.h"
+#include "Utils/Config.h"
 #include <time.h>
 #include <windows.h>
 
-#include <iostream> //TODO remove this
 
 using namespace Time;
 
@@ -13,6 +13,8 @@ TimeManager & TimeManager::getInstance()
 	return timeManager;
 }
 
+const unsigned int TimeManager::MAX_FPS = Utils::Config::getInstance().getValue("Time", "MAX_FPS");
+const unsigned int TimeManager::MINUTES_PER_SECOND = Utils::Config::getInstance().getValue("Time", "MINUTES_PER_SECOND");
 
 
 TimeManager::TimeManager()

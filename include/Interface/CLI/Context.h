@@ -25,7 +25,7 @@ namespace Interface
 			case INDIVIDUAL:
 				return "Individual";
 			default:
-				return "Error"; //this should neve be seen
+				return "Error"; //this should never be seen
 			}
 		}
 

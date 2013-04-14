@@ -91,10 +91,10 @@ namespace Individual
 		void addGoal(unsigned int _priority){goalTree.addGoal<g>(_priority);}
 
 		template<Action::GoalType g, typename T>
-		void addGoal(T t, unsigned int _priority){goalTree.addGoal<g>(t, _priority);}
+		void addGoal(T t, unsigned int _priority){goalTree.addGoal<g, T>(t, _priority);}
 
 		template<Action::GoalType g, typename T, typename U>
-		void addGoal(T t, U u, unsigned int _priority){goalTree.addGoal<g>(t, u, _priority);}
+		void addGoal(T t, U u, unsigned int _priority){goalTree.addGoal<g, T, U>(t, u, _priority);}
 
 	};
 	typedef std::shared_ptr<BaseIndividual> Individual_ptr;

@@ -30,14 +30,14 @@ namespace Action
 		template<GoalType g, typename T>
 		void addGoal(T t, unsigned int _priority)
 		{
-			auto func = [&](){ return Action::GoalCreator::getInstance().createGoal<g>(t, owner, _priority); };
+			auto func = [&](){ return Action::GoalCreator::getInstance().createGoal<g, T>(t, owner, _priority); };
 			insertGoal(GoalWrapper(func, _priority));
 		}
 
 		template<GoalType g, typename T, typename U>
 		void addGoal(T t, U u,unsigned int _priority)
 		{
-			auto func = [&](){ return GoalCreator::getInstance().createGoal<g>(t, u, owner, _priority); };
+			auto func = [&](){ return GoalCreator::getInstance().createGoal<g, T, U>(t, u, owner, _priority); };
 			insertGoal(GoalWrapper(func, _priority));
 		}
 
