@@ -2,10 +2,22 @@
 #define GOALCREATOR_H_
 
 #include "Action/Goal.h"
-#include "Individual/BaseIndividual.h"
-#include "Location/BaseLocation.h"
 #include <vector>
 #include <utility>
+#include <memory>
+
+namespace Individual
+{
+	class BaseIndividual;
+	typedef std::shared_ptr<BaseIndividual> Individual_ptr;
+}
+
+namespace Location
+{
+	class BaseLocation;
+	typedef std::shared_ptr<BaseLocation> Location_ptr;
+}
+
 
 namespace Action
 {
@@ -17,28 +29,21 @@ namespace Action
 		static GoalCreator & getInstance();
 
 		template<GoalType g>
-		Goal_ptr createGoal(Individual::Individual_ptr individual, unsigned int priority){
-			return nullptr;
-		}
+		Goal_ptr createGoal(Individual::Individual_ptr individual, unsigned int priority);
 
 		template<GoalType g, typename T>
-		Goal_ptr createGoal(T t, Individual::Individual_ptr individual, unsigned int priority){
-			return nullptr;
-		}
+		Goal_ptr createGoal(T t, Individual::Individual_ptr individual, unsigned int priority);
 
 		template<GoalType g, typename T, typename U>
-		Goal_ptr createGoal(T t, U u, Individual::Individual_ptr individual, unsigned int priority){
-			return nullptr;
-		}
+		Goal_ptr createGoal(T t, U u, Individual::Individual_ptr individual, unsigned int priority);
+
 
 
 	private:
 
 		struct distance
 		{
-			bool operator() ( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const {
-				return lhs->distance < rhs->distance;
-			}
+			bool operator() ( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const;
 		};
 		std::vector<Task_ptr> getFood(Individual::Individual_ptr individual);
 		std::vector<Task_ptr> getItem(Individual::Individual_ptr individual, Item::Item_ptr item);

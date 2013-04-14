@@ -25,6 +25,7 @@ namespace Event
 //				Individual::Individual_ptr,
 // 				unsigned int
 //		);
+		InterruptEvent();
 		~InterruptEvent();
 
 		EventType getEventType() { return EventType::INTERRUPT;};

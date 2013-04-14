@@ -293,4 +293,10 @@ Item::Item_ptr GoalCreator::getItemFromAttributes(Location::Location_ptr locatio
 	return nullptr;
 }
 
+bool GoalCreator::distance::operator ()( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const
+{
+	return lhs->distance < rhs->distance;
+}
+
+
 }

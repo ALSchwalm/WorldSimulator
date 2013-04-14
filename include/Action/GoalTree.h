@@ -23,7 +23,7 @@ namespace Action
 		template<GoalType g>
 		void addGoal(unsigned int _priority)
 		{
-			std::function<Goal_ptr()> func(GoalCreator::getInstance().createGoal<g>(owner, _priority));//;auto func = [&](){ return Action:: };
+			auto func = [&](){ return  GoalCreator::getInstance().createGoal<g>(owner, _priority);};
 			insertGoal(GoalWrapper(func, _priority));
 		}
 
