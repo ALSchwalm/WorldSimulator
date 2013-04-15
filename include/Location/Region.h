@@ -7,7 +7,6 @@
 #include <string>
 #include <memory>
 
-#include <iostream> //TODO remove this
 
 namespace Location {
 

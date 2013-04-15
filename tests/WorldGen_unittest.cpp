@@ -3,20 +3,17 @@
 #include "Location/World.h"
 #include "gtest/gtest.h"
 
-#include <vector>
-#include <iostream> //TODO remove this
-
 TEST(WorldGenTest, SeedLocations)
 {
 	WorldGen::LocationGen::seed();
 
-	EXPECT_TRUE(Location::World::getInstance()->getLocations().size() > 0);
-	EXPECT_TRUE(Location::World::getInstance()->getLocations().size() < 6);
+	EXPECT_GE(Location::World::getInstance()->getLocations().size(), WorldGen::LocationGen::MIN_REGIONS);
+	EXPECT_LE(Location::World::getInstance()->getLocations().size(), WorldGen::LocationGen::MAX_REGIONS);
 
 	for (auto region : Location::World::getInstance()->getLocations())
 	{
-		EXPECT_TRUE(region->getLocations().size() > 0);
-		EXPECT_TRUE(region->getLocations().size() <= 11);
+		EXPECT_GE(region->getLocations().size(), WorldGen::LocationGen::MIN_CITIES_PER_REGION);
+		EXPECT_LE(region->getLocations().size(), WorldGen::LocationGen::MAX_CITIES_PER_REGION);
 	}
 }
 

@@ -17,7 +17,7 @@ Config::Config() :
 
 const int Config::getValue(std::string section, std::string value)
 {
-	ini.Select(section);  //Current
+	ini.Select(section);
 	auto ini_value = ini.Get(value, -1);
 	if (ini_value == -1)
 	{

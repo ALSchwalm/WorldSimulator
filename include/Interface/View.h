@@ -31,10 +31,12 @@ namespace Interface
 
 		virtual ~View()
 		{
-			//FIXME delwin(viewWin); should be called here but
-			//this crashes when exiting. viewWin has a non
-			//null value at this point, so this is possibly
-			//a bug with pdcurses. For now we leak memory.
+			/*
+			 * FIXME delwin(viewWin); should be called here but
+			 * this crashes when exiting. viewWin has a non
+			 * null value at this point, so this is possibly
+			 * a bug with pdcurses. For now we leak memory.
+			 */
 		}
 	protected:
 		View(T _viewSubject, std::string _viewType);

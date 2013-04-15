@@ -1,6 +1,6 @@
 
 #include "Interface/CLI/Commands.h"
-#include "Interface/CLI/Dialog/DialogOK.h" //TODO remove this
+#include "Interface/CLI/Dialog/DialogOK.h"
 #include "Interface/Interface.h"
 
 namespace Interface

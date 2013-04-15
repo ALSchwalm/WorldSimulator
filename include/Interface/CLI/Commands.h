@@ -1,10 +1,8 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
-#include <functional>
 #include <string>
 #include <vector>
-#include <iostream>
 #include <cstdlib> //TODO remove this
 
 #include "Interface/CLI/CLI.h"

@@ -7,7 +7,6 @@
 
 #include "Event/BirthEvent.h"
 #include "Relationship/Relationship.h"
-#include <iostream> //TODO remove this
 
 namespace Event {
 	BirthEvent::BirthEvent(
@@ -31,7 +30,6 @@ namespace Event {
 
 	BirthEvent::~BirthEvent()
 	{
-		std::cout << "BirthEvent deleted" << std::endl;
 	}
 
 	void BirthEvent::run()
