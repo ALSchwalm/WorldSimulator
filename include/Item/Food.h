@@ -34,9 +34,7 @@ namespace Item
 	public:
 		static Item_ptr getRandomFood();
 
-		Food(FoodType _foodType) :
-			BaseItem(foodTypeAsString[_foodType]),
-			foodType(_foodType){};
+		Food(FoodType _foodType);
 
 		~Food(){};
 

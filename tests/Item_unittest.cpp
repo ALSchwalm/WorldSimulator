@@ -14,7 +14,6 @@ TEST(ItemTest, HasAttribute)
 
 	auto item = std::make_shared<Item::Weapon>("TestWeapon");
 
-
 	item->setAttribute("old");
 
 	EXPECT_TRUE(item->hasAttribute("old"));

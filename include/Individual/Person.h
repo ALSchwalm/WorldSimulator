@@ -21,7 +21,7 @@ namespace Individual
 		Person(std::string name, bool);
 		Person(std::string name, Location_ptr location, bool);
 
-		IndividualType getIndividualType() {return IndividualType::CITIZEN;}
+		IndividualType getIndividualType() override {return IndividualType::CITIZEN;}
 
 	};
 }
