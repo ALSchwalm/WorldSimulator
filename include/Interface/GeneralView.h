@@ -1,5 +1,5 @@
-#ifndef EVENTVIEW_H_
-#define EVENTVIEW_H_
+#ifndef GENERALVIEW_H_
+#define GENERALVIEW_H_
 
 #include "Interface/View.h"
 #include "Utils/curses.h"
@@ -30,7 +30,7 @@ namespace Interface
 		View<T>(_viewSubject, "Overview"){}
 
 	template<>
-	void GeneralView<Location::Location_ptr>::refreshView()
+	inline void GeneralView<Location::Location_ptr>::refreshView()
 	{
 		//TODO this should be changed to std::to_string() once MingW fixes this function
 		std::stringstream ss;

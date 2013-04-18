@@ -38,18 +38,20 @@ namespace Interface
 			 * a bug with pdcurses. For now we leak memory.
 			 */
 		}
+
+		const T viewSubject;
 	protected:
 		View(T _viewSubject, std::string _viewType);
 		std::string viewType;
-		T viewSubject;
 		WINDOW * viewWin;
 	};
 
 
 	template<typename T>
 	View<T>::View(T _viewSubject, std::string _viewType) :
-		viewType(_viewType),
-		viewSubject(_viewSubject)
+		viewSubject(_viewSubject),
+		viewType(_viewType)
+
 	{
 		this->viewWin = subwin(mainwin, LINES-3, COLS, 3, 0);
 		this->redrawView();

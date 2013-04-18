@@ -8,6 +8,7 @@
 #include "Interface/CLI/CLI.h"
 #include "Interface/CLI/Token.h"
 #include "Interface/CLI/Context.h"
+#include "Interface/CLI/CLIMethods/cliShow.h"
 
 namespace Interface
 {
@@ -45,7 +46,7 @@ namespace Interface
 
 		const std::vector<Command> Commands = {
 				Command("show", NO_CALL, "Change current view", Context::ALL),
-				Command("show world", NO_CALL, "shows the world", Context::ALL),
+				Command("show world", cliShowWorld, "shows the world", Context::ALL),
 				Command("exit", cliExit, "exit the simulation", Context::ALL)
 		};
 
