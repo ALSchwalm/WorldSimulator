@@ -18,11 +18,9 @@ namespace Interface
 			return true;
 		};
 
-		template<typename Container>
-		bool cliShowRange(Container c)
-		{
-			return true;
-		};
+		bool cliShowLocation();
+
+		bool cliShowLocationRange();
 	}
 }
 

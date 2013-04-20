@@ -1,5 +1,6 @@
 
 #include "Interface/CLI/CLI.h"
+#include "Interface/CLI/Commands.h"
 #include "Interface/CLI/CommandComplete.h"
 #include <string>
 
@@ -9,7 +10,7 @@ namespace Interface
 	{
 		WINDOW * CLIwin;
 		WINDOW * lineWin;
-
+		Command currentCommand(Commands[0]);
 		std::string line;
 		std::vector<Dialog_ptr> dialogs;
 

@@ -32,7 +32,16 @@ namespace Interface
 			for (auto command : Commands)
 			{
 				if (isCompletion(tokens, command.getTokens()))
+				{
+					for (unsigned int i=0; i < tokens.size(); ++i)
+					{
+						if (command.getTokens()[i].value == "*")
+						{
+							command.args.push_back(tokens[i].value);
+						}
+					}
 					completions.push_back(command);
+				}
 			}
 			return completions;
 		}
@@ -75,7 +84,10 @@ namespace Interface
 			else if (commandList.size() < 1)
 				dialogs.push_back(std::make_shared<DialogOK>("Unrecognized command."));
 			else
+			{
+				currentCommand = commandList[0];
 				commandList[0]();
+			}
 		}
 
 
