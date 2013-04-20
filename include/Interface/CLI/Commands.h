@@ -23,6 +23,8 @@ namespace Interface
 			const std::string getCommand() {return commandString;}
 			const std::string getHelp() {return helpString;}
 			const std::vector<Token> & getTokens(){return tokens;}
+			const Context getContext(){return context;}
+			const bool isCallable() {return callable;}
 			void operator()();
 
 			std::vector<std::string> args; //hold the arguments for wildcards
@@ -31,6 +33,7 @@ namespace Interface
 			std::string commandString;
 			std::string helpString;
 			std::vector<Token> tokens;
+			bool callable;
 
 			Context context;
 		};
@@ -56,7 +59,8 @@ namespace Interface
 				Command("view location", NO_CALL, "view a location", Context::LOCATION),
 				Command("view location *", cliShowLocation, "view a location", Context::LOCATION),
 
-				Command("exit", cliExit, "exit the simulation", Context::ALL)
+				Command("exit", cliExit, "exit the simulation", Context::ALL),
+				Command("<CR>", NO_CALL, "Press enter to run the command", Context::NO_CONTEXT)
 		};
 
 	}

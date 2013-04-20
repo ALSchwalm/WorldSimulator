@@ -12,9 +12,11 @@ namespace Interface
 			commandString(_commandString),
 			helpString(_helpString),
 			tokens(Token::tokenize(commandString)),
+			callable(false),
 			context(_context)
 		{
-
+			if (fn != NO_CALL)
+				callable = true;
 		}
 
 		void Command::operator()() {

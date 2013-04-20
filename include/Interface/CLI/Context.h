@@ -13,6 +13,7 @@ namespace Interface
 			LOCATION,
 			INDIVIDUAL,
 
+			NO_CONTEXT,		//used for <CR>
 			NUM_OF_CONTEXTS
 		};
 

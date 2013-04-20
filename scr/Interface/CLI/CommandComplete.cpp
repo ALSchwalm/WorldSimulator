@@ -3,6 +3,7 @@
 #include "Interface/CLI/HelpView.h"
 #include "Interface/CLI/Dialog/DialogOK.h"
 #include <memory>
+#include <sstream>
 
 namespace Interface
 {
@@ -31,11 +32,11 @@ namespace Interface
 			std::vector<Command> completions;
 			for (auto command : Commands)
 			{
-				if (isCompletion(tokens, command.getTokens()))
+				if (isCompletion(tokens, command.getTokens()) and (command.getContext() == currentContext or command.getContext() == Context::ALL))
 				{
 					for (unsigned int i=0; i < tokens.size(); ++i)
 					{
-						if (command.getTokens()[i].value == "*")
+						if (command.getTokens()[i].value == "*")	//Hold on to arguments for wildcards
 						{
 							command.args.push_back(tokens[i].value);
 						}
@@ -61,6 +62,26 @@ namespace Interface
 		void showHelp(std::string input)
 		{
 			std::vector<Command> completions = getPossibleCompletions(input);
+
+			if (input.back() == ' ')
+			{
+				auto current_commands = getPossibleCompletions(input.substr(0, input.size()-1));
+				if (current_commands.size() >= 1)
+				{
+					for (auto command : Commands)
+					{
+						/*
+						 * TODO I believe there can only be 1 command in current_commands, but I'm
+						 * no certain, so think about this
+						 */
+						if (command.getCommand() == "<CR>" and current_commands[0].isCallable())
+						{
+							completions.push_back(command);
+							break;
+						}
+					}
+				}
+			}
 
 			helpView = std::make_shared<HelpView>(completions);
 
