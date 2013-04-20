@@ -48,11 +48,14 @@ namespace Interface
 		}
 
 		const std::vector<Command> Commands = {
-				Command("show", NO_CALL, "Change current view", Context::ALL),
-				Command("show world", cliShowWorld, "shows the world", Context::ALL),
-				Command("show location", NO_CALL, "show a location", Context::LOCATION),
-				Command("show child-locations", cliShowLocationRange, "show child locations", Context::LOCATION),
-				Command("show location *", cliShowLocation, "show a location", Context::LOCATION),
+				Command("show", NO_CALL, "Show information about the current view", Context::ALL),
+				Command("show adjacent-locations", cliShowLocationRange, "show child locations", Context::LOCATION),
+
+				Command("view", NO_CALL, "Change the current view", Context::ALL),
+				Command("view world", cliShowWorld, "view the world", Context::ALL),
+				Command("view location", NO_CALL, "view a location", Context::LOCATION),
+				Command("view location *", cliShowLocation, "view a location", Context::LOCATION),
+
 				Command("exit", cliExit, "exit the simulation", Context::ALL)
 		};
 

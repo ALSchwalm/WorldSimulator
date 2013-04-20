@@ -87,6 +87,7 @@ namespace Interface
 			{
 				currentCommand = commandList[0];
 				commandList[0]();
+				closeHelp();
 			}
 		}
 
