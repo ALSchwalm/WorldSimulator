@@ -28,6 +28,7 @@ namespace Event {
 
 	void MoveEvent::run()
 	{
+		//if the location is adjacent
 		if (individual->getCurrentLocation()->getLocations().find(newLocation) !=  individual->getCurrentLocation()->getLocations().end())
 			individual->setCurrentLocation(newLocation);
 	}
