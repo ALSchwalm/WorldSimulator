@@ -1,8 +1,12 @@
 #ifndef INTERFACE_H_
 #define INTERFACE_H_
 
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
 
-#include "Utils/curses.h"
 #include "Interface/CLI/Context.h"
 #include <memory>
 

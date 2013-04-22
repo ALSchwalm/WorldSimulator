@@ -1,10 +1,15 @@
 #ifndef COMMANDCOMPLETE_H_
 #define COMMANDCOMPLETE_H_
 
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
+
 #include "Interface/Interface.h"
 #include "Interface/CLI/Commands.h"
 #include "Interface/CLI/Token.h"
-#include "Utils/curses.h"
 #include <string>
 #include <vector>
 

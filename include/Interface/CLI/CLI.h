@@ -1,8 +1,13 @@
 #ifndef CLI_H_
 #define CLI_H_
 
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
+
 #include "Interface/Interface.h"
-#include "Utils/curses.h"
 #include "Interface/CLI/Dialog/Dialog.h"
 #include <vector>
 

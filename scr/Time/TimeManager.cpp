@@ -1,8 +1,15 @@
 
+#if _WIN32
+# include <windows.h>
+#elif __linux__
+# include <unistd.h>
+# define Sleep(x) sleep(x/1000)
+#endif
+
 #include "Time/TimeManager.h"
 #include "Utils/Config.h"
 #include <time.h>
-#include <windows.h>
+
 
 
 using namespace Time;

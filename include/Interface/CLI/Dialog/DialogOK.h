@@ -1,7 +1,12 @@
 #ifndef DIALOGOK_H_
 #define DIALOGOK_H_
 
-#include "Utils/curses.h"
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
+
 #include "Interface/CLI/Dialog/Dialog.h"
 #include <string>
 

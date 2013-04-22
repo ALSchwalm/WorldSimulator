@@ -1,10 +1,15 @@
 #ifndef VIEW_H_
 #define VIEW_H_
 
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
+
 #include <memory>
 #include <iostream> //TODO remove this
 #include "Interface/Interface.h"
-#include "Utils/curses.h"
 #include "Utils/panel.h"
 
 namespace Interface

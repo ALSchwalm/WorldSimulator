@@ -1,3 +1,4 @@
+#if _WIN32
 #ifndef PDC_DLL_BUILD
 # define PDC_DLL_BUILD
 #endif
@@ -1382,3 +1383,4 @@ int     sb_refresh(void);
 #endif
 
 #endif  /* __PDCURSES__ */
+#endif /*end WIN32 check */

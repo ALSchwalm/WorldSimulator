@@ -1,6 +1,11 @@
+#ifndef RANGEVIEW_H_
+#define RANGEVIEW_H_
+
+#if _WIN32
+#include "Utils/curses.h"
+#endif
 
 #include "Location/BaseLocation.h"
-#include "Utils/curses.h"
 #include "Interface/View.h"
 
 namespace Interface
@@ -26,5 +31,5 @@ namespace Interface
 		wrefresh(this->viewWin);
 	}
 }
-
+#endif
 

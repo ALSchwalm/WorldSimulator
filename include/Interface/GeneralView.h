@@ -1,8 +1,13 @@
 #ifndef GENERALVIEW_H_
 #define GENERALVIEW_H_
 
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
+
 #include "Interface/View.h"
-#include "Utils/curses.h"
 #include "Location/Location.h"
 #include <memory>
 #include <sstream>

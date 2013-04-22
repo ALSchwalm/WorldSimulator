@@ -1,10 +1,13 @@
 #ifndef EVENTVIEW_H_
 #define EVENTVIEW_H_
 
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
 #include <memory>
 #include "Interface/View.h"
-#include "Utils/curses.h"
-#include "Utils/panel.h"
 
 namespace Interface
 {

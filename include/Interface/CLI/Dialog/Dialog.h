@@ -1,7 +1,12 @@
 #ifndef DIALOG_H_
 #define DIALOG_H_
 
-#include "Utils/curses.h"
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
+
 #include <memory>
 
 namespace Interface

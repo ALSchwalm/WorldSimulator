@@ -1,9 +1,14 @@
 #ifndef HELPVIEW_H_
 #define HELPVIEW_H_
 
+#if _WIN32
+# include "Utils/curses.h"
+#elif __linux__
+# include <ncurses.h>
+#endif
+
 #include <vector>
 #include "Interface/View.h"
-#include "Utils/curses.h"
 #include "Interface/CLI/Commands.h"
 
 namespace Interface
