@@ -21,8 +21,7 @@ namespace Interface
 	    }
 
 	    keypad(mainwin, true); 	//allow arrow/function keys
-	    //nodelay();	//do not wait for input
-	    halfdelay(1);
+	    nodelay(mainwin, true);	//do not wait for input
 	    noecho();	//do not echo user intput to screen
 
 	    CLI::initialize();
