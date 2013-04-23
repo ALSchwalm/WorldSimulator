@@ -28,8 +28,7 @@ namespace Interface
 
 		void handleInput()
 		{
-			static char prevChar = 'a';
-			static std::string completion = "";
+			static int prevChar = 'a';
 
 			if (dialogs.size() != 0)
 			{
@@ -37,7 +36,7 @@ namespace Interface
 				return;
 			}
 
-			char c = wgetch(lineWin);
+			int c = wgetch(lineWin);
 			switch(c)
 			{
 			case '?':
@@ -59,12 +58,13 @@ namespace Interface
 				line="";
 				break;
 			case 9:		//tab
-				completion = cliCompleteCommand(line);
-				line+= completion;
-				waddstr(lineWin, completion.c_str());
+				line+= cliCompleteCommand(line);
+				waddstr(lineWin, cliCompleteCommand(line).c_str());
 				break;
 
-			case 8:		//backspace
+			case KEY_BACKSPACE:
+			case 127:	//linux backspace
+			case 8:		//windows windows backspace
 				waddch(lineWin, '\b');
 				wdelch(lineWin);
 				if (line != "")

@@ -21,7 +21,8 @@ namespace Interface
 	    }
 
 	    keypad(mainwin, true); 	//allow arrow/function keys
-	    nodelay(mainwin, true);	//do not wait for input
+	    //nodelay(mainwin, true);	//do not wait for input
+	    timeout(1);
 	    noecho();	//do not echo user intput to screen
 
 	    CLI::initialize();
@@ -34,6 +35,7 @@ namespace Interface
 			helpView->refreshView();
 		else
 			displayView->refreshView();
+		wrefresh(CLI::lineWin);
 	}
 
 }

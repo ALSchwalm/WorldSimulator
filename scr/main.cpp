@@ -20,11 +20,10 @@ int main()
 
 	while(true)
 	{
-		Interface::CLI::handleInput();
 		Time::TimeManager::getInstance().tick();
 		Time::TimeManager::getInstance().capFPS();
 		Interface::refreshView();
-
+		Interface::CLI::handleInput();
 	}
 
 	return 0;
