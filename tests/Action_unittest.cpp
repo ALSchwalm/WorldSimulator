@@ -1,4 +1,4 @@
-#include "Individual/Person.h"
+#include "Individual/Merchant.h"
 #include "Item/BaseItem.h"
 #include "Item/Weapon.h"
 #include "Action/Task.h"
@@ -19,7 +19,7 @@ TEST(ActionTest, GetFood)
 
 	Location::addLocations(location, location2);
 
-	auto individual = std::make_shared<Individual::Person>("TestPerson", location, false);
+	auto individual = std::make_shared<Individual::Merchant>("TestPerson", location, false);
 
 	/*
 	 * Goal creation is fully specialized, so to find a Weapon, you must call addGoal

@@ -3,15 +3,15 @@
 #include <algorithm>
 #include <memory>
 #include "Individual/BaseIndividual.h"
-#include "Individual/Person.h"
+#include "Individual/Merchant.h"
 #include "Location/Village.h"
 #include "Relationship/Relationship.h"
 
 TEST(RelationshipTest, Relationships)
 {
 
-	auto individual_one = std::make_shared<Individual::Person>("Person1", true);
-	auto individual_two = std::make_shared<Individual::Person>("Person2", true);
+	auto individual_one = std::make_shared<Individual::Merchant>("Person1", true);
+	auto individual_two = std::make_shared<Individual::Merchant>("Person2", true);
 	auto location = std::make_shared<Location::Village>("Village");
 
 	individual_one->addRelationship(location, Relationship::RelationshipType::BIRTHPLACE);

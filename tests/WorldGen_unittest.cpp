@@ -25,8 +25,11 @@ TEST(WorldGenTest, SeedPopulation)
 	{
 		for (auto city : region->getLocationsByAttribute("habitable"))
 		{
-				EXPECT_TRUE(city->getIndividuals().size() >= 100);
-				EXPECT_TRUE(city->getIndividuals().size() <= 300);
+			unsigned int total = 0;
+			for (auto house : city->getLocationsByType(Location::CONTAINER))
+				total += house->getIndividuals().size();
+			EXPECT_TRUE(total >= 100);
+			EXPECT_TRUE(total <= 300);
 		}
 
 	}

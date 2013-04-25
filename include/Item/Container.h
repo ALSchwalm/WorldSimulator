@@ -39,6 +39,7 @@ namespace Item
 
 		~Container(){};
 
+		Location::LocationType getLocationType(){return Location::CONTAINER;}
 		const std::vector<Item_ptr> & getItems() {return items;}
 		void addItem(Item_ptr _item) {items.push_back(_item);}
 

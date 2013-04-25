@@ -2,7 +2,7 @@
 #include "Location/World.h"
 #include "Location/Location.h"
 #include "Item/Container.h"
-#include "Individual/Person.h"
+#include "Individual/Merchant.h"
 #include "Utils/Markov.h"
 #include <cstdlib>
 #include <memory>
@@ -31,7 +31,7 @@ void seed()
 					auto house = std::make_shared<Item::Container>(Item::ContainerType::HOUSE);
 					for (unsigned int i=0; i < family_size; ++i)
 					{
-						house->addIndividual(std::make_shared<Individual::Person>(Utils::Markov::getInstance().getProperWord(), city, rand()%2));
+						house->addIndividual(std::make_shared<Individual::Merchant>(Utils::Markov::getInstance().getProperWord(), city, rand()%2));
 					}
 					city->addItem(house);
 					Location::addLocations(city, house);

@@ -24,6 +24,7 @@ namespace Location
 		REGION,
 		WORLD,
 		TERRAIN,
+		CONTAINER,
 
 		//insert before this
 		LOCATION_ERROR,

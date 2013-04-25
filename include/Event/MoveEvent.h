@@ -3,7 +3,6 @@
 
 #include <Event/Event.h>
 #include <Event/BaseEvent.h>
-#include <Individual/Person.h>
 #include <Location/BaseLocation.h>
 
 namespace Event
