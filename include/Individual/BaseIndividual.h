@@ -68,6 +68,7 @@ namespace Individual
 		Relationship::RelationshipMap<Location_ptr> & getLocationRelationshipMap() {return LocationRelationshipMap;}
 
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
+		virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
 
 		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
 		void addItem(Item::Item_ptr i) {items.push_back(i);}

@@ -17,7 +17,7 @@ namespace Individual
 		SOLDIER, //i.e.
 		KING,
 		MERCHANT, //i.e.
-		ARTISTS,
+		ARTISAN,
 
 
 
@@ -25,8 +25,6 @@ namespace Individual
 		INDIVIDUAL_ERROR,
 		NUM_OF_INDIVIDUALS
 	};
-
-	std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<BaseIndividual>);
 
 }
 
