@@ -22,7 +22,7 @@ namespace Item
 
 namespace Individual
 {
-	class Merchant : public BaseIndividual
+	class Merchant : virtual public BaseIndividual
 	{
 	public:
 

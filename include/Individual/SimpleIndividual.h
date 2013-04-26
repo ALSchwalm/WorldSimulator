@@ -12,6 +12,7 @@ namespace Individual
 	{
 	public:
 		Baker(std::string _name, Location_ptr _location, bool _isMale=true) :
+			BaseIndividual(_name, _location, _isMale),
 			Artisan(_name, _location, _isMale),
 			Merchant(_name, _location, _isMale)
 		{}

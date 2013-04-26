@@ -15,10 +15,10 @@ namespace Item
 
 namespace Individual
 {
-	class Artisan : public BaseIndividual
+	class Artisan : virtual public BaseIndividual
 	{
 	public:
-		virtual Item::Item_ptr createItem(){};
+		virtual Item::Item_ptr createItem(){return NULL;}
 		virtual IndividualType getIndividualType() override {return IndividualType::ARTISAN;}
 
 		virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
