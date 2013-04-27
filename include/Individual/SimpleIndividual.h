@@ -5,6 +5,7 @@
 #include "Individual/Artisan.h"
 #include "Individual/Merchant.h"
 #include "Location/BaseLocation.h"
+#include "Item/Food.h"
 
 namespace Individual
 {
@@ -18,8 +19,11 @@ namespace Individual
 		{}
 
 		IndividualType getIndividualType() override {return IndividualType::BAKER;}
-		void addInitialItems(std::vector<Item::Item_ptr> &) override {};
-		Item::Item_ptr createItem(){return NULL;}
+		void addInitialItems(std::vector<Item::Item_ptr> & items) override
+				{
+					items.push_back(std::make_shared<Item::Food>(Item::BREAD));
+				};
+		Item::Item_ptr createItem(){return nullptr;}
 	};
 
 

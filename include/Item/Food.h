@@ -18,6 +18,7 @@ namespace Item
 		BACON,
 		CORN,
 		BEEF,
+		BREAD,
 
 		NUM_OF_FOODS
 	};

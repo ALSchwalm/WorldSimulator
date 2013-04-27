@@ -23,9 +23,8 @@ void seed()
 			if (city->hasAttribute("habitable"))
 			{
 				int population =  rand() % (INITIAL_MAX_POPULATION - INITIAL_MIN_POPULATION) + INITIAL_MIN_POPULATION;
-				unsigned int family_size = 0;
 
-				for (; population > 0; population -= family_size)
+				for (unsigned int family_size = 0; population > 0; population -= family_size)
 				{
 					family_size = population % 5 + 1;
 
