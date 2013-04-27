@@ -1,6 +1,7 @@
 #ifndef BASEITEM_H_
 #define BASEITEM_H_
 
+#include "Owner/Owner.h"
 #include <memory>
 #include <map>
 #include <string>
@@ -23,18 +24,24 @@ namespace Item
 
 		std::string getName() {return name;}
 		void setAttribute(std::string s) {attributes[s] = true;}
-		void setOwner(Individual::Individual_ptr i){owner = i;}
+		const Owner::Owner & getOwner() {return owner;}
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
-
-		Individual::Individual_ptr getOwner() {return owner;}
 
 	protected:
 		BaseItem() : name("Unnamed Item"){}
 		BaseItem(std::string _name) : name(_name){}
+		BaseItem(Individual::Individual_ptr _owner) :
+			name("Unnamed Item"),
+			owner(_owner)
+		{}
+		BaseItem(std::string _name, Individual::Individual_ptr _owner) :
+			name(_name),
+			owner(_owner)
+		{}
 	private:
 		std::string name;
 		std::map<std::string, bool> attributes;
-		Individual::Individual_ptr owner;
+		Owner::Owner owner;
 
 	};
 

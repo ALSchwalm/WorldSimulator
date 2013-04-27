@@ -27,7 +27,8 @@ namespace Item
 		"Mutton",
 		"Bacon",
 		"Corn",
-		"Beef"
+		"Beef",
+		"Bread"
 	};
 
 	class Food : public BaseItem
