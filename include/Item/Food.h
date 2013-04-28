@@ -6,11 +6,10 @@
 #include <string>
 #include <vector>
 #include "Item/BaseItem.h"
+#include "Skill/Skill.h"
 
 namespace Item
 {
-
-
 
 	enum FoodType
 	{
@@ -31,17 +30,42 @@ namespace Item
 		"Bread"
 	};
 
+	const Skill::skillMap requiredFoodSkills[NUM_OF_FOODS]
+	{
+		{//MUTTON
+			{Skill::COOKING, 	3.0f}
+		},
+
+		{//BACON
+			{Skill::COOKING, 	3.0f}
+		},
+
+		{//CORN
+			{Skill::COOKING, 	0.5f}
+		},
+
+		{//BEEF
+			{Skill::COOKING, 	3.0f}
+		},
+
+		{//BREAD
+			{Skill::COOKING, 	2.0f},
+			{Skill::BAKING, 	2.0f}
+		}
+
+	};
+
 	class Food : public BaseItem
 	{
 	public:
 		static Item_ptr getRandomFood();
-
+		const Skill::skillMap & getRequiredSkill(){return requiredFoodSkills[foodType];}
 		Food(FoodType _foodType);
 
 		~Food(){};
 
 	private:
-		FoodType foodType;
+		const FoodType foodType;
 
 	};
 

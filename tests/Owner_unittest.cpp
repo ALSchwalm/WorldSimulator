@@ -6,7 +6,7 @@
 TEST(OwnerTest, Comparison)
 {
 	auto individual = std::make_shared<Individual::Baker>("TestIndividual");
-	auto item = std::make_shared<Item::Weapon>("TestWeapon", individual);
+	auto item = std::make_shared<Item::Weapon>("TestWeapon", individual, Item::SWORD);
 
 	EXPECT_TRUE(item->getOwner() == individual);
 	EXPECT_FALSE(item->getOwner() != individual);

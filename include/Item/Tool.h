@@ -23,6 +23,39 @@ namespace Item
 
 	};
 
+	/*
+	 * The skill level required to create this tool
+	 * (using other tools etc)
+	 */
+	const Skill::skillMap requiredContainerSkills[NUM_OF_TOOLS]
+	{
+		{//PLOW
+			{Skill::BLACKSMITHING, 	2.5f},
+			{Skill::WOODWORKING,	1.0f}
+		},
+
+		{//OVEN
+			{Skill::BLACKSMITHING, 	3.0f},
+		}
+	};
+
+	/*
+	 * A tools 'skill' is a multiplier when calculating how
+	 * effective it is to use.
+	 */
+	const Skill::skillMap usedContainerSkills[NUM_OF_TOOLS]
+	{
+		{//PLOW
+			{Skill::FARMING, 	1.5f}
+		},
+
+		{//OVEN
+			{Skill::COOKING, 	3.0f},
+			{Skill::BAKING,  	3.0f}
+		}
+	};
+
+
 	class Tool : public BaseItem
 	{
 	public:
@@ -34,11 +67,6 @@ namespace Item
 	private:
 		ToolType toolType;
 
-		/*
-		 * A tools 'skill' is a multiplier when calculating how
-		 * effective it is to use.
-		 */
-		Skill::skillMap skillMap;
 	};
 
 }

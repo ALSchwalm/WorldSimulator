@@ -2,6 +2,7 @@
 #define BASEITEM_H_
 
 #include "Owner/Owner.h"
+#include "Skill/Skill.h"
 #include <memory>
 #include <map>
 #include <string>
@@ -21,10 +22,12 @@ namespace Item
 	public:
 
 		virtual ~BaseItem(){};
+		virtual const Skill::skillMap & getRequiredSkill()=0;
 
 		std::string getName() {return name;}
 		void setAttribute(std::string s) {attributes[s] = true;}
 		const Owner::Owner & getOwner() {return owner;}
+
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
 	protected:

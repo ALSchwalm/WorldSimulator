@@ -23,8 +23,8 @@ TEST(LocationTest, AddItems)
 {
 
 	auto location = std::make_shared<Location::Village>("TestVillage");
-	auto item = std::make_shared<Item::Weapon>("TestWeapon");
-	auto item2 = std::make_shared<Item::Weapon>("TestWeapon2");
+	auto item = std::make_shared<Item::Weapon>("TestWeapon", Item::BOW);
+	auto item2 = std::make_shared<Item::Weapon>("TestWeapon2", Item::BOW);
 
 	location->addItem(item);
 
@@ -36,8 +36,8 @@ TEST(LocationTest, RemoveItems)
 {
 
 	auto location = std::make_shared<Location::Village>("TestVillage");
-	auto item = std::make_shared<Item::Weapon>("TestWeapon");
-	auto item2 = std::make_shared<Item::Weapon>("TestWeapon2");
+	auto item = std::make_shared<Item::Weapon>("TestWeapon", Item::SWORD);
+	auto item2 = std::make_shared<Item::Weapon>("TestWeapon2", Item::SWORD);
 
 	location->addItem(item);
 
