@@ -27,34 +27,26 @@ namespace Item
 	 * The skill level required to create this tool
 	 * (using other tools etc)
 	 */
-	const Skill::skillMap requiredContainerSkills[NUM_OF_TOOLS]
+	const std::map<ToolType, const Skill::skillMap> requiredToolSkills
 	{
-		{//PLOW
-			{Skill::BLACKSMITHING, 	2.5f},
-			{Skill::WOODWORKING,	1.0f}
-		},
+		{PLOW, 	{{Skill::BLACKSMITHING, 	1.5f},
+				 {Skill::WOODWORKING,		0.5f}}},
 
-		{//OVEN
-			{Skill::BLACKSMITHING, 	3.0f},
-		}
+		{OVEN,	{{Skill::BLACKSMITHING, 	3.0f}}}
 	};
 
 	/*
 	 * A tools 'skill' is a multiplier when calculating how
-	 * effective it is to use.
+	 * effective it is to use. Using map because we don't have
+	 * designated intializers for some reason
 	 */
-	const Skill::skillMap usedContainerSkills[NUM_OF_TOOLS]
+	const std::map<ToolType, const Skill::skillMap> usedToolSkills
 	{
-		{//PLOW
-			{Skill::FARMING, 	1.5f}
-		},
+		{PLOW,	{{Skill::FARMING, 	1.5f}}},
 
-		{//OVEN
-			{Skill::COOKING, 	3.0f},
-			{Skill::BAKING,  	3.0f}
-		}
+		{OVEN,	{{Skill::COOKING, 	3.0f},
+				 {Skill::BAKING,  	3.0f}}}
 	};
-
 
 	class Tool : public BaseItem
 	{
@@ -63,7 +55,7 @@ namespace Item
 
 		Tool(ToolType _toolType);
 		~Tool(){};
-
+		const Skill::skillMap & getRequiredSkill(){return requiredToolSkills.at(toolType);}
 	private:
 		ToolType toolType;
 

@@ -5,9 +5,9 @@
 namespace Item
 {
 
-
 	Item_ptr Tool::getRandomTool()
 	{
+
 		return std::make_shared<Tool>( (ToolType) (rand() % ToolType::NUM_OF_TOOLS));
 	};
 

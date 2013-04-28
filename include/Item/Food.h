@@ -30,36 +30,25 @@ namespace Item
 		"Bread"
 	};
 
-	const Skill::skillMap requiredFoodSkills[NUM_OF_FOODS]
+	const std::map<FoodType, const Skill::skillMap> requiredFoodSkills
 	{
-		{//MUTTON
-			{Skill::COOKING, 	3.0f}
-		},
+		{MUTTON, 	{{Skill::COOKING, 	1.5f}}},
 
-		{//BACON
-			{Skill::COOKING, 	3.0f}
-		},
+		{BACON, 	{{Skill::COOKING, 	3.0f}}},
 
-		{//CORN
-			{Skill::COOKING, 	0.5f}
-		},
+		{CORN, 		{{Skill::COOKING, 	3.0f}}},
 
-		{//BEEF
-			{Skill::COOKING, 	3.0f}
-		},
+		{BEEF, 		{{Skill::COOKING, 	3.0f}}},
 
-		{//BREAD
-			{Skill::COOKING, 	2.0f},
-			{Skill::BAKING, 	2.0f}
-		}
-
+		{BREAD, 	{{Skill::COOKING, 	3.0f},
+					 {Skill::BAKING,	1.5f}}}
 	};
 
 	class Food : public BaseItem
 	{
 	public:
 		static Item_ptr getRandomFood();
-		const Skill::skillMap & getRequiredSkill(){return requiredFoodSkills[foodType];}
+		const Skill::skillMap & getRequiredSkill(){return requiredFoodSkills.at(foodType);}
 		Food(FoodType _foodType);
 
 		~Food(){};

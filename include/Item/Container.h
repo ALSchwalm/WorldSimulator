@@ -24,23 +24,16 @@ namespace Item
 		"House Floor"	//TODO find a way to have numbered floors
 	};
 
-	const Skill::skillMap requiredContainerSkills[NUM_OF_CONTAINERS]
+	const std::map<ContainerType, const Skill::skillMap> requiredContainerSkills
 	{
-		{//BARREL
-			{Skill::WOODWORKING, 	1.5f}
-		},
+		{BARREL, 		{{Skill::WOODWORKING, 	1.5f},
+						 {Skill::BLACKSMITHING,	0.5f}}},
 
-		{//CHEST
-			{Skill::WOODWORKING, 	2.0f}
-		},
+		{CHEST, 		{{Skill::WOODWORKING, 	2.0f}}},
 
-		{//HOUSE
-			{Skill::WOODWORKING, 	7.0f}
-		},
+		{HOUSE, 		{{Skill::WOODWORKING, 	5.0f}}},
 
-		{//HOUSE_FLOOR
-			{Skill::WOODWORKING, 	2.0f}
-		},
+		{HOUSE_FLOOR, 	{{Skill::WOODWORKING, 	3.0f}}}
 
 	};
 
@@ -60,7 +53,7 @@ namespace Item
 
 		~Container(){};
 
-		const Skill::skillMap & getRequiredSkill(){return requiredContainerSkills[containerType];}
+		const Skill::skillMap & getRequiredSkill(){return requiredContainerSkills.at(containerType);}
 		Location::LocationType getLocationType(){return Location::CONTAINER;}
 		const std::vector<Item_ptr> & getItems() {return items;}
 		void addItem(Item_ptr _item) {items.push_back(_item);}

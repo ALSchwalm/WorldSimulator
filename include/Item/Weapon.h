@@ -22,16 +22,12 @@ const std::string weaponTypeAsString[NUM_OF_WEAPONS] = {
 
 };
 
-const Skill::skillMap requiredWeaponSkills[NUM_OF_WEAPONS]
+const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
 {
-	{//SWORD
-		{Skill::BLACKSMITHING, 	3.0f}
-	},
+	{SWORD, 	{{Skill::BLACKSMITHING, 	2.5f},
+			 	 {Skill::WOODWORKING,		0.5f}}},
 
-	{//BOW
-		{Skill::WOODWORKING, 	3.0f}
-	},
-
+	{BOW,		{{Skill::WOODWORKING, 		3.0f}}}
 };
 
 
@@ -55,7 +51,7 @@ const Skill::skillMap requiredWeaponSkills[NUM_OF_WEAPONS]
 
 		~Weapon(){};
 
-		const Skill::skillMap & getRequiredSkill() {return requiredWeaponSkills[weaponType];}
+		const Skill::skillMap & getRequiredSkill() {return requiredWeaponSkills.at(weaponType);}
 
 	private:
 		WeaponType weaponType;
