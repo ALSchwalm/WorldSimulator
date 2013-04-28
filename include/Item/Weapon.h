@@ -30,8 +30,6 @@ const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
 	{BOW,		{{Skill::WOODWORKING, 		3.0f}}}
 };
 
-
-
 	class Weapon : public BaseItem
 	{
 	public:
@@ -51,8 +49,7 @@ const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
 
 		~Weapon(){};
 
-		const Skill::skillMap & getRequiredSkill() {return requiredWeaponSkills.at(weaponType);}
-
+		static const Skill::skillMap & getRequiredSkill(WeaponType t){return requiredWeaponSkills.at(t);}
 	private:
 		WeaponType weaponType;
 

@@ -53,7 +53,7 @@ namespace Item
 
 		~Container(){};
 
-		const Skill::skillMap & getRequiredSkill(){return requiredContainerSkills.at(containerType);}
+		static const Skill::skillMap & getRequiredSkill(ContainerType t){return requiredContainerSkills.at(t);}
 		Location::LocationType getLocationType(){return Location::CONTAINER;}
 		const std::vector<Item_ptr> & getItems() {return items;}
 		void addItem(Item_ptr _item) {items.push_back(_item);}

@@ -20,7 +20,8 @@ namespace Item
 	};
 
 	const std::string toolTypeAsString[NUM_OF_TOOLS] = {
-
+		"Plow",
+		"Oven",
 	};
 
 	/*
@@ -52,10 +53,11 @@ namespace Item
 	{
 	public:
 		static Item_ptr getRandomTool();
+		static const Skill::skillMap & getRequiredSkill(ToolType t){return requiredToolSkills.at(t);}
 
 		Tool(ToolType _toolType);
 		~Tool(){};
-		const Skill::skillMap & getRequiredSkill(){return requiredToolSkills.at(toolType);}
+
 	private:
 		ToolType toolType;
 

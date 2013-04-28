@@ -22,7 +22,6 @@ namespace Item
 	public:
 
 		virtual ~BaseItem(){};
-		virtual const Skill::skillMap & getRequiredSkill()=0;
 
 		std::string getName() {return name;}
 		void setAttribute(std::string s) {attributes[s] = true;}

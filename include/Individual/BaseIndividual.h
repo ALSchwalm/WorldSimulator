@@ -6,6 +6,7 @@
 #include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
+#include "Skill/Skill.h"
 #include <string>
 #include <map>
 #include <utility>
@@ -54,6 +55,7 @@ namespace Individual
 		Event::EventHistory history;
 
 		Action::GoalTree goalTree;
+		Skill::skillMap skillMap;
 	public:
 		virtual ~BaseIndividual(){}
 
@@ -66,6 +68,7 @@ namespace Individual
 		const std::vector<Item::Item_ptr> & getItems() {return items;}
 		Relationship::RelationshipMap<Individual_ptr> & getIndividualRelationshipMap() {return IndividualRelationshipMap;}
 		Relationship::RelationshipMap<Location_ptr> & getLocationRelationshipMap() {return LocationRelationshipMap;}
+		Skill::skillMap & getSkillMap() {return skillMap;}
 
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 		virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
@@ -78,6 +81,7 @@ namespace Individual
 
 		void setAttribute(std::string s) {attributes[s] = true;}
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
+		void setSkill(Skill::skills s, float f){skillMap[s] = f;}
 		bool removeItem(Item::Item_ptr i);
 
 		unsigned int calculatePriority(Individual_ptr, Action::GoalType);

@@ -48,7 +48,7 @@ namespace Item
 	{
 	public:
 		static Item_ptr getRandomFood();
-		const Skill::skillMap & getRequiredSkill(){return requiredFoodSkills.at(foodType);}
+		static const Skill::skillMap & getRequiredSkill(FoodType t){return requiredFoodSkills.at(t);}
 		Food(FoodType _foodType);
 
 		~Food(){};
