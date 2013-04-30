@@ -34,13 +34,13 @@ namespace Item
 	{
 		{MUTTON, 	{{Skill::COOKING, 	1.5f}}},
 
-		{BACON, 	{{Skill::COOKING, 	3.0f}}},
+		{BACON, 	{{Skill::COOKING, 	2.0f}}},
 
-		{CORN, 		{{Skill::COOKING, 	3.0f}}},
+		{CORN, 		{{Skill::COOKING, 	2.0f}}},
 
-		{BEEF, 		{{Skill::COOKING, 	3.0f}}},
+		{BEEF, 		{{Skill::COOKING, 	2.0f}}},
 
-		{BREAD, 	{{Skill::COOKING, 	3.0f},
+		{BREAD, 	{{Skill::COOKING, 	2.0f},
 					 {Skill::BAKING,	1.5f}}}
 	};
 

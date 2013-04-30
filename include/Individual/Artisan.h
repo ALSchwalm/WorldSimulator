@@ -21,8 +21,7 @@ namespace Individual
 		virtual Item::Item_ptr createItem(){return NULL;}
 		virtual IndividualType getIndividualType() override {return IndividualType::ARTISAN;}
 
-		virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
-
+		virtual void addInitialItems(std::vector<Item::Item_ptr>){};
 	protected:
 		Artisan(std::string name, bool);
 		Artisan(std::string name, Location_ptr location, bool);

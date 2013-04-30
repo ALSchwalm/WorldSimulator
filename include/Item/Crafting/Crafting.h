@@ -4,6 +4,7 @@
 #include "Item/BaseItem.h"
 #include "Individual/BaseIndividual.h"
 #include <memory>
+#include <type_traits>
 
 namespace Item
 {
@@ -12,6 +13,9 @@ namespace Item
 		template<typename T, typename EnumType>
 		inline Item_ptr createItem(EnumType enumType, Individual::Individual_ptr individual)
 		{
+
+			static_assert(std::is_enum<EnumType>::value, "Template argument is not an enum.");
+
 			for (auto p : T::getRequiredSkill(enumType))
 			{
 				if (individual->getSkillMap()[p.first] < p.second)

@@ -71,7 +71,6 @@ namespace Individual
 		Skill::skillMap & getSkillMap() {return skillMap;}
 
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
-		virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
 
 		void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
 		void addItem(Item::Item_ptr i) {items.push_back(i);}
@@ -85,6 +84,8 @@ namespace Individual
 		bool removeItem(Item::Item_ptr i);
 
 		unsigned int calculatePriority(Individual_ptr, Action::GoalType);
+
+		virtual void addInitialItems(std::vector<Item::Item_ptr>){};
 
 		/*
 		 * Goal creation is started here, then passed to the goal tree. The goal tree

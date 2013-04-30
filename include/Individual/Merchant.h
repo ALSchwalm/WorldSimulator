@@ -27,10 +27,9 @@ namespace Individual
 	public:
 
 		virtual std::vector<Item::Item_ptr> getItemsForSale() { return itemsForSale;}
-		virtual void addInitialItems(std::vector<Item::Item_ptr> &)=0;
 
 		IndividualType getIndividualType() override {return IndividualType::MERCHANT;}
-
+		virtual void addInitialItems(std::vector<Item::Item_ptr>){};
 	protected:
 		Merchant(std::string name, bool);
 		Merchant(std::string name, Location_ptr location, bool);
