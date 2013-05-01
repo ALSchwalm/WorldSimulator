@@ -1,6 +1,7 @@
 
 #include "Utils/Config.h"
 #include <iostream>
+#include <stdexcept>
 
 using namespace Utils;
 
@@ -21,8 +22,7 @@ const int Config::getValue(std::string section, std::string value)
 	auto ini_value = ini.Get(value, -1);
 	if (ini_value == -1)
 	{
-		std::cerr << std::string("Unable to locate value for ") + section + std::string(".") + value << std::endl;
-		exit(0);
+		throw(std::runtime_error(std::string("Unable to locate value for ") + section + std::string(".") + value));
 		return 0;
 	}
 	else

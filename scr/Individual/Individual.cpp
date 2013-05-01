@@ -1,6 +1,7 @@
 
 #include "Individual/Individual.h"
 #include "Individual/BaseIndividual.h"
+#include "Individual/SimpleIndividual.h"
 
 
 namespace Individual
@@ -13,4 +14,30 @@ namespace Individual
 			item->setOwner(individual);
 		return items;
 	}
+
+	std::shared_ptr<BaseIndividual> getRandomIndividual(std::string _name,
+														Location::Location_ptr _location,
+														bool _isMale)
+	{
+		IndividualType individual = static_cast<IndividualType>(rand()%1);
+		return createIndividualFromType(individual, _name, _location, _isMale);
+	}
+
+
+	std::shared_ptr<BaseIndividual> createIndividualFromType(IndividualType _type,
+															std::string _name,
+															Location::Location_ptr _location,
+															bool _isMale)
+	{
+		switch(_type)
+		{
+		case BAKER:
+			return std::make_shared<Baker>(_name, _location, _isMale);
+		default:
+			throw("Attempt to create individual from invalid enum.");
+			return nullptr;
+		}
+	}
+
+
 }

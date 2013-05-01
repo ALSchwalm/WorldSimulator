@@ -85,7 +85,7 @@ namespace Individual
 
 		unsigned int calculatePriority(Individual_ptr, Action::GoalType);
 
-		virtual void addInitialItems(std::vector<Item::Item_ptr>){};
+		virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
 
 		/*
 		 * Goal creation is started here, then passed to the goal tree. The goal tree

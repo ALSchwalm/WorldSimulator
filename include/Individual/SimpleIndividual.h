@@ -32,7 +32,7 @@ namespace Individual
 
 		IndividualType getIndividualType() override {return IndividualType::BAKER;}
 
-		void addInitialItems(std::vector<Item::Item_ptr> items)
+		void addInitialItems(std::vector<Item::Item_ptr> & items)
 		{
 			items.push_back(std::make_shared<Item::Food>(Item::BREAD));
 		};

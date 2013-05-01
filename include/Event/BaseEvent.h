@@ -30,7 +30,7 @@ namespace Event
 
 		virtual void * getSource(){ return nullptr; }
 
-		virtual void run();
+		virtual void run()=0;
 
 		void interrupt();
 

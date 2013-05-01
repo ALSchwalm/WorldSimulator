@@ -2,6 +2,7 @@
 #include "Location/World.h"
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 
 using namespace Location;
 
@@ -25,18 +26,18 @@ World::~World()
 
 void World::addItem(Item::Item_ptr i)
 {
-	std::cerr << "Error: Attempt to add item to 'world' instance." << std::endl;
+	throw(std::runtime_error("Attempt to add item to 'world' instance."));
 }
 void World::operator+=(Item::Item_ptr rhs)
 {
-	std::cerr << "Error: Attempt to add item to 'world' instance." << std::endl;
+	throw(std::runtime_error("Attempt to add item to 'world' instance."));
 }
 void World::addIndividual(Individual::Individual_ptr i)
 {
-	std::cerr << "Error: Attempt to add individual to 'world' instance." << std::endl;
+	throw(std::runtime_error("Attempt to add individual to 'world' instance."));
 }
 
 void World::operator+=(Individual::Individual_ptr rhs)
 {
-	std::cerr << "Error: Attempt to add individual to 'world' instance." << std::endl;
+	throw(std::runtime_error("Attempt to add individual to 'world' instance."));
 }

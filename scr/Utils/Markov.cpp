@@ -12,6 +12,7 @@
 #include <time.h>
 #include <cstdlib>
 #include <iostream>
+#include <stdexcept>
 
 using namespace Utils;
 
@@ -37,8 +38,7 @@ Markov::Markov()
    	fFile.open("names.txt");
    	if (!fFile.is_open())
    	{
-   		cerr << "Error opening names.txt" << std::endl;
-   		exit(0);
+   		throw(runtime_error("Error opening names.txt"));
    	}
 
     while (fFile >> name)

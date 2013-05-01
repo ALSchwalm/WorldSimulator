@@ -5,6 +5,7 @@
 #include "Location/World.h"
 #include <iostream>
 #include <cstdlib>
+#include <stdexcept>
 
 namespace Interface
 {
@@ -16,8 +17,7 @@ namespace Interface
 	void initialize()
 	{
 	    if ( (mainwin = initscr()) == NULL ) {
-			std::cerr << "Error initializing ncurses" << std::endl;
-			exit(EXIT_FAILURE);
+			throw(std::runtime_error("Error initializing ncurses"));
 	    }
 
 	    keypad(mainwin, true); 	//allow arrow/function keys
