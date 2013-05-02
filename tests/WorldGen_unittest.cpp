@@ -28,8 +28,8 @@ TEST(WorldGenTest, SeedPopulation)
 			unsigned int total = 0;
 			for (auto house : city->getLocationsByType(Location::CONTAINER))
 				total += house->getIndividuals().size();
-			EXPECT_TRUE(total >= 100);
-			EXPECT_TRUE(total <= 300);
+			EXPECT_GE(total, WorldGen::PopulationGen::INITIAL_MIN_POPULATION);
+			EXPECT_LE(total, WorldGen::PopulationGen::INITIAL_MAX_POPULATION);
 		}
 
 	}

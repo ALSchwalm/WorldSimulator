@@ -10,8 +10,8 @@ namespace WorldGen
 	{
 		void seed();
 
-		const unsigned int INITIAL_MAX_POPULATION = 300; //population per city
-		const unsigned int INITIAL_MIN_POPULATION = 100;
+		extern const unsigned int INITIAL_MAX_POPULATION;
+		extern const unsigned int INITIAL_MIN_POPULATION;
 
 	};
 }
