@@ -22,15 +22,11 @@ namespace Individual
 		BAKER,
 
 		//insert before this
-		INDIVIDUAL_ERROR,
-		NUM_OF_INDIVIDUALS
+		NUM_OF_INDIVIDUALS,
+		INDIVIDUAL_ERROR
 	};
 
-
-	std::shared_ptr<BaseIndividual> createIndividualFromType(IndividualType _type,
-															std::string _name,
-															Location::Location_ptr _location,
-															bool _isMale);
+	extern const unsigned int IndividualValues[];
 
 	std::shared_ptr<BaseIndividual> getRandomIndividual(std::string _name,
 															Location::Location_ptr _location,

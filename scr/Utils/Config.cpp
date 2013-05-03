@@ -16,7 +16,7 @@ Config::Config() :
 {
 };
 
-const int Config::getValue(std::string section, std::string value)
+const unsigned int Config::getValue(std::string section, std::string value)
 {
 	ini.Select(section);
 	auto ini_value = ini.Get(value, -1);
