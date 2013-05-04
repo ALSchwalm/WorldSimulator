@@ -12,8 +12,10 @@ Config & Config::getInstance()
 }
 
 Config::Config() :
-	ini(std::string("config.ini"), true)
+	ini(std::string("config.ini"))
 {
+	if (!ini.Parse())
+		throw(std::runtime_error("Unable to locate config.ini"));
 };
 
 const unsigned int Config::getValue(std::string section, std::string value)

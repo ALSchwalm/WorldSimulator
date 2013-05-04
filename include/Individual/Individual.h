@@ -29,8 +29,8 @@ namespace Individual
 	extern const unsigned int IndividualValues[];
 
 	std::shared_ptr<BaseIndividual> getRandomIndividual(std::string _name,
-															Location::Location_ptr _location,
-															bool _isMale=true);
+														Location::Location_ptr _location,
+														bool _isMale=true);
 
 	std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<BaseIndividual> individual);
 
