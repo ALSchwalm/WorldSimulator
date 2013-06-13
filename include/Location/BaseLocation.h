@@ -69,6 +69,8 @@ namespace Location
 
 	protected:
 		BaseLocation(std::string _name) : distance(0), name(_name) {}
+		BaseLocation(const BaseLocation&) = delete;
+		BaseLocation& operator=(const BaseLocation&) = delete;
 
 		std::unordered_set<Location_ptr> locations;
 

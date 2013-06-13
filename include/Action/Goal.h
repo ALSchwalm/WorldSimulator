@@ -35,6 +35,9 @@ namespace Action
 		Goal(GoalType g, unsigned int p = 0);
 		Goal(std::vector<Task_ptr>, GoalType g, unsigned int p = 0);
 
+		Goal(const Goal&) = delete;
+		Goal& operator=(const Goal&) = delete;
+
 		bool execute();
 		void taskFinished();
 

@@ -41,6 +41,7 @@ namespace Individual
 			currentLocation(_location),
 			goalTree(std::make_shared<BaseIndividual>(*this)){}
 
+		BaseIndividual& operator=(const BaseIndividual&) = delete;
 
 		Relationship::RelationshipMap<Individual_ptr> IndividualRelationshipMap;
 		Relationship::RelationshipMap<Location_ptr> LocationRelationshipMap;

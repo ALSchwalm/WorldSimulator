@@ -35,12 +35,15 @@ namespace Item
 		BaseItem(std::string _name) : name(_name){}
 		BaseItem(Individual::Individual_ptr _owner) :
 			name("Unnamed Item"),
-			owner(_owner)
-		{}
+			owner(_owner){}
+
 		BaseItem(std::string _name, Individual::Individual_ptr _owner) :
 			name(_name),
-			owner(_owner)
-		{}
+			owner(_owner){}
+
+		BaseItem(const BaseItem&) = delete;
+		BaseItem& operator=(const BaseItem&) = delete;
+
 	private:
 		std::string name;
 		std::map<std::string, bool> attributes;

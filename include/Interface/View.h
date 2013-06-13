@@ -22,6 +22,8 @@ namespace Interface
 		virtual void redrawView()=0;
 		virtual ~BaseView(){}
 		BaseView(){} //This should only be used by shared_ptr
+		BaseView(const BaseView&) = delete;
+		BaseView& operator=(const BaseView&) = delete;
 
 	};
 	typedef std::shared_ptr<BaseView> View_ptr;
@@ -47,6 +49,9 @@ namespace Interface
 		const T viewSubject;
 	protected:
 		View(T _viewSubject, std::string _viewType);
+		View(const View&) = delete;
+		View& operator=(const View&) = delete;
+
 		std::string viewType;
 		WINDOW * viewWin;
 	};

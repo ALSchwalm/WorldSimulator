@@ -13,6 +13,7 @@ namespace Action
 	{
 	public:
 		Task(Event::Event_ptr, Goal_ptr);
+
 		virtual ~Task();
 
 		//if true, place event in eventQueue

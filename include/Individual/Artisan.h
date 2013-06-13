@@ -26,6 +26,9 @@ namespace Individual
 		Artisan(std::string name, bool);
 		Artisan(std::string name, Location_ptr location, bool);
 
+		Artisan(const Artisan&) = delete;
+		Artisan& operator=(const Artisan&) = delete;
+
 	private:
 
 

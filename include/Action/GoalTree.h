@@ -16,6 +16,8 @@ namespace Action
 		GoalTree(Individual::Individual_ptr);
 		~GoalTree();
 
+		GoalTree& operator=(GoalTree&) = delete;
+
 		void execute();
 		void goalFinished();
 		void goalInterruped(){};

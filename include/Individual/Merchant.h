@@ -34,6 +34,9 @@ namespace Individual
 		Merchant(std::string name, bool);
 		Merchant(std::string name, Location_ptr location, bool);
 
+		Merchant(const Merchant&) = delete;
+		Merchant& operator=(const Merchant&) = delete;
+
 	private:
 		std::vector<Item::Item_ptr> itemsForSale;
 
