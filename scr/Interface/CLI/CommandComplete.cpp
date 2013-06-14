@@ -53,7 +53,7 @@ namespace Interface
 			if (completions.size()==1)
 			{
 				std::string completion = completions[0].getCommand();
-				return completion.substr(input.size(), completion.size()) + " ";
+				return completion; //completion.substr(input.size(), completion.size()) + " ";
 			}
 			return "";
 
@@ -72,7 +72,7 @@ namespace Interface
 					{
 						/*
 						 * TODO I believe there can only be 1 command in current_commands, but I'm
-						 * no certain, so think about this
+						 * not certain, so think about this
 						 */
 						if (command.getCommand() == "<CR>" and current_commands[0].isCallable())
 						{
@@ -89,6 +89,7 @@ namespace Interface
 
 		void closeHelp()
 		{
+			//Helpview is a shared_ptr, so no need to clean it up
 			helpView = nullptr;
 		}
 

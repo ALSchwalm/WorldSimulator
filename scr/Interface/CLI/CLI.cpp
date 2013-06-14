@@ -58,7 +58,8 @@ namespace Interface
 				line="";
 				break;
 			case 9:		//tab
-				line+= cliCompleteCommand(line);
+				line = cliCompleteCommand(line);
+				wclear(lineWin);
 				waddstr(lineWin, cliCompleteCommand(line).c_str());
 				break;
 
