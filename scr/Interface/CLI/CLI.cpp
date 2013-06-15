@@ -58,9 +58,11 @@ namespace Interface
 				line="";
 				break;
 			case 9:		//tab
-				line = cliCompleteCommand(line);
-				wclear(lineWin);
-				waddstr(lineWin, cliCompleteCommand(line).c_str());
+				if (cliCompleteCommand(line).size()) {
+					line = cliCompleteCommand(line);
+					wclear(lineWin);
+					waddstr(lineWin, cliCompleteCommand(line).c_str());
+				}
 				break;
 
 			case KEY_BACKSPACE:

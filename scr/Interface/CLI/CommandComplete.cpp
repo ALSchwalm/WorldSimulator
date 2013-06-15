@@ -53,7 +53,8 @@ namespace Interface
 			if (completions.size()==1)
 			{
 				std::string completion = completions[0].getCommand();
-				return completion; //completion.substr(input.size(), completion.size()) + " ";
+				if (completion[completion.size()-1] != '*')
+					return completion;
 			}
 			return "";
 
