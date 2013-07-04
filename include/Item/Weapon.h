@@ -50,6 +50,7 @@ const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
 		~Weapon(){};
 
 		static const Skill::skillMap & getRequiredSkill(WeaponType t){return requiredWeaponSkills.at(t);}
+
 	private:
 		WeaponType weaponType;
 

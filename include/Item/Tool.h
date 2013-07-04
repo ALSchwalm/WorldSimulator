@@ -39,7 +39,7 @@ namespace Item
 	/*
 	 * A tools 'skill' is a multiplier when calculating how
 	 * effective it is to use. Using map because we don't have
-	 * designated intializers for some reason
+	 * designated initializers for some reason
 	 */
 	const std::map<ToolType, const Skill::skillMap> usedToolSkills
 	{

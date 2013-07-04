@@ -18,6 +18,7 @@ namespace Item
 		CORN,
 		BEEF,
 		BREAD,
+		WHEAT,
 
 		NUM_OF_FOODS
 	};
@@ -27,7 +28,8 @@ namespace Item
 		"Bacon",
 		"Corn",
 		"Beef",
-		"Bread"
+		"Bread",
+		"Wheat"
 	};
 
 	const std::map<FoodType, const Skill::skillMap> requiredFoodSkills
@@ -44,20 +46,34 @@ namespace Item
 					 {Skill::BAKING,	1.5f}}}
 	};
 
+
+	/*
+	 * This map maps a give food to the items required to make it.
+	 * Unfortunately, tuples of size >1 cannot be implicitly constructed.
+	 * The item type tells any function calling the
+	 */
+	const std::map<FoodType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredFoodItems
+	{
+		{BREAD,		{std::make_tuple(FOOD, WHEAT, 1)}}
+	};
+
+
 	class Food : public BaseItem
 	{
 	public:
 		static Item_ptr getRandomFood();
 		static const Skill::skillMap & getRequiredSkill(FoodType t){return requiredFoodSkills.at(t);}
-		Food(FoodType _foodType);
+		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>> & getRequiredItems(FoodType t)
+		{
+			return requiredFoodItems.at(t);
+		}
 
+		Food(FoodType _foodType);
 		~Food(){};
 
 	private:
 		const FoodType foodType;
-
 	};
-
 }
 
 #endif

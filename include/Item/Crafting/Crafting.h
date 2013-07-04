@@ -10,6 +10,18 @@ namespace Item
 {
 	namespace Crafting
 	{
+
+		template<typename T, typename EnumType>
+		static bool hasItems(EnumType enumType, Individual::Individual_ptr individual)
+		{
+			auto requiredItems = T::getRequiredItems(enumType);
+			for (auto p : requiredItems)
+			{
+
+			}
+			return true;
+		}
+
 		template<typename T, typename EnumType>
 		inline Item_ptr createItem(EnumType enumType, Individual::Individual_ptr individual)
 		{

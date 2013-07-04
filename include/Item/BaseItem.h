@@ -16,6 +16,16 @@ namespace Individual
 
 namespace Item
 {
+	enum ItemType
+	{
+		FOOD,
+		WEAPON,
+		CONTAINER,
+		TOOL,
+
+		ITEM_ERROR
+	};
+
 
 	class BaseItem
 	{
@@ -25,6 +35,7 @@ namespace Item
 
 		std::string getName() {return name;}
 		void setAttribute(std::string s) {attributes[s] = true;}
+
 		const Owner::Owner & getOwner() {return owner;}
 		void setOwner(const Owner::Owner _owner) {owner=_owner;}
 
