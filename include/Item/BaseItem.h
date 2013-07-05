@@ -36,6 +36,8 @@ namespace Item
 		std::string getName() {return name;}
 		void setAttribute(std::string s) {attributes[s] = true;}
 
+		virtual const ItemType getItemType()=0;
+
 		const Owner::Owner & getOwner() {return owner;}
 		void setOwner(const Owner::Owner _owner) {owner=_owner;}
 
@@ -64,6 +66,8 @@ namespace Item
 
 	typedef std::shared_ptr<BaseItem> Item_ptr;
 	typedef std::vector<Item_ptr> ItemList;
+
+
 }
 
 #endif

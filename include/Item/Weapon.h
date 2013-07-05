@@ -10,25 +10,32 @@
 
 namespace Item
 {
-enum WeaponType
-{
-	SWORD,
-	BOW,
+	enum WeaponType
+	{
+		SWORD,
+		BOW,
 
-	NUM_OF_WEAPONS
-};
+		NUM_OF_WEAPONS
+	};
 
-const std::string weaponTypeAsString[NUM_OF_WEAPONS] = {
+	const std::string weaponTypeAsString[NUM_OF_WEAPONS] = {
+		"Sword",
+		"Bow"
+	};
 
-};
+	const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
+	{
+		{SWORD, 	{{Skill::BLACKSMITHING, 	2.5f},
+					 {Skill::WOODWORKING,		0.5f}}},
 
-const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
-{
-	{SWORD, 	{{Skill::BLACKSMITHING, 	2.5f},
-			 	 {Skill::WOODWORKING,		0.5f}}},
+		{BOW,		{{Skill::WOODWORKING, 		3.0f}}}
+	};
 
-	{BOW,		{{Skill::WOODWORKING, 		3.0f}}}
-};
+	const std::map<WeaponType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredWeaponItems
+	{
+		{SWORD,		{std::make_tuple(WEAPON, SWORD, 1)}}
+	};
+
 
 	class Weapon : public BaseItem
 	{
@@ -50,7 +57,13 @@ const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
 		~Weapon(){};
 
 		static const Skill::skillMap & getRequiredSkill(WeaponType t){return requiredWeaponSkills.at(t);}
+		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>> & getRequiredItems(WeaponType t)
+		{
+			return requiredWeaponItems.at(t);
+		}
 
+		const ItemType getItemType(){return WEAPON;}
+		const WeaponType getWeaponType(){return weaponType;}
 	private:
 		WeaponType weaponType;
 

@@ -37,6 +37,11 @@ namespace Item
 
 	};
 
+	const std::map<ContainerType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredContainerItems
+	{
+		{BARREL,		{std::make_tuple(CONTAINER, BARREL, 1)}}
+	};
+
 
 	class Container : public BaseItem, public Location::BaseLocation
 	{
@@ -54,10 +59,18 @@ namespace Item
 		~Container(){};
 
 		static const Skill::skillMap & getRequiredSkill(ContainerType t){return requiredContainerSkills.at(t);}
+		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>> & getRequiredItems(ContainerType t)
+		{
+			return requiredContainerItems.at(t);
+		}
+
 		Location::LocationType getLocationType(){return Location::CONTAINER;}
 
 		const std::vector<Item_ptr> & getItems() {return items;}
 		void addItem(Item_ptr _item) {items.push_back(_item);}
+
+		const ItemType getItemType(){return CONTAINER;}
+		const ContainerType getContainerType() {return containerType;}
 
 	private:
 		ContainerType containerType;

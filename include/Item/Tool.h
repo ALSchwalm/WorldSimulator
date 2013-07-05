@@ -49,14 +49,26 @@ namespace Item
 				 {Skill::BAKING,  	3.0f}}}
 	};
 
+	const std::map<ToolType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredToolItems
+	{
+		{PLOW,		{std::make_tuple(TOOL, PLOW, 1)}}
+	};
+
 	class Tool : public BaseItem
 	{
 	public:
 		static Item_ptr getRandomTool();
 		static const Skill::skillMap & getRequiredSkill(ToolType t){return requiredToolSkills.at(t);}
+		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>> & getRequiredItems(ToolType t)
+		{
+			return requiredToolItems.at(t);
+		}
 
 		Tool(ToolType _toolType);
 		~Tool(){};
+
+		const ItemType getItemType(){return TOOL;}
+		const ToolType getToolType(){return toolType;}
 
 	private:
 		ToolType toolType;

@@ -50,7 +50,9 @@ namespace Item
 	/*
 	 * This map maps a give food to the items required to make it.
 	 * Unfortunately, tuples of size >1 cannot be implicitly constructed.
-	 * The item type tells any function calling the
+	 * The item type tells any function calling using the vector what to
+	 * cast the first unsigned int to. This is clearly not an elegant
+	 * approach. I am actively pursuing better alternatives.
 	 */
 	const std::map<FoodType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredFoodItems
 	{
@@ -67,13 +69,20 @@ namespace Item
 		{
 			return requiredFoodItems.at(t);
 		}
+		const ItemType getItemType(){return FOOD;}
 
 		Food(FoodType _foodType);
 		~Food(){};
 
+		const FoodType getFoodType() {return foodType;}
+
 	private:
 		const FoodType foodType;
 	};
+
+
+
+
 }
 
 #endif
