@@ -23,13 +23,13 @@ namespace Interface
 			virtual void handleInput()=0;
 
 		protected:
-			Dialog(WINDOW * win) :
+			Dialog(WINDOW* win) :
 				dialogWin(win)
 			{
 				box(dialogWin, 0, 0);
 				refresh();
 			}
-			WINDOW * dialogWin;
+			WINDOW* dialogWin;
 
 		};
 

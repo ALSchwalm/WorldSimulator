@@ -26,7 +26,7 @@ namespace Action
 	{
 
 	public:
-		static GoalCreator & getInstance();
+		static GoalCreator& getInstance();
 
 		template<GoalType g>
 		Goal_ptr createGoal(Individual::Individual_ptr individual, unsigned int priority);
@@ -43,7 +43,7 @@ namespace Action
 
 		struct distance
 		{
-			bool operator() ( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const;
+			bool operator() ( const Location::Location_ptr& lhs, const Location::Location_ptr& rhs) const;
 		};
 		std::vector<Task_ptr> getFood(Individual::Individual_ptr individual);
 		std::vector<Task_ptr> getItem(Individual::Individual_ptr individual, Item::Item_ptr item);

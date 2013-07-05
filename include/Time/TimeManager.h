@@ -12,7 +12,7 @@ namespace Time
 
 	public:
 
-		static TimeManager & getInstance();
+		static TimeManager& getInstance();
 
         void capFPS(); //one of these is off by a bit. 2 FPS cap -> 2 actual FPS, but 100 FPS cap -> 111 actual FPS
         int getFPS();

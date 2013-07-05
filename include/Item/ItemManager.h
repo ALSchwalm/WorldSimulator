@@ -11,7 +11,7 @@ namespace Item
 	class ItemManager
 	{
 	public:
-		static ItemManager & getInstance();
+		static ItemManager& getInstance();
 
 		template <typename T, typename U>
 		bool moveItem(Item_ptr item, T source, U destination)

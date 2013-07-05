@@ -22,7 +22,7 @@ namespace Interface
 
 			const std::string getCommand() {return commandString;}
 			const std::string getHelp() {return helpString;}
-			const std::vector<Token> & getTokens(){return tokens;}
+			const std::vector<Token>& getTokens(){return tokens;}
 			const Context getContext(){return context;}
 			const bool isCallable() {return callable;}
 			void operator()();

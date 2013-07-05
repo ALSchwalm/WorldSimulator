@@ -56,10 +56,10 @@ namespace Time {
 		Day getDay() {return day;}
 
 		bool operator ==(Date);
-		Date & operator++();
+		Date& operator++();
 
 
-		friend std::ostream& operator<<(std::ostream &out, Date &d);
+		friend std::ostream& operator<<(std::ostream& out, Date& d);
 
 	private:
 

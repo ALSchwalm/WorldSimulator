@@ -18,8 +18,8 @@ namespace Interface
 		class Command;
 
 		void initialize();
-		extern WINDOW * CLIwin;
-		extern WINDOW *	lineWin;
+		extern WINDOW* CLIwin;
+		extern WINDOW*	lineWin;
 		extern std::vector<Dialog_ptr> dialogs;
 		extern Command currentCommand;
 		void handleInput();

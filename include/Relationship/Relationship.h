@@ -23,7 +23,6 @@ namespace Relationship
 		CHILD,
 		FRIEND,
 
-
 		BIRTHPLACE,
 
 		NUM_OF_RELATIONSHIPS
@@ -43,8 +42,14 @@ namespace Relationship
 		}
 	}
 
-	void createSymetricRelationship(Individual::Individual_ptr one, Individual::Individual_ptr two, RelationshipType rel);
-	void createASymetricRelationship(Individual::Individual_ptr one, RelationshipType relOne, Individual::Individual_ptr two, RelationshipType relTwo);
+	void createSymetricRelationship(Individual::Individual_ptr one,
+									Individual::Individual_ptr two,
+									RelationshipType rel);
+
+	void createASymetricRelationship(Individual::Individual_ptr one,
+									RelationshipType relOne,
+									Individual::Individual_ptr two,
+									RelationshipType relTwo);
 
 	template<typename T>
 	class RelationshipMap
@@ -57,7 +62,7 @@ namespace Relationship
 			relationshipMap[t].push_back(rel);
 		}
 
-		const std::vector<RelationshipType> & getRelationships(T t)
+		const std::vector<RelationshipType>& getRelationships(T t)
 		{
 			return relationshipMap[t];
 		}

@@ -7,7 +7,7 @@ namespace Time
 {
 	class DateManager {
 	public:
-		static DateManager & getInstance();
+		static DateManager& getInstance();
 
 		void nextMinute() {++now;}
 
@@ -19,7 +19,7 @@ namespace Time
 	};
 
 	//shorthand for Time::DateManager::getInstance().now
-	inline const Date & now() {return DateManager::getInstance().now;}
+	inline const Date& now() {return DateManager::getInstance().now;}
 }
 
 

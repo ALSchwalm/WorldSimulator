@@ -8,7 +8,7 @@ namespace Utils
 	class Config
 	{
 	public:
-		static Config & getInstance();
+		static Config& getInstance();
 		const unsigned int getValue(std::string, std::string);
 	private:
 		typedef INI <std::string, std::string, int> ini_t;

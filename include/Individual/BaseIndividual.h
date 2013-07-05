@@ -65,11 +65,11 @@ namespace Individual
 
 		unsigned int getAge() {return age;}
 		const std::string getName() {return name;}
-		const Event::EventHistory & getHistory(){return history;}
-		const std::vector<Item::Item_ptr> & getItems() {return items;}
-		Relationship::RelationshipMap<Individual_ptr> & getIndividualRelationshipMap() {return IndividualRelationshipMap;}
-		Relationship::RelationshipMap<Location_ptr> & getLocationRelationshipMap() {return LocationRelationshipMap;}
-		Skill::skillMap & getSkillMap() {return skillMap;}
+		const Event::EventHistory& getHistory(){return history;}
+		const std::vector<Item::Item_ptr>& getItems() {return items;}
+		Relationship::RelationshipMap<Individual_ptr>& getIndividualRelationshipMap() {return IndividualRelationshipMap;}
+		Relationship::RelationshipMap<Location_ptr>& getLocationRelationshipMap() {return LocationRelationshipMap;}
+		Skill::skillMap& getSkillMap() {return skillMap;}
 
 		virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
@@ -86,7 +86,7 @@ namespace Individual
 
 		unsigned int calculatePriority(Individual_ptr, Action::GoalType);
 
-		virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
+		virtual void addInitialItems(std::vector<Item::Item_ptr>&){};
 
 		/*
 		 * Goal creation is started here, then passed to the goal tree. The goal tree

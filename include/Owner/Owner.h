@@ -20,13 +20,12 @@ namespace Owner
 	public:
 		Owner(){}
 		Owner(std::shared_ptr<Individual::BaseIndividual>);
-		Owner(const std::vector<Individual::Individual_ptr> &);
+		Owner(const std::vector<Individual::Individual_ptr>&);
 
 		friend bool operator==(Owner o, Individual::Individual_ptr);
 		friend bool operator!=(Owner o, Individual::Individual_ptr);
-		friend bool operator==(const Owner & o, std::vector<Individual::Individual_ptr> &);
-		friend bool operator!=(const Owner & o, std::vector<Individual::Individual_ptr> &);
-
+		friend bool operator==(const Owner& o, std::vector<Individual::Individual_ptr>&);
+		friend bool operator!=(const Owner& o, std::vector<Individual::Individual_ptr>&);
 
 	private:
 		std::vector<Individual::Individual_ptr> owner;

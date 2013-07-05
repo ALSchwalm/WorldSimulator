@@ -29,6 +29,6 @@ TEST(ItemTest, Container)
 	container->addItem(item);
 	Location::addLocations(Location::World::getInstance(), container);
 
-	EXPECT_EQ(container->getLocations().size(), (unsigned int) 1);
-	EXPECT_EQ(container->getItems().size(), (unsigned int) 1);
+	EXPECT_EQ(container->getLocations().size(), 1u);
+	EXPECT_EQ(container->getItems().size(),  1u);
 }

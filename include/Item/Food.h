@@ -64,8 +64,8 @@ namespace Item
 	{
 	public:
 		static Item_ptr getRandomFood();
-		static const Skill::skillMap & getRequiredSkill(FoodType t){return requiredFoodSkills.at(t);}
-		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>> & getRequiredItems(FoodType t)
+		static const Skill::skillMap& getRequiredSkill(FoodType t){return requiredFoodSkills.at(t);}
+		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems(FoodType t)
 		{
 			return requiredFoodItems.at(t);
 		}

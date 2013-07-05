@@ -43,10 +43,10 @@ namespace Location
 		void setAttribute(std::string s) {attributes[s] = true;}
 		bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
-		const Individual::IndividualList & getIndividuals() {return individuals;}
-		const Item::ItemList & getItems() {return items;}
+		const Individual::IndividualList& getIndividuals() {return individuals;}
+		const Item::ItemList& getItems() {return items;}
 		const Event::EventHistory & getHistory(){return history;}
-		const std::unordered_set<Location_ptr> & getLocations() {return locations;}
+		const std::unordered_set<Location_ptr>& getLocations() {return locations;}
 		const std::unordered_set<Location_ptr> getLocationsByAttribute(std::string s);
 		const std::unordered_set<Location_ptr> getLocationsByType(LocationType);
 

@@ -16,8 +16,8 @@ namespace Interface
 			Token(std::string s) :
 				value(s){}
 
-			bool operator==(const Token &);
-			bool operator!=(const Token &);
+			bool operator==(const Token&);
+			bool operator!=(const Token&);
 
 			std::string value;
 

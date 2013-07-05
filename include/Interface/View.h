@@ -53,7 +53,7 @@ namespace Interface
 		View& operator=(const View&) = delete;
 
 		std::string viewType;
-		WINDOW * viewWin;
+		WINDOW* viewWin;
 	};
 
 

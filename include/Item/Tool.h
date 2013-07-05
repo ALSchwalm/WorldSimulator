@@ -58,8 +58,8 @@ namespace Item
 	{
 	public:
 		static Item_ptr getRandomTool();
-		static const Skill::skillMap & getRequiredSkill(ToolType t){return requiredToolSkills.at(t);}
-		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>> & getRequiredItems(ToolType t)
+		static const Skill::skillMap& getRequiredSkill(ToolType t){return requiredToolSkills.at(t);}
+		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems(ToolType t)
 		{
 			return requiredToolItems.at(t);
 		}

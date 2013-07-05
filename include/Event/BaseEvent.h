@@ -28,7 +28,7 @@ namespace Event
 		virtual Time::Date getExecutionDate(){return executionDate;}
 		virtual void setExecutionDate(Time::Date newDate) {executionDate = newDate;}
 
-		virtual void * getSource(){ return nullptr; }
+		virtual void* getSource(){ return nullptr; }
 
 		virtual void run()=0;
 
@@ -45,7 +45,7 @@ namespace Event
 			executionDate(t),
 			name(s){}
 
-		void * source;
+		void* source;
 	private:
 		Time::Date executionDate;
 		std::string name;

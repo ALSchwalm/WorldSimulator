@@ -56,8 +56,8 @@ namespace Item
 
 		~Weapon(){};
 
-		static const Skill::skillMap & getRequiredSkill(WeaponType t){return requiredWeaponSkills.at(t);}
-		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>> & getRequiredItems(WeaponType t)
+		static const Skill::skillMap& getRequiredSkill(WeaponType t){return requiredWeaponSkills.at(t);}
+		static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems(WeaponType t)
 		{
 			return requiredWeaponItems.at(t);
 		}
