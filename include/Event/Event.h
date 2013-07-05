@@ -6,22 +6,22 @@
 
 namespace Event
 {
-	class BaseEvent;
+    class BaseEvent;
 
-	enum EventType
-	{
-		BIRTH,
-		END_TASK,
-		MOVE,
-		PICKUP,
-		INTERRUPT,
+    enum EventType
+    {
+        BIRTH,
+        END_TASK,
+        MOVE,
+        PICKUP,
+        INTERRUPT,
 
-		//Insert events before this
-		EVENT_ERROR,
-		NUM_OF_EVENTS
-	};
+        //Insert events before this
+        EVENT_ERROR,
+        NUM_OF_EVENTS
+    };
 
-	typedef std::vector<std::shared_ptr<BaseEvent>> EventHistory;
+    typedef std::vector<std::shared_ptr<BaseEvent>> EventHistory;
 
 }
 #endif

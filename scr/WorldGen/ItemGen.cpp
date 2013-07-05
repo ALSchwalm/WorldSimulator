@@ -9,13 +9,13 @@ using namespace WorldGen;
 
 void seed()
 {
-	for (auto location : Location::World::getInstance()->getLocations())
-	{
-		for (auto region : location->getLocations())
-		{
-			auto house = std::make_shared<Item::Container>(Item::ContainerType::HOUSE);
-			Location::addLocations(region, house);
-		}
-	}
+    for (auto location : Location::World::getInstance()->getLocations())
+    {
+        for (auto region : location->getLocations())
+        {
+            auto house = std::make_shared<Item::Container>(Item::ContainerType::HOUSE);
+            Location::addLocations(region, house);
+        }
+    }
 
 }

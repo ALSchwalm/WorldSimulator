@@ -10,22 +10,22 @@
 
 namespace Event {
 
-	EndTaskEvent::EndTaskEvent(
-			Time::Date d,
-			Action::Task_ptr _callBackTask) :
-			BaseEvent(d, "EndTask"),
-			callBackTask(_callBackTask)
-	{
-	}
+    EndTaskEvent::EndTaskEvent(
+            Time::Date d,
+            Action::Task_ptr _callBackTask) :
+            BaseEvent(d, "EndTask"),
+            callBackTask(_callBackTask)
+    {
+    }
 
-	EndTaskEvent::~EndTaskEvent()
-	{
-	}
+    EndTaskEvent::~EndTaskEvent()
+    {
+    }
 
-	void EndTaskEvent::run()
-	{
-		callBackTask->finished();
-	}
+    void EndTaskEvent::run()
+    {
+        callBackTask->finished();
+    }
 
 
 } /* namespace Event */

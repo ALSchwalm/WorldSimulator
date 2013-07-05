@@ -15,30 +15,30 @@
 namespace Event
 {
 
-	class BirthEvent : public BaseEvent
-	{
-	public:
-		BirthEvent(
-				std::shared_ptr<Individual::BaseIndividual>,
-				std::shared_ptr<Location::BaseLocation>
-		);
+    class BirthEvent : public BaseEvent
+    {
+    public:
+        BirthEvent(
+                std::shared_ptr<Individual::BaseIndividual>,
+                std::shared_ptr<Location::BaseLocation>
+        );
 
-		BirthEvent(
-				Time::Date,
-				std::shared_ptr<Individual::BaseIndividual>,
-				std::shared_ptr<Location::BaseLocation>
-		);
-		~BirthEvent();
+        BirthEvent(
+                Time::Date,
+                std::shared_ptr<Individual::BaseIndividual>,
+                std::shared_ptr<Location::BaseLocation>
+        );
+        ~BirthEvent();
 
-		EventType getEventType() { return EventType::BIRTH;};
-		void run();
+        EventType getEventType() { return EventType::BIRTH;};
+        void run();
 
 
-	private:
-		std::shared_ptr<Location::BaseLocation> birthPlace;
-		std::shared_ptr<Individual::BaseIndividual> individual;
+    private:
+        std::shared_ptr<Location::BaseLocation> birthPlace;
+        std::shared_ptr<Individual::BaseIndividual> individual;
 
-	};
+    };
 
 }
 #endif /* BIRTHEVENT_H_ */

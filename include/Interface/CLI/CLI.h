@@ -13,17 +13,17 @@
 
 namespace Interface
 {
-	namespace CLI
-	{
-		class Command;
+    namespace CLI
+    {
+        class Command;
 
-		void initialize();
-		extern WINDOW* CLIwin;
-		extern WINDOW*	lineWin;
-		extern std::vector<Dialog_ptr> dialogs;
-		extern Command currentCommand;
-		void handleInput();
-	}
+        void initialize();
+        extern WINDOW* CLIwin;
+        extern WINDOW*	lineWin;
+        extern std::vector<Dialog_ptr> dialogs;
+        extern Command currentCommand;
+        void handleInput();
+    }
 }
 
 #endif

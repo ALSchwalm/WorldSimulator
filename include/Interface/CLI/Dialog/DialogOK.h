@@ -12,15 +12,15 @@
 
 namespace Interface
 {
-	namespace CLI
-	{
-		class DialogOK : public Dialog
-		{
-		public:
-			DialogOK(std::string);
-			void handleInput();
-		};
-	}
+    namespace CLI
+    {
+        class DialogOK : public Dialog
+        {
+        public:
+            DialogOK(std::string);
+            void handleInput();
+        };
+    }
 }
 
 #endif

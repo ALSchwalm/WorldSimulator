@@ -6,19 +6,19 @@
 
 namespace Time
 {
-	class TimeManager
-	{
+    class TimeManager
+    {
 
 
-	public:
+    public:
 
-		static TimeManager& getInstance();
+        static TimeManager& getInstance();
 
         void capFPS(); //one of these is off by a bit. 2 FPS cap -> 2 actual FPS, but 100 FPS cap -> 111 actual FPS
         int getFPS();
         void tick();
 
-	private:
+    private:
         TimeManager();
 
         double timeLastFrame;
@@ -29,7 +29,7 @@ namespace Time
         static const unsigned int MAX_FPS;				//These values set by ini file
         static const unsigned int MINUTES_PER_SECOND;
 
-	};
+    };
 }
 
 #endif

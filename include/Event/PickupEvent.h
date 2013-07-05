@@ -7,25 +7,25 @@
 
 namespace Event
 {
-	class PickupEvent : public BaseEvent
-	{
-	public:
-		PickupEvent(
-				Item::Item_ptr,
-				Individual::Individual_ptr);
+    class PickupEvent : public BaseEvent
+    {
+    public:
+        PickupEvent(
+                Item::Item_ptr,
+                Individual::Individual_ptr);
 
-		~PickupEvent();
+        ~PickupEvent();
 
-		EventType getEventType() { return EventType::PICKUP;}
+        EventType getEventType() { return EventType::PICKUP;}
 
-		void run();
+        void run();
 
 
-	private:
-		Item::Item_ptr item;
-		Individual::Individual_ptr individual;
+    private:
+        Item::Item_ptr item;
+        Individual::Individual_ptr individual;
 
-	};
+    };
 
 }
 #endif

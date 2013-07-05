@@ -9,161 +9,161 @@
 
 namespace Time {
 
-	Date operator+(Date d, int x)
-	{
-		Date temp(d);
-		for (int i=0; i < x; ++i)
-			++temp;
-		return temp;
-	}
+    Date operator+(Date d, int x)
+    {
+        Date temp(d);
+        for (int i=0; i < x; ++i)
+            ++temp;
+        return temp;
+    }
 
-	Date::Date(unsigned int _year, Month _month, Day _day, unsigned short _hour, unsigned short _minute) :
-		year(_year),
-		month(_month),
-		day(_day),
-		hour(_hour),
-		minute(_minute),
-		dayValue(0)
-	{
-	}
-
-
-	bool Date::operator ==(Date rhs)
-	{
-		if (rhs.day == this->day 	 &&
-			rhs.month == this->month &&
-			rhs.year == this->year   &&
-			rhs.hour == this->hour   &&
-			rhs.minute == this->minute)
-			return true;
-		return false;
-	}
-
-	Date & Date::operator++()
-	{
-		++minute;
-
-		if (minute >= 60 )
-		{
-			++hour;
-			minute %= 60;
-			if (hour >= 24)
-			{
-				++dayValue;
-				hour %= 24;
-			}
-			else
-			{
-				return *this;
-			}
-		}
-		else
-		{
-			return *this;
-		}
+    Date::Date(unsigned int _year, Month _month, Day _day, unsigned short _hour, unsigned short _minute) :
+        year(_year),
+        month(_month),
+        day(_day),
+        hour(_hour),
+        minute(_minute),
+        dayValue(0)
+    {
+    }
 
 
-		unsigned int temp_month = static_cast<Month> (month);
+    bool Date::operator ==(Date rhs)
+    {
+        if (rhs.day == this->day 	 &&
+            rhs.month == this->month &&
+            rhs.year == this->year   &&
+            rhs.hour == this->hour   &&
+            rhs.minute == this->minute)
+            return true;
+        return false;
+    }
 
-		if ( dayValue+1 > DAYS_PER_MONTH )
-		{
-			dayValue = 0;
-			temp_month++;
+    Date & Date::operator++()
+    {
+        ++minute;
 
-			if ( temp_month+1 > NUM_OF_MONTHS)
-			{
-				temp_month = 0;
-				year++;
-			}
-		}
+        if (minute >= 60 )
+        {
+            ++hour;
+            minute %= 60;
+            if (hour >= 24)
+            {
+                ++dayValue;
+                hour %= 24;
+            }
+            else
+            {
+                return *this;
+            }
+        }
+        else
+        {
+            return *this;
+        }
 
-		dayValue %= DAYS_PER_MONTH;
 
-		day = static_cast <Day> (dayValue % NUM_OF_DAYS);
-		month = static_cast <Month> (temp_month % NUM_OF_MONTHS);
+        unsigned int temp_month = static_cast<Month> (month);
 
-		return *this;
-	}
+        if ( dayValue+1 > DAYS_PER_MONTH )
+        {
+            dayValue = 0;
+            temp_month++;
 
-	std::ostream& operator<<(std::ostream &out, Date &d)
-	{
-		std::string out_day;
-		std::string out_month;
+            if ( temp_month+1 > NUM_OF_MONTHS)
+            {
+                temp_month = 0;
+                year++;
+            }
+        }
 
-		switch (d.day)
-		{
-		case Sunday:
-			out_day = "Sunday";
-			break;
-		case Monday:
-			out_day = "Monday";
-			break;
-		case Tuesday:
-			out_day = "Tuesday";
-			break;
-		case Wednesday:
-			out_day = "Wednesday";
-			break;
-		case Thursday:
-			out_day = "Thursday";
-			break;
-		case Friday:
-			out_day = "Friday";
-			break;
-		case Saturday:
-			out_day = "Saturday";
-			break;
-		default:
-			out_day = "Undefined Day";
-			break;
-		}
+        dayValue %= DAYS_PER_MONTH;
 
-		switch (d.month)
-		{
-		case January:
-			out_month = "January";
-			break;
-		case February:
-			out_month = "February";
-			break;
-		case March:
-			out_month = "March";
-			break;
-		case April:
-			out_month = "April";
-			break;
-		case May:
-			out_month = "May";
-			break;
-		case June:
-			out_month = "June";
-			break;
-		case July:
-			out_month = "July";
-			break;
-		case August:
-			out_month = "August";
-			break;
-		case September:
-			out_month = "September";
-			break;
-		case October:
-			out_month = "October";
-			break;
-		case November:
-			out_month = "November";
-			break;
-		case December:
-			out_month = "December";
-			break;
-		default:
-			out_month = "Undefined Month";
-			break;
-		}
+        day = static_cast <Day> (dayValue % NUM_OF_DAYS);
+        month = static_cast <Month> (temp_month % NUM_OF_MONTHS);
 
-		out << out_day << " the " << d.dayValue+1 << " of " << out_month << ", " << d.year << " " << d.hour << ":" << d.minute;
+        return *this;
+    }
 
-		return out;
-	}
+    std::ostream& operator<<(std::ostream &out, Date &d)
+    {
+        std::string out_day;
+        std::string out_month;
+
+        switch (d.day)
+        {
+        case Sunday:
+            out_day = "Sunday";
+            break;
+        case Monday:
+            out_day = "Monday";
+            break;
+        case Tuesday:
+            out_day = "Tuesday";
+            break;
+        case Wednesday:
+            out_day = "Wednesday";
+            break;
+        case Thursday:
+            out_day = "Thursday";
+            break;
+        case Friday:
+            out_day = "Friday";
+            break;
+        case Saturday:
+            out_day = "Saturday";
+            break;
+        default:
+            out_day = "Undefined Day";
+            break;
+        }
+
+        switch (d.month)
+        {
+        case January:
+            out_month = "January";
+            break;
+        case February:
+            out_month = "February";
+            break;
+        case March:
+            out_month = "March";
+            break;
+        case April:
+            out_month = "April";
+            break;
+        case May:
+            out_month = "May";
+            break;
+        case June:
+            out_month = "June";
+            break;
+        case July:
+            out_month = "July";
+            break;
+        case August:
+            out_month = "August";
+            break;
+        case September:
+            out_month = "September";
+            break;
+        case October:
+            out_month = "October";
+            break;
+        case November:
+            out_month = "November";
+            break;
+        case December:
+            out_month = "December";
+            break;
+        default:
+            out_month = "Undefined Month";
+            break;
+        }
+
+        out << out_day << " the " << d.dayValue+1 << " of " << out_month << ", " << d.year << " " << d.hour << ":" << d.minute;
+
+        return out;
+    }
 
 } /* namespace Time */

@@ -11,35 +11,35 @@
 
 namespace Interface
 {
-	template<typename T>
-	class EventView : public View<T>
-	{
-	public:
-		EventView(T _viewSubject);
+    template<typename T>
+    class EventView : public View<T>
+    {
+    public:
+        EventView(T _viewSubject);
 
-		void refreshView();
+        void refreshView();
 
-	};
+    };
 
 
-	template<typename T>
-	EventView<T>::EventView(T _viewSubject) :
-		View<T>(_viewSubject, "Event History")
-	{
+    template<typename T>
+    EventView<T>::EventView(T _viewSubject) :
+        View<T>(_viewSubject, "Event History")
+    {
 
-	};
+    };
 
-	template<typename T>
-	void EventView<T>::refreshView()
-	{
-		unsigned int counter = 2;
-		for( auto item : this->viewSubject->getHistory())
-		{
-			mvwprintw(this->viewWin, counter, 4, "EventInfo");
-			++counter;
-		}
-		wrefresh(this->viewWin);
-	};
+    template<typename T>
+    void EventView<T>::refreshView()
+    {
+        unsigned int counter = 2;
+        for( auto item : this->viewSubject->getHistory())
+        {
+            mvwprintw(this->viewWin, counter, 4, "EventInfo");
+            ++counter;
+        }
+        wrefresh(this->viewWin);
+    };
 
 
 }

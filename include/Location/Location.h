@@ -6,11 +6,11 @@
 namespace Location
 {
 
-	inline void addLocations(Location_ptr locationOne, Location_ptr locationTwo)
-	{
-		locationOne->addLocation(locationTwo);
-		locationTwo->addLocation(locationOne);
-	}
+    inline void addLocations(Location_ptr locationOne, Location_ptr locationTwo)
+    {
+        locationOne->addLocation(locationTwo);
+        locationTwo->addLocation(locationOne);
+    }
 
 }
 

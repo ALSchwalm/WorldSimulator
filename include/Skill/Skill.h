@@ -9,19 +9,19 @@
 
 namespace Skill
 {
-	enum skills
-	{
-		MARKSMANSHIP,
-		BLACKSMITHING,
-		WOODWORKING,
-		BAKING,
-		COOKING,
-		FARMING,
+    enum skills
+    {
+        MARKSMANSHIP,
+        BLACKSMITHING,
+        WOODWORKING,
+        BAKING,
+        COOKING,
+        FARMING,
 
-		NUM_OF_SKILLS
-	};
+        NUM_OF_SKILLS
+    };
 
-	typedef std::map<Skill::skills, float> skillMap;
+    typedef std::map<Skill::skills, float> skillMap;
 
 }
 

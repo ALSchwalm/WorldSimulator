@@ -8,37 +8,37 @@
 
 namespace Location
 {
-	namespace Terrain
-	{
+    namespace Terrain
+    {
 
-		enum TerrainType
-		{
-			FOREST_TERRAIN,
-			MOUTAIN_TERRAIN,
+        enum TerrainType
+        {
+            FOREST_TERRAIN,
+            MOUTAIN_TERRAIN,
 
-			ERROR_TERRAIN,
-			NUM_OF_TERRAIN
-		};
+            ERROR_TERRAIN,
+            NUM_OF_TERRAIN
+        };
 
-		class BaseTerrain: public BaseLocation
-		{
-		public:
-			virtual ~BaseTerrain(){}
+        class BaseTerrain: public BaseLocation
+        {
+        public:
+            virtual ~BaseTerrain(){}
 
-			virtual TerrainType getTerrainType()=0;
-			LocationType getLocationType(){return LocationType::TERRAIN;}
+            virtual TerrainType getTerrainType()=0;
+            LocationType getLocationType(){return LocationType::TERRAIN;}
 
-		protected:
-			BaseTerrain(std::string _name) :
-				BaseLocation(_name)
-			{}
+        protected:
+            BaseTerrain(std::string _name) :
+                BaseLocation(_name)
+            {}
 
 
-		private:
+        private:
 
-		};
+        };
 
-		typedef std::shared_ptr<BaseTerrain> Terrain_ptr;
-	}
+        typedef std::shared_ptr<BaseTerrain> Terrain_ptr;
+    }
 }
 #endif

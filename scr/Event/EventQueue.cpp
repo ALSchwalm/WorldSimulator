@@ -12,8 +12,8 @@ namespace Event {
 
 EventQueue & EventQueue::getInstance()
 {
-	static EventQueue e;
-	return e;
+    static EventQueue e;
+    return e;
 }
 
 
@@ -26,19 +26,19 @@ EventQueue::EventQueue()
 
 void EventQueue::execute()
 {
-	for( auto i = queue.begin(); i != queue.end(); )
-	{
-		if ( (*i)->getExecutionDate() == Time::now() )
-		{
-			(*i)->run();
-			i = queue.erase(i);
-		}
-		else
-		{
-			++i;
-		}
+    for( auto i = queue.begin(); i != queue.end(); )
+    {
+        if ( (*i)->getExecutionDate() == Time::now() )
+        {
+            (*i)->run();
+            i = queue.erase(i);
+        }
+        else
+        {
+            ++i;
+        }
 
-	}
+    }
 }
 
 } /* namespace Event */

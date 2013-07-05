@@ -15,17 +15,17 @@
 
 namespace Location {
 
-	class Village: public BaseLocation
-	{
-	public:
-		Village(std::string _name);
+    class Village: public BaseLocation
+    {
+    public:
+        Village(std::string _name);
 
-		LocationType getLocationType(){return Location::VILLAGE;}
+        LocationType getLocationType(){return Location::VILLAGE;}
 
-	private:
+    private:
 
 
-	};
+    };
 
 } /* namespace Location */
 #endif /* VILLAGE_H_ */

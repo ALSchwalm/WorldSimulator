@@ -9,55 +9,52 @@
 namespace Condition
 {
 
-	class ConditionList
-	{
+    class ConditionList
+    {
 
-	public:
+    public:
 
-		ConditionList(){};
+        ConditionList(){};
 
-		template<typename T, typename U>
-		void addCondition( bool(*f)(T, U), T t, U u);
-
-
-		bool isSatisfied();
-
-	private:
-		std::vector< std::function<bool()> > conditions;
-
-	};
+        template<typename T, typename U>
+        void addCondition( bool(*f)(T, U), T t, U u);
 
 
-	template<typename T, typename U>
-	void ConditionList::addCondition( bool (*f)(T, U), T t, U u)
-	{
-		auto func = [=]{ return f(t, u); };
-		conditions.push_back(func);
-	}
+        bool isSatisfied();
 
-	bool ConditionList::isSatisfied()
-	{
-		for (auto c : conditions)
-		{
-			if (!c())
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+    private:
+        std::vector< std::function<bool()> > conditions;
+
+    };
 
 
-	template<typename T, typename U>
-	bool HAS_ATTRIBUTE(T t, U u)
-	{
-		if (t->hasAttribute(u))
-			return true;
-		return false;
-	}
+    template<typename T, typename U>
+    void ConditionList::addCondition( bool (*f)(T, U), T t, U u)
+    {
+        auto func = [=]{ return f(t, u); };
+        conditions.push_back(func);
+    }
+
+    bool ConditionList::isSatisfied()
+    {
+        for (auto c : conditions)
+        {
+            if (!c())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
-
+    template<typename T, typename U>
+    bool HAS_ATTRIBUTE(T t, U u)
+    {
+        if (t->hasAttribute(u))
+            return true;
+        return false;
+    }
 
 }
 #endif

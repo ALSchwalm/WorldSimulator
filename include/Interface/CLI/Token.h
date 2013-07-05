@@ -6,24 +6,24 @@
 
 namespace Interface
 {
-	namespace CLI
-	{
-		class Token
-		{
-		public:
-			static std::vector<Token>tokenize(std::string);
+    namespace CLI
+    {
+        class Token
+        {
+        public:
+            static std::vector<Token>tokenize(std::string);
 
-			Token(std::string s) :
-				value(s){}
+            Token(std::string s) :
+                value(s){}
 
-			bool operator==(const Token&);
-			bool operator!=(const Token&);
+            bool operator==(const Token&);
+            bool operator!=(const Token&);
 
-			std::string value;
+            std::string value;
 
 
-		};
-	}
+        };
+    }
 }
 
 #endif

@@ -3,10 +3,10 @@
 
 namespace WorldGen
 {
-	namespace ItemGen
-	{
-		void seed();
-	};
+    namespace ItemGen
+    {
+        void seed();
+    };
 }
 
 #endif

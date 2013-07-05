@@ -14,31 +14,31 @@
 
 int main()
 {
-	try
-	{
-		WorldGen::LocationGen::seed();
-		WorldGen::PopulationGen::seed();
+    try
+    {
+        WorldGen::LocationGen::seed();
+        WorldGen::PopulationGen::seed();
 
-		Interface::initialize();
+        Interface::initialize();
 
-		while(true)
-		{
-			Time::TimeManager::getInstance().tick();
-			Time::TimeManager::getInstance().capFPS();
-			Interface::refreshView();
-			Interface::CLI::handleInput();
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cerr << "An unhandled exception occurred: " << e.what() << std::endl;
-		return 1;
-	}
-	catch (...)
-	{
-		std::cerr << "An unknown exception occurred." << std::endl;
-		return 1;
-	}
+        while(true)
+        {
+            Time::TimeManager::getInstance().tick();
+            Time::TimeManager::getInstance().capFPS();
+            Interface::refreshView();
+            Interface::CLI::handleInput();
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << "An unhandled exception occurred: " << e.what() << std::endl;
+        return 1;
+    }
+    catch (...)
+    {
+        std::cerr << "An unknown exception occurred." << std::endl;
+        return 1;
+    }
 
-	return 0;
+    return 0;
 }

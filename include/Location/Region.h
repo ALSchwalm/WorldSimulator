@@ -10,33 +10,33 @@
 
 namespace Location {
 
-	enum RegionType
-	{
-		DESERT,
-		FOREST,
-		PLAINS,
+    enum RegionType
+    {
+        DESERT,
+        FOREST,
+        PLAINS,
 
-		NUM_OF_REGIONS
-	};
+        NUM_OF_REGIONS
+    };
 
-	class Region: public BaseLocation
-	{
-	public:
-		static RegionType getRandomRegionType();
+    class Region: public BaseLocation
+    {
+    public:
+        static RegionType getRandomRegionType();
 
-		Region(std::string _name, RegionType _regionType = RegionType::PLAINS) :
-			BaseLocation(_name),
-			regionType(_regionType)
-			{};
+        Region(std::string _name, RegionType _regionType = RegionType::PLAINS) :
+            BaseLocation(_name),
+            regionType(_regionType)
+            {};
 
-		LocationType getLocationType(){return Location::REGION;}
-		RegionType getRegionType() {return regionType;}
+        LocationType getLocationType(){return Location::REGION;}
+        RegionType getRegionType() {return regionType;}
 
 
-	private:
-		RegionType regionType;
+    private:
+        RegionType regionType;
 
-	};
+    };
 
 } /* namespace Location */
 #endif

@@ -16,24 +16,24 @@
 namespace Event
 {
 
-	class EndTaskEvent : public BaseEvent
-	{
-	public:
-		EndTaskEvent(
-			Time::Date executionDate,
-			Action::Task_ptr callBackTask
-		);
-		~EndTaskEvent();
+    class EndTaskEvent : public BaseEvent
+    {
+    public:
+        EndTaskEvent(
+            Time::Date executionDate,
+            Action::Task_ptr callBackTask
+        );
+        ~EndTaskEvent();
 
-		EventType getEventType() { return EventType::END_TASK;}
+        EventType getEventType() { return EventType::END_TASK;}
 
-		void run();
+        void run();
 
 
-	private:
-		Action::Task_ptr callBackTask;
+    private:
+        Action::Task_ptr callBackTask;
 
-	};
+    };
 
 }
 #endif /* BIRTHEVENT_H_ */

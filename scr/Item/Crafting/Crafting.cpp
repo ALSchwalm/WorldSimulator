@@ -2,8 +2,8 @@
 
 namespace Item
 {
-	namespace Crafting
-	{
+    namespace Crafting
+    {
 
-	}
+    }
 }

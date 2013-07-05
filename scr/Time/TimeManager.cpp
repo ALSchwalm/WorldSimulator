@@ -16,8 +16,8 @@ using namespace Time;
 
 TimeManager & TimeManager::getInstance()
 {
-	static TimeManager timeManager;
-	return timeManager;
+    static TimeManager timeManager;
+    return timeManager;
 }
 
 const unsigned int TimeManager::MAX_FPS = Utils::Config::getInstance().getValue("Time", "MAX_FPS");
@@ -61,7 +61,7 @@ void TimeManager::tick()
         unsigned int tempDivisor = timeRemainder  / (1.0f / MINUTES_PER_SECOND);
         for (unsigned int i = 0; i < tempDivisor; i++)
         {
-        	DateManager::getInstance().nextMinute();
+            DateManager::getInstance().nextMinute();
         }
         timeRemainder -= tempDivisor * (1.0f / MINUTES_PER_SECOND);
 

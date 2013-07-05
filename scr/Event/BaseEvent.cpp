@@ -7,5 +7,5 @@ using namespace Event;
 
 void BaseEvent::interrupt()
 {
-	Event::EventQueue::getInstance().removeEvent(std::shared_ptr<BaseEvent>(this));
+    Event::EventQueue::getInstance().removeEvent(std::shared_ptr<BaseEvent>(this));
 }

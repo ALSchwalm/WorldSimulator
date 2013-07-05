@@ -6,21 +6,21 @@
 using namespace Interface::CLI;
 
 DialogOK::DialogOK(std::string displayText) :
-		Dialog(subwin(mainwin, 3, displayText.size()+4, LINES/2, COLS/2-(displayText.size()/2)))
+        Dialog(subwin(mainwin, 3, displayText.size()+4, LINES/2, COLS/2-(displayText.size()/2)))
 {
-	mvwprintw(dialogWin, 0, 2, "Error");
-	mvwprintw(dialogWin, 1, 1, displayText.c_str());
-	wrefresh(dialogWin);
+    mvwprintw(dialogWin, 0, 2, "Error");
+    mvwprintw(dialogWin, 1, 1, displayText.c_str());
+    wrefresh(dialogWin);
 }
 
 void DialogOK::handleInput()
 {
-	char c = wgetch(dialogWin);
-	if (c == 10)
-	{
-		wclear(dialogWin);
-		wrefresh(dialogWin);
-		dialogs.pop_back();
+    char c = wgetch(dialogWin);
+    if (c == 10)
+    {
+        wclear(dialogWin);
+        wrefresh(dialogWin);
+        dialogs.pop_back();
 
-	}
+    }
 }

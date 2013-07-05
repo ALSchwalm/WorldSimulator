@@ -6,35 +6,35 @@
 
 namespace Utils
 {
-	class Title
-	{
+    class Title
+    {
 
-	};
+    };
 
-	//TODO find a better place for this
-	enum PositiveTitles
-	{
-		GREAT,
-		TERRIBLE,
-		FEROCIOUS,
-		FEEBLE,
+    //TODO find a better place for this
+    enum PositiveTitles
+    {
+        GREAT,
+        TERRIBLE,
+        FEROCIOUS,
+        FEEBLE,
 
-		NUM_OF_POSITIVE_TITLES
-	};
+        NUM_OF_POSITIVE_TITLES
+    };
 
-	class Name
-	{
-	public:
-		Name(std::string _first){};
-		Name(std::string _first, std::string _last){};
+    class Name
+    {
+    public:
+        Name(std::string _first){};
+        Name(std::string _first, std::string _last){};
 
-		void addTitle(std::string suffix){};
+        void addTitle(std::string suffix){};
 
-		std::string getNameWithModifiers(){};
+        std::string getNameWithModifiers(){};
 
 
-	private:
-		std::vector<Title> titles;
-	};
+    private:
+        std::vector<Title> titles;
+    };
 }
 #endif

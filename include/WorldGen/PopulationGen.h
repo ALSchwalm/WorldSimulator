@@ -6,14 +6,14 @@
 
 namespace WorldGen
 {
-	namespace PopulationGen
-	{
-		void seed();
+    namespace PopulationGen
+    {
+        void seed();
 
-		extern const unsigned int INITIAL_MAX_POPULATION;
-		extern const unsigned int INITIAL_MIN_POPULATION;
+        extern const unsigned int INITIAL_MAX_POPULATION;
+        extern const unsigned int INITIAL_MIN_POPULATION;
 
-	};
+    };
 }
 
 #endif

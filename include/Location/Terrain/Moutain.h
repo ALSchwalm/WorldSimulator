@@ -5,20 +5,20 @@
 
 namespace Location
 {
-	namespace Terrain {
+    namespace Terrain {
 
-		class Moutain: public BaseTerrain
-		{
-		public:
-			Moutain(std::string _name);
+        class Moutain: public BaseTerrain
+        {
+        public:
+            Moutain(std::string _name);
 
-			TerrainType getTerrainType(){return Terrain::MOUTAIN_TERRAIN;}
+            TerrainType getTerrainType(){return Terrain::MOUTAIN_TERRAIN;}
 
-		private:
+        private:
 
 
-		};
+        };
 
-	}
+    }
 }
 #endif

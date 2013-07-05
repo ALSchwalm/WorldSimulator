@@ -5,21 +5,21 @@
 
 namespace Time
 {
-	class DateManager {
-	public:
-		static DateManager& getInstance();
+    class DateManager {
+    public:
+        static DateManager& getInstance();
 
-		void nextMinute() {++now;}
+        void nextMinute() {++now;}
 
-		Date now;
+        Date now;
 
-	private:
-		DateManager();
+    private:
+        DateManager();
 
-	};
+    };
 
-	//shorthand for Time::DateManager::getInstance().now
-	inline const Date& now() {return DateManager::getInstance().now;}
+    //shorthand for Time::DateManager::getInstance().now
+    inline const Date& now() {return DateManager::getInstance().now;}
 }
 
 

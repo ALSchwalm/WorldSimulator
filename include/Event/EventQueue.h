@@ -16,27 +16,27 @@
 
 namespace Event {
 
-	class EventQueue {
-	public:
-		static EventQueue & getInstance();
+    class EventQueue {
+    public:
+        static EventQueue & getInstance();
 
-		void execute();
+        void execute();
 
-		Event_ptr getNextEvent()
-		{
-			return queue.front();
-		}
+        Event_ptr getNextEvent()
+        {
+            return queue.front();
+        }
 
-		void addEvent(Event::Event_ptr e) {queue.push_back(e);}
+        void addEvent(Event::Event_ptr e) {queue.push_back(e);}
 
-		void removeEvent(Event::Event_ptr e) { queue.erase(std::remove(queue.begin(), queue.end(), e)); }
+        void removeEvent(Event::Event_ptr e) { queue.erase(std::remove(queue.begin(), queue.end(), e)); }
 
-	private:
-		EventQueue();
+    private:
+        EventQueue();
 
-		std::list<std::shared_ptr<BaseEvent>> queue;
+        std::list<std::shared_ptr<BaseEvent>> queue;
 
-	};
+    };
 
 } /* namespace Event */
 #endif /* EVENTQUEUE_H_ */

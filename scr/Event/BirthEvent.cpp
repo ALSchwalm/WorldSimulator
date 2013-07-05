@@ -9,35 +9,35 @@
 #include "Relationship/Relationship.h"
 
 namespace Event {
-	BirthEvent::BirthEvent(
-			std::shared_ptr<Individual::BaseIndividual> i,
-			std::shared_ptr<Location::BaseLocation> l) :
-			BaseEvent("Birth"),
-			birthPlace(l),
-			individual(i)
-	{
-	}
+    BirthEvent::BirthEvent(
+            std::shared_ptr<Individual::BaseIndividual> i,
+            std::shared_ptr<Location::BaseLocation> l) :
+            BaseEvent("Birth"),
+            birthPlace(l),
+            individual(i)
+    {
+    }
 
-	BirthEvent::BirthEvent(
-			Time::Date d,
-			std::shared_ptr<Individual::BaseIndividual> i,
-			std::shared_ptr<Location::BaseLocation> l) :
-			BaseEvent(d, "Birth"),
-			birthPlace(l),
-			individual(i)
-	{
-	}
+    BirthEvent::BirthEvent(
+            Time::Date d,
+            std::shared_ptr<Individual::BaseIndividual> i,
+            std::shared_ptr<Location::BaseLocation> l) :
+            BaseEvent(d, "Birth"),
+            birthPlace(l),
+            individual(i)
+    {
+    }
 
-	BirthEvent::~BirthEvent()
-	{
-	}
+    BirthEvent::~BirthEvent()
+    {
+    }
 
-	void BirthEvent::run()
-	{
-		individual->addRelationship(birthPlace, Relationship::RelationshipType::BIRTHPLACE);
-		individual->addEvent(std::shared_ptr<BirthEvent>(this));
-		birthPlace->addIndividual(individual);
-	}
+    void BirthEvent::run()
+    {
+        individual->addRelationship(birthPlace, Relationship::RelationshipType::BIRTHPLACE);
+        individual->addEvent(std::shared_ptr<BirthEvent>(this));
+        birthPlace->addIndividual(individual);
+    }
 
 
 } /* namespace Event */

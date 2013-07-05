@@ -8,54 +8,53 @@
 
 namespace Individual
 {
-	class BaseIndividual;
-	typedef std::shared_ptr<BaseIndividual> Individual_ptr;
+  class BaseIndividual;
+  typedef std::shared_ptr<BaseIndividual> Individual_ptr;
 }
 
 
 namespace Action
 {
-	class GoalTree;
-	class Task;
-	typedef std::shared_ptr<Task> Task_ptr;
+    class GoalTree;
+    class Task;
+    typedef std::shared_ptr<Task> Task_ptr;
 
 
-	enum GoalType
-	{
-		GET_FOOD,
-		GET_ITEM,
+    enum GoalType
+    {
+        GET_FOOD,
+        GET_ITEM,
 
-		NUM_OF_GOALS
-	};
+        NUM_OF_GOALS
+    };
 
-	class Goal
-	{
+    class Goal
+    {
 
-	public:
-		Goal(GoalType g, unsigned int p = 0);
-		Goal(std::vector<Task_ptr>, GoalType g, unsigned int p = 0);
+    public:
+        Goal(GoalType g, unsigned int p = 0);
+        Goal(std::vector<Task_ptr>, GoalType g, unsigned int p = 0);
 
-		Goal(const Goal&) = delete;
-		Goal& operator=(const Goal&) = delete;
+        Goal(const Goal&) = delete;
+        Goal& operator=(const Goal&) = delete;
 
-		bool execute();
-		void taskFinished();
+        bool execute();
+        void taskFinished();
 
-		void setTasks(std::vector<Task_ptr> _taskList){taskList = _taskList;}
+        void setTasks(std::vector<Task_ptr> _taskList){taskList = _taskList;}
 
-		unsigned int getPriority() {return priority;}
-		void interrupt(); //TODO return bool for uninterruptable tasks?
+        unsigned int getPriority() {return priority;}
+        void interrupt(); //TODO return bool for uninterruptable tasks?
 
-	private:
-		std::vector<Task_ptr> taskList;
-		GoalType goalType;
-		unsigned int priority;
-		std::shared_ptr<GoalTree> tree;
+    private:
+        std::vector<Task_ptr> taskList;
+        GoalType goalType;
+        unsigned int priority;
+        std::shared_ptr<GoalTree> tree;
 
+  };
 
-	};
-
-	typedef std::shared_ptr<Goal> Goal_ptr;
+    typedef std::shared_ptr<Goal> Goal_ptr;
 }
 
 #endif

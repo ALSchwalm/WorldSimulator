@@ -15,44 +15,44 @@
 namespace Event
 {
 
-	typedef std::shared_ptr<BaseEvent> Event_ptr;
+    typedef std::shared_ptr<BaseEvent> Event_ptr;
 
-	class BaseEvent
-	{
-	public:
-		virtual ~BaseEvent(){};
+    class BaseEvent
+    {
+    public:
+        virtual ~BaseEvent(){};
 
-		virtual std::string getEventName() {return name;}
-		virtual EventType getEventType() {return EVENT_ERROR;}
+        virtual std::string getEventName() {return name;}
+        virtual EventType getEventType() {return EVENT_ERROR;}
 
-		virtual Time::Date getExecutionDate(){return executionDate;}
-		virtual void setExecutionDate(Time::Date newDate) {executionDate = newDate;}
+        virtual Time::Date getExecutionDate(){return executionDate;}
+        virtual void setExecutionDate(Time::Date newDate) {executionDate = newDate;}
 
-		virtual void* getSource(){ return nullptr; }
+        virtual void* getSource(){ return nullptr; }
 
-		virtual void run()=0;
+        virtual void run()=0;
 
-		void interrupt();
+        void interrupt();
 
-	protected:
-		BaseEvent(std::string s) :
-			source(nullptr),
-			executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)),
-			name(s){}
+    protected:
+        BaseEvent(std::string s) :
+            source(nullptr),
+            executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)),
+            name(s){}
 
-		BaseEvent(Time::Date t, std::string s) :
-			source(nullptr),
-			executionDate(t),
-			name(s){}
+        BaseEvent(Time::Date t, std::string s) :
+            source(nullptr),
+            executionDate(t),
+            name(s){}
 
-		void* source;
-	private:
-		Time::Date executionDate;
-		std::string name;
+        void* source;
+    private:
+        Time::Date executionDate;
+        std::string name;
 
 
 
-	};
+    };
 
 }
 #endif /* EVENT_H_ */

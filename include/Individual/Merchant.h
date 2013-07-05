@@ -16,30 +16,30 @@
 
 namespace Item
 {
-	class BaseItem;
-	typedef std::shared_ptr<BaseItem> Item_ptr;
+    class BaseItem;
+    typedef std::shared_ptr<BaseItem> Item_ptr;
 }
 
 namespace Individual
 {
-	class Merchant : virtual public BaseIndividual
-	{
-	public:
+    class Merchant : virtual public BaseIndividual
+    {
+    public:
 
-		virtual std::vector<Item::Item_ptr> getItemsForSale() { return itemsForSale;}
+        virtual std::vector<Item::Item_ptr> getItemsForSale() { return itemsForSale;}
 
-		IndividualType getIndividualType() override {return IndividualType::INDIVIDUAL_ERROR;}
-		virtual void addInitialItems(std::vector<Item::Item_ptr>&){};
-	protected:
-		Merchant(std::string name, bool);
-		Merchant(std::string name, Location_ptr location, bool);
+        IndividualType getIndividualType() override {return IndividualType::INDIVIDUAL_ERROR;}
+        virtual void addInitialItems(std::vector<Item::Item_ptr>&){};
+    protected:
+        Merchant(std::string name, bool);
+        Merchant(std::string name, Location_ptr location, bool);
 
-		Merchant(const Merchant&) = delete;
-		Merchant& operator=(const Merchant&) = delete;
+        Merchant(const Merchant&) = delete;
+        Merchant& operator=(const Merchant&) = delete;
 
-	private:
-		std::vector<Item::Item_ptr> itemsForSale;
+    private:
+        std::vector<Item::Item_ptr> itemsForSale;
 
-	};
+    };
 }
 #endif
