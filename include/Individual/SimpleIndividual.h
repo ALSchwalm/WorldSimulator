@@ -34,7 +34,7 @@ namespace Individual
 
         void addInitialItems(std::vector<Item::Item_ptr>& items)
         {
-            items.push_back(std::make_shared<Item::Food>(Item::BREAD));
+            items.push_back(std::make_shared<Item::Food<Item::BREAD> >());
         };
 
     };

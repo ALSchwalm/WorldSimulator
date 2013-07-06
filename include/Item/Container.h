@@ -7,7 +7,7 @@
 namespace Item
 {
 
-    enum ContainerType
+    enum containerType
     {
         BARREL,
         CHEST,
@@ -24,7 +24,7 @@ namespace Item
         "House Floor"	//TODO find a way to have numbered floors
     };
 
-    const std::map<ContainerType, const Skill::skillMap> requiredContainerSkills
+    const std::map<containerType, const Skill::skillMap> requiredContainerSkills
     {
         {BARREL, 		{{Skill::WOODWORKING, 	1.5f},
                         {Skill::BLACKSMITHING,	0.5f}}},
@@ -37,31 +37,51 @@ namespace Item
 
     };
 
-    const std::map<ContainerType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredContainerItems
+    const std::map<containerType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredContainerItems
     {
         {BARREL,		{std::make_tuple(CONTAINER, BARREL, 1)}}
     };
 
-
-    class Container : public BaseItem, public Location::BaseLocation
+    class BaseContainer : public BaseItem
     {
     public:
-        Container(std::string _name, ContainerType _containerType) :
-            BaseItem(_name),
-            Location::BaseLocation(_name),
-            containerType(_containerType){};
+        const ItemType getItemType() override {return CONTAINER;}
+        const containerType getContainerType() {return containertype;}
 
-        Container(ContainerType _containerType) :
-            BaseItem(containerTypeAsString[_containerType]),
-            Location::BaseLocation(containerTypeAsString[_containerType]),
-            containerType(_containerType){};
+    protected:
+        BaseContainer(std::string _name, containerType _c) :
+            BaseItem(_name),
+            containertype(_c)
+        {}
+    private:
+        containerType containertype;
+    };
+
+    template<containerType c>
+    class Container : public BaseContainer, public Location::BaseLocation
+    {
+    public:
+        typedef containerType type;
+        typedef BaseContainer baseType;
+
+        Container(std::string _name, containerType _containerType) :
+            BaseContainer(_name, c),
+            Location::BaseLocation(_name){}
+
+        Container() :
+            BaseContainer(containerTypeAsString[c], c),
+            Location::BaseLocation(containerTypeAsString[c]){}
 
         ~Container(){};
 
-        static const Skill::skillMap& getRequiredSkill(ContainerType t){return requiredContainerSkills.at(t);}
-        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems(ContainerType t)
+        static const Skill::skillMap& getRequiredSkill()
         {
-            return requiredContainerItems.at(t);
+            return requiredContainerSkills.at(c);
+        }
+
+        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems()
+        {
+            return requiredContainerItems.at(c);
         }
 
         Location::LocationType getLocationType(){return Location::CONTAINER;}
@@ -70,10 +90,9 @@ namespace Item
         void addItem(Item_ptr _item) {items.push_back(_item);}
 
         const ItemType getItemType(){return CONTAINER;}
-        const ContainerType getContainerType() {return containerType;}
+        static constexpr ItemType getStaticItemType(){return CONTAINER;}
 
     private:
-        ContainerType containerType;
         std::vector<Item_ptr> items;
 
     };

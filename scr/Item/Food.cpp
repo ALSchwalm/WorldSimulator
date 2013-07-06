@@ -5,17 +5,11 @@
 namespace Item
 {
 
-
-    Item_ptr Food::getRandomFood()
+    template<foodType f>
+    Item_ptr Food<f>::getRandomFood()
     {
-        return std::make_shared<Food>( (FoodType) (rand() % FoodType::NUM_OF_FOODS));
+        //return std::make_shared<Food>( (FoodType) (rand() % FoodType::NUM_OF_FOODS));
     };
 
-    Food::Food(FoodType _foodType) :
-        BaseItem(foodTypeAsString[_foodType]),
-        foodType(_foodType)
-    {
-        this->setAttribute("edible");
-    }
 
 }

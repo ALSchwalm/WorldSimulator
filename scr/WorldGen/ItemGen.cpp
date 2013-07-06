@@ -13,7 +13,7 @@ void seed()
     {
         for (auto region : location->getLocations())
         {
-            auto house = std::make_shared<Item::Container>(Item::ContainerType::HOUSE);
+            auto house = std::make_shared<Item::Container<Item::HOUSE>>();
             Location::addLocations(region, house);
         }
     }

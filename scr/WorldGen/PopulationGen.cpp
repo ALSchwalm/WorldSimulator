@@ -33,7 +33,7 @@ void seed()
                 {
                     family_size = population % 5 + 1;
 
-                    auto house = std::make_shared<Item::Container>(Item::ContainerType::HOUSE);
+                    auto house = std::make_shared<Item::Container<Item::HOUSE>>();
                     for (unsigned int i=0; i < family_size; ++i)
                     {
                         auto newIndividual = Individual::getRandomIndividual(Utils::Markov::getInstance().getProperWord(), city, rand()%2);

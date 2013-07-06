@@ -21,7 +21,7 @@ namespace Item
     template<>
     inline bool isEnumType<FOOD>(Item_ptr i, unsigned int t)
     {
-        Food* f = dynamic_cast<Food*>(i.get());
+        BaseFood* f = dynamic_cast<BaseFood*>(i.get());
         if (!f || f->getFoodType() != t)
             return false;
         return true;
@@ -30,7 +30,7 @@ namespace Item
     template<>
     inline bool isEnumType<CONTAINER>(Item_ptr i, unsigned int t)
     {
-        Container* c = dynamic_cast<Container*>(i.get());
+        BaseContainer* c = dynamic_cast<BaseContainer*>(i.get());
         if (!c || c->getContainerType() != t)
             return false;
         return true;
@@ -54,34 +54,20 @@ namespace Item
         return true;
     }
 
-
-
-    template<typename T>
-    inline bool isClassType(Item_ptr i, unsigned int t);
-
-    template<>
-    inline bool isClassType<Food>(Item_ptr i, unsigned int t)
+    inline bool isClassType(Item_ptr i, ItemType itemType, unsigned int t)
     {
-        return isEnumType<FOOD>(i, t);
+        //No default to cause compiler warnings if there is an unhandled case
+        switch (itemType)
+        {
+        case FOOD:
+            return isEnumType<FOOD>(i, t);
+        case CONTAINER:
+            return isEnumType<CONTAINER>(i, t);
+        }
+
+        return false;
     }
 
-    template<>
-    inline bool isClassType<Container>(Item_ptr i, unsigned int t)
-    {
-        return isEnumType<CONTAINER>(i, t);
-    }
-
-    template<>
-    inline bool isClassType<Tool>(Item_ptr i, unsigned int t)
-    {
-        return isEnumType<TOOL>(i, t);
-    }
-
-    template<>
-    inline bool isClassType<Weapon>(Item_ptr i, unsigned int t)
-    {
-        return isEnumType<WEAPON>(i, t);
-    }
 
 }
 
