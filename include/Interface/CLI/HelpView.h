@@ -28,6 +28,7 @@ namespace Interface
         ~HelpView();
         void redrawView(){};
         void refreshView() override;
+        WINDOW* getViewWin() override {return viewWin;}
     private:
         WINDOW * viewWin;
         std::vector<CLI::Command> commands;

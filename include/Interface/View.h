@@ -21,6 +21,7 @@ namespace Interface
         virtual void refreshView()=0;
         virtual void redrawView()=0;
         virtual ~BaseView(){}
+        virtual WINDOW* getViewWin()=0;
         BaseView(){} //This should only be used by shared_ptr
         BaseView(const BaseView&) = delete;
         BaseView& operator=(const BaseView&) = delete;
@@ -35,6 +36,7 @@ namespace Interface
     public:
         virtual void refreshView()=0;
         void redrawView();
+        WINDOW* getViewWin() override {return viewWin;}
 
         virtual ~View()
         {

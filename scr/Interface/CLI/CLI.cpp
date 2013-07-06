@@ -64,7 +64,12 @@ namespace Interface
                     waddstr(lineWin, cliCompleteCommand(line).c_str());
                 }
                 break;
-
+            case KEY_DOWN:
+                wscrl(displayView->getViewWin(), 1);
+                break;
+            case KEY_UP:
+                wscrl(displayView->getViewWin(), -1);
+                break;
             case KEY_BACKSPACE:
             case 127:	//linux backspace
             case 8:		//windows windows backspace

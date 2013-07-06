@@ -24,6 +24,7 @@ namespace Interface
         //nodelay(mainwin, true);	//do not wait for input
         timeout(1);
         noecho();	//do not echo user intput to screen
+        scrollok(mainwin, true);
 
         CLI::initialize();
         currentContext = CLI::Context::LOCATION;
