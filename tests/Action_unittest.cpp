@@ -25,7 +25,7 @@ TEST(ActionTest, GetFood)
 	 * Goal creation is fully specialized, so to find a Weapon, you must call addGoal
 	 * with a shared_ptr<BaseItem>.
 	 */
-	std::shared_ptr<Item::BaseItem>item = std::make_shared<Item::Weapon>("TestWeapon", Item::SWORD);
+	std::shared_ptr<Item::BaseItem>item = std::make_shared<Item::Weapon<Item::SWORD>>("TestWeapon");
 
 	item->setAttribute("edible");
 
