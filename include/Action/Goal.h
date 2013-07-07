@@ -52,7 +52,7 @@ namespace Action
         unsigned int priority;
         std::shared_ptr<GoalTree> tree;
 
-  };
+    };
 
     typedef std::shared_ptr<Goal> Goal_ptr;
 }

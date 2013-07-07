@@ -5,14 +5,15 @@
 namespace Item
 {
 
-    Item_ptr Tool::getRandomTool()
+    template<ToolType t>
+    Item_ptr Tool<t>::getRandomTool()
     {
-        return std::make_shared<Tool>( (ToolType) (rand() % ToolType::NUM_OF_TOOLS));
+        //return std::make_shared<Tool>( (ToolType) (rand() % ToolType::NUM_OF_TOOLS));
     };
 
-    Tool::Tool(ToolType _toolType) :
-        BaseItem(toolTypeAsString[_toolType]),
-        toolType(_toolType)
+    template<ToolType t>
+    Tool<t>::Tool() :
+        BaseItem(toolTypeAsString[t], t)
     {
     }
 

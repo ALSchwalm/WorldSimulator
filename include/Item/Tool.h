@@ -54,25 +54,42 @@ namespace Item
         {PLOW,		{std::make_tuple(TOOL, PLOW, 1)}}
     };
 
-    class Tool : public BaseItem
+
+    class BaseTool : public BaseItem
     {
     public:
+        const ItemType getItemType() override {return TOOL;}
+        const ToolType getToolType() {return toolType;}
+
+    protected:
+        BaseTool(std::string _name, ToolType _t) :
+            BaseItem(_name),
+            toolType(_t)
+        {}
+    private:
+        ToolType toolType;
+    };
+
+
+    template<ToolType t>
+    class Tool : public BaseTool
+    {
+    public:
+        typedef ToolType type;
+        typedef BaseTool baseType;
+
         static Item_ptr getRandomTool();
-        static const Skill::skillMap& getRequiredSkill(ToolType t){return requiredToolSkills.at(t);}
-        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems(ToolType t)
+        static const Skill::skillMap& getRequiredSkill(){return requiredToolSkills.at(t);}
+        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems()
         {
             return requiredToolItems.at(t);
         }
 
-        Tool(ToolType _toolType);
+        Tool();
         ~Tool(){};
 
-        const ItemType getItemType(){return TOOL;}
-        const ToolType getToolType(){return toolType;}
-
-    private:
-        ToolType toolType;
-
+        const ItemType getItemType() override {return TOOL;}
+        static constexpr ItemType getStaticItemType(){return TOOL;}
     };
 
 }

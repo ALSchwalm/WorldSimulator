@@ -27,19 +27,15 @@ namespace Individual
     class BaseIndividual
     {
     protected:
-        BaseIndividual(std::string _name, bool _isMale=true) :
-            age(0),
-            name(_name),
-            isMale(_isMale),
-            currentLocation (nullptr),
-            goalTree(std::make_shared<BaseIndividual>(*this)){} //FIXME review this
-
         BaseIndividual(std::string _name, Location_ptr _location, bool _isMale=true) :
             age(0),
             name(_name),
             isMale(_isMale),
             currentLocation(_location),
-            goalTree(std::make_shared<BaseIndividual>(*this)){}
+            goalTree(std::make_shared<BaseIndividual>(*this)){} //FIXME review this
+
+        BaseIndividual(std::string _name, bool _isMale=true) :
+            BaseIndividual(_name, nullptr, _isMale){}
 
         BaseIndividual& operator=(const BaseIndividual&) = delete;
 

@@ -6,6 +6,7 @@
 #include "Item/Tool.h"
 #include "Item/Weapon.h"
 #include "Item/Container.h"
+#include <stdexcept>
 
 namespace Item
 {
@@ -39,7 +40,7 @@ namespace Item
     template<>
     inline bool isEnumType<TOOL>(Item_ptr i, unsigned int t)
     {
-        Tool* tool = dynamic_cast<Tool*>(i.get());
+        BaseTool* tool = dynamic_cast<BaseTool*>(i.get());
         if (!tool || tool->getToolType() != t)
             return false;
         return true;
@@ -48,7 +49,7 @@ namespace Item
     template<>
     inline bool isEnumType<WEAPON>(Item_ptr i, unsigned int t)
     {
-        Weapon* w = dynamic_cast<Weapon*>(i.get());
+        BaseWeapon* w = dynamic_cast<BaseWeapon*>(i.get());
         if (!w || w->getWeaponType() != t)
             return false;
         return true;
@@ -63,6 +64,13 @@ namespace Item
             return isEnumType<FOOD>(i, t);
         case CONTAINER:
             return isEnumType<CONTAINER>(i, t);
+        case TOOL:
+            return isEnumType<TOOL>(i, t);
+        case WEAPON:
+            return isEnumType<WEAPON>(i, t);
+        case ITEM_ERROR:
+            throw(std::runtime_error("Attempt to call isClassType on ITEM_ERROR"));
+            return false;
         }
 
         return false;

@@ -12,7 +12,7 @@
 TEST(ItemTest, HasAttribute)
 {
 
-	auto item = std::make_shared<Item::Weapon>("TestWeapon", Item::SWORD);
+	auto item = std::make_shared<Item::Weapon<Item::SWORD>>("TestWeapon");
 
 	item->setAttribute("old");
 
@@ -23,8 +23,8 @@ TEST(ItemTest, HasAttribute)
 
 TEST(ItemTest, Container)
 {
-	auto container = std::make_shared<Item::Container>(Item::ContainerType::BARREL);
-	auto item = std::make_shared<Item::Weapon>("Test weapon", Item::SWORD);
+	auto container = std::make_shared<Item::Container<Item::BARREL>>();
+	auto item = std::make_shared<Item::Weapon<Item::SWORD>>("Test weapon");
 
 	container->addItem(item);
 	Location::addLocations(Location::World::getInstance(), container);

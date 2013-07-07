@@ -37,36 +37,48 @@ namespace Item
     };
 
 
-    class Weapon : public BaseItem
+    class BaseWeapon : public BaseItem
     {
     public:
-        Weapon(WeaponType _weaponType) : weaponType(_weaponType){}
-        Weapon(std::string _name, WeaponType _weaponType) :
-            BaseItem(_name),
-            weaponType(_weaponType)
-        {}
-        Weapon(Individual::Individual_ptr _owner, WeaponType _weaponType) :
-            BaseItem(_owner) ,
-            weaponType(_weaponType)
-        {}
-        Weapon(std::string _name, Individual::Individual_ptr _owner, WeaponType _weaponType ) :
+        const ItemType getItemType() override {return TOOL;}
+        const WeaponType getWeaponType() {return weaponType;}
+
+    protected:
+        BaseWeapon(std::string _name, Individual::Individual_ptr _owner, WeaponType _w) :
             BaseItem(_name, _owner),
-            weaponType(_weaponType)
-        {}
+            weaponType(_w){}
+    private:
+        WeaponType weaponType;
+    };
+
+
+    template<WeaponType w>
+    class Weapon : public BaseWeapon
+    {
+    public:
+        typedef WeaponType type;
+        typedef BaseWeapon baseType;
+
+        Weapon() : Weapon(weaponTypeAsString[w], nullptr){}
+
+        Weapon(std::string _name) : Weapon(_name, nullptr){}
+
+        Weapon(Individual::Individual_ptr _owner) :
+            Weapon(weaponTypeAsString[w], _owner){}
+
+        Weapon(std::string _name, Individual::Individual_ptr _owner ) :
+            BaseWeapon(_name, _owner, w){}
 
         ~Weapon(){};
 
-        static const Skill::skillMap& getRequiredSkill(WeaponType t){return requiredWeaponSkills.at(t);}
-        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems(WeaponType t)
+        static const Skill::skillMap& getRequiredSkill(){return requiredWeaponSkills.at(w);}
+        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems()
         {
-            return requiredWeaponItems.at(t);
+            return requiredWeaponItems.at(w);
         }
 
-        const ItemType getItemType(){return WEAPON;}
-        const WeaponType getWeaponType(){return weaponType;}
-    private:
-        WeaponType weaponType;
-
+        const ItemType getItemType() override {return WEAPON;}
+        static constexpr ItemType getStaticItemType(){return WEAPON;}
     };
 
 }

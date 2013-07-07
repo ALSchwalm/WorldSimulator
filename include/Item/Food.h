@@ -10,8 +10,7 @@
 
 namespace Item
 {
-
-    enum FoodType
+    enum foodType
     {
         MUTTON,
         BACON,
@@ -24,65 +23,86 @@ namespace Item
     };
 
     const std::string foodTypeAsString[NUM_OF_FOODS] = {
-        "Mutton",
-        "Bacon",
-        "Corn",
-        "Beef",
-        "Bread",
-        "Wheat"
+       "Mutton",
+       "Bacon",
+       "Corn",
+       "Beef",
+       "Bread",
+       "Wheat"
     };
 
-    const std::map<FoodType, const Skill::skillMap> requiredFoodSkills
+    const std::map<foodType, const Skill::skillMap> requiredFoodSkills
     {
-        {MUTTON, 	{{Skill::COOKING, 	1.5f}}},
+       {MUTTON,    {{Skill::COOKING,   1.5f}}},
 
-        {BACON, 	{{Skill::COOKING, 	2.0f}}},
+       {BACON,     {{Skill::COOKING,   2.0f}}},
 
-        {CORN, 		{{Skill::COOKING, 	2.0f}}},
+       {CORN,      {{Skill::COOKING,   2.0f}}},
 
-        {BEEF, 		{{Skill::COOKING, 	2.0f}}},
+       {BEEF,      {{Skill::COOKING,   2.0f}}},
 
-        {BREAD, 	{{Skill::COOKING, 	2.0f},
-                    {Skill::BAKING,	1.5f}}}
+       {BREAD,     {{Skill::COOKING,   2.0f},
+                       {Skill::BAKING, 1.5f}}}
     };
-
 
     /*
     * This map maps a give food to the items required to make it.
     * Unfortunately, tuples of size >1 cannot be implicitly constructed.
-    * The item type tells any function calling using the vector what to
+    * The item type tells any function using the vector what to
     * cast the first unsigned int to. This is clearly not an elegant
     * approach. I am actively pursuing better alternatives.
     */
-    const std::map<FoodType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredFoodItems
+    static const std::map<foodType, const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>> requiredFoodItems
     {
-        {BREAD,		{std::make_tuple(FOOD, WHEAT, 1)}}
+      {BREAD,     {std::make_tuple(FOOD, WHEAT, 1)}}
     };
 
-
-    class Food : public BaseItem
+    class BaseFood : public BaseItem
     {
     public:
-        static Item_ptr getRandomFood();
-        static const Skill::skillMap& getRequiredSkill(FoodType t){return requiredFoodSkills.at(t);}
-        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems(FoodType t)
-        {
-            return requiredFoodItems.at(t);
-        }
-        const ItemType getItemType(){return FOOD;}
+        const ItemType getItemType() override {return FOOD;}
+        const foodType getFoodType() {return foodtype;}
 
-        Food(FoodType _foodType);
-        ~Food(){};
-
-        const FoodType getFoodType() {return foodType;}
-
+    protected:
+        BaseFood(std::string _name, foodType _f) :
+            BaseItem(_name),
+            foodtype(_f)
+        {}
     private:
-        const FoodType foodType;
+        foodType foodtype;
     };
 
+    template<foodType f>
+    class Food : public BaseFood
+    {
+    public:
+        typedef foodType type;
+        typedef BaseFood baseType;
+
+        static Item_ptr getRandomFood();
+
+        static const Skill::skillMap& getRequiredSkill()
+        {
+            return requiredFoodSkills.at(f);
+        }
+
+        static const std::vector<std::tuple<ItemType, unsigned int, unsigned int>>& getRequiredItems()
+        {
+           return requiredFoodItems.at(f);
+        }
+
+        const ItemType getItemType() override {return FOOD;}
+        static constexpr ItemType getStaticItemType(){return FOOD;}
 
 
+        Food() : BaseFood(foodTypeAsString[f], f)
+        {
+            this->setAttribute("edible");
+        }
 
+        ~Food(){};
+
+    };
 }
 
 #endif

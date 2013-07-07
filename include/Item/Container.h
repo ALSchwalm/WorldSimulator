@@ -57,6 +57,7 @@ namespace Item
         containerType containertype;
     };
 
+
     template<containerType c>
     class Container : public BaseContainer, public Location::BaseLocation
     {
@@ -64,13 +65,11 @@ namespace Item
         typedef containerType type;
         typedef BaseContainer baseType;
 
-        Container(std::string _name, containerType _containerType) :
+        Container(std::string _name) :
             BaseContainer(_name, c),
             Location::BaseLocation(_name){}
 
-        Container() :
-            BaseContainer(containerTypeAsString[c], c),
-            Location::BaseLocation(containerTypeAsString[c]){}
+        Container() : Container(containerTypeAsString[c]){}
 
         ~Container(){};
 
