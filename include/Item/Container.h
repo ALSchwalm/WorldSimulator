@@ -42,32 +42,39 @@ namespace Item
         {BARREL,		{std::make_tuple(CONTAINER, BARREL, 1)}}
     };
 
-    class BaseContainer : public BaseItem
+    class BaseContainer : public BaseItem, public Location::BaseLocation
     {
     public:
         const ItemType getItemType() override {return CONTAINER;}
         const containerType getContainerType() {return containertype;}
 
+        Location::LocationType getLocationType() override {return Location::CONTAINER;}
+        void addItem(Item_ptr _item) override {items.push_back(_item);}
+
+        const std::vector<Item_ptr>& getItems() {return items;}
+
+        static constexpr ItemType getStaticItemType(){return CONTAINER;}
+
     protected:
         BaseContainer(std::string _name, containerType _c) :
             BaseItem(_name),
-            containertype(_c)
-        {}
+            Location::BaseLocation(_name),
+            containertype(_c){}
     private:
         containerType containertype;
+        std::vector<Item_ptr> items;
     };
 
 
     template<containerType c>
-    class Container : public BaseContainer, public Location::BaseLocation
+    class Container : public BaseContainer
     {
     public:
         typedef containerType type;
         typedef BaseContainer baseType;
 
         Container(std::string _name) :
-            BaseContainer(_name, c),
-            Location::BaseLocation(_name){}
+            BaseContainer(_name, c){}
 
         Container() : Container(containerTypeAsString[c]){}
 
@@ -82,17 +89,6 @@ namespace Item
         {
             return requiredContainerItems.at(c);
         }
-
-        Location::LocationType getLocationType(){return Location::CONTAINER;}
-
-        const std::vector<Item_ptr>& getItems() {return items;}
-        void addItem(Item_ptr _item) {items.push_back(_item);}
-
-        const ItemType getItemType(){return CONTAINER;}
-        static constexpr ItemType getStaticItemType(){return CONTAINER;}
-
-    private:
-        std::vector<Item_ptr> items;
 
     };
 
