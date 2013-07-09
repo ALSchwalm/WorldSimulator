@@ -1,46 +1,39 @@
-
 #include "Individual/Individual.h"
-#include "Individual/BaseProfession.h"
-#include "Individual/SimpleIndividual.h"
-#include "Utils/Config.h"
+#include "Action/GoalTree.h"
+#include "Relationship/Relationship.h"
+#include <algorithm>
 
-namespace Profession
+namespace Actor
 {
 
-    const unsigned int ProfessionValues[]
+    bool Individual::removeItem(Item::Item_ptr i)
     {
-        Utils::Config::getInstance().getValue("OccupationRate", "BAKER_RATE")
-    };
-
-    static_assert(sizeof(ProfessionValues)/sizeof(ProfessionValues[0]) == NUM_OF_PROFESSIONS,
-            "IndividualType not given value in IndividualValues.");
-
-
-    static std::shared_ptr<BaseProfession> createIndividualFromType(ProfessionType _type)
-    {
-        switch(_type)
+        if (std::find(items.begin(), items.end(), i) == items.end())
         {
-        case BAKER:
-            return std::make_shared<Baker>();
-        default:
-            throw("Attempt to create individual from invalid enum.");
-            return nullptr;
+            return false;
+        }
+        else
+        {
+            items.erase(std::find(items.begin(), items.end(), i));
+            return true;
         }
     }
 
-    std::shared_ptr<BaseProfession> getRandomProfession()
+    void Individual::addRelationship(Location::Location_ptr location, Relationship::RelationshipType rel)
     {
-        ProfessionType profession = static_cast<ProfessionType>(rand()%NUM_OF_PROFESSIONS);
-        return createIndividualFromType(profession);
+        LocationRelationshipMap.addRelationship(location, rel);
     }
-/*
-    std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<BaseIndividual> individual)
+
+    void Individual::addRelationship(Individual_ptr individual, Relationship::RelationshipType rel)
     {
-        std::vector<Item::Item_ptr> items;
-        individual->addInitialItems(items);
-        for (auto item : items)
-            item->setOwner(individual);
-        return items;
+        IndividualRelationshipMap.addRelationship(individual, rel);
     }
-*/
+
+    unsigned int Individual::calculatePriority(Individual_ptr individual, Action::GoalType goalType)
+    {
+        //TODO relationships can be both positive and negative, so size is not a good metric
+        if (IndividualRelationshipMap.getRelationships(individual).size() != 0)
+            return 10;
+        return 0;
+    }
 }

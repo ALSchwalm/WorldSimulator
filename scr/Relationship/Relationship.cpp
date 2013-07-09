@@ -1,5 +1,5 @@
 #include "Relationship/Relationship.h"
-#include "Individual/BaseIndividual.h"
+#include "Individual/Individual.h"
 
 namespace Relationship
 {

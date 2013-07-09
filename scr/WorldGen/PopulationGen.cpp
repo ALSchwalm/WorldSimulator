@@ -3,7 +3,7 @@
 #include "Location/Location.h"
 #include "Item/Container.h"
 #include "Individual/SimpleIndividual.h"
-#include "Individual/BaseIndividual.h"
+#include "Individual/Individual.h"
 #include "Individual/Individual.h"
 #include "Utils/Markov.h"
 #include "Utils/Config.h"

@@ -8,7 +8,7 @@
 #ifndef BASELOCATION_H_
 #define BASELOCATION_H_
 
-#include "Individual/BaseIndividual.h"
+#include "Individual/Individual.h"
 #include "Event/Event.h"
 #include "Item/BaseItem.h"
 #include <memory>

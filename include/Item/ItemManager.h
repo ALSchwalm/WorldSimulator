@@ -2,7 +2,7 @@
 #define ITEMMANGER_H_
 
 #include "Item/BaseItem.h"
-#include "Individual/BaseIndividual.h"
+#include "Individual/Individual.h"
 #include "Location/BaseLocation.h"
 
 namespace Item
