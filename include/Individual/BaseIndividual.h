@@ -20,24 +20,24 @@ namespace Location
     typedef shared_ptr<BaseLocation> Location_ptr;
 }
 
-namespace Individual
+namespace Actor
 {
     using Location::Location_ptr;
 
-    class BaseIndividual
+    class Individual
     {
     protected:
-        BaseIndividual(std::string _name, Location_ptr _location, bool _isMale=true) :
+        Individual(std::string _name, Location_ptr _location, bool _isMale=true) :
             age(0),
             name(_name),
             isMale(_isMale),
             currentLocation(_location),
-            goalTree(std::make_shared<BaseIndividual>(*this)){} //FIXME review this
+            goalTree(std::make_shared<Individual>(*this)){} //FIXME review this
 
-        BaseIndividual(std::string _name, bool _isMale=true) :
-            BaseIndividual(_name, nullptr, _isMale){}
+        Individual(std::string _name, bool _isMale=true) :
+            Individual(_name, nullptr, _isMale){}
 
-        BaseIndividual& operator=(const BaseIndividual&) = delete;
+        Individual& operator=(const Individual&) = delete;
 
         Relationship::RelationshipMap<Individual_ptr> IndividualRelationshipMap;
         Relationship::RelationshipMap<Location_ptr> LocationRelationshipMap;
@@ -54,10 +54,10 @@ namespace Individual
         Action::GoalTree goalTree;
         Skill::skillMap skillMap;
     public:
-        virtual ~BaseIndividual(){}
+        virtual ~Individual(){}
 
         Location_ptr getCurrentLocation() { return currentLocation; }
-        void setCurrentLocation( Location_ptr c ) { currentLocation = c;}
+        void setCurrentLocation(Location_ptr c) { currentLocation = c;}
 
         unsigned int getAge() {return age;}
         const std::string getName() {return name;}
@@ -66,8 +66,6 @@ namespace Individual
         Relationship::RelationshipMap<Individual_ptr>& getIndividualRelationshipMap() {return IndividualRelationshipMap;}
         Relationship::RelationshipMap<Location_ptr>& getLocationRelationshipMap() {return LocationRelationshipMap;}
         Skill::skillMap& getSkillMap() {return skillMap;}
-
-        virtual IndividualType getIndividualType(){ return IndividualType::INDIVIDUAL_ERROR;}
 
         void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
         void addItem(Item::Item_ptr i) {items.push_back(i);}
@@ -100,8 +98,9 @@ namespace Individual
         void addGoal(T t, U u, unsigned int _priority){goalTree.addGoal<g, T, U>(t, u, _priority);}
 
     };
-    typedef std::shared_ptr<BaseIndividual> Individual_ptr;
-    typedef std::vector<std::shared_ptr<Individual::BaseIndividual>> IndividualList;
+
+    typedef std::shared_ptr<Individual> Individual_ptr;
+    typedef std::vector<Individual_ptr> IndividualList;
 
 }
 #endif

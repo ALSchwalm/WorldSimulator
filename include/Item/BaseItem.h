@@ -10,8 +10,8 @@
 
 namespace Individual
 {
-    class BaseIndividual;
-    typedef std::shared_ptr<Individual::BaseIndividual> Individual_ptr;
+    class Individual;
+    typedef std::shared_ptr<Actor::Individual> Individual_ptr;
 }
 
 namespace Item
@@ -44,13 +44,13 @@ namespace Item
         bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
     protected:
-        BaseItem(std::string _name, Individual::Individual_ptr _owner) :
+        BaseItem(std::string _name, Actor::Individual_ptr _owner) :
             name(_name),
             owner(_owner){}
 
         BaseItem() : name("Unnamed Item"){}
         BaseItem(std::string _name) : name(_name){}
-        BaseItem(Individual::Individual_ptr _owner) :
+        BaseItem(Actor::Individual_ptr _owner) :
             name("Unnamed Item"),
             owner(_owner){}
 

@@ -10,7 +10,7 @@
 
 namespace Event {
     BirthEvent::BirthEvent(
-            std::shared_ptr<Individual::BaseIndividual> i,
+            std::shared_ptr<Actor::Individual> i,
             std::shared_ptr<Location::BaseLocation> l) :
             BaseEvent("Birth"),
             birthPlace(l),
@@ -20,7 +20,7 @@ namespace Event {
 
     BirthEvent::BirthEvent(
             Time::Date d,
-            std::shared_ptr<Individual::BaseIndividual> i,
+            std::shared_ptr<Actor::Individual> i,
             std::shared_ptr<Location::BaseLocation> l) :
             BaseEvent(d, "Birth"),
             birthPlace(l),

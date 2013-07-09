@@ -12,7 +12,7 @@ namespace Event
     public:
         PickupEvent(
                 Item::Item_ptr,
-                Individual::Individual_ptr);
+                Actor::Individual_ptr);
 
         ~PickupEvent();
 
@@ -23,7 +23,7 @@ namespace Event
 
     private:
         Item::Item_ptr item;
-        Individual::Individual_ptr individual;
+        Actor::Individual_ptr individual;
 
     };
 

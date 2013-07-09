@@ -12,13 +12,13 @@ namespace Event
     {
     public:
         MoveEvent(
-                std::shared_ptr<Individual::BaseIndividual>,
+                std::shared_ptr<Actor::Individual>,
                 std::shared_ptr<Location::BaseLocation>
         );
 
         MoveEvent(
                 Time::Date,
-                std::shared_ptr<Individual::BaseIndividual>,
+                std::shared_ptr<Actor::Individual>,
                 std::shared_ptr<Location::BaseLocation>
         );
         ~MoveEvent();
@@ -30,7 +30,7 @@ namespace Event
 
     private:
         std::shared_ptr<Location::BaseLocation> newLocation;
-        std::shared_ptr<Individual::BaseIndividual> individual;
+        std::shared_ptr<Actor::Individual> individual;
 
     };
 

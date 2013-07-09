@@ -8,10 +8,10 @@
 #include <map>
 #include <vector>
 
-namespace Individual
+namespace Actor
 {
-    class BaseIndividual;
-    typedef std::shared_ptr<BaseIndividual> Individual_ptr;
+    class Individual;
+    typedef std::shared_ptr<Individual> Individual_ptr;
 }
 
 namespace Relationship

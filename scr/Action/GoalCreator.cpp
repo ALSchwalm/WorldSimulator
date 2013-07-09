@@ -26,7 +26,7 @@ GoalCreator::~GoalCreator()
 
 
 template<>
-Goal_ptr GoalCreator::createGoal<GET_FOOD>(Individual::Individual_ptr individual, unsigned int priority)
+Goal_ptr GoalCreator::createGoal<GET_FOOD>(Actor::Individual_ptr individual, unsigned int priority)
 {
     currentGoal = std::make_shared<Action::Goal>(GET_FOOD, priority);
     auto get_food = getFood(individual);
@@ -37,7 +37,7 @@ Goal_ptr GoalCreator::createGoal<GET_FOOD>(Individual::Individual_ptr individual
 }
 
 template<>
-Goal_ptr GoalCreator::createGoal<GET_ITEM>(Item::Item_ptr item, Individual::Individual_ptr individual, unsigned int priority)
+Goal_ptr GoalCreator::createGoal<GET_ITEM>(Item::Item_ptr item, Actor::Individual_ptr individual, unsigned int priority)
 {
     currentGoal = std::make_shared<Action::Goal>(GET_ITEM, priority);
     auto get_item = getItem(individual, item);
@@ -47,7 +47,7 @@ Goal_ptr GoalCreator::createGoal<GET_ITEM>(Item::Item_ptr item, Individual::Indi
     return currentGoal;
 }
 
-std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual)
+std::vector<Task_ptr> GoalCreator::getFood(Actor::Individual_ptr individual)
 {
 
     std::vector<std::string> attributeList;
@@ -58,7 +58,7 @@ std::vector<Task_ptr> GoalCreator::getFood(Individual::Individual_ptr individual
     return taskList;
 }
 
-std::vector<Task_ptr> GoalCreator::getItem(Individual::Individual_ptr individual, Item::Item_ptr item)
+std::vector<Task_ptr> GoalCreator::getItem(Actor::Individual_ptr individual, Item::Item_ptr item)
 {
     std::vector<Action::Task_ptr> taskList;
 

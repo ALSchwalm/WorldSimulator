@@ -15,24 +15,12 @@ namespace Location
 
 namespace Individual
 {
-    class BaseIndividual;
+    class Individual;
 
-    enum IndividualType
-    {
-        BAKER,
-
-        //insert before this
-        NUM_OF_INDIVIDUALS,
-        INDIVIDUAL_ERROR
-    };
 
     extern const unsigned int IndividualValues[];
 
-    std::shared_ptr<BaseIndividual> getRandomIndividual(std::string _name,
-                                                        Location::Location_ptr _location,
-                                                        bool _isMale=true);
-
-    std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<BaseIndividual> individual);
+    std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<Individual> individual);
 
 
 }

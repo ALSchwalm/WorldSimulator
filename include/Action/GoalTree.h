@@ -13,7 +13,7 @@ namespace Action
     class GoalTree
     {
     public:
-        GoalTree(Individual::Individual_ptr);
+        GoalTree(Actor::Individual_ptr);
         ~GoalTree();
 
         GoalTree& operator=(GoalTree&) = delete;

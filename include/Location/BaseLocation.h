@@ -43,7 +43,7 @@ namespace Location
         void setAttribute(std::string s) {attributes[s] = true;}
         bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
-        const Individual::IndividualList& getIndividuals() {return individuals;}
+        const Actor::IndividualList& getIndividuals() {return individuals;}
         const Item::ItemList& getItems() {return items;}
         const Event::EventHistory & getHistory(){return history;}
         const std::unordered_set<Location_ptr>& getLocations() {return locations;}
@@ -57,8 +57,8 @@ namespace Location
         virtual void addItem(Item::Item_ptr i) { items.push_back(i); }
         virtual void operator+=(Item::Item_ptr rhs)	{items.push_back(rhs);}
 
-        virtual void addIndividual(Individual::Individual_ptr i){individuals.push_back(i);}
-        virtual void operator+=(Individual::Individual_ptr rhs){individuals.push_back(rhs);	}
+        virtual void addIndividual(Actor::Individual_ptr i){individuals.push_back(i);}
+        virtual void operator+=(Actor::Individual_ptr rhs){individuals.push_back(rhs);	}
 
         void addLocation(Location::Location_ptr l);
         void operator+=(Location::Location_ptr rhs);
@@ -79,7 +79,7 @@ namespace Location
         std::map<std::string, bool> attributes;
         std::string name;
 
-        std::vector<Individual::Individual_ptr> individuals;
+        std::vector<Actor::Individual_ptr> individuals;
         std::vector<Item::Item_ptr> items;
 
 

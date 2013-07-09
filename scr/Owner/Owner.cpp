@@ -4,17 +4,17 @@
 namespace Owner
 {
 
-    Owner::Owner(std::shared_ptr<Individual::BaseIndividual> o)
+    Owner::Owner(std::shared_ptr<Actor::Individual> o)
     {
         owner.push_back(o);
     }
 
-    Owner::Owner(const std::vector<Individual::Individual_ptr> & os)
+    Owner::Owner(const std::vector<Actor::Individual_ptr> & os)
     {
         owner = os;
     }
 
-    bool operator==(Owner lhs, Individual::Individual_ptr rhs)
+    bool operator==(Owner lhs, Actor::Individual_ptr rhs)
     {
         if (lhs.owner.size() != 1)
         {
@@ -26,17 +26,17 @@ namespace Owner
         }
     }
 
-    bool operator!=(Owner lhs, Individual::Individual_ptr rhs)
+    bool operator!=(Owner lhs, Actor::Individual_ptr rhs)
     {
         return !(lhs == rhs);
     }
 
-    bool operator==(Owner & lhs, std::vector<Individual::Individual_ptr> & rhs)
+    bool operator==(Owner & lhs, std::vector<Actor::Individual_ptr> & rhs)
     {
         return lhs == rhs;
     }
 
-    bool operator!=(Owner & lhs, std::vector<Individual::Individual_ptr> & rhs)
+    bool operator!=(Owner & lhs, std::vector<Actor::Individual_ptr> & rhs)
     {
         return !(lhs == rhs);
     }

@@ -6,10 +6,10 @@
 #include <utility>
 #include <memory>
 
-namespace Individual
+namespace Actor
 {
-    class BaseIndividual;
-    typedef std::shared_ptr<BaseIndividual> Individual_ptr;
+    class Individual;
+    typedef std::shared_ptr<Individual> Individual_ptr;
 }
 
 namespace Location
@@ -29,13 +29,13 @@ namespace Action
         static GoalCreator& getInstance();
 
         template<GoalType g>
-        Goal_ptr createGoal(Individual::Individual_ptr individual, unsigned int priority);
+        Goal_ptr createGoal(Actor::Individual_ptr individual, unsigned int priority);
 
         template<GoalType g, typename T>
-        Goal_ptr createGoal(T t, Individual::Individual_ptr individual, unsigned int priority);
+        Goal_ptr createGoal(T t, Actor::Individual_ptr individual, unsigned int priority);
 
         template<GoalType g, typename T, typename U>
-        Goal_ptr createGoal(T t, U u, Individual::Individual_ptr individual, unsigned int priority);
+        Goal_ptr createGoal(T t, U u, Actor::Individual_ptr individual, unsigned int priority);
 
 
 
@@ -45,11 +45,11 @@ namespace Action
         {
             bool operator() ( const Location::Location_ptr& lhs, const Location::Location_ptr& rhs) const;
         };
-        std::vector<Task_ptr> getFood(Individual::Individual_ptr individual);
-        std::vector<Task_ptr> getItem(Individual::Individual_ptr individual, Item::Item_ptr item);
+        std::vector<Task_ptr> getFood(Actor::Individual_ptr individual);
+        std::vector<Task_ptr> getItem(Actor::Individual_ptr individual, Item::Item_ptr item);
 
 
-        std::vector<Task_ptr> findItemFromAttributes(Individual::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance);
+        std::vector<Task_ptr> findItemFromAttributes(Actor::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance);
         std::vector<Location::Location_ptr> traceBack(Location::Location_ptr l);
 
         std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance);

@@ -2,7 +2,7 @@
 #include "Item/ItemManager.h"
 
 namespace Event {
-    PickupEvent::PickupEvent(Item::Item_ptr _item, Individual::Individual_ptr _individual) :
+    PickupEvent::PickupEvent(Item::Item_ptr _item, Actor::Individual_ptr _individual) :
             BaseEvent("Pickup"),
             item(_item),
             individual(_individual)

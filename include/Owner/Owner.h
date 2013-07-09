@@ -5,10 +5,10 @@
 #include <vector>
 #include <memory>
 
-namespace Individual
+namespace Actor
 {
-    class BaseIndividual;
-    typedef std::shared_ptr<Individual::BaseIndividual> Individual_ptr;
+    class Individual;
+    typedef std::shared_ptr<Individual> Individual_ptr;
 }
 
 
@@ -19,16 +19,16 @@ namespace Owner
     {
     public:
         Owner(){}
-        Owner(std::shared_ptr<Individual::BaseIndividual>);
-        Owner(const std::vector<Individual::Individual_ptr>&);
+        Owner(std::shared_ptr<Actor::Individual>);
+        Owner(const std::vector<Actor::Individual_ptr>&);
 
-        friend bool operator==(Owner o, Individual::Individual_ptr);
-        friend bool operator!=(Owner o, Individual::Individual_ptr);
-        friend bool operator==(const Owner& o, std::vector<Individual::Individual_ptr>&);
-        friend bool operator!=(const Owner& o, std::vector<Individual::Individual_ptr>&);
+        friend bool operator==(Owner o, Actor::Individual_ptr);
+        friend bool operator!=(Owner o, Actor::Individual_ptr);
+        friend bool operator==(const Owner& o, std::vector<Actor::Individual_ptr>&);
+        friend bool operator!=(const Owner& o, std::vector<Actor::Individual_ptr>&);
 
     private:
-        std::vector<Individual::Individual_ptr> owner;
+        std::vector<Actor::Individual_ptr> owner;
 
     };
 

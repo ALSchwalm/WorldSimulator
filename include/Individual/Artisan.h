@@ -3,7 +3,7 @@
 
 #include "Event/Event.h"
 #include "Event/BaseEvent.h"
-#include "Individual/BaseIndividual.h"
+#include "Individual/BaseProfession.h"
 #include <string>
 #include <memory>
 
@@ -13,18 +13,24 @@ namespace Item
     typedef std::shared_ptr<BaseItem> Item_ptr;
 }
 
-namespace Individual
+namespace Location
 {
-    class Artisan : virtual public BaseIndividual
+    class BaseLocation;
+    typedef std::shared_ptr<BaseLocation> Location_ptr;
+}
+
+
+namespace Profession
+{
+    class Artisan : virtual public BaseProfession
     {
     public:
         virtual Item::Item_ptr createItem(){return NULL;}
-        virtual IndividualType getIndividualType() override {return IndividualType::INDIVIDUAL_ERROR;}
+        virtual ProfessionType getProfessionType() override {return ProfessionType::INDIVIDUAL_ERROR;}
 
         virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
     protected:
-        Artisan(std::string name, bool);
-        Artisan(std::string name, Location_ptr location, bool);
+        Artisan(){}
 
         Artisan(const Artisan&) = delete;
         Artisan& operator=(const Artisan&) = delete;

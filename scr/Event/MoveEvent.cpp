@@ -2,7 +2,7 @@
 
 namespace Event {
     MoveEvent::MoveEvent(
-            std::shared_ptr<Individual::BaseIndividual> i,
+            std::shared_ptr<Actor::Individual> i,
             std::shared_ptr<Location::BaseLocation> l) :
             BaseEvent("Move"),
             newLocation(l),
@@ -13,7 +13,7 @@ namespace Event {
 
     MoveEvent::MoveEvent(
             Time::Date d,
-            std::shared_ptr<Individual::BaseIndividual> i,
+            std::shared_ptr<Actor::Individual> i,
             std::shared_ptr<Location::BaseLocation> l) :
             BaseEvent(d, "Move"),
             newLocation(l),
