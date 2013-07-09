@@ -13,14 +13,15 @@ namespace Location
 }
 
 
-namespace Individual
+namespace Profession
 {
-    class Individual;
+
+    class BaseProfession;
 
 
-    extern const unsigned int IndividualValues[];
+    extern const unsigned int ProfessionValues[];
 
-    std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<Individual> individual);
+    //std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<Individual> individual);
 
 
 }

@@ -10,7 +10,7 @@ namespace Profession
         BAKER,
 
         //insert before this
-        NUM_OF_INDIVIDUALS,
+        NUM_OF_PROFESSIONS,
         INDIVIDUAL_ERROR
     };
 

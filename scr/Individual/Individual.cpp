@@ -1,44 +1,39 @@
 
 #include "Individual/Individual.h"
-#include "Individual/BaseIndividual.h"
+#include "Individual/BaseProfession.h"
 #include "Individual/SimpleIndividual.h"
 #include "Utils/Config.h"
 
-namespace Individual
+namespace Profession
 {
 
-    const unsigned int IndividualValues[]
+    const unsigned int ProfessionValues[]
     {
         Utils::Config::getInstance().getValue("OccupationRate", "BAKER_RATE")
     };
 
-    static_assert(sizeof(IndividualValues)/sizeof(IndividualValues[0]) == NUM_OF_INDIVIDUALS,
+    static_assert(sizeof(ProfessionValues)/sizeof(ProfessionValues[0]) == NUM_OF_PROFESSIONS,
             "IndividualType not given value in IndividualValues.");
 
 
-    static std::shared_ptr<BaseIndividual> createIndividualFromType(IndividualType _type,
-                                                                    std::string _name,
-                                                                    Location::Location_ptr _location,
-                                                                    bool _isMale)
+    static std::shared_ptr<BaseProfession> createIndividualFromType(ProfessionType _type)
     {
         switch(_type)
         {
         case BAKER:
-            return std::make_shared<Baker>(_name, _location, _isMale);
+            return std::make_shared<Baker>();
         default:
             throw("Attempt to create individual from invalid enum.");
             return nullptr;
         }
     }
 
-    std::shared_ptr<BaseIndividual> getRandomIndividual(std::string _name,
-                                                        Location::Location_ptr _location,
-                                                        bool _isMale)
+    std::shared_ptr<BaseProfession> getRandomProfession()
     {
-        IndividualType individual = static_cast<IndividualType>(rand()%NUM_OF_INDIVIDUALS);
-        return createIndividualFromType(individual, _name, _location, _isMale);
+        ProfessionType profession = static_cast<ProfessionType>(rand()%NUM_OF_PROFESSIONS);
+        return createIndividualFromType(profession);
     }
-
+/*
     std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<BaseIndividual> individual)
     {
         std::vector<Item::Item_ptr> items;
@@ -47,5 +42,5 @@ namespace Individual
             item->setOwner(individual);
         return items;
     }
-
+*/
 }

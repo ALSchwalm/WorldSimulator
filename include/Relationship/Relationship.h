@@ -42,13 +42,13 @@ namespace Relationship
         }
     }
 
-    void createSymetricRelationship(Individual::Individual_ptr one,
-                                    Individual::Individual_ptr two,
+    void createSymetricRelationship(Actor::Individual_ptr one,
+                                    Actor::Individual_ptr two,
                                     RelationshipType rel);
 
-    void createASymetricRelationship(Individual::Individual_ptr one,
+    void createASymetricRelationship(Actor::Individual_ptr one,
                                     RelationshipType relOne,
-                                    Individual::Individual_ptr two,
+                                    Actor::Individual_ptr two,
                                     RelationshipType relTwo);
 
     template<typename T>

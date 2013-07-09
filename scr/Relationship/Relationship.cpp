@@ -3,13 +3,13 @@
 
 namespace Relationship
 {
-    void createSymetricRelationship(Individual::Individual_ptr one, Individual::Individual_ptr two, RelationshipType rel)
+    void createSymetricRelationship(Actor::Individual_ptr one, Actor::Individual_ptr two, RelationshipType rel)
     {
         one->getIndividualRelationshipMap().addRelationship(two, rel);
         two->getIndividualRelationshipMap().addRelationship(one, rel);
     }
 
-    void createASymetricRelationship(Individual::Individual_ptr one, RelationshipType relOne, Individual::Individual_ptr two, RelationshipType relTwo)
+    void createASymetricRelationship(Actor::Individual_ptr one, RelationshipType relOne, Actor::Individual_ptr two, RelationshipType relTwo)
     {
         one->getIndividualRelationshipMap().addRelationship(two, relTwo);
         two->getIndividualRelationshipMap().addRelationship(one, relOne);
