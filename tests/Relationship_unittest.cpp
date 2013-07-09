@@ -2,16 +2,16 @@
 
 #include <algorithm>
 #include <memory>
-#include "Individual/BaseIndividual.h"
-#include "Individual/SimpleIndividual.h"
+#include "Individual/Individual.h"
+#include "Individual/SimpleProfession.h"
 #include "Location/Village.h"
 #include "Relationship/Relationship.h"
 
 TEST(RelationshipTest, Relationships)
 {
 
-	auto individual_one = std::make_shared<Individual::Baker>("Person1", true);
-	auto individual_two = std::make_shared<Individual::Baker>("Person2", true);
+	auto individual_one = std::make_shared<Actor::Individual>("Person1", true);
+	auto individual_two = std::make_shared<Actor::Individual>("Person2", true);
 	auto location = std::make_shared<Location::Village>("Village");
 
 	individual_one->addRelationship(location, Relationship::RelationshipType::BIRTHPLACE);

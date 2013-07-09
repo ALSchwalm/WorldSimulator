@@ -1,7 +1,7 @@
 
 #include "Individual/Individual.h"
 #include "Individual/BaseProfession.h"
-#include "Individual/SimpleIndividual.h"
+#include "Individual/SimpleProfession.h"
 #include "Utils/Config.h"
 
 namespace Profession

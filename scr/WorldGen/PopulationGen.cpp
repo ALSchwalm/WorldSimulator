@@ -2,7 +2,7 @@
 #include "Location/World.h"
 #include "Location/Location.h"
 #include "Item/Container.h"
-#include "Individual/SimpleIndividual.h"
+#include "Individual/SimpleProfession.h"
 #include "Individual/Individual.h"
 #include "Individual/Individual.h"
 #include "Utils/Markov.h"

@@ -3,14 +3,14 @@
 #include "Item/Weapon.h"
 #include "Item/Tool.h"
 #include "Item/Container.h"
-#include "Individual/SimpleIndividual.h"
+#include "Individual/SimpleProfession.h"
 #include "Item/ItemUtils.h"
 
 #include <memory>
 
 TEST(CraftingTest, CraftTool)
 {
-	auto individual = std::make_shared<Individual::Baker>("TestIndividaul");
+	auto individual = std::make_shared<Actor::Individual>("TestIndividaul");
 	auto item = std::make_shared<Item::Food<Item::BREAD>>();
 	auto wheat = std::make_shared<Item::Food<Item::WHEAT>>();
 
