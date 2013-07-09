@@ -36,10 +36,10 @@ void seed()
                     auto house = std::make_shared<Item::Container<Item::HOUSE>>();
                     for (unsigned int i=0; i < family_size; ++i)
                     {
-                        auto newIndividual = Individual::getRandomIndividual(Utils::Markov::getInstance().getProperWord(), city, rand()%2);
+                        auto newIndividual = std::make_shared<Actor::Individual>(Utils::Markov::getInstance().getProperWord(), city, rand()%2);
                         house->addIndividual(newIndividual);
-                        for (auto item : Individual::getInitialItems(newIndividual))
-                            house->addItem(item);
+                       // for (auto item : Individual::getInitialItems(newIndividual))
+                        //    house->addItem(item);
                     }
                     city->addItem(house);
                     Location::addLocations(city, house);

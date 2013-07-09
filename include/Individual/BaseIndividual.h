@@ -27,18 +27,6 @@ namespace Actor
     class Individual
     {
     protected:
-        Individual(std::string _name, Location_ptr _location, bool _isMale=true) :
-            age(0),
-            name(_name),
-            isMale(_isMale),
-            currentLocation(_location),
-            goalTree(std::make_shared<Individual>(*this)){} //FIXME review this
-
-        Individual(std::string _name, bool _isMale=true) :
-            Individual(_name, nullptr, _isMale){}
-
-        Individual& operator=(const Individual&) = delete;
-
         Relationship::RelationshipMap<Individual_ptr> IndividualRelationshipMap;
         Relationship::RelationshipMap<Location_ptr> LocationRelationshipMap;
 
@@ -53,7 +41,20 @@ namespace Actor
 
         Action::GoalTree goalTree;
         Skill::skillMap skillMap;
+
     public:
+        Individual(std::string _name, Location_ptr _location, bool _isMale=true) :
+            age(0),
+            name(_name),
+            isMale(_isMale),
+            currentLocation(_location),
+            goalTree(std::make_shared<Individual>(*this)){} //FIXME review this
+
+        Individual(std::string _name, bool _isMale=true) :
+            Individual(_name, nullptr, _isMale){}
+
+        Individual& operator=(const Individual&) = delete;
+
         virtual ~Individual(){}
 
         Location_ptr getCurrentLocation() { return currentLocation; }
