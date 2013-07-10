@@ -3,7 +3,7 @@
 
 #include "Event/Event.h"
 #include "Event/BaseEvent.h"
-#include "Individual/BaseProfession.h"
+#include "Profession/BaseProfession.h"
 #include <string>
 #include <memory>
 

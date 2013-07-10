@@ -2,7 +2,7 @@
 #define CRAFTING_H_
 
 #include "Item/BaseItem.h"
-#include "Individual/Individual.h"
+#include "Actor/Individual.h"
 #include "Item/ItemUtils.h"
 #include <memory>
 #include <type_traits>

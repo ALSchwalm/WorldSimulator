@@ -1,7 +1,7 @@
 
-#include "Individual/Individual.h"
-#include "Individual/BaseProfession.h"
-#include "Individual/SimpleProfession.h"
+#include "Actor/Individual.h"
+#include "Profession/BaseProfession.h"
+#include "Profession/SimpleProfession.h"
 #include "Utils/Config.h"
 
 namespace Profession

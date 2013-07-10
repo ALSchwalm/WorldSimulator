@@ -1,9 +1,9 @@
-#include "Individual/BaseProfession.h"
+#include "Profession/BaseProfession.h"
 #include <exception>
 
 namespace Profession
 {
-    const float BaseProfession::getSkillLevel(Skill::skills s)
+    const float BaseProfession::getSkillLevel(Skill::skills s) noexcept
     {
         try {
             return skillMap.at(s);

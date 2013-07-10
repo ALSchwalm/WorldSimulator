@@ -1,9 +1,9 @@
 #ifndef SIMPLEINDIVIDUAL_H_
 #define SIMPLEINDIVIDUAL_H_
 
-#include "Individual/BaseProfession.h"
-#include "Individual/Artisan.h"
-#include "Individual/Merchant.h"
+#include "Profession/BaseProfession.h"
+#include "Profession/Artisan.h"
+#include "Profession/Merchant.h"
 
 #include "Item/Food.h"
 #include "Skill/Skill.h"

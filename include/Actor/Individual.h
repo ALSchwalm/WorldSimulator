@@ -1,8 +1,8 @@
 #ifndef BASEINDIVIDUAL_H_
 #define BASEINDIVIDUAL_H_
 
-#include "Individual/Individual.h"
-#include "Individual/Profession.h"
+#include "Actor/Individual.h"
+#include "Profession/Profession.h"
 #include "Event/Event.h"
 #include "Item/BaseItem.h"
 #include "Action/GoalTree.h"

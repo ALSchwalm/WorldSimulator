@@ -2,9 +2,9 @@
 #include "Location/World.h"
 #include "Location/Location.h"
 #include "Item/Container.h"
-#include "Individual/SimpleProfession.h"
-#include "Individual/Individual.h"
-#include "Individual/Profession.h"
+#include "Profession/SimpleProfession.h"
+#include "Profession/Profession.h"
+#include "Actor/Individual.h"
 #include "Utils/Markov.h"
 #include "Utils/Config.h"
 #include <cstdlib>

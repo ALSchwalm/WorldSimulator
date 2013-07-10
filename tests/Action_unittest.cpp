@@ -1,4 +1,4 @@
-#include "Individual/SimpleProfession.h"
+#include "Profession/SimpleProfession.h"
 #include "Item/BaseItem.h"
 #include "Item/Weapon.h"
 #include "Action/Task.h"

@@ -1,3 +1,0 @@
-
-#include "Individual/Merchant.h"
-

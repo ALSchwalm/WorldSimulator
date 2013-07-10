@@ -1,7 +1,7 @@
 #ifndef BASEPROFESSION_H_
 #define BASEPROFESSION_H_
 
-#include "Individual/Profession.h"
+#include "Profession/Profession.h"
 #include "Skill/Skill.h"
 #include <memory>
 
@@ -12,7 +12,7 @@ namespace Profession
     {
     public:
         virtual ProfessionType getProfessionType()=0;
-        const float getSkillLevel(Skill::skills s);
+        const float getSkillLevel(Skill::skills s) noexcept;
 
         virtual ~BaseProfession(){}
     protected:

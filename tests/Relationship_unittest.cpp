@@ -1,9 +1,8 @@
 #include "gtest/gtest.h"
-
 #include <algorithm>
 #include <memory>
-#include "Individual/Individual.h"
-#include "Individual/SimpleProfession.h"
+#include "Actor/Individual.h"
+#include "Profession/SimpleProfession.h"
 #include "Location/Village.h"
 #include "Relationship/Relationship.h"
 

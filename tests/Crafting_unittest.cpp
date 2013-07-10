@@ -3,7 +3,7 @@
 #include "Item/Weapon.h"
 #include "Item/Tool.h"
 #include "Item/Container.h"
-#include "Individual/SimpleProfession.h"
+#include "Profession/SimpleProfession.h"
 #include "Item/ItemUtils.h"
 
 #include <memory>

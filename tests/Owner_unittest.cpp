@@ -1,6 +1,6 @@
 #include "Item/Weapon.h"
-#include "Individual/SimpleProfession.h"
-#include "Individual/Individual.h"
+#include "Profession/SimpleProfession.h"
+#include "Actor/Individual.h"
 #include "gtest/gtest.h"
 
 

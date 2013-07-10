@@ -1,5 +1,5 @@
-#include "Individual/Individual.h"
-#include "Individual/BaseProfession.h"
+#include "Actor/Individual.h"
+#include "Profession/BaseProfession.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
 #include <algorithm>
