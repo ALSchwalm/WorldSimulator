@@ -41,8 +41,8 @@ void seed()
                                                                                 city,
                                                                                 rand()%2);
                         house->addIndividual(newIndividual);
-                       // for (auto item : Individual::getInitialItems(newIndividual))
-                        //    house->addItem(item);
+                        for (auto item : newIndividual->getInitialItems())
+                            house->addItem(item);
                     }
                     city->addItem(house);
                     Location::addLocations(city, house);

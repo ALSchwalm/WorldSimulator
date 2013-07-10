@@ -12,6 +12,7 @@ namespace Profession
     {
     public:
         virtual ProfessionType getProfessionType()=0;
+        virtual void addInitialItems(std::vector<Item::Item_ptr> &)=0;
         const float getSkillLevel(Skill::skills s) noexcept;
 
         virtual ~BaseProfession(){}

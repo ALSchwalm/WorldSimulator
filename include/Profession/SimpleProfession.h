@@ -21,7 +21,7 @@ namespace Profession
 
         ProfessionType getProfessionType() override {return ProfessionType::BAKER;}
 
-        void addInitialItems(std::vector<Item::Item_ptr>& items)
+        void addInitialItems(std::vector<Item::Item_ptr>& items) override
         {
             items.push_back(std::make_shared<Item::Food<Item::BREAD> >());
         };

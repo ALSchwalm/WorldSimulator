@@ -8,6 +8,13 @@
 namespace Actor
 {
 
+    const std::vector<Item::Item_ptr> Individual::getInitialItems()
+    {
+        std::vector<Item::Item_ptr> items;
+        profession->addInitialItems(items);
+        return items;
+    }
+
     const float Individual::getSkillLevel(Skill::skills s)
     {
         try {

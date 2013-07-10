@@ -28,7 +28,6 @@ namespace Profession
         virtual Item::Item_ptr createItem(){return NULL;}
         virtual ProfessionType getProfessionType() override {return ProfessionType::PROFESSION_ERROR;}
 
-        virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
     protected:
         Artisan(){}
 
