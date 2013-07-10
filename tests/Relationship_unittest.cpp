@@ -10,8 +10,8 @@
 TEST(RelationshipTest, Relationships)
 {
 
-	auto individual_one = std::make_shared<Actor::Individual>("Person1", true);
-	auto individual_two = std::make_shared<Actor::Individual>("Person2", true);
+	auto individual_one = std::make_shared<Actor::Individual>("Person1", Profession::BAKER);
+	auto individual_two = std::make_shared<Actor::Individual>("Person2", Profession::BAKER);
 	auto location = std::make_shared<Location::Village>("Village");
 
 	individual_one->addRelationship(location, Relationship::RelationshipType::BIRTHPLACE);

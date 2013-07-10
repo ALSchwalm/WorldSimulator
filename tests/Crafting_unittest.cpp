@@ -10,7 +10,7 @@
 
 TEST(CraftingTest, CraftTool)
 {
-	auto individual = std::make_shared<Actor::Individual>("TestIndividaul");
+	auto individual = std::make_shared<Actor::Individual>("TestIndividaul", Profession::BAKER);
 	auto item = std::make_shared<Item::Food<Item::BREAD>>();
 	auto wheat = std::make_shared<Item::Food<Item::WHEAT>>();
 
