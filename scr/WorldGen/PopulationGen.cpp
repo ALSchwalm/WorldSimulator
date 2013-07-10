@@ -4,7 +4,7 @@
 #include "Item/Container.h"
 #include "Individual/SimpleProfession.h"
 #include "Individual/Individual.h"
-#include "Individual/Individual.h"
+#include "Individual/Profession.h"
 #include "Utils/Markov.h"
 #include "Utils/Config.h"
 #include <cstdlib>
@@ -36,7 +36,10 @@ void seed()
                     auto house = std::make_shared<Item::Container<Item::HOUSE>>();
                     for (unsigned int i=0; i < family_size; ++i)
                     {
-                        auto newIndividual = std::make_shared<Actor::Individual>(Utils::Markov::getInstance().getProperWord(), city, rand()%2);
+                        auto newIndividual = std::make_shared<Actor::Individual>(Utils::Markov::getInstance().getProperWord(),
+                                                                                Profession::BAKER,
+                                                                                city,
+                                                                                rand()%2);
                         house->addIndividual(newIndividual);
                        // for (auto item : Individual::getInitialItems(newIndividual))
                         //    house->addItem(item);

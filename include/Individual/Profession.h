@@ -15,10 +15,19 @@ namespace Location
 
 namespace Profession
 {
+    enum ProfessionType
+    {
+        BAKER,
+
+        //insert before this
+        NUM_OF_PROFESSIONS,
+        PROFESSION_ERROR
+    };
 
     class BaseProfession;
+    typedef std::shared_ptr<BaseProfession> Profession_ptr;
 
-
+    std::shared_ptr<BaseProfession> createProfessionFromType(ProfessionType _type);
     extern const unsigned int ProfessionValues[];
 
     //std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<Individual> individual);

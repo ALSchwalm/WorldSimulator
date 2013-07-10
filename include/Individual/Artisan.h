@@ -26,7 +26,7 @@ namespace Profession
     {
     public:
         virtual Item::Item_ptr createItem(){return NULL;}
-        virtual ProfessionType getProfessionType() override {return ProfessionType::INDIVIDUAL_ERROR;}
+        virtual ProfessionType getProfessionType() override {return ProfessionType::PROFESSION_ERROR;}
 
         virtual void addInitialItems(std::vector<Item::Item_ptr> &){};
     protected:

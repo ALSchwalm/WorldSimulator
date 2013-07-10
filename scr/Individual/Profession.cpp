@@ -16,22 +16,31 @@ namespace Profession
             "IndividualType not given value in IndividualValues.");
 
 
-    static std::shared_ptr<BaseProfession> createIndividualFromType(ProfessionType _type)
+    std::shared_ptr<BaseProfession> createProfessionFromType(ProfessionType _type)
     {
+        /*
+         * Do not set a default case to cause a compiler warning if a case is unhandled
+         */
         switch(_type)
         {
         case BAKER:
             return std::make_shared<Baker>();
-        default:
+
+        case NUM_OF_PROFESSIONS:
+            throw("Attempt to create individual from invalid enum.");
+            return nullptr;
+
+        case PROFESSION_ERROR:
             throw("Attempt to create individual from invalid enum.");
             return nullptr;
         }
+        return nullptr;
     }
 
     std::shared_ptr<BaseProfession> getRandomProfession()
     {
         ProfessionType profession = static_cast<ProfessionType>(rand()%NUM_OF_PROFESSIONS);
-        return createIndividualFromType(profession);
+        return createProfessionFromType(profession);
     }
 /*
     std::vector<Item::Item_ptr> getInitialItems(std::shared_ptr<BaseIndividual> individual)

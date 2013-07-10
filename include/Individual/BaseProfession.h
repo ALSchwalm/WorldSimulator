@@ -1,27 +1,25 @@
 #ifndef BASEPROFESSION_H_
 #define BASEPROFESSION_H_
 
+#include "Individual/Profession.h"
+#include "Skill/Skill.h"
 #include <memory>
 
 namespace Profession
 {
-    enum ProfessionType
-    {
-        BAKER,
-
-        //insert before this
-        NUM_OF_PROFESSIONS,
-        INDIVIDUAL_ERROR
-    };
-
 
     class BaseProfession
     {
     public:
         virtual ProfessionType getProfessionType()=0;
+        const float getSkillLevel(Skill::skills s);
 
         virtual ~BaseProfession(){}
-    private:
+    protected:
+        BaseProfession(){}
+
+        bool setSkill(Skill::skills s, const float f);
+        Skill::skillMap skillMap;
 
     };
 

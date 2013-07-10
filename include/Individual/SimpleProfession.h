@@ -15,8 +15,8 @@ namespace Profession
     public:
         Baker()
         {
-            //setSkill(Skill::BAKING, 5.0f);
-            //setSkill(Skill::COOKING, 5.0f);
+            setSkill(Skill::BAKING, 5.0f);
+            setSkill(Skill::COOKING, 5.0f);
         }
 
         ProfessionType getProfessionType() override {return ProfessionType::BAKER;}
@@ -27,10 +27,5 @@ namespace Profession
         };
 
     };
-
-
-
-
-
 }
 #endif

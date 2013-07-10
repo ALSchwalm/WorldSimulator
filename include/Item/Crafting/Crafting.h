@@ -39,11 +39,9 @@ namespace Item
         template<typename T>
         inline Item_ptr createItem(Individual::Individual_ptr individual)
         {
-
-
             for (auto p : T::getRequiredSkill())
             {
-                if (individual->getSkillMap()[p.first] < p.second)
+                if (individual->getSkillLevel(p.first) < p.second)
                     return nullptr;
             }
             if (hasItems<T>(individual).size() == 0)

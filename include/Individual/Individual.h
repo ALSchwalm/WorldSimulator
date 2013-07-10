@@ -2,6 +2,7 @@
 #define BASEINDIVIDUAL_H_
 
 #include "Individual/Individual.h"
+#include "Individual/Profession.h"
 #include "Event/Event.h"
 #include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
@@ -31,6 +32,8 @@ namespace Actor
         Relationship::RelationshipMap<Location_ptr> LocationRelationshipMap;
 
         std::vector<Item::Item_ptr> items;
+
+        Profession::Profession_ptr profession;
         unsigned int age;
         const std::string name;
         bool isMale;
@@ -43,15 +46,16 @@ namespace Actor
         Skill::skillMap skillMap;
 
     public:
-        Individual(std::string _name, Location_ptr _location, bool _isMale=true) :
-            age(0),
-            name(_name),
-            isMale(_isMale),
-            currentLocation(_location),
-            goalTree(std::make_shared<Individual>(*this)){} //FIXME review this
-
-        Individual(std::string _name, bool _isMale=true) :
-            Individual(_name, nullptr, _isMale){}
+        Individual(std::string _name,
+                    Profession::ProfessionType p,
+                    Location_ptr _location = nullptr,
+                    bool _isMale=true) :
+                        profession(Profession::createProfessionFromType(p)),
+                        age(0),
+                        name(_name),
+                        isMale(_isMale),
+                        currentLocation(_location),
+                        goalTree(std::make_shared<Individual>(*this)){} //FIXME review this
 
         Individual& operator=(const Individual&) = delete;
 
@@ -66,7 +70,10 @@ namespace Actor
         const std::vector<Item::Item_ptr>& getItems() {return items;}
         Relationship::RelationshipMap<Individual_ptr>& getIndividualRelationshipMap() {return IndividualRelationshipMap;}
         Relationship::RelationshipMap<Location_ptr>& getLocationRelationshipMap() {return LocationRelationshipMap;}
-        Skill::skillMap& getSkillMap() {return skillMap;}
+
+        //TODO decide whether this should be added with the profession skill
+        const Skill::skillMap& getSkillMap() {return skillMap;}
+        const float getSkillLevel(Skill::skills s);
 
         void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
         void addItem(Item::Item_ptr i) {items.push_back(i);}
