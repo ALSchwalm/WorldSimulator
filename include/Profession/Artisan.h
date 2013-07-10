@@ -26,13 +26,10 @@ namespace Profession
     {
     public:
         virtual Item::Item_ptr createItem(){return NULL;}
-        virtual ProfessionType getProfessionType() override {return ProfessionType::PROFESSION_ERROR;}
 
     protected:
-        Artisan(){}
 
-        Artisan(const Artisan&) = delete;
-        Artisan& operator=(const Artisan&) = delete;
+        virtual ~Artisan(){}
 
     private:
 

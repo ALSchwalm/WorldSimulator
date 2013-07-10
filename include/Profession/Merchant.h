@@ -34,16 +34,9 @@ namespace Profession
 
         virtual std::vector<Item::Item_ptr> getItemsForSale() { return itemsForSale;}
 
-        ProfessionType getProfessionType() override {return ProfessionType::PROFESSION_ERROR;}
-
-
     protected:
-        Merchant(){}
 
-        Merchant(const Merchant&) = delete;
-        Merchant& operator=(const Merchant&) = delete;
-
-        ~Merchant(){}
+        virtual ~Merchant(){}
 
     private:
         std::vector<Item::Item_ptr> itemsForSale;
