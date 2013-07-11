@@ -36,18 +36,27 @@ namespace Item
             return usedItems;
         }
 
-        template<typename T>
-        inline Item_ptr createItem(Individual::Individual_ptr individual)
+        template<typename T, typename... U>
+        inline Item_ptr createItem(Individual::Individual_ptr individual, U... args)
         {
             for (auto p : T::getRequiredSkill())
             {
                 if (individual->getSkillLevel(p.first) < p.second)
                     return nullptr;
             }
-            if (hasItems<T>(individual).size() == 0)
-                return nullptr;
+            auto usedItems = hasItems<T>(individual);
 
-            return std::make_shared<T>();
+            if (usedItems.empty())
+            {
+                return nullptr;
+            }
+            else
+            {
+                for (auto item : usedItems)
+                    individual->removeItem(item);
+            }
+
+            return std::make_shared<T>(args...);
         }
     }
 }

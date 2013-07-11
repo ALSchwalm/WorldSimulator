@@ -14,9 +14,15 @@ TEST(CraftingTest, CraftTool)
 	auto item = std::make_shared<Item::Food<Item::BREAD>>();
 	auto wheat = std::make_shared<Item::Food<Item::WHEAT>>();
 
+	//Add required items to individual inventory
 	individual->addItem(wheat);
 
-	//EXPECT_TRUE(Item::isEnumType<Item::FOOD>(item, Item::Food::BREAD));
+	//Use up items
 	EXPECT_TRUE(Item::Crafting::createItem<Item::Food<Item::BREAD>>(individual) != nullptr);
+
+	//Test that items are removed
+	EXPECT_TRUE(Item::Crafting::createItem<Item::Food<Item::BREAD>>(individual) == nullptr);
+
+	//Test that items are required
 	EXPECT_TRUE(Item::Crafting::createItem<Item::Container<Item::HOUSE>>(individual) == nullptr);
 }
