@@ -19,9 +19,12 @@ namespace Relationship
     enum RelationshipType
     {
         CITIZEN,
-        PARENT,
+        FATHER,
+        MOTHER,
         CHILD,
         FRIEND,
+        WIFE,
+        HUSBAND,
 
         BIRTHPLACE,
 

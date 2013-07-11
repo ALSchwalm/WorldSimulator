@@ -16,7 +16,7 @@ TEST(RelationshipTest, Relationships)
 	individual_one->addRelationship(location, Relationship::RelationshipType::BIRTHPLACE);
 
 	Relationship::createSymetricRelationship(individual_one, individual_two, Relationship::RelationshipType::FRIEND);
-	Relationship::createASymetricRelationship(individual_one, Relationship::RelationshipType::PARENT, individual_two, Relationship::RelationshipType::CHILD);
+	Relationship::createASymetricRelationship(individual_one, Relationship::WIFE, individual_two, Relationship::HUSBAND);
 
 	EXPECT_TRUE(individual_one->getIndividualRelationshipMap().getRelationships(individual_two).size() == 2);
 	EXPECT_TRUE(individual_two->getIndividualRelationshipMap().getRelationships(individual_one).size() == 2);

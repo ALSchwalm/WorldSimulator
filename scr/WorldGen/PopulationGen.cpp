@@ -5,6 +5,7 @@
 #include "Profession/SimpleProfession.h"
 #include "Profession/Profession.h"
 #include "Actor/Individual.h"
+#include "Actor/ActorUtils.h"
 #include "Utils/Markov.h"
 #include "Utils/Config.h"
 #include <cstdlib>
@@ -34,16 +35,12 @@ void seed()
                     family_size = population % 5 + 1;
 
                     auto house = std::make_shared<Item::Container<Item::HOUSE>>();
-                    for (unsigned int i=0; i < family_size; ++i)
-                    {
-                        auto newIndividual = std::make_shared<Actor::Individual>(Utils::Markov::getInstance().getProperWord(),
-                                                                                Profession::BAKER,
-                                                                                city,
-                                                                                rand()%2);
-                        house->addIndividual(newIndividual);
-                        for (auto item : newIndividual->getInitialItems())
-                            house->addItem(item);
-                    }
+
+                    Actor::createFamily(family_size, house);
+                    /*house->addIndividual(newIndividual);
+                    for (auto item : newIndividual->getInitialItems())
+                        house->addItem(item);*/
+
                     city->addItem(house);
                     Location::addLocations(city, house);
                 }
