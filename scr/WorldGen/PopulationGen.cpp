@@ -37,9 +37,6 @@ void seed()
                     auto house = std::make_shared<Item::Container<Item::HOUSE>>();
 
                     Actor::createFamily(family_size, house);
-                    /*house->addIndividual(newIndividual);
-                    for (auto item : newIndividual->getInitialItems())
-                        house->addItem(item);*/
 
                     city->addItem(house);
                     Location::addLocations(city, house);

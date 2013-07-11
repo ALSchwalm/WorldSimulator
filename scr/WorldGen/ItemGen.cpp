@@ -4,18 +4,43 @@
 #include "Location/World.h"
 #include "Location/Location.h"
 #include <memory>
+#include <unordered_set>
+#include <list>
 
-using namespace WorldGen;
-
-void seed()
+namespace WorldGen
 {
-    for (auto location : Location::World::getInstance()->getLocations())
+    namespace ItemGen
     {
-        for (auto region : location->getLocations())
+        void seed()
         {
-            auto house = std::make_shared<Item::Container<Item::HOUSE>>();
-            Location::addLocations(region, house);
+            std::list<Location::Location_ptr> openset;
+            std::unordered_set<Location::Location_ptr> closedset;
+
+            openset.push_back(Location::World::getInstance());
+
+            for (auto location : openset)
+            {
+                closedset.insert(location);
+                for (auto possibleLocation : location->getLocations())
+                {
+                    if (closedset.find(possibleLocation) == closedset.end() and
+                            std::find(openset.begin(), openset.end(), possibleLocation) == openset.end())
+                    {
+                        openset.push_back(possibleLocation);
+                    }
+                }
+
+
+                for (auto individual : location->getIndividuals())
+                {
+                    for (auto item : individual->getInitialItems())
+                        location->addItem(item);
+                }
+
+            }
+
         }
     }
-
 }
+
+

@@ -11,6 +11,7 @@
 #include "Time/TimeManager.h"
 #include "WorldGen/LocationGen.h"
 #include "WorldGen/PopulationGen.h"
+#include "WorldGen/ItemGen.h"
 
 int main()
 {
@@ -18,6 +19,7 @@ int main()
     {
         WorldGen::LocationGen::seed();
         WorldGen::PopulationGen::seed();
+        WorldGen::ItemGen::seed();
 
         Interface::initialize();
 
