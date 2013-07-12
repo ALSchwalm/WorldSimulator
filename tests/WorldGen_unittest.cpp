@@ -1,5 +1,6 @@
 #include "WorldGen/LocationGen.h"
 #include "WorldGen/PopulationGen.h"
+#include "WorldGen/ItemGen.h"
 #include "Location/World.h"
 #include "gtest/gtest.h"
 
@@ -33,4 +34,22 @@ TEST(WorldGenTest, SeedPopulation)
 		}
 
 	}
+}
+
+
+TEST(WorldGenTest, SeedItems)
+{
+    WorldGen::ItemGen::seed();
+
+    for (auto region : Location::World::getInstance()->getLocations())
+    {
+        for (auto city : region->getLocationsByAttribute("habitable"))
+        {
+            for (auto house : city->getLocationsByType(Location::CONTAINER))
+            {
+                if (!house->getIndividuals().empty())
+                    EXPECT_FALSE(house->getItems().empty());
+            }
+        }
+    }
 }
