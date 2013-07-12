@@ -46,15 +46,12 @@ namespace Item
     {
     public:
         const ItemType getItemType() override {return CONTAINER;}
-        const containerType getContainerType() {return containertype;}
-
-        Location::LocationType getLocationType() override {return Location::CONTAINER;}
-        void addItem(Item_ptr _item) override {items.push_back(_item);}
-
-        const std::vector<Item_ptr>& getItems() {return items;}
-
         static constexpr ItemType getStaticItemType(){return CONTAINER;}
 
+        Location::LocationType getLocationType() override {return Location::CONTAINER;}
+        static constexpr Location::LocationType getStaticLocationType() {return Location::CONTAINER;}
+
+        const containerType getContainerType() {return containertype;}
     protected:
         BaseContainer(std::string _name, containerType _c) :
             BaseItem(_name),
@@ -62,7 +59,6 @@ namespace Item
             containertype(_c){}
     private:
         containerType containertype;
-        std::vector<Item_ptr> items;
     };
 
 

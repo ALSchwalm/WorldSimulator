@@ -34,8 +34,11 @@ namespace WorldGen
                 for (auto individual : location->getIndividuals())
                 {
                     for (auto item : individual->getInitialItems())
+                    {
                         location->addItem(item);
+                    }
                 }
+
 
             }
 
