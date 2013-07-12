@@ -96,14 +96,11 @@ namespace Actor
         * compile-time checking of the validity of the template/function arguments. For example
         * it is not possible to create a GET_FOOD goal, with a BaseEvent type.
         */
-        template<Action::GoalType g>
-        void addGoal(unsigned int _priority){goalTree.addGoal<g>(_priority);}
-
-        template<Action::GoalType g, typename T>
-        void addGoal(T t, unsigned int _priority){goalTree.addGoal<g, T>(t, _priority);}
-
-        template<Action::GoalType g, typename T, typename U>
-        void addGoal(T t, U u, unsigned int _priority){goalTree.addGoal<g, T, U>(t, u, _priority);}
+        template<Action::GoalType g, typename... U>
+        void addGoal(unsigned int _priority, U... args)
+        {
+            goalTree.addGoal<g, U...>(_priority, args...);
+        }
 
     };
 

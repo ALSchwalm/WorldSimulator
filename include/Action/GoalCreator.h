@@ -32,10 +32,10 @@ namespace Action
         Goal_ptr createGoal(Actor::Individual_ptr individual, unsigned int priority);
 
         template<GoalType g, typename T>
-        Goal_ptr createGoal(T t, Actor::Individual_ptr individual, unsigned int priority);
+        Goal_ptr createGoal(Actor::Individual_ptr individual, unsigned int priority, T t);
 
         template<GoalType g, typename T, typename U>
-        Goal_ptr createGoal(T t, U u, Actor::Individual_ptr individual, unsigned int priority);
+        Goal_ptr createGoal(Actor::Individual_ptr individual, unsigned int priority, T t, U u);
 
 
 
