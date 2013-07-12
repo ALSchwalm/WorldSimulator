@@ -53,6 +53,7 @@ namespace Interface
         const std::vector<Command> Commands = {
                 Command("show", NO_CALL, "Show information about the current view", Context::ALL),
                 Command("show adjacent-locations", cliShowLocationRange, "show child locations", Context::LOCATION),
+                Command("show items", cliShowItemRange, "show items in this location", Context::LOCATION),
 
                 Command("view", NO_CALL, "Change the current view", Context::ALL),
                 Command("view world", cliShowWorld, "view the world", Context::ALL),

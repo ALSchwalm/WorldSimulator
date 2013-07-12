@@ -21,6 +21,7 @@ namespace Interface
         bool cliShowLocation();
 
         bool cliShowLocationRange();
+        bool cliShowItemRange();
     }
 }
 

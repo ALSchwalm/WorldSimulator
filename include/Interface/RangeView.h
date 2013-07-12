@@ -10,17 +10,19 @@
 
 namespace Interface
 {
-    template<typename T>
+    template<typename T, typename U>
     class RangeView : public View<T>
     {
     public:
         RangeView(T t) :
             View<T>(t, "List View"){}
+
+
         void refreshView();
     };
 
     template<>
-    void RangeView<Location::Location_ptr>::refreshView()
+    void RangeView<Location::Location_ptr, Location::Location_ptr>::refreshView()
     {
         unsigned int i=3;
         for (auto location : viewSubject->getLocations())
@@ -30,6 +32,19 @@ namespace Interface
         }
         wrefresh(this->viewWin);
     }
+
+    template<>
+    void RangeView<Location::Location_ptr, Item::Item_ptr>::refreshView()
+    {
+        unsigned int i=3;
+        for (auto item : viewSubject->getItems())
+        {
+            mvwprintw(this->viewWin, i, 4, item->getName().c_str());
+            ++i;
+        }
+        wrefresh(this->viewWin);
+    }
+
 }
 #endif
 
