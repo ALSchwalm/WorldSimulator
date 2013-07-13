@@ -10,10 +10,14 @@
 #include "Interface/View.h"
 #include "Location/Location.h"
 #include <memory>
-#include <sstream>
+#include <cstdlib>
 
 namespace Interface
 {
+
+    static void toChar(char* val, int num) {
+        sprintf(val, "%d", num);
+    }
 
     /*
     * GeneralView's 'refreshView' member is partially
@@ -26,7 +30,7 @@ namespace Interface
     {
     public:
         GeneralView(T);
-        void refreshView();
+        void refreshView() override;
     };
 
 
@@ -37,12 +41,26 @@ namespace Interface
     template<>
     inline void GeneralView<Location::Location_ptr>::refreshView()
     {
-        //TODO this should be changed to std::to_string() once MingW fixes this function
-        std::stringstream ss;
-        ss << viewSubject->getLocations().size();
+        char val[256];
 
-        mvwprintw(this->viewWin, 2, 4, std::string("Adjacent locations\t\t" + ss.str()).c_str());
-        wrefresh(this->viewWin);
+        mvwprintw(this->nameWin, 2, 4, "Statistic:");
+        mvwprintw(this->nameWin, 4, 4, "Adjacent locations");
+        mvwprintw(this->nameWin, 5, 4, "Individuals");
+        mvwprintw(this->nameWin, 6, 4, "Items");
+
+        mvwprintw(this->dataWin, 2, 4, "Value:");
+
+        toChar(val, viewSubject->getLocations().size());
+        mvwprintw(this->dataWin, 4, 4, val);
+
+        toChar(val, viewSubject->getIndividuals().size());
+        mvwprintw(this->dataWin, 5, 4, val);
+
+        toChar(val, viewSubject->getItems().size());
+        mvwprintw(this->dataWin, 6, 4, val);
+
+        wrefresh(this->nameWin);
+        wrefresh(this->dataWin);
     }
 
 }

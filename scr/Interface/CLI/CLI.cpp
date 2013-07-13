@@ -8,8 +8,8 @@ namespace Interface
 {
     namespace CLI
     {
-        WINDOW * CLIwin;
-        WINDOW * lineWin;
+        WINDOW* CLIwin;
+        WINDOW* lineWin;
         Command currentCommand(Commands[0]);
         std::string line;
         std::vector<Dialog_ptr> dialogs;
@@ -19,11 +19,11 @@ namespace Interface
 
             CLIwin = subwin(mainwin, 3, COLS, 0, 0);
             box(CLIwin, 0, 0);
-            refresh();
+
             mvaddstr(1, 2, "Command:");
 
             lineWin = subwin(CLIwin, 1, COLS-12, 1, 11);
-
+            refresh();
         }
 
         void handleInput()
@@ -65,10 +65,10 @@ namespace Interface
                 }
                 break;
             case KEY_DOWN:
-                wscrl(displayView->getViewWin(), 1);
+                //wscrl(displayView->getViewWin(), 1);
                 break;
             case KEY_UP:
-                wscrl(displayView->getViewWin(), -1);
+                //wscrl(displayView->getViewWin(), -1);
                 break;
             case KEY_BACKSPACE:
             case 127:	//linux backspace

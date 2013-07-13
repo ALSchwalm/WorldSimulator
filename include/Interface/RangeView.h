@@ -39,10 +39,10 @@ namespace Interface
         unsigned int i=3;
         for (auto location : viewSubject->getLocations())
         {
-            mvwprintw(this->viewWin, i, 4, location->getName().c_str());
+            mvwprintw(this->nameWin, i, 4, location->getName().c_str());
             ++i;
         }
-        wrefresh(this->viewWin);
+        wrefresh(this->nameWin);
     }
 
     template<>
@@ -51,10 +51,10 @@ namespace Interface
         unsigned int i=3;
         for (auto item : viewSubject->getItems())
         {
-            mvwprintw(this->viewWin, i, 4, item->getName().c_str());
+            mvwprintw(this->nameWin, i, 4, item->getName().c_str());
             ++i;
         }
-        wrefresh(this->viewWin);
+        wrefresh(this->nameWin);
     }
 
     template<>
@@ -63,10 +63,10 @@ namespace Interface
         unsigned int i=3;
         for (auto item : viewSubject->getIndividuals())
         {
-            mvwprintw(this->viewWin, i, 4, item->getName().c_str());
+            mvwprintw(this->nameWin, i, 4, item->getName().c_str());
             ++i;
         }
-        wrefresh(this->viewWin);
+        wrefresh(this->nameWin);
     }
 
 

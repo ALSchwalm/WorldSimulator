@@ -6,13 +6,19 @@ using namespace Interface;
 HelpView::HelpView(std::vector<CLI::Command> completions) :
         commands(completions)
 {
-    this->viewWin = subwin(mainwin, LINES-3, COLS, 3, 0);
-    wclear(viewWin);
-    box(this->viewWin, 0, 0);
+    /*
+     * Help panes are split 1/3 - 2/3 to better accommodate they typical
+     * distribution of text.
+     */
+    this->titleWin = subwin(mainwin, LINES-3, COLS, 3, 0);
+    this->nameWin = subwin(titleWin, LINES-5, (COLS-2)/3, 4, 1);
+    this->dataWin = subwin(titleWin, LINES-5, 2*(COLS-2)/3, 4, COLS/3+1);
+    wclear(titleWin);
 
-    mvwprintw(this->viewWin, 0, 2, "Help");
+    box(this->titleWin, 0, 0);
+    mvwprintw(this->titleWin, 0, 2, "Help");
 
-    refresh();
+    wrefresh(this->titleWin);
 };
 
 HelpView::~HelpView()
@@ -24,30 +30,18 @@ HelpView::~HelpView()
 
 void HelpView::refreshView()
 {
-
-    unsigned int longestCommand = 0;
-    for (auto command : commands) {
-        if (command.getCommand().size() > longestCommand)
-            longestCommand = command.getCommand().size();
-    }
-
-
-
-    //The "Commands:" title is 8 characters long, this ensures there are always 4 spaces after it
-    if (longestCommand < 8)
-        longestCommand = 8;
-
     unsigned int counter = 4;
     for( auto command : commands)
     {
-        mvwprintw(this->viewWin, counter, 4, command.getCommand().c_str());
-        mvwprintw(this->viewWin, counter, longestCommand+8, command.getHelp().c_str());
+        mvwprintw(this->nameWin, counter, 4, command.getCommand().c_str());
+        mvwprintw(this->dataWin, counter, 4, command.getHelp().c_str());
         ++counter;
     }
 
     //Display a header for columns
-    mvwprintw(this->viewWin, 2, 4, "Command:");
-    mvwprintw(this->viewWin, 2, longestCommand+8, "Help:");
+    mvwprintw(this->nameWin, 2, 4, "Command:");
+    mvwprintw(this->dataWin, 2, 4, "Help:");
 
-    wrefresh(this->viewWin);
+    wrefresh(this->dataWin);
+    wrefresh(this->nameWin);
 };
