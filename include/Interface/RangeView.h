@@ -14,12 +14,19 @@ namespace Interface
     class RangeView : public View<T>
     {
     public:
-        RangeView(T t) :
-            View<T>(t, "List View"){}
+        RangeView(T t);
 
 
         void refreshView();
     };
+
+    template<>
+    RangeView<Location::Location_ptr, Location::Location_ptr>::RangeView(Location::Location_ptr t) :
+        View<Location::Location_ptr>(t, "Location List View"){}
+
+    template<>
+    RangeView<Location::Location_ptr, Item::Item_ptr>::RangeView(Location::Location_ptr t) :
+        View<Location::Location_ptr>(t, "Item List View"){}
 
     template<>
     void RangeView<Location::Location_ptr, Location::Location_ptr>::refreshView()

@@ -24,15 +24,30 @@ HelpView::~HelpView()
 
 void HelpView::refreshView()
 {
-    //Display a header for columns
-    mvwprintw(this->viewWin, 2, 4, "Command:\t\tHelp:");
+
+    unsigned int longestCommand = 0;
+    for (auto command : commands) {
+        if (command.getCommand().size() > longestCommand)
+            longestCommand = command.getCommand().size();
+    }
+
+
+
+    //The "Commands:" title is 8 characters long, this ensures there are always 4 spaces after it
+    if (longestCommand < 8)
+        longestCommand = 8;
 
     unsigned int counter = 4;
     for( auto command : commands)
     {
         mvwprintw(this->viewWin, counter, 4, command.getCommand().c_str());
-        mvwprintw(this->viewWin, counter, 4+command.getCommand().size(), ("\t\t" + command.getHelp()).c_str());
+        mvwprintw(this->viewWin, counter, longestCommand+8, command.getHelp().c_str());
         ++counter;
     }
+
+    //Display a header for columns
+    mvwprintw(this->viewWin, 2, 4, "Command:");
+    mvwprintw(this->viewWin, 2, longestCommand+8, "Help:");
+
     wrefresh(this->viewWin);
 };
