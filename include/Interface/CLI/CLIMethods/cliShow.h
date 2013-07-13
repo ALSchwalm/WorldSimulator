@@ -12,16 +12,17 @@ namespace Interface
 {
     namespace CLI
     {
-        inline bool cliShowWorld()
+        inline bool cliViewWorld()
         {
             displayView = std::make_shared<GeneralView<Location::Location_ptr> >(Location::World::getInstance());
             return true;
         };
 
-        bool cliShowLocation();
+        bool cliViewLocation();
 
         bool cliShowLocationRange();
         bool cliShowItemRange();
+        bool cliShowIndividualRange();
     }
 }
 

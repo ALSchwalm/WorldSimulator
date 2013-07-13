@@ -29,6 +29,11 @@ namespace Interface
         View<Location::Location_ptr>(t, "Item List View"){}
 
     template<>
+    RangeView<Location::Location_ptr, Actor::Individual_ptr>::RangeView(Location::Location_ptr t) :
+        View<Location::Location_ptr>(t, "Individual List View"){}
+
+
+    template<>
     void RangeView<Location::Location_ptr, Location::Location_ptr>::refreshView()
     {
         unsigned int i=3;
@@ -51,6 +56,19 @@ namespace Interface
         }
         wrefresh(this->viewWin);
     }
+
+    template<>
+    void RangeView<Location::Location_ptr, Actor::Individual_ptr>::refreshView()
+    {
+        unsigned int i=3;
+        for (auto item : viewSubject->getIndividuals())
+        {
+            mvwprintw(this->viewWin, i, 4, item->getName().c_str());
+            ++i;
+        }
+        wrefresh(this->viewWin);
+    }
+
 
 }
 #endif

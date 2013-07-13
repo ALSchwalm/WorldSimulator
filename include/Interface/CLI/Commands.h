@@ -54,11 +54,12 @@ namespace Interface
                 Command("show", NO_CALL, "Show information about the current view", Context::ALL),
                 Command("show adjacent-locations", cliShowLocationRange, "show child locations", Context::LOCATION),
                 Command("show items", cliShowItemRange, "show items in this location", Context::LOCATION),
+                Command("show individuals", cliShowIndividualRange, "show individuals in this location", Context::LOCATION),
 
                 Command("view", NO_CALL, "Change the current view", Context::ALL),
-                Command("view world", cliShowWorld, "view the world", Context::ALL),
+                Command("view world", cliViewWorld, "view the world", Context::ALL),
                 Command("view location", NO_CALL, "view a location", Context::LOCATION),
-                Command("view location *", cliShowLocation, "view a location", Context::LOCATION),
+                Command("view location *", cliViewLocation, "view a location", Context::LOCATION),
 
                 Command("exit", cliExit, "exit the simulation", Context::ALL),
                 Command("<CR>", NO_CALL, "Press enter to run the command", Context::NO_CONTEXT)

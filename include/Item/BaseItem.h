@@ -38,7 +38,7 @@ namespace Item
 
         virtual const ItemType getItemType()=0;
 
-        const Owner::Owner & getOwner() {return owner;}
+        const Owner::Owner& getOwner() {return owner;}
         void setOwner(const Owner::Owner _owner) {owner=_owner;}
 
         bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}

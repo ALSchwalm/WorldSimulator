@@ -3,6 +3,7 @@
 #include "Interface/CLI/Commands.h"
 #include "Interface/CLI/CLI.h"
 #include "Location/BaseLocation.h"
+#include "Actor/Individual.h"
 #include "Interface/RangeView.h"
 #include <memory>
 
@@ -11,7 +12,7 @@ namespace Interface
     namespace CLI
     {
 
-        bool cliShowLocation()
+        bool cliViewLocation()
         {
             auto view = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
             for (auto location : view->viewSubject->getLocations())
@@ -47,6 +48,14 @@ namespace Interface
             displayView = std::make_shared<RangeView<Location::Location_ptr, Item::Item_ptr> >(view->viewSubject);
             return true;
         }
+
+        bool cliShowIndividualRange()
+        {
+            auto view = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
+            displayView = std::make_shared<RangeView<Location::Location_ptr, Actor::Individual_ptr> >(view->viewSubject);
+            return true;
+        }
+
 
     }
 }
