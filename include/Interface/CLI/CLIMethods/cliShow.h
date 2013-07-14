@@ -4,7 +4,6 @@
 #include "Interface/GeneralView.h"
 #include "Interface/Interface.h"
 #include "Location/World.h"
-#include "Location/BaseLocation.h"
 #include <vector>
 #include <memory>
 
@@ -18,11 +17,25 @@ namespace Interface
             return true;
         };
 
+        //template<typename T>
         bool cliViewLocation();
 
+        template<Context c>
+        bool cliViewIndividual();
+
+        template<> bool cliViewIndividual<Context::INDIVIDUAL>();
+        template<> bool cliViewIndividual<Context::LOCATION>();
+
+        //template<typename T>
         bool cliShowLocationRange();
+
+        //template<typename T>
         bool cliShowItemRange();
+
+        //template<typename T>
         bool cliShowIndividualRange();
+
+        bool cliShowInfo();
     }
 }
 

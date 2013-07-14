@@ -63,6 +63,31 @@ namespace Interface
         wrefresh(this->dataWin);
     }
 
+    template<>
+    inline void GeneralView<Actor::Individual_ptr>::refreshView()
+    {
+        char val[256];
+
+        mvwprintw(this->nameWin, 2, 4, "Statistic:");
+        mvwprintw(this->nameWin, 4, 4, "Current Location");
+        mvwprintw(this->nameWin, 5, 4, "Inventory size");
+        mvwprintw(this->nameWin, 6, 4, "Age");
+
+        mvwprintw(this->dataWin, 2, 4, "Value:");
+
+        mvwprintw(this->dataWin, 4, 4, viewSubject->getCurrentLocation()->getName().c_str());
+
+        toChar(val, viewSubject->getItems().size());
+        mvwprintw(this->dataWin, 5, 4, val);
+
+        toChar(val, viewSubject->getAge());
+        mvwprintw(this->dataWin, 6, 4, val);
+
+        wrefresh(this->nameWin);
+        wrefresh(this->dataWin);
+    }
+
+
 }
 
 #endif

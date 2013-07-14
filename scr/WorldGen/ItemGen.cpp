@@ -23,7 +23,7 @@ namespace WorldGen
                 closedset.insert(location);
                 for (auto possibleLocation : location->getLocations())
                 {
-                    if (closedset.find(possibleLocation) == closedset.end() and
+                    if (closedset.find(possibleLocation) == closedset.end() &&
                             std::find(openset.begin(), openset.end(), possibleLocation) == openset.end())
                     {
                         openset.push_back(possibleLocation);
@@ -35,6 +35,7 @@ namespace WorldGen
                 {
                     for (auto item : individual->getInitialItems())
                     {
+                        item->setOwner(individual);
                         location->addItem(item);
                     }
                 }

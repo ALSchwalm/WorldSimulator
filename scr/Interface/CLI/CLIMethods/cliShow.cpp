@@ -12,7 +12,11 @@ namespace Interface
     namespace CLI
     {
 
-        bool cliViewLocation()
+        bool cliShowInfo()
+        {
+            return true;
+        }
+        inline bool cliViewLocation()
         {
             auto view = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
             for (auto location : view->viewSubject->getLocations())
@@ -20,13 +24,55 @@ namespace Interface
                 if (location->getName() == currentCommand.args[0])
                 {
                     displayView = std::make_shared<GeneralView<Location::Location_ptr> >(location);
+                    currentContext = Context::INDIVIDUAL;
                     return true;
                 }
             }
             return false;
         }
 
-        bool cliShowLocationRange()
+        template<>
+        bool cliViewIndividual<Context::INDIVIDUAL>()
+        {
+            auto individualView = dynamic_cast<View<Actor::Individual_ptr>* >(displayView.get());
+
+            if (!individualView)
+                return false;
+
+            for (auto individual : individualView->viewSubject->getCurrentLocation()->getIndividuals())
+            {
+                if (individual->getName() == currentCommand.args[0])
+                {
+                    displayView = std::make_shared<GeneralView<Actor::Individual_ptr> >(individual);
+                    currentContext = Context::INDIVIDUAL;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        template<>
+        bool cliViewIndividual<Context::LOCATION>()
+        {
+            auto locationView = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
+
+            if (!locationView)
+                return false;
+
+            for (auto individual : locationView->viewSubject->getIndividuals())
+            {
+                if (individual->getName() == currentCommand.args[0])
+                {
+                    displayView = std::make_shared<GeneralView<Actor::Individual_ptr> >(individual);
+                    currentContext = Context::INDIVIDUAL;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        inline bool cliShowLocationRange()
         {
             /*
              * We know this dynamic cast is valid because these commands are protected by 'context'.
@@ -42,20 +88,19 @@ namespace Interface
             return true;
         }
 
-        bool cliShowItemRange()
+        inline bool cliShowItemRange()
         {
             auto view = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
             displayView = std::make_shared<RangeView<Location::Location_ptr, Item::Item_ptr> >(view->viewSubject);
             return true;
         }
 
-        bool cliShowIndividualRange()
+        inline bool cliShowIndividualRange()
         {
             auto view = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
             displayView = std::make_shared<RangeView<Location::Location_ptr, Actor::Individual_ptr> >(view->viewSubject);
             return true;
         }
-
 
     }
 }
