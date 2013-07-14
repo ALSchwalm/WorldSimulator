@@ -1,5 +1,5 @@
-#ifndef INDIVIDUAL_H_
-#define INDIVIDUAL_H_
+#ifndef PROFESSION_H_
+#define PROFESSION_H_
 
 #include "Item/BaseItem.h"
 #include <vector>
@@ -23,6 +23,15 @@ namespace Profession
         NUM_OF_PROFESSIONS,
         PROFESSION_ERROR
     };
+
+    const std::string ProfessionNames[] =
+    {
+        "Baker"
+    };
+
+    inline const std::string& toString(ProfessionType p) {
+        return ProfessionNames[p];
+    }
 
     class BaseProfession;
     typedef std::shared_ptr<BaseProfession> Profession_ptr;

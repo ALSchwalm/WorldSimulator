@@ -31,6 +31,18 @@ namespace Location
         NUM_OF_LOCATIONS
     };
 
+    const std::string locationNames[] = {
+            "Village",
+            "Region",
+            "World",
+            "Terrain",
+            "Container"
+    };
+
+    inline const std::string& toString(LocationType t) {
+        return locationNames[t];
+    }
+
     class BaseLocation
     {
     public:

@@ -5,6 +5,7 @@
 #include "Utils/curses.h"
 #endif
 
+#include "Profession/BaseProfession.h"
 #include "Location/BaseLocation.h"
 #include "Interface/View.h"
 
@@ -36,37 +37,53 @@ namespace Interface
     template<>
     void RangeView<Location::Location_ptr, Location::Location_ptr>::refreshView()
     {
-        unsigned int i=3;
+        mvwprintw(this->nameWin, 2, 4, "Name:");
+        mvwprintw(this->dataWin, 2, 4, "Type:");
+
+        unsigned int i=4;
         for (auto location : viewSubject->getLocations())
         {
             mvwprintw(this->nameWin, i, 4, location->getName().c_str());
+            mvwprintw(this->dataWin, i, 4, Location::toString(location->getLocationType()).c_str());
             ++i;
         }
         wrefresh(this->nameWin);
+        wrefresh(this->dataWin);
     }
 
     template<>
     void RangeView<Location::Location_ptr, Item::Item_ptr>::refreshView()
     {
-        unsigned int i=3;
+        mvwprintw(this->nameWin, 2, 4, "Name:");
+        mvwprintw(this->dataWin, 2, 4, "Owner:");
+
+        unsigned int i=4;
         for (auto item : viewSubject->getItems())
         {
             mvwprintw(this->nameWin, i, 4, item->getName().c_str());
+            mvwprintw(this->dataWin, i, 4, item->getOwner().getName().c_str());
+
             ++i;
         }
         wrefresh(this->nameWin);
+        wrefresh(this->dataWin);
     }
 
     template<>
     void RangeView<Location::Location_ptr, Actor::Individual_ptr>::refreshView()
     {
-        unsigned int i=3;
-        for (auto item : viewSubject->getIndividuals())
+        mvwprintw(this->nameWin, 2, 4, "Name:");
+        mvwprintw(this->dataWin, 2, 4, "Profession:");
+
+        unsigned int i=4;
+        for (auto individual : viewSubject->getIndividuals())
         {
-            mvwprintw(this->nameWin, i, 4, item->getName().c_str());
+            mvwprintw(this->nameWin, i, 4, individual->getName().c_str());
+            mvwprintw(this->dataWin, i, 4, Profession::toString(individual->getProfession()->getProfessionType()).c_str());
             ++i;
         }
         wrefresh(this->nameWin);
+        wrefresh(this->dataWin);
     }
 
 

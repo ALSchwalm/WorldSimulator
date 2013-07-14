@@ -64,12 +64,13 @@ namespace Actor
         Location_ptr getCurrentLocation() { return currentLocation; }
         void setCurrentLocation(Location_ptr c) { currentLocation = c;}
 
-        unsigned int getAge() {return age;}
-        const std::string getName() {return name;}
-        const Event::EventHistory& getHistory(){return history;}
-        const std::vector<Item::Item_ptr>& getItems() {return items;}
-        Relationship::RelationshipMap<Individual_ptr>& getIndividualRelationshipMap() {return IndividualRelationshipMap;}
-        Relationship::RelationshipMap<Location_ptr>& getLocationRelationshipMap() {return LocationRelationshipMap;}
+        unsigned int getAge() const {return age;}
+        const std::string getName() const {return name;}
+        const Event::EventHistory& getHistory() const {return history;}
+        const std::vector<Item::Item_ptr>& getItems() const {return items;};
+        Relationship::RelationshipMap<Individual_ptr>& getIndividualRelationshipMap() {return IndividualRelationshipMap;};
+        Relationship::RelationshipMap<Location_ptr>& getLocationRelationshipMap() {return LocationRelationshipMap;};
+        Profession::Profession_ptr getProfession() const {return profession;}
 
         //TODO decide whether this should be added with the profession skill
         const Skill::skillMap& getSkillMap() {return skillMap;}
@@ -82,7 +83,7 @@ namespace Actor
         void addRelationship(Individual_ptr individual, Relationship::RelationshipType rel);
 
         void setAttribute(std::string s) {attributes[s] = true;}
-        bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
+        bool hasAttribute(std::string s) const {return attributes.find(s) != attributes.end();}
         void setSkill(Skill::skills s, float f){skillMap[s] = f;}
         bool removeItem(Item::Item_ptr i);
 

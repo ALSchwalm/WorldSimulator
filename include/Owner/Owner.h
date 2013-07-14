@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace Actor
 {
@@ -26,6 +27,8 @@ namespace Owner
         friend bool operator!=(Owner o, Actor::Individual_ptr);
         friend bool operator==(const Owner& o, std::vector<Actor::Individual_ptr>&);
         friend bool operator!=(const Owner& o, std::vector<Actor::Individual_ptr>&);
+
+        std::string getName() const;
 
     private:
         std::vector<Actor::Individual_ptr> owner;
