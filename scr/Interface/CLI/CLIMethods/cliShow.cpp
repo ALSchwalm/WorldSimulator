@@ -16,20 +16,54 @@ namespace Interface
         {
             return true;
         }
-        inline bool cliViewLocation()
+
+        template<>
+        bool cliViewLocation<Context::LOCATION>()
         {
-            auto view = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
-            for (auto location : view->viewSubject->getLocations())
+            auto locationView = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
+
+            if (!locationView)
+                return false;
+
+            for (auto location : locationView->viewSubject->getLocations())
             {
                 if (location->getName() == currentCommand.args[0])
                 {
                     displayView = std::make_shared<GeneralView<Location::Location_ptr> >(location);
-                    currentContext = Context::INDIVIDUAL;
+                    currentContext = Context::LOCATION;
                     return true;
                 }
             }
             return false;
         }
+
+        template<>
+        bool cliViewLocation<Context::INDIVIDUAL>()
+        {
+            auto individualView = dynamic_cast<View<Actor::Individual_ptr>* >(displayView.get());
+
+            if (!individualView)
+                return false;
+
+            if (individualView->viewSubject->getCurrentLocation()->getName()==currentCommand.args[0])
+            {
+                displayView = std::make_shared<GeneralView<Location::Location_ptr>>(individualView->viewSubject->getCurrentLocation());
+                currentContext = Context::LOCATION;
+                return true;
+            }
+
+            for (auto location : individualView->viewSubject->getCurrentLocation()->getLocations())
+            {
+                if (location->getName() == currentCommand.args[0])
+                {
+                    displayView = std::make_shared<GeneralView<Location::Location_ptr> >(location);
+                    currentContext = Context::LOCATION;
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         template<>
         bool cliViewIndividual<Context::INDIVIDUAL>()

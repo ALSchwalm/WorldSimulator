@@ -59,8 +59,9 @@ namespace Interface
 
                 Command("view", NO_CALL, "Change the current view", Context::ALL),
                 Command("view world", cliViewWorld, "view the world", Context::ALL),
-                Command("view location", NO_CALL, "view a location", Context::LOCATION),
-                Command("view location *", cliViewLocation, "view a location", Context::LOCATION),
+                Command("view location", NO_CALL, "view a location", Context::ALL),
+                Command("view location *", cliViewLocation<Context::LOCATION>, "view a location", Context::LOCATION),
+                Command("view location *", cliViewLocation<Context::INDIVIDUAL>, "view a location", Context::INDIVIDUAL),
                 Command("view individual", NO_CALL, "view an individual", Context::ALL),
                 Command("view individual *", cliViewIndividual<Context::LOCATION>, "view an individual", Context::LOCATION),
                 Command("view individual *", cliViewIndividual<Context::INDIVIDUAL>, "view an individual", Context::INDIVIDUAL),

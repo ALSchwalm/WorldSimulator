@@ -14,11 +14,16 @@ namespace Interface
         inline bool cliViewWorld()
         {
             displayView = std::make_shared<GeneralView<Location::Location_ptr> >(Location::World::getInstance());
+            currentContext = Context::LOCATION;
             return true;
         };
 
-        //template<typename T>
+        template<Context c>
         bool cliViewLocation();
+
+        template<> bool cliViewLocation<Context::INDIVIDUAL>();
+        template<> bool cliViewLocation<Context::LOCATION>();
+
 
         template<Context c>
         bool cliViewIndividual();
@@ -26,7 +31,6 @@ namespace Interface
         template<> bool cliViewIndividual<Context::INDIVIDUAL>();
         template<> bool cliViewIndividual<Context::LOCATION>();
 
-        //template<typename T>
         bool cliShowLocationRange();
 
         //template<typename T>

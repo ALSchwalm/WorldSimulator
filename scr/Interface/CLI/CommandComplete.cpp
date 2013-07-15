@@ -32,7 +32,9 @@ namespace Interface
             std::vector<Command> completions;
             for (auto command : Commands)
             {
-                if (isCompletion(tokens, command.getTokens()) and (command.getContext() == currentContext or command.getContext() == Context::ALL))
+                if (isCompletion(tokens, command.getTokens()) and
+                        (command.getContext() == currentContext or
+                                command.getContext() == Context::ALL))
                 {
                     for (unsigned int i=0; i < tokens.size(); ++i)
                     {
@@ -111,6 +113,7 @@ namespace Interface
                 currentCommand = commandList[0];
                 commandList[0]();
                 closeHelp();
+                displayView->redrawView();
             }
         }
 
