@@ -7,20 +7,25 @@ namespace Interface
 {
     namespace CLI
     {
-        Command::Command(std::string _commandString, bool (*_fn)(), std::string _helpString, Context _context) :
+        Command::Command(std::string _commandString,
+                bool (*_fn)(),
+                std::string _helpString,
+                Context _preContext,
+                Context _postContext) :
             fn(_fn),
             commandString(_commandString),
             helpString(_helpString),
             tokens(Token::tokenize(commandString)),
             callable(false),
-            context(_context)
+            preContext(_preContext),
+            postContext(_postContext)
         {
             if (fn != NO_CALL)
                 callable = true;
         }
 
         void Command::operator()() {
-            if (currentContext != context && context != Context::ALL)
+            if (currentContext != preContext && preContext != Context::ALL)
             {
                 dialogs.push_back(std::make_shared<DialogOK>("Invalid command within this context."));
                 return;
@@ -29,6 +34,11 @@ namespace Interface
             if(!fn())
             {
                 dialogs.push_back(std::make_shared<DialogOK>("Command failed."));
+            }
+            else
+            {
+                if (postContext != Context::SAME)
+                   currentContext = postContext;
             }
         }
 

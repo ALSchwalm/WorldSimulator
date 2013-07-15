@@ -14,6 +14,7 @@ namespace Interface
             INDIVIDUAL,
 
             NO_CONTEXT,		//used for <CR>
+            SAME,
             NUM_OF_CONTEXTS
         };
 

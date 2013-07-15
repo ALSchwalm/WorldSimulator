@@ -12,8 +12,23 @@ namespace Interface
     namespace CLI
     {
 
+        /*
+         * TODO possibly just store general view, as that is the default
+         */
         bool cliShowInfo()
         {
+            if (currentContext==Context::LOCATION) {
+                auto locationView = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
+                if (!locationView)
+                    return false;
+                displayView = std::make_shared<GeneralView<Location::Location_ptr> >(locationView->viewSubject);
+            } else if (currentContext==Context::INDIVIDUAL) {
+                auto individualView = dynamic_cast<View<Actor::Individual_ptr>* >(displayView.get());
+                if (!individualView)
+                    return false;
+                displayView = std::make_shared<GeneralView<Actor::Individual_ptr> >(individualView->viewSubject);
+            }
+
             return true;
         }
 
@@ -30,7 +45,6 @@ namespace Interface
                 if (location->getName() == currentCommand.args[0])
                 {
                     displayView = std::make_shared<GeneralView<Location::Location_ptr> >(location);
-                    currentContext = Context::LOCATION;
                     return true;
                 }
             }
@@ -48,7 +62,6 @@ namespace Interface
             if (individualView->viewSubject->getCurrentLocation()->getName()==currentCommand.args[0])
             {
                 displayView = std::make_shared<GeneralView<Location::Location_ptr>>(individualView->viewSubject->getCurrentLocation());
-                currentContext = Context::LOCATION;
                 return true;
             }
 
@@ -57,7 +70,6 @@ namespace Interface
                 if (location->getName() == currentCommand.args[0])
                 {
                     displayView = std::make_shared<GeneralView<Location::Location_ptr> >(location);
-                    currentContext = Context::LOCATION;
                     return true;
                 }
             }
@@ -78,7 +90,6 @@ namespace Interface
                 if (individual->getName() == currentCommand.args[0])
                 {
                     displayView = std::make_shared<GeneralView<Actor::Individual_ptr> >(individual);
-                    currentContext = Context::INDIVIDUAL;
                     return true;
                 }
             }
@@ -98,7 +109,6 @@ namespace Interface
                 if (individual->getName() == currentCommand.args[0])
                 {
                     displayView = std::make_shared<GeneralView<Actor::Individual_ptr> >(individual);
-                    currentContext = Context::INDIVIDUAL;
                     return true;
                 }
             }
