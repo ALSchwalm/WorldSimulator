@@ -19,10 +19,13 @@ namespace Item
         NUM_OF_TOOLS
     };
 
-    const std::string toolTypeAsString[NUM_OF_TOOLS] = {
+    const std::string toolTypeAsString[] = {
         "Plow",
         "Oven",
     };
+
+    static_assert(sizeof(toolTypeAsString)/sizeof(toolTypeAsString[0]) == NUM_OF_TOOLS,
+            "ToolType not given string.");
 
     /*
     * The skill level required to create this tool

@@ -18,10 +18,13 @@ namespace Item
         NUM_OF_WEAPONS
     };
 
-    const std::string weaponTypeAsString[NUM_OF_WEAPONS] = {
+    const std::string weaponTypeAsString[] = {
         "Sword",
         "Bow"
     };
+
+    static_assert(sizeof(weaponTypeAsString)/sizeof(weaponTypeAsString[0]) == NUM_OF_WEAPONS,
+            "WeaponType not given string.");
 
     const std::map<WeaponType, const Skill::skillMap> requiredWeaponSkills
     {

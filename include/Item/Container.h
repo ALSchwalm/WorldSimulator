@@ -17,12 +17,15 @@ namespace Item
         NUM_OF_CONTAINERS
     };
 
-    const std::string containerTypeAsString[NUM_OF_CONTAINERS] = {
+    const std::string containerTypeAsString[] = {
         "Barrel",
         "Chest",
         "House",
         "House Floor"	//TODO find a way to have numbered floors
     };
+
+    static_assert(sizeof(containerTypeAsString)/sizeof(containerTypeAsString[0]) == NUM_OF_CONTAINERS,
+            "ContainerType not given string.");
 
     const std::map<containerType, const Skill::skillMap> requiredContainerSkills
     {

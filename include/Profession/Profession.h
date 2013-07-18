@@ -29,6 +29,9 @@ namespace Profession
         "Baker"
     };
 
+    static_assert(sizeof(ProfessionNames)/sizeof(ProfessionNames[0]) == NUM_OF_PROFESSIONS,
+            "ProfessionType not given string.");
+
     inline const std::string& toString(ProfessionType p) {
         return ProfessionNames[p];
     }

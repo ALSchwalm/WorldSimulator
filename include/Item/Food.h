@@ -22,7 +22,7 @@ namespace Item
         NUM_OF_FOODS
     };
 
-    const std::string foodTypeAsString[NUM_OF_FOODS] = {
+    const std::string foodTypeAsString[] = {
        "Mutton",
        "Bacon",
        "Corn",
@@ -30,6 +30,9 @@ namespace Item
        "Bread",
        "Wheat"
     };
+
+    static_assert(sizeof(foodTypeAsString)/sizeof(foodTypeAsString[0]) == NUM_OF_FOODS,
+            "FoodType not given string.");
 
     const std::map<foodType, const Skill::skillMap> requiredFoodSkills
     {

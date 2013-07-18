@@ -27,8 +27,8 @@ namespace Location
         CONTAINER,
 
         //insert before this
-        LOCATION_ERROR,
-        NUM_OF_LOCATIONS
+        NUM_OF_LOCATIONS,
+        LOCATION_ERROR
     };
 
     const std::string locationNames[] = {
@@ -38,6 +38,9 @@ namespace Location
             "Terrain",
             "Container"
     };
+
+    static_assert(sizeof(locationNames)/sizeof(locationNames[0]) == NUM_OF_LOCATIONS,
+            "LocationType not given string.");
 
     inline const std::string& toString(LocationType t) {
         return locationNames[t];
