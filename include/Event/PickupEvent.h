@@ -16,7 +16,7 @@ namespace Event
 
         ~PickupEvent();
 
-        EventType getEventType() { return EventType::PICKUP;}
+        EventType getEventType() const { return EventType::PICKUP;}
 
         void run();
 

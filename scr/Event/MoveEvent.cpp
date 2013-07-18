@@ -8,7 +8,7 @@ namespace Event {
             newLocation(l),
             individual(i)
     {
-        source = (void *)i.get();
+
     }
 
     MoveEvent::MoveEvent(
@@ -19,7 +19,7 @@ namespace Event {
             newLocation(l),
             individual(i)
     {
-        source = (void *)i.get();
+
     }
 
     MoveEvent::~MoveEvent()
@@ -29,8 +29,15 @@ namespace Event {
     void MoveEvent::run()
     {
         //if the location is adjacent
-        if (individual->getCurrentLocation()->getLocations().find(newLocation) !=  individual->getCurrentLocation()->getLocations().end())
+        if (individual->getCurrentLocation()->getLocations().find(newLocation) !=
+                individual->getCurrentLocation()->getLocations().end()) {
             individual->setCurrentLocation(newLocation);
+            sourceTask->finished();
+        }
+        else
+        {
+            sourceTask->failed();
+        }
     }
 
 } /* namespace Event */

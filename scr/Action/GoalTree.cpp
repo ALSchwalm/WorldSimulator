@@ -58,3 +58,9 @@ void GoalTree::insertGoal(GoalWrapper g)
         execute();
     }
 }
+
+void GoalTree::interrupt()
+{
+    currentGoal->interrupt();
+}
+

@@ -20,7 +20,7 @@ namespace Action
 
         void execute();
         void goalFinished();
-        void goalInterruped(){};
+        void interrupt();
 
         template<GoalType g>
         void addGoal(unsigned int _priority)

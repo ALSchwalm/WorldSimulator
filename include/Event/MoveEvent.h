@@ -23,7 +23,7 @@ namespace Event
         );
         ~MoveEvent();
 
-        EventType getEventType() { return EventType::MOVE;};
+        EventType getEventType() const { return EventType::MOVE;};
 
         void run();
 

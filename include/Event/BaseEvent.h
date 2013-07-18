@@ -8,9 +8,17 @@
 #ifndef BASE_EVENT_H_
 #define BASE_EVENT_H_
 
-#include <Event/Event.h>
-#include <Time/Date.h>
+#include "Event/Event.h"
+#include "Time/Date.h"
+#include "Time/TimeManager.h"
 #include <memory>
+
+
+namespace Action
+{
+    class Task;
+}
+
 
 namespace Event
 {
@@ -22,36 +30,40 @@ namespace Event
     public:
         virtual ~BaseEvent(){};
 
-        virtual std::string getEventName() {return name;}
-        virtual EventType getEventType() {return EVENT_ERROR;}
+        std::string getEventName() const {return name;}
+        virtual EventType getEventType() const {return EVENT_ERROR;}
+        Time::Date getExecutionDate() const {return executionDate;}
+        Action::Task* getSourceTask() const { return sourceTask; }
 
-        virtual Time::Date getExecutionDate(){return executionDate;}
-        virtual void setExecutionDate(Time::Date newDate) {executionDate = newDate;}
-
-        virtual void* getSource(){ return nullptr; }
+        void setExecutionDate(Time::Date newDate) {executionDate = newDate;}
+        void setSoonestExecution() {executionDate = Time::now()+1;}
+        void setSourceTask(Action::Task* s) {sourceTask = s;}
 
         virtual void run()=0;
 
-        void interrupt();
+        //An event which takes place over time should implement this
+        virtual void interrupt(){};
 
     protected:
         BaseEvent(std::string s) :
-            source(nullptr),
             executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)),
-            name(s){}
+            name(s),
+            sourceTask(nullptr){}
 
         BaseEvent(Time::Date t, std::string s) :
-            source(nullptr),
             executionDate(t),
-            name(s){}
+            name(s),
+            sourceTask(nullptr){}
 
-        void* source;
-    private:
         Time::Date executionDate;
         std::string name;
 
-
-
+        /*
+         * The task which ties this event to an individual (possibly)
+         * The task will only be destroyed once the goal is completed, and it cannot be completed
+         * until a callback from the event, so it should be safe to use a raw pointer.
+         */
+        Action::Task* sourceTask;
     };
 
 }

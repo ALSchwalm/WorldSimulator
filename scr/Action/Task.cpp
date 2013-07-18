@@ -19,8 +19,9 @@ Task::~Task()
 
 bool Task::run()
 {
-    event->setExecutionDate(Time::now()+3);
-    //TODO check for preconditions here
+    //Execute as soon as possible
+    event->setSoonestExecution();
+    event->setSourceTask(this);
 
     Event::EventQueue::getInstance().addEvent(event);
     return true;
@@ -36,4 +37,9 @@ void Task::interrupt()
 {
     interrupted = true;
     event->interrupt();
+}
+
+void Task::failed()
+{
+
 }

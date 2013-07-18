@@ -15,7 +15,14 @@ namespace Event {
 
     void PickupEvent::run()
     {
-        Item::ItemManager::getInstance().moveItem(item, individual->getCurrentLocation(), individual);
+        if (Item::ItemManager::getInstance().moveItem(item, individual->getCurrentLocation(), individual))
+        {
+            sourceTask->finished();
+        }
+        else
+        {
+            sourceTask->failed();
+        }
     }
 
 } /* namespace Event */

@@ -21,6 +21,7 @@ namespace Action
         bool run();
         void finished();
         void interrupt();
+        void failed();
 
     private:
         Event::Event_ptr event;

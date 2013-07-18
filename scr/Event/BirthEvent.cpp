@@ -37,6 +37,7 @@ namespace Event {
         individual->addRelationship(birthPlace, Relationship::RelationshipType::BIRTHPLACE);
         individual->addEvent(std::shared_ptr<BirthEvent>(this));
         birthPlace->addIndividual(individual);
+        sourceTask->finished();
     }
 
 
