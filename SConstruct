@@ -41,7 +41,6 @@ if not COMP_INCLUDES_INTO_CCFLAGS:
     CXX_FLAGS = filter_includes(CXX_FLAGS)
 
 env.Append(CFLAGS=C_FLAGS, CXXFLAGS=CXX_FLAGS)
-env.Append(CXXFLAGS=['-std=c++0x'])
 
 if platform.system() == "Windows":
 	LIBRARIES = ['pdcurses']

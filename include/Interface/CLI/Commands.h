@@ -51,12 +51,13 @@ namespace Interface
 
         inline bool cliExit()
         {
-            exit(0);
+            endwin();
+            exit(EXIT_SUCCESS);
             return false;
         }
 
         const std::vector<Command> Commands = {
-                //          Command                         function call                                   description                                 pre context             postContext
+                //          Command                         function call                                   description                               pre context             postContext
                 Command("show",                         NO_CALL,                                    "Show information about the current view",      Context::ALL,           Context::SAME),
                 Command("show locations",               cliShowLocationRange,                       "show nearby locations",                        Context::LOCATION,      Context::SAME),
                 Command("show items",                   cliShowItemRange,                           "show items in this location",                  Context::LOCATION,      Context::SAME),
