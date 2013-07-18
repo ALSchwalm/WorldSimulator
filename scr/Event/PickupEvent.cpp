@@ -17,11 +17,13 @@ namespace Event {
     {
         if (Item::ItemManager::getInstance().moveItem(item, individual->getCurrentLocation(), individual))
         {
-            sourceTask->finished();
+            if (sourceTask)
+                sourceTask->finished();
         }
         else
         {
-            sourceTask->failed();
+            if (sourceTask)
+                sourceTask->failed();
         }
     }
 

@@ -32,11 +32,14 @@ namespace Event {
         if (individual->getCurrentLocation()->getLocations().find(newLocation) !=
                 individual->getCurrentLocation()->getLocations().end()) {
             individual->setCurrentLocation(newLocation);
-            sourceTask->finished();
+
+            if (sourceTask)
+                sourceTask->finished();
         }
         else
         {
-            sourceTask->failed();
+            if (sourceTask)
+                sourceTask->failed();
         }
     }
 
