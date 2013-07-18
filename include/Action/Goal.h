@@ -32,25 +32,26 @@ namespace Action
     {
 
     public:
-        Goal(GoalType g, unsigned int p = 0);
-        Goal(std::vector<Task_ptr>, GoalType g, unsigned int p = 0);
+        Goal(GoalType g, GoalTree* source, unsigned int p = 0);
+        Goal(std::vector<Task_ptr>, GoalType g,  GoalTree* source, unsigned int p = 0);
 
         Goal(const Goal&) = delete;
         Goal& operator=(const Goal&) = delete;
 
-        bool execute();
-        void taskFinished();
+        void execute();
+        void taskFinished(bool success);
+        void interrupt(); //TODO return bool for uninterruptable tasks?
 
         void setTasks(std::vector<Task_ptr> _taskList){taskList = _taskList;}
 
         unsigned int getPriority() {return priority;}
-        void interrupt(); //TODO return bool for uninterruptable tasks?
+
 
     private:
         std::vector<Task_ptr> taskList;
         GoalType goalType;
+        GoalTree* tree;
         unsigned int priority;
-        std::shared_ptr<GoalTree> tree;
 
     };
 

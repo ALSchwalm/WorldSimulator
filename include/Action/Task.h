@@ -26,7 +26,6 @@ namespace Action
     private:
         Event::Event_ptr event;
         Goal_ptr goal;
-        bool interrupted; //stop EndtaskEvent from creating problems
 
     };
 

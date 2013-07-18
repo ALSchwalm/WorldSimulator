@@ -19,7 +19,7 @@ namespace Action
         GoalTree& operator=(GoalTree&) = delete;
 
         void execute();
-        void goalFinished();
+        void goalFinished(bool success);
         void interrupt();
 
         template<GoalType g>
@@ -68,8 +68,6 @@ namespace Action
 
         Goal_ptr currentGoal;
         std::set<GoalWrapper, priority> goalHeap;
-
-
 
     };
 

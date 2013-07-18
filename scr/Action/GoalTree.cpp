@@ -21,19 +21,26 @@ GoalTree::~GoalTree()
 void GoalTree::execute()
 {
     GoalWrapper temp = (*goalHeap.begin());
-    currentGoal = temp.goalFunction();
 
-    goalHeap.erase(goalHeap.begin());
+    //Call the goalWrapper function to create the actual goal
+    currentGoal = temp.goalFunction();
 
     assert(currentGoal != nullptr);
 
     currentGoal->execute();
 }
 
-void GoalTree::goalFinished()
+void GoalTree::goalFinished(bool success)
 {
+    if (success)
+    {
+        goalHeap.erase(goalHeap.begin());
+    }
+
     if (goalHeap.begin() != goalHeap.end())
+    {
         execute();
+    }
 }
 
 

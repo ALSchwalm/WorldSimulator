@@ -71,6 +71,7 @@ namespace Actor
         Relationship::RelationshipMap<Individual_ptr>& getIndividualRelationshipMap() {return IndividualRelationshipMap;};
         Relationship::RelationshipMap<Location_ptr>& getLocationRelationshipMap() {return LocationRelationshipMap;};
         Profession::Profession_ptr getProfession() const {return profession;}
+        Action::GoalTree* getGoalTree() {return &goalTree;}
 
         //TODO decide whether this should be added with the profession skill
         const Skill::skillMap& getSkillMap() {return skillMap;}

@@ -28,7 +28,7 @@ GoalCreator::~GoalCreator()
 template<>
 Goal_ptr GoalCreator::createGoal<GET_FOOD>(Actor::Individual_ptr individual, unsigned int priority)
 {
-    currentGoal = std::make_shared<Action::Goal>(GET_FOOD, priority);
+    currentGoal = std::make_shared<Action::Goal>(GET_FOOD, individual->getGoalTree(), priority);
     auto get_food = getFood(individual);
     if (get_food.size() == 0)
         return nullptr;
@@ -39,7 +39,7 @@ Goal_ptr GoalCreator::createGoal<GET_FOOD>(Actor::Individual_ptr individual, uns
 template<>
 Goal_ptr GoalCreator::createGoal<GET_ITEM>(Actor::Individual_ptr individual, unsigned int priority, Item::Item_ptr item)
 {
-    currentGoal = std::make_shared<Action::Goal>(GET_ITEM, priority);
+    currentGoal = std::make_shared<Action::Goal>(GET_ITEM, individual->getGoalTree(), priority);
     auto get_item = getItem(individual, item);
     if (get_item.size() == 0)
         return nullptr;

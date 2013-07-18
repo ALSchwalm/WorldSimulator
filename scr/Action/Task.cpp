@@ -8,8 +8,7 @@ using namespace Action;
 
 Task::Task(Event::Event_ptr _event, Goal_ptr _goal) :
         event(_event),
-        goal(_goal),
-        interrupted(false)
+        goal(_goal)
 {
 }
 
@@ -29,17 +28,15 @@ bool Task::run()
 
 void Task::finished()
 {
-    if (!interrupted)
-        goal->taskFinished();
+    goal->taskFinished(true);
 }
 
 void Task::interrupt()
 {
-    interrupted = true;
     event->interrupt();
 }
 
 void Task::failed()
 {
-
+    goal->taskFinished(false);
 }
