@@ -137,7 +137,7 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
         }
 
     }
-    while (openSet.size() > 0)
+    while (!openSet.empty())
     {
         auto location = (*openSet.begin());
 
@@ -193,7 +193,7 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
             openSet.insert(location);
         }
     }
-    while (openSet.size() > 0)
+    while (!openSet.empty())
     {
         auto location = (*openSet.begin());
 
@@ -236,10 +236,9 @@ std::vector<Location::Location_ptr> GoalCreator::traceBack(Location::Location_pt
 
 Item::Item_ptr GoalCreator::getItemFromAttributes(Location::Location_ptr location, std::vector<std::string> attributeList)
 {
-    bool found;
     for ( auto item : location->getItems())
     {
-        found = true;
+        bool found = true;
         for ( auto attribute : attributeList)
         {
             if (!item->hasAttribute(attribute))

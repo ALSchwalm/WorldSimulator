@@ -46,7 +46,7 @@ void GoalTree::goalFinished(bool success)
 
 void GoalTree::insertGoal(GoalWrapper g)
 {
-    if (goalHeap.size() != 0)
+    if (!goalHeap.empty())
     {
         if (g.priority > currentGoal->getPriority())
         {

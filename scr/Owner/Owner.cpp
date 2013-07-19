@@ -10,9 +10,9 @@ namespace Owner
         owner.push_back(o);
     }
 
-    Owner::Owner(const std::vector<Actor::Individual_ptr> & os)
+    Owner::Owner(const std::vector<Actor::Individual_ptr> & os) :
+        owner(os)
     {
-        owner = os;
     }
 
     bool operator==(Owner lhs, Actor::Individual_ptr rhs)
