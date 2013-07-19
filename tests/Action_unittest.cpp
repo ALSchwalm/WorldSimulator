@@ -32,7 +32,7 @@ TEST(ActionTest, GetFood)
 
 	location2->addItem(item);
 
-	Actor::addGoal<Action::GoalType::GET_FOOD>(individual, 0);
+	Actor::addGoal<Action::GET_FOOD>(individual, 0);
 
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent() != nullptr);
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE);

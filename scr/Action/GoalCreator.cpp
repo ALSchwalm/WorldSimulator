@@ -10,26 +10,13 @@
 namespace Action
 {
 
-GoalCreator& GoalCreator::getInstance()
-{
-    static GoalCreator g;
-    return g;
-}
-
-GoalCreator::GoalCreator()
-{
-}
-
-GoalCreator::~GoalCreator()
-{
-}
-
+    namespace GoalCreator {
 
 template<>
-Goal_ptr GoalCreator::createGoal<GET_FOOD>(Actor::Individual_ptr individual, unsigned int priority)
+Goal_ptr createGoal<GET_FOOD>(Actor::Individual_ptr individual, unsigned int priority)
 {
-    currentGoal = std::make_shared<Action::Goal>(GET_FOOD, individual->getGoalTree(), priority);
-    auto get_food = getFood(individual);
+    auto currentGoal = std::make_shared<Action::Goal>(GET_FOOD, individual->getGoalTree(), priority);
+    auto get_food = getFood(individual, currentGoal);
     if (get_food.size() == 0)
         return nullptr;
     currentGoal->setTasks(get_food);
@@ -37,28 +24,30 @@ Goal_ptr GoalCreator::createGoal<GET_FOOD>(Actor::Individual_ptr individual, uns
 }
 
 template<>
-Goal_ptr GoalCreator::createGoal<GET_ITEM>(Actor::Individual_ptr individual, unsigned int priority, Item::Item_ptr item)
+Goal_ptr createGoal<GET_ITEM>(Actor::Individual_ptr individual, unsigned int priority, Item::Item_ptr item)
 {
-    currentGoal = std::make_shared<Action::Goal>(GET_ITEM, individual->getGoalTree(), priority);
-    auto get_item = getItem(individual, item);
+    auto currentGoal = std::make_shared<Action::Goal>(GET_ITEM, individual->getGoalTree(), priority);
+    auto get_item = getItem(individual, item, currentGoal);
     if (get_item.size() == 0)
         return nullptr;
     currentGoal->setTasks(get_item);
     return currentGoal;
 }
 
-std::vector<Task_ptr> GoalCreator::getFood(Actor::Individual_ptr individual)
+std::vector<Task_ptr> getFood(Actor::Individual_ptr individual, Goal_ptr goal)
 {
 
     std::vector<std::string> attributeList;
     attributeList.push_back("edible");
 
-    std::vector<Action::Task_ptr> taskList = findItemFromAttributes(individual, attributeList, 5);
+    std::vector<Action::Task_ptr> taskList = findItemFromAttributes(individual, attributeList, 5, goal);
     std::reverse(taskList.begin(), taskList.end());
     return taskList;
 }
 
-std::vector<Task_ptr> GoalCreator::getItem(Actor::Individual_ptr individual, Item::Item_ptr item)
+std::vector<Task_ptr> getItem(Actor::Individual_ptr individual,
+        Item::Item_ptr item,
+        Goal_ptr goal)
 {
     std::vector<Action::Task_ptr> taskList;
 
@@ -71,17 +60,20 @@ std::vector<Task_ptr> GoalCreator::getItem(Actor::Individual_ptr individual, Ite
     for (auto location : locationList)
     {
         auto newEvent = std::make_shared<Event::MoveEvent>(individual, location);
-        taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
+        taskList.push_back(std::make_shared<Action::Task>(newEvent, goal));
     }
 
     auto newEvent = std::make_shared<Event::PickupEvent>(search_result.first, individual);
-    taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
+    taskList.push_back(std::make_shared<Action::Task>(newEvent, goal));
 
     return taskList;
 }
 
 //Returns an empty vector if unable to find item
-std::vector<Task_ptr> GoalCreator::findItemFromAttributes(Individual::Individual_ptr individual, std::vector<std::string> attributeList, unsigned int maxDistance)
+std::vector<Task_ptr> findItemFromAttributes(Individual::Individual_ptr individual,
+        std::vector<std::string> attributeList,
+        unsigned int maxDistance,
+        Goal_ptr goal)
 {
 
     auto startLocation = individual->getCurrentLocation();
@@ -101,17 +93,17 @@ std::vector<Task_ptr> GoalCreator::findItemFromAttributes(Individual::Individual
     for (auto location : locationList)
     {
         auto newEvent = std::make_shared<Event::MoveEvent>(individual, location);
-        taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
+        taskList.push_back(std::make_shared<Action::Task>(newEvent, goal));
     }
 
     auto newEvent = std::make_shared<Event::PickupEvent>(search_result.first, individual);
-    taskList.push_back(std::make_shared<Action::Task>(newEvent, currentGoal));
+    taskList.push_back(std::make_shared<Action::Task>(newEvent, goal));
 
     return taskList;
 }
 
 //TODO find a way to do this without copying vectors
-std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance)
+std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> dijkstra(Location::Location_ptr startLocation, std::vector<std::string> attributeList, unsigned int maxDistance)
 {
     std::vector<Location::Location_ptr> outputList;
     std::unordered_set<Location::Location_ptr> closedSet;
@@ -167,7 +159,7 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 
 
 //TODO find a way to do this without copying vectors
-std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijkstra(Location::Location_ptr startLocation, Item::Item_ptr item, unsigned int maxDistance)
+std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> dijkstra(Location::Location_ptr startLocation, Item::Item_ptr item, unsigned int maxDistance)
 {
     std::vector<Location::Location_ptr> outputList;
     std::unordered_set<Location::Location_ptr> closedSet;
@@ -220,7 +212,7 @@ std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> GoalCreator::dijk
 
 }
 
-std::vector<Location::Location_ptr> GoalCreator::traceBack(Location::Location_ptr l)
+std::vector<Location::Location_ptr> traceBack(Location::Location_ptr l)
 {
     std::vector<Location::Location_ptr> outputList;
     outputList.push_back(l);
@@ -234,7 +226,7 @@ std::vector<Location::Location_ptr> GoalCreator::traceBack(Location::Location_pt
 }
 
 
-Item::Item_ptr GoalCreator::getItemFromAttributes(Location::Location_ptr location, std::vector<std::string> attributeList)
+Item::Item_ptr getItemFromAttributes(Location::Location_ptr location, std::vector<std::string> attributeList)
 {
     for ( auto item : location->getItems())
     {
@@ -252,10 +244,10 @@ Item::Item_ptr GoalCreator::getItemFromAttributes(Location::Location_ptr locatio
     return nullptr;
 }
 
-bool GoalCreator::distance::operator ()( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const
+bool distance::operator ()( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const
 {
     return lhs->distance < rhs->distance;
 }
 
-
+    }
 }

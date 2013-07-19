@@ -3,6 +3,7 @@
 
 #include <set>
 #include <memory>
+#include <functional>
 #include "Action/Goal.h"
 #include "Action/GoalCreator.h"
 
@@ -22,24 +23,11 @@ namespace Action
         void goalFinished(bool success);
         void interrupt();
 
-        template<GoalType g>
-        void addGoal(Actor::Individual_ptr i, unsigned int _priority)
-        {
-            auto func = [&](){ return Action::GoalCreator::getInstance().createGoal<g>(i, _priority); };
-            insertGoal(GoalWrapper(func, _priority));
-        }
 
-        template<GoalType g, typename T>
-        void addGoal(Actor::Individual_ptr i, unsigned int _priority, T t)
+        template<GoalType g, typename... U>
+        void addGoal(Actor::Individual_ptr i, unsigned int _priority, U... args)
         {
-            auto func = [&](){ return GoalCreator::getInstance().createGoal<g, T>(i, _priority, t);};
-            insertGoal(GoalWrapper(func, _priority));
-        }
-
-        template<GoalType g, typename T, typename U>
-        void addGoal(Actor::Individual_ptr i, unsigned int _priority, T t, U u)
-        {
-            auto func = [&](){ return GoalCreator::getInstance().createGoal<g, T, U>(i, _priority, t, u); };
+            auto func = std::bind(Action::GoalCreator::createGoal<g, U...>, i, _priority, args...);
             insertGoal(GoalWrapper(func, _priority));
         }
 
