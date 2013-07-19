@@ -55,7 +55,7 @@ namespace Actor
                         name(_name),
                         isMale(_isMale),
                         currentLocation(_location),
-                        goalTree(std::make_shared<Individual>(*this)){} //FIXME review this
+                        goalTree(){} //FIXME review this
 
         Individual& operator=(const Individual&) = delete;
 
@@ -91,18 +91,6 @@ namespace Actor
         unsigned int calculatePriority(Individual_ptr, Action::GoalType);
 
         const std::vector<Item::Item_ptr> getInitialItems();
-
-        /*
-        * Goal creation is started here, then passed to the goal tree. The goal tree
-        * then calls the goalCreator, which fully specializes function templates. This allows
-        * compile-time checking of the validity of the template/function arguments. For example
-        * it is not possible to create a GET_FOOD goal, with a BaseEvent type.
-        */
-        template<Action::GoalType g, typename... U>
-        void addGoal(unsigned int _priority, U... args)
-        {
-            goalTree.addGoal<g, U...>(_priority, args...);
-        }
 
     };
 

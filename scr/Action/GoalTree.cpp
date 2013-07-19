@@ -7,8 +7,7 @@
 
 using namespace Action;
 
-GoalTree::GoalTree(Individual::Individual_ptr _individual) :
-        owner(_individual)
+GoalTree::GoalTree()
 {
 
 }

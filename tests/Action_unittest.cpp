@@ -1,6 +1,7 @@
 #include "Profession/SimpleProfession.h"
 #include "Item/BaseItem.h"
 #include "Item/Weapon.h"
+#include "Actor/ActorUtils.h"
 #include "Action/Task.h"
 #include "Action/GoalCreator.h"
 #include "Location/Village.h"
@@ -31,7 +32,7 @@ TEST(ActionTest, GetFood)
 
 	location2->addItem(item);
 
-	individual->addGoal<Action::GoalType::GET_FOOD>(0);
+	Actor::addGoal<Action::GoalType::GET_FOOD>(individual, 0);
 
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent() != nullptr);
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE);

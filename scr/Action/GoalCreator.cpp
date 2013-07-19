@@ -10,7 +10,7 @@
 namespace Action
 {
 
-GoalCreator & GoalCreator::getInstance()
+GoalCreator& GoalCreator::getInstance()
 {
     static GoalCreator g;
     return g;

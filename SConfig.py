@@ -7,7 +7,7 @@ PROJECT_TYPE = 'exe'
 BUILD_CONFIGURATION = 'Debug'
 TOOLCHAIN_NAME = 'mingw gcc'
 C_FLAGS = '-O0 -g3 -Wall -c -fmessage-length=0'
-CXX_FLAGS = '-O0 -g3 -Wall -c -fmessage-length=0 -std=c++0x'
+CXX_FLAGS = '-O0 -g3 -Wall -c -fmessage-length=0 -std=c++11'
 COMPILER_NAME = 'g++'
 PROJECT_NAME = 'WorldSimulator'
 INCLUDES = []
