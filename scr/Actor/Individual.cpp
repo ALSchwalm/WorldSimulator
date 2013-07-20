@@ -1,4 +1,5 @@
 #include "Actor/Individual.h"
+#include "Actor/Disease.h"
 #include "Profession/BaseProfession.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"

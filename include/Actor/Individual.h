@@ -1,7 +1,6 @@
 #ifndef BASEINDIVIDUAL_H_
 #define BASEINDIVIDUAL_H_
 
-#include "Actor/Individual.h"
 #include "Profession/Profession.h"
 #include "Event/Event.h"
 #include "Item/BaseItem.h"
@@ -12,6 +11,7 @@
 #include <map>
 #include <utility>
 #include <memory>
+#include <array>
 
 using std::shared_ptr;
 
@@ -24,6 +24,20 @@ namespace Location
 namespace Actor
 {
     using Location::Location_ptr;
+
+
+    enum Stats {
+        HEALTH,
+        SPEED,
+        AGILITY,
+        INTELLIGENCE,
+        DEXTERITY,
+        HUNGER,
+        FATIGUE,
+
+        NUM_OF_STATS
+    };
+
 
     class Individual
     {
@@ -45,6 +59,8 @@ namespace Actor
         Action::GoalTree goalTree;
         Skill::skillMap skillMap;
 
+        std::array<unsigned int, NUM_OF_STATS>stats;
+
     public:
         Individual(std::string _name,
                     Profession::ProfessionType p,
@@ -55,9 +71,20 @@ namespace Actor
                         name(_name),
                         isMale(_isMale),
                         currentLocation(_location),
-                        goalTree(){} //FIXME review this
+                        goalTree()
+
+        {
+            stats[HEALTH] =         1;
+            stats[SPEED] =          1;
+            stats[AGILITY] =        1;
+            stats[INTELLIGENCE] =   1;
+            stats[DEXTERITY] =      1;
+            stats[HUNGER] =         0;
+            stats[FATIGUE] =        0;
+        }
 
         Individual& operator=(const Individual&) = delete;
+        Individual(const Individual&) = delete;
 
         virtual ~Individual(){}
 
