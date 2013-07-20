@@ -18,10 +18,15 @@ namespace Utils
     public:
         static Markov& getInstance();
 
-        std::string getWord(bool properName=0);
-        std::string getWord(unsigned int, bool properName=0);
-        std::string getProperWord();
-        std::string getProperWord(unsigned int);
+        std::string getWord(bool properName=0) const ;
+        std::string getWord(unsigned int, bool properName=0) const ;
+        std::string getProperWord() const;
+        std::string getProperWord(unsigned int) const;
+
+        std::string getRegionName() const;
+        std::string getVillageName() const;
+        std::string getIndividualName(std::string familyName = "") const;
+
 
     private:
 

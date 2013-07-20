@@ -58,7 +58,7 @@ Markov::Markov()
 }
 
 
-std::string Markov::getWord(unsigned int size, bool properName)
+std::string Markov::getWord(unsigned int size, bool properName) const
 {
     const std::string letters = "abcdefghijklmnopqrstuvwxyz";
     std::string word = "";
@@ -77,20 +77,56 @@ std::string Markov::getWord(unsigned int size, bool properName)
     return word;
 }
 
-std::string Markov::getWord(bool properName)
+std::string Markov::getWord(bool properName) const
 {
     unsigned int size = (rand() % 11) + 5;
 
     return getWord(size, properName);
 }
 
-std::string Markov::getProperWord()
+std::string Markov::getProperWord() const
 {
     return getWord(true);
 }
 
-std::string Markov::getProperWord(unsigned int size)
+std::string Markov::getProperWord(unsigned int size) const
 {
     return getWord(size, true);
+}
+
+std::string Markov::getRegionName() const
+{
+    if (rand()%2 == 1)
+    {
+        return "Region of " + getProperWord();
+    }
+    else
+    {
+        return getProperWord() + " Region";
+    }
+}
+
+std::string Markov::getVillageName() const
+{
+    if (rand()%2 == 1)
+    {
+        return "Village of " + getProperWord();
+    }
+    else
+    {
+        return getProperWord() + " Village";
+    }
+}
+
+std::string Markov::getIndividualName(std::string familyName) const
+{
+    if (!familyName.empty())
+    {
+        return getProperWord() + " " + familyName;
+    }
+    else
+    {
+        return getProperWord() + " " + getProperWord();
+    }
 }
 

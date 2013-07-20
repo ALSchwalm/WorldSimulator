@@ -28,7 +28,7 @@ void seed()
     unsigned int numberRegions = (rand() % (MAX_REGIONS-MIN_REGIONS)) + MIN_REGIONS;
     for (unsigned int i = 0; i < numberRegions; ++i)
     {
-        auto region = std::make_shared<Location::Region>( Utils::Markov::getInstance().getProperWord());
+        auto region = std::make_shared<Location::Region>( Utils::Markov::getInstance().getRegionName());
         Location::addLocations(Location::World::getInstance(), region);
     }
 
@@ -37,7 +37,7 @@ void seed()
         unsigned int numberCities = (rand() % (MAX_CITIES_PER_REGION-MIN_CITIES_PER_REGION)) + MIN_CITIES_PER_REGION;
         for (unsigned int i=0; i < numberCities; ++i) //TODO assign nationality here
         {
-            auto city = std::make_shared<Location::Village>(Utils::Markov::getInstance().getProperWord());
+            auto city = std::make_shared<Location::Village>(Utils::Markov::getInstance().getVillageName());
             Location::addLocations(region, city);
         }
     }

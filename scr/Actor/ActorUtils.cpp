@@ -13,8 +13,10 @@ namespace Actor
         if (size==0)
             return family;
 
+        std::string familyName = Utils::Markov::getInstance().getProperWord();
+
         //Construct father
-        family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getProperWord(),
+        family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
                                                     Profession::BAKER,
                                                     l,
                                                     true));
@@ -22,7 +24,7 @@ namespace Actor
         if (size > 0)
         {
             //Construct mother
-            family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getProperWord(),
+            family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
                                                         Profession::BAKER,
                                                         l,
                                                         false));
@@ -41,7 +43,7 @@ namespace Actor
 
         for (; size > 0; --size){
             //Construct children
-            auto child = std::make_shared<Individual>(Utils::Markov::getInstance().getProperWord(),
+            auto child = std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
                                                     Profession::BAKER, /*TODO change to child*/
                                                     l,
                                                     rand()%2);
