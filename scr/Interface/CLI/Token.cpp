@@ -24,8 +24,21 @@ namespace Interface
 
             std::vector<Token> tokens;
 
-            while (ss >> buf)
+            while (ss >> buf) {
+                if (buf[0] == '\"'){                //the user has wrapped some text in quotes
+                    std::string quoteToken = buf;
+                    quoteToken += " ";              //re add the spaces
+                    while (ss >> buf) {
+                        quoteToken += buf;
+                        if (buf[buf.size()-1] == '\"')      //end of quotes
+                            break;
+                        quoteToken += " ";
+                    }
+                    buf = quoteToken.substr(1, quoteToken.size()-2);    //remove the quotes
+                }
+
                 tokens.push_back(Token(buf));
+            }
             return tokens;
         }
 
