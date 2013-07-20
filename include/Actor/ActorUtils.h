@@ -6,6 +6,7 @@
 #include "Profession/Profession.h"
 #include "Location/BaseLocation.h"
 #include <vector>
+#include <utility>
 
 namespace Actor
 {
@@ -19,9 +20,9 @@ namespace Actor
     * it is not possible to create a GET_FOOD goal, with a BaseEvent type.
     */
     template<Action::GoalType g, typename... U>
-    void addGoal(Individual_ptr i, unsigned int _priority, U... args)
+    void addGoal(Individual_ptr i, unsigned int _priority, U&&... args)
     {
-        i->getGoalTree()->addGoal<g, U...>(i, _priority, args...);
+        i->getGoalTree()->addGoal<g>(i, _priority, std::forward<U>(args)...);
     }
 }
 

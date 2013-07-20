@@ -1,12 +1,12 @@
 #ifndef GOALTREE_H_
 #define GOALTREE_H_
 
+#include "Action/Goal.h"
+#include "Action/GoalCreator.h"
 #include <set>
 #include <memory>
 #include <functional>
-#include "Action/Goal.h"
-#include "Action/GoalCreator.h"
-
+#include <utility>
 
 namespace Action
 {
@@ -25,9 +25,9 @@ namespace Action
 
 
         template<GoalType g, typename... U>
-        void addGoal(Actor::Individual_ptr i, unsigned int _priority, U... args)
+        void addGoal(Actor::Individual_ptr i, unsigned int _priority, U&&... args)
         {
-            auto func = std::bind(Action::GoalCreator::createGoal<g, U...>, i, _priority, args...);
+            auto func = std::bind(Action::GoalCreator::createGoal<g>, i, _priority, std::forward<U>(args)...);
             insertGoal(GoalWrapper(func, _priority));
         }
 
