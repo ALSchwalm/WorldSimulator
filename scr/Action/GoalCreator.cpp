@@ -2,7 +2,6 @@
 #include "Action/GoalCreator.h"
 #include "Event/MoveEvent.h"
 #include "Event/PickupEvent.h"
-#include <cassert>
 #include <memory>
 #include <algorithm>
 #include <unordered_set>
@@ -11,6 +10,41 @@ namespace Action
 {
 
     namespace GoalCreator {
+
+struct distance
+{
+    bool operator() ( const Location::Location_ptr& lhs, const Location::Location_ptr& rhs) const
+    {
+        return lhs->distance < rhs->distance;
+    }
+};
+
+//Forward declarations
+std::vector<Task_ptr> getFood(Actor::Individual_ptr individual, Goal_ptr goal);
+std::vector<Task_ptr> getItem(Actor::Individual_ptr individual,
+                                Item::Item_ptr item,
+                                Goal_ptr goal);
+
+
+std::vector<Task_ptr> findItemFromAttributes(Actor::Individual_ptr individual,
+                                            std::vector<std::string> attributeList,
+                                            unsigned int maxDistance,
+                                            Goal_ptr goal);
+
+std::vector<Location::Location_ptr> traceBack(Location::Location_ptr l);
+
+std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> dijkstra(Location::Location_ptr startLocation,
+                                                                        std::vector<std::string> attributeList,
+                                                                        unsigned int maxDistance);
+
+std::pair<Item::Item_ptr, std::vector<Location::Location_ptr>> dijkstra(Location::Location_ptr startLocation,
+                                                                        Item::Item_ptr item,
+                                                                        unsigned int maxDistance);
+
+Item::Item_ptr getItemFromAttributes(Location::Location_ptr location,
+                                    std::vector<std::string> attributeList);
+//End forward declarations
+
 
 template<>
 Goal_ptr createGoal<GET_FOOD>(Actor::Individual_ptr individual, unsigned int priority)
@@ -242,11 +276,6 @@ Item::Item_ptr getItemFromAttributes(Location::Location_ptr location, std::vecto
             return item;
     }
     return nullptr;
-}
-
-bool distance::operator ()( const Location::Location_ptr & lhs, const Location::Location_ptr & rhs) const
-{
-    return lhs->distance < rhs->distance;
 }
 
     }
