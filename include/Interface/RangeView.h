@@ -43,7 +43,7 @@ namespace Interface
     {
         if (int index = atoi(token.value.c_str()))
         {
-            if (index > 0 && static_cast<unsigned int>(index) < viewSubject->getIndividuals().size()) {
+            if (index > 0 && static_cast<unsigned int>(index-1) < viewSubject->getIndividuals().size()) {
                 token.value = viewSubject->getIndividuals()[index-1]->getName();
                 return true;
             }
@@ -56,9 +56,9 @@ namespace Interface
     {
         if (int index = atoi(token.value.c_str()))
         {
-            if (index > 0 && static_cast<unsigned int>(index) < viewSubject->getLocations().size()) {
+            if (index > 0 && static_cast<unsigned int>(index-1) < viewSubject->getLocations().size()) {
                 auto iter = viewSubject->getLocations().begin();
-                std::advance(iter, index-1);
+                std::advance(iter, index-1);        //Locations are of type unordered_set to use advance
                 token.value = (*iter)->getName();
                 return true;
             }
@@ -71,7 +71,7 @@ namespace Interface
     {
         if (int index = atoi(token.value.c_str()))
         {
-            if (index > 0 && static_cast<unsigned int>(index) < viewSubject->getItems().size()) {
+            if (index > 0 && static_cast<unsigned int>(index-1) < viewSubject->getItems().size()) {
                 token.value = viewSubject->getItems()[index-1]->getName();
                 return true;
             }
