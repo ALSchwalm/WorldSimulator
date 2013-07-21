@@ -6,6 +6,7 @@
 #include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
+#include "Actor/Disease.h"
 #include "Skill/Skill.h"
 #include <string>
 #include <map>
@@ -24,20 +25,6 @@ namespace Location
 namespace Actor
 {
     using Location::Location_ptr;
-
-
-    enum Stats {
-        HEALTH,
-        SPEED,
-        AGILITY,
-        INTELLIGENCE,
-        DEXTERITY,
-        HUNGER,
-        FATIGUE,
-
-        NUM_OF_STATS
-    };
-
 
     class Individual
     {
@@ -61,27 +48,13 @@ namespace Actor
 
         std::array<unsigned int, NUM_OF_STATS>stats;
 
+        std::vector<Disease> diseases;
+
     public:
         Individual(std::string _name,
                     Profession::ProfessionType p,
                     Location_ptr _location = nullptr,
-                    bool _isMale=true) :
-                        profession(Profession::createProfessionFromType(p)),
-                        age(0),
-                        name(_name),
-                        isMale(_isMale),
-                        currentLocation(_location),
-                        goalTree()
-
-        {
-            stats[HEALTH] =         1;
-            stats[SPEED] =          1;
-            stats[AGILITY] =        1;
-            stats[INTELLIGENCE] =   1;
-            stats[DEXTERITY] =      1;
-            stats[HUNGER] =         0;
-            stats[FATIGUE] =        0;
-        }
+                    bool _isMale=true);
 
         Individual& operator=(const Individual&) = delete;
         Individual(const Individual&) = delete;
@@ -99,6 +72,7 @@ namespace Actor
         Relationship::RelationshipMap<Location_ptr>& getLocationRelationshipMap() {return LocationRelationshipMap;};
         Profession::Profession_ptr getProfession() const {return profession;}
         Action::GoalTree* getGoalTree() {return &goalTree;}
+        std::vector<Disease>& getDiseases() {return diseases;}
 
         //TODO decide whether this should be added with the profession skill
         const Skill::skillMap& getSkillMap() {return skillMap;}

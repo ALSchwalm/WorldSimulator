@@ -1,5 +1,4 @@
 #include "Actor/Individual.h"
-#include "Actor/Disease.h"
 #include "Profession/BaseProfession.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
@@ -8,6 +7,27 @@
 
 namespace Actor
 {
+
+    Individual::Individual(std::string _name,
+                Profession::ProfessionType p,
+                Location_ptr _location,
+                bool _isMale) :
+                    profession(Profession::createProfessionFromType(p)),
+                    age(0),
+                    name(_name),
+                    isMale(_isMale),
+                    currentLocation(_location),
+                    goalTree()
+    {
+        stats[HEALTH] =         1;
+        stats[SPEED] =          1;
+        stats[AGILITY] =        1;
+        stats[INTELLIGENCE] =   1;
+        stats[DEXTERITY] =      1;
+        stats[HUNGER] =         0;
+        stats[FATIGUE] =        0;
+    }
+
 
     const std::vector<Item::Item_ptr> Individual::getInitialItems()
     {

@@ -1,10 +1,11 @@
 #ifndef DISEASE_H_
 #define DISEASE_H_
 
-#include "Actor/Individual.h"
+#include "Actor/Stats.h"
 #include "Utils/Markov.h"
 #include <string>
 #include <cstdlib>
+#include <array>
 
 namespace Actor
 {
