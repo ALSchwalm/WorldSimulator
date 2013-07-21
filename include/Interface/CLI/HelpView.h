@@ -21,16 +21,16 @@ namespace Interface
     * with another help view, it will do nothing.
     */
 
-    class HelpView : public BaseView
+    class HelpView
     {
     public:
         HelpView(std::vector<CLI::Command>);
         ~HelpView();
         void redrawView(){};
-        void refreshView() override;
-        WINDOW* getTitleWin() override {return titleWin;}
-        WINDOW* getNameWin() override {return nameWin;}
-        WINDOW* getDataWin() override {return dataWin;}
+        void refreshView();
+        WINDOW* getTitleWin() {return titleWin;}
+        WINDOW* getNameWin() {return nameWin;}
+        WINDOW* getDataWin() {return dataWin;}
     private:
         WINDOW* titleWin;
         WINDOW* nameWin;

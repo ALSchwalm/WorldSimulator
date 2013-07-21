@@ -36,10 +36,12 @@ namespace Interface
                         (command.getContext() == currentContext or
                                 command.getContext() == Context::ALL))
                 {
+                    command.args.clear();
                     for (unsigned int i=0; i < tokens.size(); ++i)
                     {
                         if (command.getTokens()[i].value == "*")	//Hold on to arguments for wildcards
                         {
+                            displayView->expandArg(tokens[i]);      //Expand context based arguments
                             command.args.push_back(tokens[i].value);
                         }
                     }

@@ -13,13 +13,14 @@
 namespace Interface
 {
     class BaseView;
+    class HelpView;
 
     void initialize();
     void refreshView();
 
     extern WINDOW* mainwin;
     extern std::shared_ptr<BaseView> displayView;
-    extern std::shared_ptr<BaseView> helpView;
+    extern std::shared_ptr<HelpView> helpView;
     extern CLI::Context currentContext;
 }
 #endif

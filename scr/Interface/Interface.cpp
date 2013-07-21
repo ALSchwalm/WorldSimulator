@@ -2,6 +2,7 @@
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
 #include "Interface/GeneralView.h"
+#include "Interface/CLI/HelpView.h"
 #include "Location/World.h"
 #include <iostream>
 #include <cstdlib>
@@ -11,7 +12,7 @@ namespace Interface
 {
     WINDOW * mainwin;
     std::shared_ptr<BaseView> displayView;
-    std::shared_ptr<BaseView> helpView;
+    std::shared_ptr<HelpView> helpView;
     CLI::Context currentContext;
 
     void initialize()

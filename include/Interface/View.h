@@ -10,6 +10,7 @@
 #include <memory>
 #include <iostream> //TODO remove this
 #include "Interface/Interface.h"
+#include "Interface/CLI/Token.h"
 #include "Utils/panel.h"
 
 namespace Interface
@@ -24,6 +25,11 @@ namespace Interface
         virtual WINDOW* getTitleWin()=0;
         virtual WINDOW* getNameWin()=0;
         virtual WINDOW* getDataWin()=0;
+
+        //expands tokens that are dependent on context. i.e., passing '1' in place of a
+        //location name when viewing adjacent locations.
+        virtual bool expandArg(CLI::Token&)=0;
+
         BaseView(){} //This should only be used by shared_ptr
         BaseView(const BaseView&) = delete;
         BaseView& operator=(const BaseView&) = delete;
@@ -41,6 +47,7 @@ namespace Interface
         WINDOW* getTitleWin() override {return titleWin;}
         WINDOW* getNameWin() override {return nameWin;}
         WINDOW* getDataWin() override {return dataWin;}
+        virtual bool expandArg(CLI::Token&) override {return false;}
 
         virtual ~View()
         {

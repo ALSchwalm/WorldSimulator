@@ -11,7 +11,7 @@ namespace Interface
 
             /*
             In order to allow generic inputs (i.e. show <INDIVIDUAL NAME>) a special char is needed to represent the generic.
-            '*' is this char. Tokens containing '*' are eq to any non empty token. By a happy coincidnece, this also lets us
+            '*' is this char. Tokens containing '*' are eq to any non empty token. By a happy coincidence, this also lets us
             give possible completions for the next argument. So when the user has typed in all of one argument, followed by a
             space, append an '*'. This will show all possible completions from the current position, as all of the next tokens
             are eq to the appended '*'.
