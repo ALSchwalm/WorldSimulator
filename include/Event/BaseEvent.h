@@ -12,6 +12,7 @@
 #include "Time/Date.h"
 #include "Time/TimeManager.h"
 #include <memory>
+#include <string>
 
 
 namespace Action

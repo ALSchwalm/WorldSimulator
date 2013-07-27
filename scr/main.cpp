@@ -6,6 +6,7 @@
  */
 
 #include <exception>
+#include <iostream>
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
 #include "Time/TimeManager.h"
