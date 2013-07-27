@@ -6,6 +6,7 @@
  */
 
 #include "Time/Date.h"
+#include <sstream>
 
 namespace Time {
 
@@ -28,7 +29,7 @@ namespace Time {
     }
 
 
-    bool Date::operator ==(Date rhs)
+    bool Date::operator==(const Date& rhs) const
     {
         if (rhs.day == this->day 	 &&
             rhs.month == this->month &&
@@ -37,6 +38,11 @@ namespace Time {
             rhs.minute == this->minute)
             return true;
         return false;
+    }
+
+    bool Date::operator!=(const Date& rhs) const
+    {
+        return !((*this) == rhs);
     }
 
     Date & Date::operator++()
@@ -85,32 +91,32 @@ namespace Time {
         return *this;
     }
 
-    std::ostream& operator<<(std::ostream &out, Date &d)
+    std::string Date::getDateAsString(bool concise) const
     {
         std::string out_day;
         std::string out_month;
 
-        switch (d.day)
+        switch (day)
         {
-        case Sunday:
+        case Day::Sunday:
             out_day = "Sunday";
             break;
-        case Monday:
+        case Day::Monday:
             out_day = "Monday";
             break;
-        case Tuesday:
+        case Day::Tuesday:
             out_day = "Tuesday";
             break;
-        case Wednesday:
+        case Day::Wednesday:
             out_day = "Wednesday";
             break;
-        case Thursday:
+        case Day::Thursday:
             out_day = "Thursday";
             break;
-        case Friday:
+        case Day::Friday:
             out_day = "Friday";
             break;
-        case Saturday:
+        case Day::Saturday:
             out_day = "Saturday";
             break;
         default:
@@ -118,42 +124,42 @@ namespace Time {
             break;
         }
 
-        switch (d.month)
+        switch (month)
         {
-        case January:
+        case Month::January:
             out_month = "January";
             break;
-        case February:
+        case Month::February:
             out_month = "February";
             break;
-        case March:
+        case Month::March:
             out_month = "March";
             break;
-        case April:
+        case Month::April:
             out_month = "April";
             break;
-        case May:
+        case Month::May:
             out_month = "May";
             break;
-        case June:
+        case Month::June:
             out_month = "June";
             break;
-        case July:
+        case Month::July:
             out_month = "July";
             break;
-        case August:
+        case Month::August:
             out_month = "August";
             break;
-        case September:
+        case Month::September:
             out_month = "September";
             break;
-        case October:
+        case Month::October:
             out_month = "October";
             break;
-        case November:
+        case Month::November:
             out_month = "November";
             break;
-        case December:
+        case Month::December:
             out_month = "December";
             break;
         default:
@@ -161,9 +167,20 @@ namespace Time {
             break;
         }
 
-        out << out_day << " the " << d.dayValue+1 << " of " << out_month << ", " << d.year << " " << d.hour << ":" << d.minute;
+        std::ostringstream ss;
 
-        return out;
+        if (!concise)
+            ss << out_day << " the " << dayValue+1 << " of " << out_month << ", " << year << " " << hour << ":" << minute;
+        else
+            ss << dayValue+1 << "-" << out_month << "-" << year;
+
+        return ss.str();
+
     }
+
+    std::ostream& operator<<(std::ostream &out, Date &d) {
+        return out << d.getDateAsString();
+    }
+
 
 } /* namespace Time */

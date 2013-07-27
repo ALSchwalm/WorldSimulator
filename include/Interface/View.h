@@ -93,6 +93,7 @@ namespace Interface
         mvwprintw(this->titleWin, 0, 2, status.c_str());
 
         wrefresh(this->titleWin);
+        Interface::update_date();
     }
 
 

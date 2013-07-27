@@ -51,13 +51,15 @@ namespace Time {
     public:
         Date(unsigned int year, Month month, Day day, unsigned short hour=0, unsigned short minute=0);
 
-        unsigned int getYear() {return year;}
-        Month getMonth() {return month;}
-        Day getDay() {return day;}
+        unsigned int getYear() const {return year;}
+        Month getMonth() const {return month;}
+        Day getDay() const {return day;}
 
-        bool operator ==(Date);
+        bool operator==(const Date&) const;
+        bool operator!=(const Date&) const;
         Date& operator++();
 
+        std::string getDateAsString(bool concise=0) const;
 
         friend std::ostream& operator<<(std::ostream& out, Date& d);
 

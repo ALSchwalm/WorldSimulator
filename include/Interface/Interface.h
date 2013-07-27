@@ -17,6 +17,7 @@ namespace Interface
 
     void initialize();
     void refreshView();
+    void update_date();
 
     extern WINDOW* mainwin;
     extern std::shared_ptr<BaseView> displayView;

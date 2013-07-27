@@ -9,7 +9,7 @@ namespace Time
     public:
         static DateManager& getInstance();
 
-        void nextMinute() {++now;}
+        void nextMinute();
 
         Date now;
 

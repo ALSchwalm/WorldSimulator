@@ -14,3 +14,7 @@ DateManager::DateManager() :
 {
 
 }
+
+void DateManager::nextMinute() {
+    ++now;
+}

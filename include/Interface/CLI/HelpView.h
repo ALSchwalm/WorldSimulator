@@ -14,7 +14,7 @@
 namespace Interface
 {
     /*
-    * HelpView is a special case of view. It is not derived from View<T>,
+    * HelpView is a special case of view. It is not derived from View<T> or baseView,
     * and it is not held in Interface::displayView. Instead, it has its own
     * Interface::helpView variable. When a helpView is destroyed, it will
     * either call a redraw of the displayView, or, if it is being replaced
