@@ -110,7 +110,9 @@ namespace Interface
                 dialogs.push_back(std::make_shared<DialogOK>("Ambiguous command."));
             else if (commandList.size() < 1)
                 dialogs.push_back(std::make_shared<DialogOK>("Unrecognized command."));
-            else
+            else if (!commandList[0].isCallable())
+		dialogs.push_back(std::make_shared<DialogOK>("Invalid command."));
+	    else
             {
                 currentCommand = commandList[0];
                 commandList[0]();
