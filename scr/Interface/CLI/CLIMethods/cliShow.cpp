@@ -132,10 +132,19 @@ namespace Interface
             return true;
         }
 
-        inline bool cliShowItemRange()
+        template<>
+        bool cliShowItemRange<Context::LOCATION>()
         {
             auto view = dynamic_cast<View<Location::Location_ptr>* >(displayView.get());
             displayView = std::make_shared<RangeView<Location::Location_ptr, Item::Item_ptr> >(view->viewSubject);
+            return true;
+        }
+
+        template<>
+        bool cliShowItemRange<Context::INDIVIDUAL>()
+        {
+            auto view = dynamic_cast<View<Actor::Individual_ptr>* >(displayView.get());
+            displayView = std::make_shared<RangeView<Actor::Individual_ptr, Item::Item_ptr> >(view->viewSubject);
             return true;
         }
 

@@ -60,7 +60,8 @@ namespace Interface
                 //          Command                         function call                                   description                               pre context             postContext
                 Command("show",                         NO_CALL,                                    "Show information about the current view",      Context::ALL,           Context::SAME),
                 Command("show locations",               cliShowLocationRange,                       "show nearby locations",                        Context::LOCATION,      Context::SAME),
-                Command("show items",                   cliShowItemRange,                           "show items in this location",                  Context::LOCATION,      Context::SAME),
+                Command("show items",                   cliShowItemRange<Context::LOCATION>,        "show items in this location",                  Context::LOCATION,      Context::SAME),
+                Command("show items",                   cliShowItemRange<Context::INDIVIDUAL>,      "show items in this location",                  Context::INDIVIDUAL,      Context::SAME),
                 Command("show individuals",             cliShowIndividualRange,                     "show individuals in this location",            Context::LOCATION,      Context::SAME),
                 Command("show info",                    cliShowInfo,                                "show general information",                     Context::ALL,           Context::SAME),
 

@@ -33,10 +33,12 @@ namespace Interface
 
         bool cliShowLocationRange();
 
-        //template<typename T>
+        template<Context c>
         bool cliShowItemRange();
 
-        //template<typename T>
+        template<> bool cliShowItemRange<Context::INDIVIDUAL>();
+        template<> bool cliShowItemRange<Context::LOCATION>();
+
         bool cliShowIndividualRange();
 
         bool cliShowInfo();
