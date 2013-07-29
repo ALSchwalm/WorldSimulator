@@ -111,8 +111,8 @@ namespace Interface
             else if (commandList.size() < 1)
                 dialogs.push_back(std::make_shared<DialogOK>("Unrecognized command."));
             else if (!commandList[0].isCallable())
-		dialogs.push_back(std::make_shared<DialogOK>("Invalid command."));
-	    else
+                dialogs.push_back(std::make_shared<DialogOK>("Invalid command."));
+            else
             {
                 currentCommand = commandList[0];
                 commandList[0]();
