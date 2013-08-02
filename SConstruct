@@ -43,7 +43,7 @@ if not COMP_INCLUDES_INTO_CCFLAGS:
 env.Append(CFLAGS=C_FLAGS, CXXFLAGS=CXX_FLAGS)
 
 if platform.system() == "Windows":
-	LIBRARIES = ['pdcurses']
+	LIBRARIES = ['pdcurses', 'jsoncpp']
 elif platform.system() == "Linux":
 	LIBRARIES = ['ncurses']
 LIBRARY_PATHS = ['lib/']
