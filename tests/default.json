@@ -1,0 +1,102 @@
+{
+    "Items" : {
+        "Foods" : {
+            "Mutton" : {
+                "Name" : "Mutton",
+                "RequiredSkills" : { "Cooking" : 1.5 },
+                "RequiredItems"  : {}
+            },
+
+            "Bacon" : {
+                "Name" : "Bacon",
+                "RequiredSkills" : { "Cooking" : 1.5 },
+                "RequriedItems"  : {}
+            },
+
+            "Corn" : {
+                "Name" : "Corn",
+                "RequiredSkills" : { "Cooking" : 1.5 },
+                "RequriedItems"  : {}
+            },
+            
+            "Beef" : {
+                "Name" : "Beef",
+                "RequiredSkills" : { "Cooking" : 1.5 },
+                "RequriedItems"  : {}
+            },
+
+            "Wheat" : {
+                "Name" : "Wheat",
+                "RequiredSkills" : { "Cooking" : 1.5 },
+                "RequriedItems"  : {}
+            },
+
+            "Bread" : {
+                "Name" : "Bread",
+                "RequiredSkills" : { "Cooking" : 1.5,
+                                     "Baking"  : 2.0},
+                "RequriedItems"  : { "Wheat" : 2 }
+            },
+        },
+
+        "Containers" : {
+            "Barrel" : {
+                "Name" : "Barrel",
+                "RequiredSkills" : { "Woodworking" : 1.5,
+                                     "Blacksmithing"  : 2.0},
+                "RequriedItems"  : {}
+            },
+
+            "Chest" : {
+                "Name" : "Chest",
+                "RequiredSkills" : { "Woodworking" : 1.5},
+                "RequriedItems"  : {}
+            },
+
+            "House" : {
+                "Name" : "House",
+                "RequiredSkills" : { "Woodworking" : 5.0},
+                "RequriedItems"  : {}
+            },
+
+            "House_Floor" : {
+                "Name" : "House Floor",
+                "RequiredSkills" : { "Woodworking" : 3.0},
+                "RequriedItems"  : {}
+            }
+        },
+
+        "Tools" : {
+            "Plow" : {
+                "Name" : "Plow"
+                "RequiredSkills" : { "Woodworking" : 1.5,
+                                     "Blacksmithing"  : 2.0},
+                "UsedSkills" : { "Farming" : 1.5 },
+                "RequiedItems" : {}
+            },
+
+            "Oven" : {
+                "Name" : "Oven"
+                "RequiredSkills" : { "Woodworking" : 1.5,
+                                     "Blacksmithing"  : 2.0},
+                "UsedSkills" : { "Cooking" : 3.0},
+                "RequiedItems" : {}
+            }
+        },
+
+        "Weapons" : {
+            "Sword" : {
+                "Name" : "Sword",
+                "RequiredSkills" : { "Woodworking" : 1.5,
+                                     "Blacksmithing"  : 2.0}
+            }
+
+            "Bow" : {
+                "Name" : "Bow",
+                "RequiredSkills" : { "Woodworking" : 3.0}
+            }
+        }
+    }
+}
+
+    
