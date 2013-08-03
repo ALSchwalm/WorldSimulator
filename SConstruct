@@ -43,9 +43,9 @@ if not COMP_INCLUDES_INTO_CCFLAGS:
 env.Append(CFLAGS=C_FLAGS, CXXFLAGS=CXX_FLAGS)
 
 if platform.system() == "Windows":
-	LIBRARIES = ['pdcurses', 'jsoncpp']
+	LIBRARIES = ['pdcurses', 'jsoncpp_mingw']
 elif platform.system() == "Linux":
-	LIBRARIES = ['ncurses', 'jsoncpp']
+	LIBRARIES = ['ncurses', 'jsoncpp_gcc']
 LIBRARY_PATHS = ['lib/']
 env.Append(CPPPATH=["include"])
 env.Replace(CCFLAGS='') # otherwise we have /nolink in Windows there

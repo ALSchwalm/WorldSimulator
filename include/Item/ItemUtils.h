@@ -6,10 +6,15 @@
 #include "Item/Tool.h"
 #include "Item/Weapon.h"
 #include "Item/Container.h"
+#include "Utils/json/json.h"
 #include <stdexcept>
 
 namespace Item
 {
+
+    bool AddItemFactory(const Json::Value itemRoot);
+
+
     /*
     * This template function is used to determine whether an item
     * has a particular "subItemType". That is, given a shared_ptr<BaseItem>
