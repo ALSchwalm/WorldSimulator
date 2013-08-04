@@ -38,7 +38,14 @@ namespace Item
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<FOOD>::make() const {
-		return std::make_shared<Item::Food>(id);
+		auto newFood = std::make_shared<Item::Food>(id);
+
+		//Set default attributes for new item
+		for (auto attribute : attributes){
+			newFood->setAttribute(attribute.first, attribute.second);
+		}
+
+		return newFood;
 	}
 
 
@@ -53,7 +60,14 @@ namespace Item
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<TOOL>::make() const {
-		return std::make_shared<Item::Tool>(id);
+		auto newTool = std::make_shared<Item::Tool>(id);
+
+		//Set default attributes for new item
+		for (auto attribute : attributes){
+			newTool->setAttribute(attribute.first, attribute.second);
+		}
+
+		return newTool;
 	}
 
 
@@ -62,7 +76,14 @@ namespace Item
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<CONTAINER>::make() const {
-		return std::make_shared<Item::Container>(id);
+		auto newContainer = std::make_shared<Item::Container>(id);
+
+		//Set default attributes for new item
+		for (auto attribute : attributes){
+			newContainer->setAttribute(attribute.first, attribute.second);
+		}
+
+		return newContainer;
 	}
 
 
@@ -72,7 +93,14 @@ namespace Item
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<WEAPON>::make() const {
-		return std::make_shared<Item::Weapon>(id);
+		auto newWeapon = std::make_shared<Item::Weapon>(id);
+
+		//Set default attributes for new item
+		for (auto attribute : attributes){
+			newWeapon->setAttribute(attribute.first, attribute.second);
+		}
+
+		return newWeapon;
 	}
 
 }
