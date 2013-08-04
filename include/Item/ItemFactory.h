@@ -8,10 +8,6 @@
 
 namespace Item
 {
-	typedef const std::string ID;
-	typedef std::vector< std::pair<ID, double>> skillVector;
-	typedef std::vector< std::pair<ID, unsigned int>> itemVector;
-
 	class ItemFactoryBase
 	{
 	public:

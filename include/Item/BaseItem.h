@@ -3,6 +3,7 @@
 
 #include "Owner/Owner.h"
 #include "Skill/Skill.h"
+#include "Item/ItemUtils.h"
 #include <memory>
 #include <map>
 #include <string>
@@ -44,13 +45,15 @@ namespace Item
         bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
     protected:
-        BaseItem(std::string _name, Actor::Individual_ptr _owner) :
-            name(_name),
+        BaseItem(ID _id, std::string _name, Actor::Individual_ptr _owner) :
+        	id(_id),
+        	name(_name),
             owner(_owner){}
 
-        BaseItem() : name("Unnamed Item"){}
-        BaseItem(std::string _name) : name(_name){}
-        BaseItem(Actor::Individual_ptr _owner) :
+        BaseItem(ID _id) : id(_id), name("Unnamed Item"){}
+        BaseItem(ID _id, std::string _name) : id(_id), name(_name){}
+        BaseItem(ID _id, Actor::Individual_ptr _owner) :
+        	id(_id),
             name("Unnamed Item"),
             owner(_owner){}
 
@@ -60,6 +63,7 @@ namespace Item
         BaseItem& operator=(const BaseItem&) = delete;
 
     private:
+        ID id;
         std::string name;
         std::map<std::string, bool> attributes;
         Owner::Owner owner;

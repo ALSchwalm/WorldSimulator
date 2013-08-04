@@ -11,7 +11,7 @@ namespace Item
 {
     namespace Crafting
     {
-
+/*
         template<typename T>
         static const std::vector<Item_ptr> hasItems(Individual::Individual_ptr individual)
         {
@@ -35,10 +35,10 @@ namespace Item
             }
             return usedItems;
         }
-
+*/
         template<typename T, typename... U>
         inline Item_ptr createItem(Individual::Individual_ptr individual, U... args)
-        {
+        {/*
             for (auto p : T::getRequiredSkill())
             {
                 if (individual->getSkillLevel(p.first) < p.second)
@@ -57,6 +57,8 @@ namespace Item
             }
 
             return std::make_shared<T>(args...);
+            */
+        	return nullptr;
         }
     }
 }

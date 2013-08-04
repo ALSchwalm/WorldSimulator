@@ -23,7 +23,6 @@ namespace Profession
 
         void addInitialItems(std::vector<Item::Item_ptr>& items) override
         {
-            items.push_back(std::make_shared<Item::Food<Item::BREAD> >());
         };
 
     };

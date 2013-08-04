@@ -1,16 +1,15 @@
 #ifndef ITEMUTILS_H_
 #define ITEMUTILS_H_
 
-#include "Item/Food.h"
-#include "Item/BaseItem.h"
-#include "Item/Tool.h"
-#include "Item/Weapon.h"
-#include "Item/Container.h"
 #include "Utils/json/json.h"
-#include <stdexcept>
+#include <utility>
+#include <vector>
 
 namespace Item
 {
+	typedef const std::string ID;
+	typedef std::vector< std::pair<ID, double>> skillVector;
+	typedef std::vector< std::pair<ID, unsigned int>> itemVector;
 
     bool AddItemFactory(const Json::Value itemRoot);
 
@@ -20,7 +19,7 @@ namespace Item
     * has a particular "subItemType". That is, given a shared_ptr<BaseItem>
     * which points to a Food instance, whether that Food instance was created
     * with BREAD FoodType.
-    */
+
     template<ItemType itemType>
     inline bool isEnumType(Item_ptr i, unsigned int t);
 
@@ -81,7 +80,7 @@ namespace Item
         return false;
     }
 
-
+*/
 }
 
 #endif

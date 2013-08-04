@@ -33,13 +33,13 @@ void seed()
                 for (unsigned int family_size = 0; population > 0; population -= family_size)
                 {
                     family_size = population % 5 + 1;
-
+/*
                     auto house = std::make_shared<Item::Container<Item::HOUSE>>();
 
                     Actor::createFamily(family_size, house);
 
                     city->addItem(house);
-                    Location::addLocations(city, house);
+                    Location::addLocations(city, house);*/
                 }
             }
         }
