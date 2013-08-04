@@ -35,7 +35,7 @@ namespace Item
         virtual ~BaseItem(){};
 
         const std::string& getName() {return name;}
-        void setAttribute(std::string s) {attributes[s] = true;}
+        void setAttribute(std::string s, bool val=true) {attributes[s] = val;}
 
         virtual const ItemType getItemType()=0;
 

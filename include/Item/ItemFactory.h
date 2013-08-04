@@ -20,6 +20,7 @@ namespace Item
 		const ID id;
 		skillVector requiredSkills;
 		itemVector requiredItems;
+		std::map<std::string, bool> attributes;
 
 	};
 

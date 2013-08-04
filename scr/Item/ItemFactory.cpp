@@ -12,7 +12,7 @@ namespace Item
 	ItemFactoryBase::ItemFactoryBase(const Json::Value itemRoot) :
 			id(itemRoot["ID"].asString())
 	{
-		std::vector<std::string>&& skillNames = itemRoot["RequiredSkills"].getMemberNames();
+		std::vector<std::string> skillNames = itemRoot["RequiredSkills"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["RequiredSkills"].size(); ++i) {
 			auto skillValue = itemRoot["RequiredSkills"][i];
 			requiredSkills.emplace_back(skillNames.at(i), skillValue.asDouble());
@@ -24,6 +24,11 @@ namespace Item
 			requiredItems.emplace_back(itemNames.at(i), itemValue.asUInt());
 		}
 
+		auto attributeNames = itemRoot["Attributes"].getMemberNames();
+		for(unsigned int i=0; i < itemRoot["Attributes"].size(); ++i) {
+			auto itemValue = itemRoot["Attributes"][i];
+			attributes[itemNames.at(i)] = itemValue.asBool();
+		}
 
 	}
 
