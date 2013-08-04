@@ -3,21 +3,21 @@
 
 namespace Item
 {
+	std::vector<std::unique_ptr<ItemFactoryBase>> itemFactories;
+
 	ItemFactoryBase::ItemFactoryBase(const Json::Value itemRoot) :
 			id(itemRoot["ID"].asString())
 	{
-		std::vector<std::string> skillNames = itemRoot["RequiredSkills"].getMemberNames();
+		std::vector<std::string>&& skillNames = itemRoot["RequiredSkills"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["RequiredSkills"].size(); ++i) {
-			auto skillValue = itemRoot["RequiredSkills"][i];
-			auto skillPair = std::make_pair(skillNames.at(i), skillValue.asDouble());
-			requiredSkills.push_back(skillPair);
+			auto&& skillValue = itemRoot["RequiredSkills"][i];
+			requiredSkills.emplace_back(skillNames.at(i), skillValue.asDouble());
 		}
 
 		auto itemNames = itemRoot["RequiredItems"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["RequiredItems"].size(); ++i) {
-			auto itemValue = itemRoot["RequiredItems"][i];
-			auto itemPair = std::make_pair(skillNames.at(i), itemValue.asUInt());
-			requiredItems.push_back(itemPair);
+			auto&& itemValue = itemRoot["RequiredItems"][i];
+			requiredItems.emplace_back(itemNames.at(i), itemValue.asUInt());
 		}
 
 
@@ -36,7 +36,11 @@ namespace Item
 
 	ItemFactory<TOOL>::ItemFactory(const Json::Value itemRoot) : ItemFactoryBase(itemRoot)
 	{
-
+		auto skillNames = itemRoot["UsedSkills"].getMemberNames();
+		for(unsigned int i=0; i < itemRoot["UsedSkills"].size(); ++i) {
+			auto&& skillValue = itemRoot["UsedSkills"][i];
+			usedSkills.emplace_back(skillNames.at(i), skillValue.asDouble());
+		}
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<TOOL>::make() const {

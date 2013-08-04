@@ -8,7 +8,6 @@
 
 namespace Item
 {
-
 	typedef const std::string ID;
 	typedef std::vector< std::pair<ID, double>> skillVector;
 	typedef std::vector< std::pair<ID, unsigned int>> itemVector;
@@ -27,6 +26,8 @@ namespace Item
 		itemVector requiredItems;
 
 	};
+
+	extern std::vector<std::unique_ptr<ItemFactoryBase>> itemFactories;
 
 	template <ItemType i>
 	class ItemFactory;
