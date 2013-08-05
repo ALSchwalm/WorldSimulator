@@ -11,7 +11,7 @@ namespace Item
 	typedef std::vector< std::pair<ID, double>> skillVector;
 	typedef std::vector< std::pair<ID, unsigned int>> itemVector;
 
-    bool AddItemFactory(const Json::Value itemRoot);
+    bool AddItemFactory(ID _id, const Json::Value itemRoot);
 
 
     /*

@@ -1,7 +1,7 @@
 {
     "Items" : {
         "Mutton" : {
-            "ID" : "Mutton",
+            "Name" : "Mutton",
             "Type" : "Food",
             "RequiredSkills" : { "Cooking" : 1.5 },
             "RequiredItems"  : {},
@@ -9,7 +9,7 @@
         },
 
         "Bacon" : {
-            "ID" : "Bacon",
+            "Name" : "Bacon",
             "Type" : "Food",
             "RequiredSkills" : { "Cooking" : 1.5 },
             "RequriedItems"  : {},
@@ -17,7 +17,7 @@
         },
 
         "Corn" : {
-            "ID" : "Corn",
+            "Name" : "Corn",
             "Type" : "Food",
             "RequiredSkills" : { "Cooking" : 1.5 },
             "RequriedItems"  : {},
@@ -25,7 +25,7 @@
         },
         
         "Beef" : {
-            "ID" : "Beef",
+            "Name" : "Beef",
             "Type" : "Food",
             "RequiredSkills" : { "Cooking" : 1.5 },
             "RequriedItems"  : {},
@@ -33,7 +33,7 @@
         },
 
         "Wheat" : {
-            "ID" : "Wheat",
+            "Name" : "Wheat",
             "Type" : "Food",
             "RequiredSkills" : { "Cooking" : 1.5 },
             "RequriedItems"  : {},
@@ -41,7 +41,7 @@
         },
 
         "Bread" : {
-            "ID" : "Bread",
+            "Name" : "Bread",
             "Type" : "Food",
             "RequiredSkills" : { "Cooking" : 1.5,
                                  "Baking"  : 2.0},
@@ -50,7 +50,7 @@
         },
 
         "Barrel" : {
-            "ID" : "Barrel",
+            "Name" : "Barrel",
             "Type" : "Container",
             "RequiredSkills" : { "Woodworking" : 1.5,
                                  "Blacksmithing"  : 2.0},
@@ -59,7 +59,7 @@
         },
 
         "Chest" : {
-            "ID" : "Chest",
+            "Name" : "Chest",
             "Type" : "Container",
             "RequiredSkills" : { "Woodworking" : 1.5},
             "RequriedItems"  : {},
@@ -67,7 +67,7 @@
         },
 
         "House" : {
-            "ID" : "House",
+            "Name" : "House",
             "Type" : "Container",
             "RequiredSkills" : { "Woodworking" : 5.0},
             "RequriedItems"  : {},
@@ -75,7 +75,7 @@
         },
 
         "House_Floor" : {
-            "ID" : "House Floor",
+            "Name" : "House Floor",
             "Type" : "Container",
             "RequiredSkills" : { "Woodworking" : 3.0},
             "RequriedItems"  : {},
@@ -84,7 +84,7 @@
 
         
         "Plow" : {
-            "ID" : "Plow"
+            "Name" : "Plow"
             "Type" : "Tool"
             "RequiredSkills" : { "Woodworking" : 1.5,
                                  "Blacksmithing"  : 2.0},
@@ -94,7 +94,7 @@
         },
 
         "Oven" : {
-            "ID" : "Oven"
+            "Name" : "Oven"
             "Type" : "Tool"
             "RequiredSkills" : { "Woodworking" : 1.5,
                                  "Blacksmithing"  : 2.0},
@@ -104,7 +104,7 @@
         }
 
         "Sword" : {
-            "ID" : "Sword",
+            "Name" : "Sword",
             "Type" : "Weapon",
             "RequiredSkills" : { "Woodworking" : 1.5,
                                  "Blacksmithing"  : 2.0},
@@ -113,7 +113,7 @@
         }
 
         "Bow" : {
-            "ID" : "Bow",
+            "Name" : "Bow",
             "Type" : "Weapon",
             "RequiredSkills" : { "Woodworking" : 3.0},
             "RequiedItems" : {},

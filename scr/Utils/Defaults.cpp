@@ -39,9 +39,10 @@ namespace Utils
 
     bool loadItems(const Json::Value itemRoot) {
 
+    	auto IDs = itemRoot.getMemberNames();
         for(unsigned int i = 0; i < itemRoot.size(); ++i)
         {
-            if (!Item::AddItemFactory(itemRoot[i]))
+            if (!Item::AddItemFactory(IDs[i], itemRoot[i]))
             {
                 //TODO log error
             }

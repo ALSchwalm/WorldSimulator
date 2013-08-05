@@ -15,8 +15,12 @@ namespace Item
         Location::LocationType getLocationType() override {return Location::CONTAINER;}
         static constexpr Location::LocationType getStaticLocationType() {return Location::CONTAINER;}
 
+        Container(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
+        	BaseItem(_id, _name, _attributes),
+        	Location::BaseLocation(""){}
+
         Container(ID _id) :
-            BaseItem(_id),
+            BaseItem(_id, "Unnamed Container"),
             Location::BaseLocation(""){}
 
     };

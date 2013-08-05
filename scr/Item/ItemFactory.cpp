@@ -9,8 +9,9 @@ namespace Item
 {
 	std::vector<std::unique_ptr<ItemFactoryBase>> itemFactories;
 
-	ItemFactoryBase::ItemFactoryBase(const Json::Value itemRoot) :
-			id(itemRoot["ID"].asString())
+	ItemFactoryBase::ItemFactoryBase(ID _id, const Json::Value itemRoot) :
+			id(_id),
+			name(itemRoot["Name"].asString())
 	{
 		std::vector<std::string> skillNames = itemRoot["RequiredSkills"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["RequiredSkills"].size(); ++i) {
@@ -32,25 +33,20 @@ namespace Item
 
 	}
 
-	ItemFactory<FOOD>::ItemFactory(const Json::Value itemRoot) : ItemFactoryBase(itemRoot)
+	ItemFactory<FOOD>::ItemFactory(ID _id, const Json::Value itemRoot) : ItemFactoryBase(_id, itemRoot)
 	{
 
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<FOOD>::make() const {
-		auto newFood = std::make_shared<Item::Food>(id);
-
-		//Set default attributes for new item
-		for (auto attribute : attributes){
-			newFood->setAttribute(attribute.first, attribute.second);
-		}
+		auto newFood = std::make_shared<Item::Food>(id, name, attributes);
 
 		return newFood;
 	}
 
 
 
-	ItemFactory<TOOL>::ItemFactory(const Json::Value itemRoot) : ItemFactoryBase(itemRoot)
+	ItemFactory<TOOL>::ItemFactory(ID _id, const Json::Value itemRoot) : ItemFactoryBase(_id, itemRoot)
 	{
 		auto skillNames = itemRoot["UsedSkills"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["UsedSkills"].size(); ++i) {
@@ -60,45 +56,30 @@ namespace Item
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<TOOL>::make() const {
-		auto newTool = std::make_shared<Item::Tool>(id);
-
-		//Set default attributes for new item
-		for (auto attribute : attributes){
-			newTool->setAttribute(attribute.first, attribute.second);
-		}
+		auto newTool = std::make_shared<Item::Tool>(id, name, attributes);
 
 		return newTool;
 	}
 
 
-	ItemFactory<CONTAINER>::ItemFactory(const Json::Value itemRoot) : ItemFactoryBase(itemRoot)
+	ItemFactory<CONTAINER>::ItemFactory(ID _id, const Json::Value itemRoot) : ItemFactoryBase(_id, itemRoot)
 	{
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<CONTAINER>::make() const {
-		auto newContainer = std::make_shared<Item::Container>(id);
-
-		//Set default attributes for new item
-		for (auto attribute : attributes){
-			newContainer->setAttribute(attribute.first, attribute.second);
-		}
+		auto newContainer = std::make_shared<Item::Container>(id, name, attributes);
 
 		return newContainer;
 	}
 
 
-	ItemFactory<WEAPON>::ItemFactory(const Json::Value itemRoot) : ItemFactoryBase(itemRoot)
+	ItemFactory<WEAPON>::ItemFactory(ID _id, const Json::Value itemRoot) : ItemFactoryBase(_id, itemRoot)
 	{
 
 	}
 
 	std::shared_ptr<BaseItem> ItemFactory<WEAPON>::make() const {
-		auto newWeapon = std::make_shared<Item::Weapon>(id);
-
-		//Set default attributes for new item
-		for (auto attribute : attributes){
-			newWeapon->setAttribute(attribute.first, attribute.second);
-		}
+		auto newWeapon = std::make_shared<Item::Weapon>(id, name, attributes);
 
 		return newWeapon;
 	}

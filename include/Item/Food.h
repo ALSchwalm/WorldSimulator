@@ -15,7 +15,11 @@ namespace Item
     public:
         const ItemType getItemType() override {return FOOD;}
         Food(ID _id) :
-            BaseItem(_id){}
+            BaseItem(_id, "Unnamed Food"){}
+
+        Food(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
+        	BaseItem(_id, _name, _attributes){}
+
     private:
 
     };

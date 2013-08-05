@@ -15,9 +15,10 @@ namespace Item
 		virtual ~ItemFactoryBase(){};
 
 	protected:
-		ItemFactoryBase(const Json::Value itemRoot);
+		ItemFactoryBase(ID _id, const Json::Value itemRoot);
 
 		const ID id;
+		const std::string name;
 		skillVector requiredSkills;
 		itemVector requiredItems;
 		std::map<std::string, bool> attributes;
@@ -33,7 +34,7 @@ namespace Item
 	class ItemFactory<FOOD> : public ItemFactoryBase
 	{
 	public:
-		ItemFactory(const Json::Value itemRoot);
+		ItemFactory(ID _id, const Json::Value itemRoot);
 		std::shared_ptr<BaseItem> make() const override;
 	};
 
@@ -41,7 +42,7 @@ namespace Item
 	class ItemFactory<CONTAINER> : public ItemFactoryBase
 	{
 	public:
-		ItemFactory(const Json::Value itemRoot);
+		ItemFactory(ID _id, const Json::Value itemRoot);
 		std::shared_ptr<BaseItem> make() const override;
 	};
 
@@ -49,7 +50,7 @@ namespace Item
 	class ItemFactory<WEAPON> : public ItemFactoryBase
 	{
 	public:
-		ItemFactory(const Json::Value itemRoot);
+		ItemFactory(ID _id, const Json::Value itemRoot);
 		std::shared_ptr<BaseItem> make() const override;
 	};
 
@@ -57,12 +58,11 @@ namespace Item
 	class ItemFactory<TOOL> : public ItemFactoryBase
 	{
 	public:
-		ItemFactory(const Json::Value itemRoot);
+		ItemFactory(ID _id, const Json::Value itemRoot);
 		std::shared_ptr<BaseItem> make() const override;
 	private:
 		skillVector usedSkills;
 	};
-
 }
 
 #endif

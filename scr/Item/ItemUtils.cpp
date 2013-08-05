@@ -5,21 +5,21 @@
 namespace Item
 {
 
-    bool AddItemFactory(const Json::Value itemRoot) {
+    bool AddItemFactory(ID _id, const Json::Value itemRoot) {
 
     	auto type = itemRoot["Type"].asString();
     	ItemFactoryBase* newFactory = nullptr;
     	if (type == "Food") {
-    		newFactory = new ItemFactory<FOOD>(itemRoot);
+    		newFactory = new ItemFactory<FOOD>(_id, itemRoot);
     	}
     	else if (type == "Tool") {
-    		newFactory = new ItemFactory<TOOL>(itemRoot);
+    		newFactory = new ItemFactory<TOOL>(_id, itemRoot);
     	}
     	else if (type == "Weapon") {
-    		newFactory = new ItemFactory<WEAPON>(itemRoot);
+    		newFactory = new ItemFactory<WEAPON>(_id, itemRoot);
     	}
     	else if (type == "Container") {
-    		newFactory = new ItemFactory<CONTAINER>(itemRoot);
+    		newFactory = new ItemFactory<CONTAINER>(_id, itemRoot);
     	}
     	else {
     		return false;

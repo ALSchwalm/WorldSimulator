@@ -45,17 +45,18 @@ namespace Item
         bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
     protected:
+
         BaseItem(ID _id, std::string _name, Actor::Individual_ptr _owner) :
         	id(_id),
         	name(_name),
             owner(_owner){}
 
-        BaseItem(ID _id) : id(_id), name("Unnamed Item"){}
-        BaseItem(ID _id, std::string _name) : id(_id), name(_name){}
-        BaseItem(ID _id, Actor::Individual_ptr _owner) :
+        BaseItem(ID _id, std::string _name) : BaseItem(_id, _name, nullptr){}
+
+        BaseItem(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
         	id(_id),
-            name("Unnamed Item"),
-            owner(_owner){}
+        	name(_name),
+        	attributes(_attributes){}
 
 
 
