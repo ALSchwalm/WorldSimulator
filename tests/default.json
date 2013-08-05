@@ -91,12 +91,12 @@
             "RequiredSkills" : { "Woodworking" : 3.0},
             "RequriedItems"  : {},
             "Attributes" : {} 
-        }
+        },
 
         
         "Plow" : {
-            "Name" : "Plow"
-            "Type" : "Tool"
+            "Name" : "Plow",
+            "Type" : "Tool",
             "RequiredSkills" : { "Woodworking" : 1.5,
                                  "Blacksmithing"  : 2.0},
             "UsedSkills" : { "Farming" : 1.5 },
@@ -105,14 +105,14 @@
         },
 
         "Oven" : {
-            "Name" : "Oven"
-            "Type" : "Tool"
+            "Name" : "Oven",
+            "Type" : "Tool",
             "RequiredSkills" : { "Woodworking" : 1.5,
                                  "Blacksmithing"  : 2.0},
             "UsedSkills" : { "Cooking" : 3.0},
             "RequiedItems" : {},
             "Attributes" : {} 
-        }
+        },
 
         "Sword" : {
             "Name" : "Sword",
@@ -121,7 +121,7 @@
                                  "Blacksmithing"  : 2.0},
             "RequiedItems" : {},
             "Attributes" : {}
-        }
+        },
 
         "Bow" : {
             "Name" : "Bow",

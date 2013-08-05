@@ -7,6 +7,7 @@
 
 #include <exception>
 #include <iostream>
+#include "Utils/Defaults.h"
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
 #include "Time/TimeManager.h"
@@ -18,7 +19,9 @@ int main()
 {
     try
     {
-        WorldGen::LocationGen::seed();
+    	Utils::loadPlugins();
+
+    	WorldGen::LocationGen::seed();
         WorldGen::PopulationGen::seed();
         WorldGen::ItemGen::seed();
 

@@ -22,7 +22,6 @@ namespace Item
 		skillVector requiredSkills;
 		itemVector requiredItems;
 		std::map<std::string, bool> attributes;
-
 	};
 
 	extern std::vector<std::unique_ptr<ItemFactoryBase>> itemFactories;
