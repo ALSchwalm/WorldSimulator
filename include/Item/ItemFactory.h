@@ -17,7 +17,7 @@ namespace Item
 	protected:
 		ItemFactoryBase(ID _id, const Json::Value itemRoot);
 
-		const ID id;
+		ID id;
 		const std::string name;
 		skillVector requiredSkills;
 		itemVector requiredItems;

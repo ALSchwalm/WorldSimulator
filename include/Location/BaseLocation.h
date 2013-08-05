@@ -55,7 +55,7 @@ namespace Location
 
         virtual LocationType getLocationType(){return LocationType::LOCATION_ERROR;}
 
-        void setAttribute(std::string s) {attributes[s] = true;}
+        void setAttribute(std::string s, bool value=true) {attributes[s] = value;}
         bool hasAttribute(std::string s) {return attributes.find(s) != attributes.end();}
 
         const Actor::IndividualList& getIndividuals() {return individuals;}
