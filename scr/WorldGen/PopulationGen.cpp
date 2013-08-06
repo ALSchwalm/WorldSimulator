@@ -39,10 +39,15 @@ void seed()
 						auto&& factory = *Item::getItemFactoryFromAttribute("habitable");
 						auto house = std::dynamic_pointer_cast<Item::Container>(factory->make());
 
-						Actor::createFamily(family_size, house);
+						if (house) {
+							Actor::createFamily(family_size, house);
 
-						city->addItem(house);
-						Location::addLocations(city, house);
+							city->addItem(house);
+							Location::addLocations(city, house);
+						}
+						else {
+							Actor::createFamily(family_size, city);
+						}
                     }
                 }
             }
