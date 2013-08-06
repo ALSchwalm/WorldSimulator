@@ -1,6 +1,7 @@
 #include "WorldGen/PopulationGen.h"
 #include "Location/World.h"
 #include "Location/Location.h"
+#include "Item/ItemFactory.h"
 #include "Item/Container.h"
 #include "Profession/SimpleProfession.h"
 #include "Profession/Profession.h"
@@ -33,13 +34,16 @@ void seed()
                 for (unsigned int family_size = 0; population > 0; population -= family_size)
                 {
                     family_size = population % 5 + 1;
-/*
-                    auto house = std::make_shared<Item::Container<Item::HOUSE>>();
 
-                    Actor::createFamily(family_size, house);
+                    if (Item::getItemFactoryFromAttribute("habitable") != Item::itemFactories.end()) {
+						auto&& factory = *Item::getItemFactoryFromAttribute("habitable");
+						auto house = std::dynamic_pointer_cast<Item::Container>(factory->make());
 
-                    city->addItem(house);
-                    Location::addLocations(city, house);*/
+						Actor::createFamily(family_size, house);
+
+						city->addItem(house);
+						Location::addLocations(city, house);
+                    }
                 }
             }
         }

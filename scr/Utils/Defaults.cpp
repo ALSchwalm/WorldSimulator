@@ -10,8 +10,6 @@ namespace Utils
 
     bool loadItems(const Json::Value itemRoot);
 
-
-
     bool loadPlugins() {
         std::ifstream file;
         Json::Value root;   // will contains the root value after parsing.
@@ -32,7 +30,7 @@ namespace Utils
             return false;
         }
 
-        loadItems(root["items"]);
+        loadItems(root["Items"]);
 
         return true;
     }
@@ -42,7 +40,7 @@ namespace Utils
     	auto IDs = itemRoot.getMemberNames();
         for(unsigned int i = 0; i < itemRoot.size(); ++i)
         {
-            if (!Item::AddItemFactory(IDs[i], itemRoot[i]))
+            if (!Item::AddItemFactory(IDs[i], itemRoot[IDs[i]]))
             {
                 //TODO log error
             }

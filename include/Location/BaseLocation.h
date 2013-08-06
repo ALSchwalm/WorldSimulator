@@ -84,15 +84,20 @@ namespace Location
 
     protected:
         BaseLocation(std::string _name) : distance(0), name(_name) {}
+        BaseLocation(std::string _name, std::map<std::string, bool> _attributes) :
+        	name(_name),
+        	attributes(_attributes){}
+
+
         BaseLocation(const BaseLocation&) = delete;
         BaseLocation& operator=(const BaseLocation&) = delete;
 
         std::unordered_set<Location_ptr> locations;
 
     private:
+        std::string name;
         Event::EventHistory history;
         std::map<std::string, bool> attributes;
-        std::string name;
 
         std::vector<Actor::Individual_ptr> individuals;
         std::vector<Item::Item_ptr> items;

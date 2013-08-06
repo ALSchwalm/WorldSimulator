@@ -13,27 +13,26 @@ namespace Item
 			id(_id),
 			name(itemRoot["Name"].asString())
 	{
-		std::vector<std::string> skillNames = itemRoot["RequiredSkills"].getMemberNames();
+		auto skillNames = itemRoot["RequiredSkills"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["RequiredSkills"].size(); ++i) {
-			auto skillValue = itemRoot["RequiredSkills"][i];
+			auto skillValue = itemRoot["RequiredSkills"][skillNames[i]];
 			requiredSkills.emplace_back(skillNames.at(i), skillValue.asDouble());
 		}
 
 		auto itemNames = itemRoot["RequiredItems"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["RequiredItems"].size(); ++i) {
-			auto itemValue = itemRoot["RequiredItems"][i];
+			auto itemValue = itemRoot["RequiredItems"][itemNames[i]];
 			requiredItems.emplace_back(itemNames.at(i), itemValue.asUInt());
 		}
 
 		auto attributeNames = itemRoot["Attributes"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["Attributes"].size(); ++i) {
-			auto itemValue = itemRoot["Attributes"][i];
-			attributes[itemNames.at(i)] = itemValue.asBool();
+			auto itemValue = itemRoot["Attributes"][attributeNames[i]];
+			attributes[attributeNames.at(i)] = itemValue.asBool();
 		}
-
 	}
 
-	bool ItemFactoryBase::hasAttribute(const std::string& s)
+	bool ItemFactoryBase::hasAttribute(const std::string& s) const
 	{
 		auto location = attributes.find(s);
 		if (location != attributes.end())
@@ -61,7 +60,7 @@ namespace Item
 	{
 		auto skillNames = itemRoot["UsedSkills"].getMemberNames();
 		for(unsigned int i=0; i < itemRoot["UsedSkills"].size(); ++i) {
-			auto skillValue = itemRoot["UsedSkills"][i];
+			auto skillValue = itemRoot["UsedSkills"][skillNames[i]];
 			usedSkills.emplace_back(skillNames.at(i), skillValue.asDouble());
 		}
 	}

@@ -22,7 +22,7 @@ namespace Item
 
         Container(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
         	BaseItem(_id, _name, _attributes),
-        	Location::BaseLocation(""){}
+        	Location::BaseLocation(_name, _attributes){}
 
         Container(ID _id) :
             BaseItem(_id, "Unnamed Container"),
