@@ -29,6 +29,15 @@ bool BaseLocation::removeItem(Item::Item_ptr i)
     }
 }
 
+bool BaseLocation::hasAttribute(const std::string& s) {
+	auto location = attributes.find(s);
+	if (location != attributes.end())
+	{
+		return location->second;
+	}
+	return false;
+}
+
 const std::unordered_set<Location_ptr> BaseLocation::getLocationsByAttribute(std::string s)
 {
     std::unordered_set<Location_ptr> temp;

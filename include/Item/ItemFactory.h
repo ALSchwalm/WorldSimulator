@@ -14,6 +14,8 @@ namespace Item
 		virtual std::shared_ptr<BaseItem> make() const=0;
 		virtual ~ItemFactoryBase(){};
 
+		bool hasAttribute(const std::string& s);
+
 	protected:
 		ItemFactoryBase(ID _id, const Json::Value itemRoot);
 

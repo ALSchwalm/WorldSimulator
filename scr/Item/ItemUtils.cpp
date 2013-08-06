@@ -30,4 +30,17 @@ namespace Item
         return true;
     }
 
+    std::vector<std::unique_ptr<Item::ItemFactoryBase>>::iterator
+    	getItemFactoryFromAttribute(const std::string& attribute, bool value)
+    {
+    	auto factory=itemFactories.begin();
+    	for (; factory != itemFactories.end(); ++factory) {
+    		if ( (*factory)->hasAttribute(attribute) ) {
+    			return factory;
+    		}
+    	}
+    	return factory;
+    }
+
+
 }

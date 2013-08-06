@@ -33,6 +33,17 @@ namespace Item
 
 	}
 
+	bool ItemFactoryBase::hasAttribute(const std::string& s)
+	{
+		auto location = attributes.find(s);
+		if (location != attributes.end())
+		{
+			return location->second;
+		}
+		return false;
+	}
+
+
 	ItemFactory<FOOD>::ItemFactory(ID _id, const Json::Value itemRoot) : ItemFactoryBase(_id, itemRoot)
 	{
 
