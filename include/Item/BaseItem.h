@@ -35,7 +35,11 @@ namespace Item
         virtual ~BaseItem(){};
 
         const std::string& getName() {return name;}
-        void setAttribute(std::string s, bool val=true) {attributes[s] = val;}
+
+        //Some types may have multiple attribute maps, so allow them to set all appropriate maps
+        //for example, container has BaseItem and BaseLocation attributes, so it sets both in
+        //its setAttribute() member
+        virtual void setAttribute(std::string s, bool val=true) {attributes[s] = val;}
 
         virtual const ItemType getItemType()=0;
 

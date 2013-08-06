@@ -15,7 +15,7 @@ namespace Item
         Location::LocationType getLocationType() override {return Location::CONTAINER;}
         static constexpr Location::LocationType getStaticLocationType() {return Location::CONTAINER;}
 
-        void setAttribute(std::string s, bool value=true){
+        virtual void setAttribute(std::string s, bool value=true) override {
         	BaseItem::setAttribute(s, value);
         	Location::BaseLocation::setAttribute(s, value);
         }
