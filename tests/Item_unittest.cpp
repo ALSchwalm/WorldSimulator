@@ -13,8 +13,7 @@
 TEST(ItemTest, HasAttribute)
 {
 
-	auto item = Item::itemFactories[0]->make();
-
+	auto item = std::make_shared<Item::Weapon>("ID");
 	item->setAttribute("old");
 
 	EXPECT_TRUE(item->hasAttribute("old"));
@@ -23,13 +22,13 @@ TEST(ItemTest, HasAttribute)
 
 
 TEST(ItemTest, Container)
-{/*
-	auto container = std::make_shared<Item::Container<Item::BARREL>>();
-	auto item = Item::itemFactories[0].make();
+{
+	auto container = std::make_shared<Item::Container>("ID");
+	auto item = std::make_shared<Item::Weapon>("ID");
 
 	container->addItem(item);
 	Location::addLocations(Location::World::getInstance(), container);
 
 	EXPECT_EQ(container->getLocations().size(), 1u);
-	EXPECT_EQ(container->getItems().size(),  1u);*/
+	EXPECT_EQ(container->getItems().size(),  1u);
 }

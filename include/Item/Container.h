@@ -10,10 +10,8 @@ namespace Item
     {
     public:
         const ItemType getItemType() override {return CONTAINER;}
-        static constexpr ItemType getStaticItemType(){return CONTAINER;}
 
         Location::LocationType getLocationType() override {return Location::CONTAINER;}
-        static constexpr Location::LocationType getStaticLocationType() {return Location::CONTAINER;}
 
         virtual void setAttribute(std::string s, bool value=true) override {
         	BaseItem::setAttribute(s, value);

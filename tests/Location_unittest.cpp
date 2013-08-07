@@ -6,7 +6,7 @@
 #include "Location/Village.h"
 #include "Location/World.h"
 #include "Location/Location.h"
-#include "Item/ItemFactory.h"
+#include "Item/Weapon.h"
 
 TEST(LocationTest, HasAttribute)
 {
@@ -23,8 +23,8 @@ TEST(LocationTest, AddItems)
 {
 
 	auto location = std::make_shared<Location::Village>("TestVillage");
-	auto item = Item::itemFactories[0]->make();
-	auto item2 = Item::itemFactories[0]->make();
+	auto item = std::make_shared<Item::Weapon>("ID");
+	auto item2 = std::make_shared<Item::Weapon>("ID");
 
 	location->addItem(item);
 
@@ -36,8 +36,8 @@ TEST(LocationTest, RemoveItems)
 {
 
 	auto location = std::make_shared<Location::Village>("TestVillage");
-	auto item = Item::itemFactories[0]->make();
-	auto item2 = Item::itemFactories[0]->make();
+	auto item = std::make_shared<Item::Weapon>("ID");
+	auto item2 = std::make_shared<Item::Weapon>("ID");
 
 	location->addItem(item);
 
