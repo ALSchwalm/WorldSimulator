@@ -52,7 +52,7 @@ namespace Interface {
         unsigned int i=4;
         for (auto location : viewSubject->getLocations())
         {
-            mvwprintw(this->nameWin, i, 2, Utils::numberToString(i-3).c_str());
+            mvwprintw(this->nameWin, i, 1, Utils::numberToString(i-3).c_str());
             mvwprintw(this->nameWin, i, 4, location->getName().c_str());
             mvwprintw(this->dataWin, i, 4, Location::toString(location->getLocationType()).c_str());
             ++i;
@@ -70,7 +70,7 @@ namespace Interface {
         unsigned int i=4;
         for (auto item : viewSubject->getItems())
         {
-            mvwprintw(this->nameWin, i, 2, Utils::numberToString(i-3).c_str());
+            mvwprintw(this->nameWin, i, 1, Utils::numberToString(i-3).c_str());
             mvwprintw(this->nameWin, i, 4, item->getName().c_str());
             mvwprintw(this->dataWin, i, 4, item->getOwner().getName().c_str());
 
@@ -89,7 +89,7 @@ namespace Interface {
         unsigned int i=4;
         for (auto individual : viewSubject->getIndividuals())
         {
-            mvwprintw(this->nameWin, i, 2, Utils::numberToString(i-3).c_str());
+            mvwprintw(this->nameWin, i, 1, Utils::numberToString(i-3).c_str());
             mvwprintw(this->nameWin, i, 4, individual->getName().c_str());
             mvwprintw(this->dataWin, i, 4, Profession::toString(individual->getProfession()->getProfessionType()).c_str());
             ++i;
