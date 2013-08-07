@@ -3,6 +3,7 @@ import re
 import glob
 import sys
 import fnmatch
+import platform
 
 env = Environment()
 
@@ -11,7 +12,12 @@ Tool('mingw')(env) # Prefer MinGW over other compilers like cl.exe
 
 env.Append(LIBPATH = ['../lib'])
 env.Append(CXXFLAGS=['-Wall', '-std=gnu++0x'])
-env.Append(LIBS = ['GoogleTest', 'pdcurses', 'jsoncpp_mingw'])
+
+if platform.system() == "Windows":
+   env.Append(LIBS = ['pdcurses', 'jsoncpp_mingw', 'gtest_mingw'])
+elif platform.system() == "Linux":
+   env.Append(LIBS = ['ncurses', 'jsoncpp_gcc', 'gtest_main_gcc', 'gtest_gcc', 'pthread'])
+   
 env.Append(CPPPATH=['include', '../include', '.'])
 
 
@@ -20,9 +26,12 @@ for root, dirnames, filenames in os.walk('../Debug'):
 	for filename in fnmatch.filter(filenames, '*.o'):
 		if filename != 'main.o':
 			object_list.append(os.path.join(root, filename))
-
+                        
 matches = Glob('*.cpp')
 for match in matches:
 	object_list.append(env.Object(target="obj/" + os.path.splitext(str(match))[0] + '.o', source=match))
 
-env.Program(target = "tests.exe", source = object_list)
+if platform.system() == "Windows":
+   env.Program(target = "tests.exe", source = object_list)
+elif platform.system() == "Linux":
+   env.Program("tests.out", source = object_list)

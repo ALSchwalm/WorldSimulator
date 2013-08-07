@@ -1,6 +1,7 @@
 #include "Profession/SimpleProfession.h"
 #include "Item/BaseItem.h"
 #include "Item/Weapon.h"
+#include "Item/ItemFactory.h"
 #include "Actor/ActorUtils.h"
 #include "Action/Task.h"
 #include "Action/GoalCreator.h"
@@ -22,16 +23,10 @@ TEST(ActionTest, GetFood)
 
 	auto individual = std::make_shared<Actor::Individual>("TestPerson", Profession::BAKER, location, false);
 
-	/*
-	 * Goal creation is fully specialized, so to find a Weapon, you must call addGoal
-	 * with a shared_ptr<BaseItem>.
-	 */
-	std::shared_ptr<Item::BaseItem>item = std::make_shared<Item::Weapon<Item::SWORD>>("TestWeapon");
-
-	item->setAttribute("edible");
-
-	location2->addItem(item);
-
+	if (Item::getItemFactoryFromAttribute("edible") != Item::itemFactories.end()) {
+		auto&& factory = *Item::getItemFactoryFromAttribute("edible");
+		location2->addItem(factory->make());
+	}
 	Actor::addGoal<Action::GET_FOOD>(individual, 0);
 
 	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent() != nullptr);
