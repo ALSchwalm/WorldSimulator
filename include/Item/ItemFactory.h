@@ -16,6 +16,7 @@ namespace Item
 
 		bool hasAttribute(const std::string& s) const;
 		ID getID() const {return id;}
+		const itemVector& getRequiredItems() const {return requiredItems;}
 
 	protected:
 		ItemFactoryBase(ID _id, const Json::Value itemRoot);

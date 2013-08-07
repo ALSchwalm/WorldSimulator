@@ -4,6 +4,7 @@
 #include "Item/BaseItem.h"
 #include "Actor/Individual.h"
 #include "Item/ItemUtils.h"
+#include "Item/ItemFactory.h"
 #include <memory>
 #include <type_traits>
 
@@ -11,54 +12,37 @@ namespace Item
 {
     namespace Crafting
     {
-/*
-        template<typename T>
-        static const std::vector<Item_ptr> hasItems(Individual::Individual_ptr individual)
+        template<typename... T>
+        inline Item_ptr createItem(ID id, Individual::Individual_ptr individual, T... args)
         {
-            std::vector<Item_ptr> usedItems;
-            auto requiredItems = T::getRequiredItems();
-            for (auto p : requiredItems)
-            {
-                auto items = individual->getItems();
-                auto found_item = std::find_if(items.begin(), items.end(),
-                        [&](Item_ptr i) {return isClassType(i, std::get<0>(p), std::get<1>(p));});
+        	auto factory = getItemFactoryFromID(id);
+        	if (factory == itemFactories.end())
+        		return nullptr;
 
-                if (found_item == items.end())
-                {
-                    usedItems.clear();
-                    break;
-                }
-                else
-                {
-                    usedItems.push_back(*found_item);
-                }
-            }
-            return usedItems;
-        }
-*/
-        template<typename T, typename... U>
-        inline Item_ptr createItem(Individual::Individual_ptr individual, U... args)
-        {/*
-            for (auto p : T::getRequiredSkill())
-            {
-                if (individual->getSkillLevel(p.first) < p.second)
-                    return nullptr;
-            }
-            auto usedItems = hasItems<T>(individual);
+        	auto&& itemFactory = *factory;
 
-            if (usedItems.empty())
-            {
-                return nullptr;
-            }
-            else
-            {
-                for (auto item : usedItems)
-                    individual->removeItem(item);
-            }
+        	std::vector<Item_ptr> usedItems;
+        	for(auto item : itemFactory->getRequiredItems())
+        	{
+        		auto items = individual->getItems();
+        		auto location = std::find_if(items.begin(), items.end(),
+        				[&](Item_ptr i) {
+        					return (i->getID() == id &&
+        							std::find(usedItems.begin(), usedItems.end(), i) != usedItems.end());
+        				});
+        		if(location != items.end()) {
+        			usedItems.push_back(*location);
+        		}
+        		else
+        		{
+        			return nullptr;
+        		}
+        	}
 
-            return std::make_shared<T>(args...);
-            */
-        	return nullptr;
+			for (auto item : usedItems)
+				individual->removeItem(item);
+
+            return itemFactory->make(args...);
         }
     }
 }

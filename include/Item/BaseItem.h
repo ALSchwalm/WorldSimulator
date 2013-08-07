@@ -35,6 +35,7 @@ namespace Item
         virtual ~BaseItem(){};
 
         const std::string& getName() {return name;}
+        ID& getID() const {return id;}
 
         //Some types may have multiple attribute maps, so allow them to set all appropriate maps
         //for example, container has BaseItem and BaseLocation attributes, so it sets both in

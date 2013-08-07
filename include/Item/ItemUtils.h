@@ -19,6 +19,9 @@ namespace Item
 
     std::vector<std::unique_ptr<Item::ItemFactoryBase>>::iterator
     	getItemFactoryFromAttribute(const std::string& attribute, bool value=true);
+
+    std::vector<std::unique_ptr<Item::ItemFactoryBase>>::iterator
+    	getItemFactoryFromID(ID _id);
 }
 
 #endif

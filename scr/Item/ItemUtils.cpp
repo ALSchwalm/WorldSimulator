@@ -42,5 +42,17 @@ namespace Item
     	return factory;
     }
 
+    std::vector<std::unique_ptr<Item::ItemFactoryBase>>::iterator
+    	getItemFactoryFromID(ID _id)
+    {
+    	auto factory=itemFactories.begin();
+    	for (; factory != itemFactories.end(); ++factory) {
+    		if ( (*factory)->getID() == _id ) {
+    			return factory;
+    		}
+    	}
+    	return factory;
+    }
+
 
 }
