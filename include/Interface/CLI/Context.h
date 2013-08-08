@@ -7,7 +7,7 @@ namespace Interface
 {
     namespace CLI
     {
-        enum Context
+        enum class Context
         {
             ALL,
             LOCATION,
@@ -22,9 +22,9 @@ namespace Interface
         {
             switch (c)
             {
-            case LOCATION:
+            case Context::LOCATION:
                 return "Location";
-            case INDIVIDUAL:
+            case Context::INDIVIDUAL:
                 return "Individual";
             default:
                 return "Error"; //this should never be seen
