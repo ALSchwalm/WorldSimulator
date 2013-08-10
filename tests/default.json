@@ -130,6 +130,22 @@
             "RequiedItems" : {},
             "Attributes" : {}
         }
+    },
+
+    "Professions" : {
+        "Baker" : {
+            "Type" : "Merchant",
+            "DefaultSkills" : { "Cooking" : 1.0,
+                                "Baking" : 5.0},
+            "DefaultItems" : { "Bread" : 2 }
+        },
+        "Swordsman" : {
+            "Type" : "Soldier",
+            "DefaultSkills" : { "Swordsmanship" : 3.0,
+                                "Archery" : 2.0 },
+            "DefaultItems" : { "Sword" : 1,
+                               "Bow" : 1 }
+        }
     }
 }
 
