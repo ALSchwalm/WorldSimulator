@@ -26,7 +26,8 @@ namespace Utils
         bool parsingSuccessful = reader.parse( file, root );
 
         if ( !parsingSuccessful ) {
-            throw(std::runtime_error("Error parsing default.json"));
+            throw(std::runtime_error("Error parsing default.json" +
+            		reader.getFormatedErrorMessages()));
             return false;
         }
 
