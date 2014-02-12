@@ -11,18 +11,18 @@ env.Replace(CCFLAGS = [])
 Tool('mingw')(env) # Prefer MinGW over other compilers like cl.exe
 
 env.Append(LIBPATH = ['../lib'])
-env.Append(CXXFLAGS=['-Wall', '-std=gnu++0x'])
+env.Append(CXXFLAGS=['-Wall', '-std=c++11'])
 
 if platform.system() == "Windows":
-   env.Append(LIBS = ['pdcurses', 'jsoncpp_mingw', 'gtest_mingw'])
+   env.Append(LIBS = ['pdcurses', 'jsoncpp', 'gtest'])
 elif platform.system() == "Linux":
-   env.Append(LIBS = ['ncurses', 'jsoncpp_gcc', 'gtest_main_gcc', 'gtest_gcc', 'pthread'])
+   env.Append(LIBS = ['ncurses', 'jsoncpp', 'gtest_main', 'gtest', 'pthread'])
    
 env.Append(CPPPATH=['include', '../include', '.'])
 
 
 object_list = []
-for root, dirnames, filenames in os.walk('../Debug'):
+for root, dirnames, filenames in os.walk('../scr'):
 	for filename in fnmatch.filter(filenames, '*.o'):
 		if filename != 'main.o':
 			object_list.append(os.path.join(root, filename))
