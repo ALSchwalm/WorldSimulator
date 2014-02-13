@@ -8,10 +8,11 @@ import glob
 from subprocess import Popen
 
 UNITTEST = ARGUMENTS.get("unittest", 0)
+CXX = ARGUMENTS.get('CXX', 'g++')
 BIN_NAME = "simulator"
 BIN_PATH = "build/"
 
-env = Environment()
+env = Environment(CXX=CXX, ENV=os.environ)
 
 env.Append(LIBPATH = ['../lib'])
 env.Append(CXXFLAGS=['-Wall', '-Wextra', '-std=c++11'])

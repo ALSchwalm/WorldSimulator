@@ -1,4 +1,4 @@
-#ifndef ARTISAN_H
+#ifndef ARTISAN_H_
 #define ARTISAN_H_
 
 #include "Event/Event.h"

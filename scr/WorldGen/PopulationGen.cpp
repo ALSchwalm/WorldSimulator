@@ -36,18 +36,18 @@ void seed()
                     family_size = population % 5 + 1;
 
                     if (Item::getItemFactoryFromAttribute("habitable") != Item::itemFactories.end()) {
-						auto&& factory = *Item::getItemFactoryFromAttribute("habitable");
-						auto house = std::dynamic_pointer_cast<Item::Container>(factory->make());
+                        auto&& factory = *Item::getItemFactoryFromAttribute("habitable");
+                        auto house = std::dynamic_pointer_cast<Item::Container>(factory->make());
 
-						if (house.get()) {
-							Actor::createFamily(family_size, house);
+                        if (house.get()) {
+                            Actor::createFamily(family_size, house);
 
-							city->addItem(house);
-							Location::addLocations(city, house);
-						}
-						else {
-							Actor::createFamily(family_size, city);
-						}
+                            city->addItem(house);
+                            Location::addLocations(city, house);
+                        }
+                        else {
+                            Actor::createFamily(family_size, city);
+                        }
                     }
                 }
             }
