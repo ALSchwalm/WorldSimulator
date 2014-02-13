@@ -33,7 +33,6 @@ if UNITTEST:
     tests = Glob("tests/*.cpp")
     src_list += ["tests/"+test.name for test in tests]
     BIN_NAME = "unittest"
-    BIN_PATH = "tests/"
     env["LIBS"] += ["gtest_main", "gtest", "pthread"]
 
 if platform.system() == "Windows":
