@@ -3,7 +3,7 @@
 
 namespace Profession
 {
-    const float BaseProfession::getSkillLevel(Skill::skills s) noexcept
+    float BaseProfession::getSkillLevel(Skill::skills s) noexcept
     {
         try {
             return skillMap.at(s);

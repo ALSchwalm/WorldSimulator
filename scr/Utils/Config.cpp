@@ -18,7 +18,7 @@ Config::Config() :
         throw(std::runtime_error("Unable to locate config.ini"));
 };
 
-const unsigned int Config::getValue(std::string section, std::string value)
+unsigned int Config::getValue(std::string section, std::string value)
 {
     ini.Select(section);
     auto ini_value = ini.Get(value, -1);

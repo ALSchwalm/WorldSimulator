@@ -24,10 +24,10 @@ namespace Interface
                     Context _preContext,
                     Context _postContext);
 
-            const std::string getCommand() const {return commandString;}
-            const std::string getHelp() const {return helpString;}
+            const std::string& getCommand() const {return commandString;}
+            const std::string& getHelp() const {return helpString;}
             const std::vector<Token>& getTokens() const {return tokens;}
-            const Context getContext() const {return preContext;}
+            const Context& getContext() const {return preContext;}
             bool isCallable() const  {return callable;}
             void operator()();
 

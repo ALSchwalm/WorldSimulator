@@ -42,7 +42,7 @@ namespace Item
         //its setAttribute() member
         virtual void setAttribute(std::string s, bool val=true) {attributes[s] = val;}
 
-        virtual const ItemType getItemType()=0;
+        virtual ItemType getItemType()=0;
 
         const Owner::Owner& getOwner() {return owner;}
         void setOwner(const Owner::Owner _owner) {owner=_owner;}

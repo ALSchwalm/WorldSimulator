@@ -9,7 +9,7 @@ namespace Item
     class Container : public BaseItem, public Location::BaseLocation
     {
     public:
-        const ItemType getItemType() override {return CONTAINER;}
+        ItemType getItemType() override {return CONTAINER;}
 
         Location::LocationType getLocationType() override {return Location::CONTAINER;}
 

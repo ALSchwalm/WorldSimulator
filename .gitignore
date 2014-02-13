@@ -2,6 +2,7 @@
 ## Linux
 ################
 
+tests/unittest
 build/simulator
 *.out
 

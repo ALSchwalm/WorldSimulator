@@ -13,7 +13,7 @@ namespace Item
     class Weapon : public BaseItem
     {
     public:
-        const ItemType getItemType() override {return TOOL;}
+        ItemType getItemType() override {return TOOL;}
 
         Weapon(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
         	BaseItem(_id, _name, _attributes){}

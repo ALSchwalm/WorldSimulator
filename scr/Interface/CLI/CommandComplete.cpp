@@ -51,7 +51,7 @@ namespace Interface
             return completions;
         }
 
-        const std::string cliCompleteCommand(std::string input)
+        std::string cliCompleteCommand(std::string input)
         {
             auto completions = getPossibleCompletions(input);
             if (completions.size()==1)

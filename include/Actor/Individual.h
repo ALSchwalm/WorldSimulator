@@ -65,7 +65,7 @@ namespace Actor
         void setCurrentLocation(Location_ptr c) { currentLocation = c;}
 
         unsigned int getAge() const {return age;}
-        const std::string getName() const {return name;}
+        const std::string& getName() const {return name;}
         const Event::EventHistory& getHistory() const {return history;}
         const std::vector<Item::Item_ptr>& getItems() const {return items;};
         Relationship::RelationshipMap<Individual_ptr>& getIndividualRelationshipMap() {return IndividualRelationshipMap;};
@@ -76,7 +76,7 @@ namespace Actor
 
         //TODO decide whether this should be added with the profession skill
         const Skill::skillMap& getSkillMap() {return skillMap;}
-        const float getSkillLevel(Skill::skills s);
+        float getSkillLevel(Skill::skills s);
 
         void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
         void addItem(Item::Item_ptr i) {items.push_back(i);}
@@ -91,7 +91,7 @@ namespace Actor
 
         unsigned int calculatePriority(Individual_ptr, Action::GoalType);
 
-        const std::vector<Item::Item_ptr> getInitialItems();
+        std::vector<Item::Item_ptr> getInitialItems();
 
     };
 

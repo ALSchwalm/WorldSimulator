@@ -14,7 +14,7 @@ namespace Item
     class Tool : public BaseItem
     {
     public:
-        const ItemType getItemType() override {return TOOL;}
+        ItemType getItemType() override {return TOOL;}
 
         Tool(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
         	BaseItem(_id, _name, _attributes){}

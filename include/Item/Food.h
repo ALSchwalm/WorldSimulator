@@ -13,7 +13,7 @@ namespace Item
     class Food : public BaseItem
     {
     public:
-        const ItemType getItemType() override {return FOOD;}
+        ItemType getItemType() override {return FOOD;}
         Food(ID _id) :
             BaseItem(_id, "Unnamed Food"){}
 

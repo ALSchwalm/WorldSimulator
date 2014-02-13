@@ -7,6 +7,10 @@ import fnmatch
 import glob
 from subprocess import Popen
 
+UNITTEST = ARGUMENTS.get("unittest", 0)
+BIN_NAME = "simulator"
+BIN_PATH = "build/"
+
 env = Environment()
 
 env.Append(LIBPATH = ['../lib'])
@@ -24,7 +28,15 @@ for root, dirnames, filenames in os.walk('scr/'):
     for filename in fnmatch.filter(filenames, '*.cpp'):
         src_list.append(os.path.join(root, filename))
 
+if UNITTEST:
+    src_list.remove("scr/main.cpp")
+    tests = Glob("tests/*.cpp")
+    src_list += ["tests/"+test.name for test in tests]
+    BIN_NAME = "unittest"
+    BIN_PATH = "tests/"
+    env["LIBS"] += ["gtest_main", "gtest", "pthread"]
+
 if platform.system() == "Windows":
-   env.Program(target = "build/simulator.exe", source = src_list)
+    env.Program(target = BIN_PATH + BIN_NAME + ".exe", source = src_list)
 elif platform.system() == "Linux":
-   env.Program("build/simulator", source = src_list)
+    env.Program(BIN_PATH + BIN_NAME, source = src_list)

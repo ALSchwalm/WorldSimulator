@@ -9,7 +9,7 @@ namespace Utils
     {
     public:
         static Config& getInstance();
-        const unsigned int getValue(std::string, std::string);
+        unsigned int getValue(std::string, std::string);
     private:
         typedef INI <std::string, std::string, int> ini_t;
         ini_t ini;
