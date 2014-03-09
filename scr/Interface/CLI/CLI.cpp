@@ -28,7 +28,7 @@ namespace Interface
 
         void handleInput()
         {
-            static int prevChar = 'a';
+            static int prevChar = '\0';
 
             if (dialogs.size() != 0)
             {
