@@ -8,7 +8,7 @@ import glob
 from subprocess import Popen
 
 UNITTEST = ARGUMENTS.get("unittest", 0)
-SHARED_LIB = ARGUMENTS.get("lib", 0)
+SHARED_LIB = ARGUMENTS.get("lib", True)
 CXX = ARGUMENTS.get('CXX', 'g++')
 BIN_NAME = "simulator"
 BUILD_PATH = "build/"
