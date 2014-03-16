@@ -12,14 +12,23 @@ namespace Item
     {
     public:
         template<typename... Args>
-        std::shared_ptr<BaseItem> make(Args args) const {
+        std::shared_ptr<BaseItem> make(Args... args) const {
             return extract<std::shared_ptr<BaseItem>>(pyClass(args...));
         }
 
-        ItemFactoryBase(object _pyClass) : pyclass(_pyClass) {}
+        ItemFactory(object _pyClass) : pyClass(_pyClass) {}
 
         bool hasAttribute(const std::string& s) const {
-            return pyClass.attr("default_attributes").has_key(s);
+            dict default_attributes = extract<dict>(pyClass.attr("default_attributes"));
+            return default_attributes.has_key(s);
+        }
+
+        ID getClassID() const {
+            return extract<ID>(pyClass.attr("classID"));
+        }
+
+        list getRequiredItems() const {
+            return call_method<list>(pyClass.ptr(), "getRequiredItems");
         }
 
     private:

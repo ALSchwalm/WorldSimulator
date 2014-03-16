@@ -11,5 +11,6 @@ BOOST_PYTHON_MODULE(Simulator) {
         .add_property("attributes",
                       &Item::BaseItem::getAttributes,
                       &Item::BaseItem::setAttributes)
-        .def("getID", &Item::BaseItem::getClassID);
+        .def("getID", &Item::BaseItem::getClassID)
+        .def("getRequiredItems", &Item::BaseItem::getRequiredItems);
 }

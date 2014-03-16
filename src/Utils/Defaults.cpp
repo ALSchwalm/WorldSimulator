@@ -26,7 +26,7 @@ namespace Utils
                                               "if inspect.isclass(obj) "
                                               "and obj != BaseItem]", main_namespace));
 
-            for(unsigned int i=0; i < classes.length; ++i) {
+            for(unsigned int i=0; i < len(classes); ++i) {
                 Item::AddItemFactory(classes[i]);
             }
 

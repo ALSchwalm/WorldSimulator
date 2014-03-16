@@ -6,25 +6,15 @@
 
 namespace Item
 {
-    class Container : public BaseItem, public Location::BaseLocation
+    class BaseContainer : public BaseItem, public Location::BaseLocation
     {
     public:
-        ItemType getItemType() override {return CONTAINER;}
+        ItemType getItemType() const override {return ItemType::CONTAINER;}
 
-        Location::LocationType getLocationType() override {return Location::CONTAINER;}
+    };
 
-        virtual void setAttribute(std::string s, bool value=true) override {
-        	BaseItem::setAttribute(s, value);
-        	Location::BaseLocation::setAttribute(s, value);
-        }
-
-        Container(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
-        	BaseItem(_id, _name, _attributes),
-        	Location::BaseLocation(_name, _attributes){}
-
-        Container(ID _id) :
-            BaseItem(_id, "Unnamed Container"),
-            Location::BaseLocation(""){}
+    class BaseContainerPy : public BaseItemPy
+    {
 
     };
 

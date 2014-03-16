@@ -11,11 +11,20 @@ namespace Item
     using namespace boost::python;
     using ID = unsigned long;
 
+    enum class ItemType {
+        TOOL,
+        WEAPON,
+        FOOD,
+        CONTAINER
+    };
+
     class BaseItem
     {
     public:
         const std::string& getName() {return name;}
         virtual ID getClassID() const=0;
+
+        virtual ItemType getItemType() const=0;
 
         dict getAttributes() {return attributes;}
         void setAttributes(dict attr) { attributes = attr;}
@@ -29,6 +38,8 @@ namespace Item
 
         const Owner::Owner& getOwner() const {return owner;}
         void setOwner(const Owner::Owner _owner) {owner=_owner;}
+
+        virtual list getRequiredItems() const=0;
 
         BaseItem(const BaseItem&) = delete;
         BaseItem& operator=(const BaseItem&) = delete;
@@ -52,6 +63,14 @@ namespace Item
 
         ID getClassID() const override {
             return call_method<ID>(self, "getClassID");
+        }
+
+        ItemType getItemType() const override {
+            return call_method<ItemType>(self, "getItemType");
+        }
+
+        list getRequiredItems() const override {
+            return call_method<list>(self, "getRequiredItems");
         }
 
     private:

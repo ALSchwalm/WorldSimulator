@@ -53,9 +53,15 @@ struct std_shared_ptr_from_python
 namespace Utils
 {
     using namespace boost::python;
+    using namespace Item;
 
     void setupConversions() {
-        converter::std_shared_ptr_from_python<Item::BaseItem>();
+        ///Conversion   shared_ptr<BaseItem> <-> PyObject
+        converter::std_shared_ptr_from_python<BaseItem>();
+        objects::class_value_wrapper<
+            std::shared_ptr<BaseItem>
+            , objects::make_ptr_instance<BaseItem, objects::pointer_holder<std::shared_ptr<BaseItem>,BaseItem> >
+            >();
     }
 }
 

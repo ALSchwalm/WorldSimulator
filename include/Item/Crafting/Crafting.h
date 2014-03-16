@@ -13,35 +13,15 @@ namespace Item
     namespace Crafting
     {
         template<typename... T>
-        inline Item_ptr createItem(ID id, Individual::Individual_ptr individual, T... args)
+        inline Item_ptr createItem(ID id, Actor::Individual_ptr individual, T... args)
         {
-        	auto factory = getItemFactoryFromID(id);
-        	if (factory == itemFactories.end())
-        		return nullptr;
+            auto factory = getItemFactoryFromID(id);
+            if (factory == itemFactories.end())
+                return nullptr;
 
-        	auto&& itemFactory = *factory;
+            auto&& itemFactory = *factory;
 
-        	std::vector<Item_ptr> usedItems;
-        	for(auto item : itemFactory->getRequiredItems())
-        	{
-        		auto items = individual->getItems();
-        		auto location = std::find_if(items.begin(), items.end(),
-        				[&](Item_ptr i) {
-        					return (i->getID() == id &&
-        							std::find(usedItems.begin(), usedItems.end(), i) != usedItems.end());
-        				});
-        		if(location != items.end()) {
-        			usedItems.push_back(*location);
-        		}
-        		else
-        		{
-        			return nullptr;
-        		}
-        	}
-
-			for (auto item : usedItems)
-				individual->removeItem(item);
-
+            //TODO: remove appropriate items
             return itemFactory->make(args...);
         }
     }

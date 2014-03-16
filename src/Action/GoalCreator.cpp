@@ -104,7 +104,7 @@ std::vector<Task_ptr> getItem(Actor::Individual_ptr individual,
 }
 
 //Returns an empty vector if unable to find item
-std::vector<Task_ptr> findItemFromAttributes(Individual::Individual_ptr individual,
+std::vector<Task_ptr> findItemFromAttributes(Actor::Individual_ptr individual,
         std::vector<std::string> attributeList,
         unsigned int maxDistance,
         Goal_ptr goal)

@@ -3,6 +3,7 @@
 #include "Location/Location.h"
 #include "Item/ItemFactory.h"
 #include "Item/Container.h"
+#include "Item/ItemUtils.h"
 #include "Profession/SimpleProfession.h"
 #include "Profession/Profession.h"
 #include "Actor/Individual.h"
@@ -35,9 +36,9 @@ void seed()
                 {
                     family_size = population % 5 + 1;
 
-                    if (Item::getItemFactoryFromAttribute("habitable") != Item::itemFactories.end()) {
-                        auto&& factory = *Item::getItemFactoryFromAttribute("habitable");
-                        auto house = std::dynamic_pointer_cast<Item::Container>(factory->make());
+                    if (Item::getItemFactoryFromAttribute("habitable", true) != Item::itemFactories.end()) {
+                        auto&& factory = *Item::getItemFactoryFromAttribute("habitable", true);
+                        auto house = std::dynamic_pointer_cast<Item::BaseContainer>(factory->make());
 
                         if (house.get()) {
                             Actor::createFamily(family_size, house);
