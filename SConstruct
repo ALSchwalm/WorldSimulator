@@ -18,9 +18,9 @@ env = Environment(CXX=CXX, ENV=os.environ)
 env.Append(CXXFLAGS=['-Wall', '-Wextra', '-std=c++11'])
 
 if platform.system() == "Windows":
-   env.Append(LIBS = ['pdcurses', 'jsoncpp', 'python2.7', 'boost_python'])
+   env.Append(LIBS = ['pdcurses', 'python2.7', 'boost_python'])
 elif platform.system() == "Linux":
-   env.Append(LIBS = ['ncurses', 'jsoncpp', 'python2.7', 'boost_python'])
+   env.Append(LIBS = ['ncurses', 'python2.7', 'boost_python'])
 
 env.Append(CPPPATH=["include", "/usr/include/python2.7"])
 

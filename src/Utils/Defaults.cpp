@@ -1,53 +1,40 @@
 
 #include "Utils/Defaults.h"
-#include "Utils/json/json.h"
+#include "Utils/Conversion.h"
 #include "Item/ItemUtils.h"
+#include <boost/python.hpp>
 #include <fstream>
 #include <stdexcept>
 
 namespace Utils
 {
-
-    bool loadItems(const Json::Value itemRoot);
+    using namespace boost::python;
 
     bool loadPlugins() {
-        std::ifstream file;
-        Json::Value root;   // will contains the root value after parsing.
-        Json::Reader reader;
+        try {
+            Py_Initialize();
+            setupConversions(); //TODO put this somewhere else
 
+            object main_module((handle<>(borrowed(PyImport_AddModule("__main__")))));
+            object main_namespace = main_module.attr("__dict__");
 
-        //TODO also read in Plugins folder
-        file.open("default.json");
-        if (!file.is_open()) {
-            throw(std::runtime_error("Error opening default.json"));
-            return false;
-        }
+            exec("import sys, inspect; sys.path.append('.');"
+                 "from plugins import *;", main_namespace);
 
-        bool parsingSuccessful = reader.parse( file, root );
+            list classes = extract<list>(eval("[obj for (name, obj) "
+                                              "in inspect.getmembers(sys.modules[__name__]) "
+                                              "if inspect.isclass(obj) "
+                                              "and obj != BaseItem]", main_namespace));
 
-        if ( !parsingSuccessful ) {
-            throw(std::runtime_error("Error parsing default.json" +
-            		reader.getFormatedErrorMessages()));
-            return false;
-        }
-
-        loadItems(root["Items"]);
-
-        return true;
-    }
-
-    bool loadItems(const Json::Value itemRoot) {
-
-    	auto IDs = itemRoot.getMemberNames();
-        for(unsigned int i = 0; i < itemRoot.size(); ++i)
-        {
-            if (!Item::AddItemFactory(IDs[i], itemRoot[IDs[i]]))
-            {
-                //TODO log error
+            for(unsigned int i=0; i < classes.length; ++i) {
+                Item::AddItemFactory(classes[i]);
             }
+
+            return true;
         }
-
-        return true;
+        catch( error_already_set ) {
+            PyErr_Print();
+            return false;
+        }
     }
-
 }

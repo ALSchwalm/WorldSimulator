@@ -1,11 +1,15 @@
+#include "Item/BaseItem.h"
 #include <boost/python.hpp>
 #include <memory>
 
 using namespace boost::python;
 
 BOOST_PYTHON_MODULE(Simulator) {
-    class_<BaseItem,
+    class_<Item::BaseItem,
            boost::noncopyable,
-           std::shared_ptr<BaseItemWrapper>>("BaseItem", init<>())
-        .def("getAttributes", &BaseItem::getAttributes);
+           std::shared_ptr<Item::BaseItemPy>>("BaseItem", init<>())
+        .add_property("attributes",
+                      &Item::BaseItem::getAttributes,
+                      &Item::BaseItem::setAttributes)
+        .def("getID", &Item::BaseItem::getClassID);
 }

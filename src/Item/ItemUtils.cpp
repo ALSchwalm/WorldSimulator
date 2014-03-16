@@ -1,31 +1,15 @@
 
 #include "Item/ItemUtils.h"
 #include "Item/ItemFactory.h"
+#include <boost/python.hpp>
 
 namespace Item
 {
 
-    bool AddItemFactory(ID _id, const Json::Value itemRoot) {
+    bool AddItemFactory(boost::python::object obj) {
 
-    	auto type = itemRoot["Type"].asString();
-    	ItemFactoryBase* newFactory = nullptr;
-    	if (type == "Food") {
-    		newFactory = new ItemFactory<FOOD>(_id, itemRoot);
-    	}
-    	else if (type == "Tool") {
-    		newFactory = new ItemFactory<TOOL>(_id, itemRoot);
-    	}
-    	else if (type == "Weapon") {
-    		newFactory = new ItemFactory<WEAPON>(_id, itemRoot);
-    	}
-    	else if (type == "Container") {
-    		newFactory = new ItemFactory<CONTAINER>(_id, itemRoot);
-    	}
-    	else {
-    		return false;
-    	}
-
-    	std::unique_ptr<ItemFactoryBase> factPtr(newFactory);
+    	ItemFactoryBase* newFactory = new ItemFactory(obj)
+    	std::unique_ptr<ItemFactory> factPtr(newFactory);
     	itemFactories.push_back(std::move(factPtr));
         return true;
     }
