@@ -32,11 +32,16 @@ namespace Item
         void setAttributes(dict attr) { attributes = attr;}
 
         template<typename T>
-        void setAttribute(std::string name, T val) { attributes[name] = val;}
-        bool hasAttribute(std::string name) const { return attributes.has_key(name); }
+        void setAttribute(const std::string& name, T val) { attributes[name] = val;}
+
+        bool hasAttribute(const std::string& name) const {
+            return attributes.has_key(name);
+        }
 
         template<typename T>
-        const T& getAttribute(std::string name) const { return extract<T&>(attributes[name]); }
+        const T& getAttribute(const std::string& name) const {
+            return extract<T&>(attributes[name]);
+        }
 
         const Owner::Owner& getOwner() const {return owner;}
         void setOwner(const Owner::Owner _owner) {owner=_owner;}
@@ -48,7 +53,8 @@ namespace Item
         virtual ~BaseItem(){};
 
     protected:
-        BaseItem(){}
+        BaseItem(std::string _name) : name(_name) {}
+        BaseItem() : BaseItem("Unnamed Item") {}
 
         std::string name;
         Owner::Owner owner;
@@ -62,6 +68,7 @@ namespace Item
     {
     public:
         BaseItemPy(PyObject *p) : self(p) {}
+        BaseItemPy(PyObject *p, std::string _name) : BaseItem(_name), self(p) {}
 
         ID getClassID() const override {
             return call_method<ID>(self, "getClassID");

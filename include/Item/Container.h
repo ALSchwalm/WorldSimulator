@@ -14,14 +14,17 @@ namespace Item
         virtual ~BaseContainer(){}
 
     protected:
-        BaseContainer(){}
+        BaseContainer(std::string _name) : Location::BaseLocation(_name) {}
 
     };
 
     class BaseContainerPy : public BaseItemPy, public BaseContainer
     {
     public:
-        BaseContainerPy(PyObject *p) : BaseItemPy(p) {}
+        BaseContainerPy(PyObject *p, std::string _name) : BaseItem(_name),
+                                                          BaseItemPy(p),
+                                                          BaseContainer(_name) {}
+
     };
 
 }
