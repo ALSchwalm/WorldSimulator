@@ -88,6 +88,7 @@ namespace Location
         	name(_name),
         	attributes(_attributes){}
 
+        BaseLocation() : BaseLocation("Unnamed Location"){}
 
         BaseLocation(const BaseLocation&) = delete;
         BaseLocation& operator=(const BaseLocation&) = delete;

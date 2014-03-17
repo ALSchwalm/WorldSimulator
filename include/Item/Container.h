@@ -6,16 +6,22 @@
 
 namespace Item
 {
-    class BaseContainer : public BaseItem, public Location::BaseLocation
+    class BaseContainer : public virtual BaseItem, public Location::BaseLocation
     {
     public:
         ItemType getItemType() const override {return ItemType::CONTAINER;}
 
+        virtual ~BaseContainer(){}
+
+    protected:
+        BaseContainer(){}
+
     };
 
-    class BaseContainerPy : public BaseItemPy
+    class BaseContainerPy : public BaseItemPy, public BaseContainer
     {
-
+    public:
+        BaseContainerPy(PyObject *p) : BaseItemPy(p) {}
     };
 
 }

@@ -15,7 +15,9 @@ namespace Item
         TOOL,
         WEAPON,
         FOOD,
-        CONTAINER
+        CONTAINER,
+
+        ERROR
     };
 
     class BaseItem
@@ -24,7 +26,7 @@ namespace Item
         const std::string& getName() {return name;}
         virtual ID getClassID() const=0;
 
-        virtual ItemType getItemType() const=0;
+        virtual ItemType getItemType() const { return ItemType::ERROR; }
 
         dict getAttributes() {return attributes;}
         void setAttributes(dict attr) { attributes = attr;}
@@ -56,7 +58,7 @@ namespace Item
     using Item_ptr = std::shared_ptr<BaseItem>;
     using ItemList = std::vector<Item_ptr>;
 
-    class BaseItemPy : public BaseItem
+    class BaseItemPy : public virtual BaseItem
     {
     public:
         BaseItemPy(PyObject *p) : self(p) {}
@@ -65,15 +67,11 @@ namespace Item
             return call_method<ID>(self, "getClassID");
         }
 
-        ItemType getItemType() const override {
-            return call_method<ItemType>(self, "getItemType");
-        }
-
         list getRequiredItems() const override {
             return call_method<list>(self, "getRequiredItems");
         }
 
-    private:
+    protected:
         PyObject *self;
 
     };
