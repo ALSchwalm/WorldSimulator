@@ -40,9 +40,11 @@ if SHARED_LIB:
    lib_env["CXXFLAGS"] += ["-shared", "-fPIC"]
    lib_src_list = ["lib/"+src_file.name for src_file in Glob("lib/*.cpp")]
    LIB_NAME = "simulator.so"
-   lib_env.SharedLibrary(BUILD_PATH + LIB_NAME, source = lib_src_list)
+   lib_env.SharedLibrary(target=BUILD_PATH + LIB_NAME,
+                         source = lib_src_list,
+                         SHLIBPREFIX='')
 
 if platform.system() == "Windows":
     env.Program(target = BUILD_PATH + BIN_NAME + ".exe", source = src_list)
 elif platform.system() == "Linux":
-    env.Program(BUILD_PATH + BIN_NAME, source = src_list)
+    env.Program(target =BUILD_PATH + BIN_NAME, source = src_list)

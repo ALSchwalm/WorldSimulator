@@ -4,7 +4,7 @@
 
 using namespace boost::python;
 
-BOOST_PYTHON_MODULE(Simulator) {
+BOOST_PYTHON_MODULE(simulator) {
     class_<Item::BaseItem,
            boost::noncopyable,
            std::shared_ptr<Item::BaseItemPy>>("BaseItem", init<>())

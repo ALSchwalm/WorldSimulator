@@ -7,6 +7,7 @@
 
 #include <exception>
 #include <iostream>
+#include <boost/python.hpp>
 #include "Utils/Defaults.h"
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
@@ -34,6 +35,9 @@ int main()
             Interface::refreshView();
             Interface::CLI::handleInput();
         }
+    }
+    catch( boost::python::error_already_set ) {
+        PyErr_Print();
     }
     catch (std::exception& e)
     {
