@@ -3,12 +3,13 @@
 
 #include <string>
 #include <vector>
+#include <boost/operators.hpp>
 
 namespace Interface
 {
     namespace CLI
     {
-        class Token
+        class Token : boost::equality_comparable<Token>
         {
         public:
             static std::vector<Token>tokenize(std::string);
@@ -16,8 +17,7 @@ namespace Interface
             Token(std::string s) :
                 value(s){}
 
-            bool operator==(const Token&);
-            bool operator!=(const Token&);
+            bool operator==(const Token&) const;
 
             std::string value;
 

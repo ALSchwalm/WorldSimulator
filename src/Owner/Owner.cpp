@@ -15,7 +15,11 @@ namespace Owner
     {
     }
 
-    bool operator==(Owner lhs, Actor::Individual_ptr rhs)
+    bool Owner::operator==(const Owner& o) const {
+        return owner == o.owner;
+    }
+
+    bool operator==(const Owner& lhs, const Actor::Individual_ptr& rhs)
     {
         if (lhs.owner.size() != 1)
         {
@@ -27,19 +31,9 @@ namespace Owner
         }
     }
 
-    bool operator!=(Owner lhs, Actor::Individual_ptr rhs)
-    {
-        return !(lhs == rhs);
-    }
-
-    bool operator==(Owner & lhs, std::vector<Actor::Individual_ptr> & rhs)
+    bool operator==(const Owner& lhs, const std::vector<Actor::Individual_ptr>& rhs)
     {
         return lhs == rhs;
-    }
-
-    bool operator!=(Owner & lhs, std::vector<Actor::Individual_ptr> & rhs)
-    {
-        return !(lhs == rhs);
     }
 
     std::string Owner::getName() const

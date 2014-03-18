@@ -32,7 +32,7 @@ namespace Interface
             return tokens;
         }
 
-        bool Token::operator==(const Token & rhs)
+        bool Token::operator==(const Token & rhs) const
         {
             if (rhs.value.find(this->value) == 0)
             {
@@ -46,11 +46,5 @@ namespace Interface
             }
             return false;
         }
-
-        bool Token::operator!=(const Token & rhs)
-        {
-            return !((*this) == rhs);
-        }
-
     }
 }
