@@ -17,11 +17,11 @@ namespace WorldGen
     namespace LocationGen
     {
 
-const unsigned int MAX_REGIONS = Utils::Config::getInstance().getValue("LocationGen", "MAX_REGIONS");
-const unsigned int MIN_REGIONS = Utils::Config::getInstance().getValue("LocationGen", "MIN_REGIONS");
+        const unsigned int MAX_REGIONS = Utils::Config::getInstance().getValue("LocationGen.MAX_REGIONS");
+        const unsigned int MIN_REGIONS = Utils::Config::getInstance().getValue("LocationGen.MIN_REGIONS");
 
-const unsigned int MAX_CITIES_PER_REGION = Utils::Config::getInstance().getValue("LocationGen", "MAX_CITIES_PER_REGION");
-const unsigned int MIN_CITIES_PER_REGION = Utils::Config::getInstance().getValue("LocationGen", "MIN_CITIES_PER_REGION");
+        const unsigned int MAX_CITIES_PER_REGION = Utils::Config::getInstance().getValue("LocationGen.MAX_CITIES_PER_REGION");
+        const unsigned int MIN_CITIES_PER_REGION = Utils::Config::getInstance().getValue("LocationGen.MIN_CITIES_PER_REGION");
 
 void seed()
 {

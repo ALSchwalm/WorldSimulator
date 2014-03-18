@@ -9,7 +9,7 @@ namespace Profession
 
     const unsigned int ProfessionValues[]
     {
-        Utils::Config::getInstance().getValue("OccupationRate", "BAKER_RATE")
+        Utils::Config::getInstance().getValue("OccupationRate.BAKER_RATE")
     };
 
     static_assert(sizeof(ProfessionValues)/sizeof(ProfessionValues[0]) == NUM_OF_PROFESSIONS,

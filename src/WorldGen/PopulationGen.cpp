@@ -19,8 +19,8 @@ namespace WorldGen
     {
 
 
-const unsigned int INITIAL_MAX_POPULATION = Utils::Config::getInstance().getValue("PopulationGen", "INITIAL_MAX_POPULATION");
-const unsigned int INITIAL_MIN_POPULATION = Utils::Config::getInstance().getValue("PopulationGen", "INITIAL_MIN_POPULATION");
+        const unsigned int INITIAL_MAX_POPULATION = Utils::Config::getInstance().getValue("PopulationGen.INITIAL_MAX_POPULATION");
+        const unsigned int INITIAL_MIN_POPULATION = Utils::Config::getInstance().getValue("PopulationGen.INITIAL_MIN_POPULATION");
 
 void seed()
 {
