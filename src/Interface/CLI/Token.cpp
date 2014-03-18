@@ -22,7 +22,7 @@ namespace Interface
             std::vector<Token> tokens;
 
             using escapeList = boost::escaped_list_separator<char>;
-            escapeList Separator(' ', '\"');
+            escapeList Separator('\\', ' ', '\"');
             boost::tokenizer<escapeList> tok(line, Separator );
 
             for(auto token : tok) {

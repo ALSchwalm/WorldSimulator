@@ -1,5 +1,5 @@
 #include "Interface/RangeView.h"
-
+#include <boost/lexical_cast.hpp>
 
 namespace Interface {
     template<>
@@ -25,7 +25,7 @@ namespace Interface {
         unsigned int i=4;
         for (auto item : viewSubject->getItems())
         {
-            mvwprintw(this->nameWin, i, 1, Utils::numberToString(i-3).c_str());
+            mvwprintw(this->nameWin, i, 1, boost::lexical_cast<std::string>(i-3).c_str());
             mvwprintw(this->nameWin, i, 4, item->getName().c_str());
             mvwprintw(this->dataWin, i, 4, item->getOwner().getName().c_str());
 
