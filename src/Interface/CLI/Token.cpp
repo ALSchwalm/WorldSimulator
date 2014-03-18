@@ -1,6 +1,6 @@
 
 #include "Interface/CLI/Token.h"
-#include <sstream>
+#include <boost/tokenizer.hpp>
 
 namespace Interface
 {
@@ -19,26 +19,16 @@ namespace Interface
             if (line.back() == ' ' || line.size() == 0)
                 line+="*";
 
-            std::string buf;
-            std::stringstream ss(line);
-
             std::vector<Token> tokens;
 
-            while (ss >> buf) {
-                if (buf[0] == '\"'){                //the user has wrapped some text in quotes
-                    std::string quoteToken = buf;
-                    quoteToken += " ";              //re add the spaces
-                    while (ss >> buf) {
-                        quoteToken += buf;
-                        if (buf[buf.size()-1] == '\"')      //end of quotes
-                            break;
-                        quoteToken += " ";
-                    }
-                    buf = quoteToken.substr(1, quoteToken.size()-2);    //remove the quotes
-                }
+            using escapeList = boost::escaped_list_separator<char>;
+            escapeList Separator(' ', '\"');
+            boost::tokenizer<escapeList> tok(line, Separator );
 
-                tokens.push_back(Token(buf));
+            for(auto token : tok) {
+                tokens.push_back(token);
             }
+
             return tokens;
         }
 
