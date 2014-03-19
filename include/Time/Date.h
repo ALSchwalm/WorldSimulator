@@ -53,9 +53,9 @@ namespace Time
             return this->tm = tm;
         }
 
-        std::string toString() const {
+        std::string toString(const char* format = "%B %e %Y %R") const {
             char mbstr[100];
-            std::strftime(mbstr, 100, "%B %e %Y %R", &tm);
+            std::strftime(mbstr, 100, format, &tm);
             return std::string(mbstr);
         }
 
