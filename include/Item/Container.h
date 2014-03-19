@@ -6,10 +6,13 @@
 
 namespace Item
 {
+    using namespace Location;
+    
     class BaseContainer : public virtual BaseItem, public Location::BaseLocation
     {
     public:
         ItemType getItemType() const override {return ItemType::CONTAINER;}
+        LocationType getLocationType() const override {return LocationType::CONTAINER;}
 
         virtual ~BaseContainer(){}
 

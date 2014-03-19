@@ -14,7 +14,7 @@ namespace Location
         ~World();
         static Location_ptr getInstance();
 
-        LocationType getLocationType(){return LocationType::WORLD;}
+        LocationType getLocationType() const {return LocationType::WORLD;}
 
         //override these functions to throw errors if they are called on a "world"
         void addItem(Item::Item_ptr);

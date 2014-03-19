@@ -29,8 +29,8 @@ namespace Location {
             regionType(_regionType)
             {};
 
-        LocationType getLocationType(){return Location::REGION;}
-        RegionType getRegionType() {return regionType;}
+        LocationType getLocationType() const {return Location::REGION;}
+        RegionType getRegionType() const {return regionType;}
 
 
     private:

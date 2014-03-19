@@ -13,6 +13,7 @@
 #include "Item/BaseItem.h"
 #include <memory>
 #include <unordered_set>
+#include <cassert>
 
 namespace Location
 {
@@ -43,6 +44,7 @@ namespace Location
             "LocationType not given string.");
 
     inline const std::string& toString(LocationType t) {
+        assert(t != NUM_OF_LOCATIONS && t != LOCATION_ERROR);
         return locationNames[t];
     }
 
@@ -53,7 +55,7 @@ namespace Location
 
         virtual std::string getName() {return name;}
 
-        virtual LocationType getLocationType(){return LocationType::LOCATION_ERROR;}
+        virtual LocationType getLocationType() const=0;
 
         virtual void setAttribute(std::string s, bool value=true) {attributes[s] = value;}
         bool hasAttribute(const std::string& s);
