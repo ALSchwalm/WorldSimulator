@@ -9,6 +9,7 @@
 #include <iostream>
 #include <boost/python.hpp>
 #include "Utils/Defaults.h"
+#include "Utils/Utils.h"
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
 #include "Time/TimeManager.h"
@@ -20,6 +21,7 @@ int main()
 {
     try
     {
+        Utils::Logging::initialize();
     	Utils::loadPlugins();
 
     	WorldGen::LocationGen::seed();

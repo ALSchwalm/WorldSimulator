@@ -15,12 +15,17 @@ BUILD_PATH = "build/"
 
 env = Environment(CXX=CXX, ENV=os.environ)
 
-env.Append(CXXFLAGS=['-Wall', '-Wextra', '-std=c++11'])
+env.Append(CXXFLAGS=['-Wall', '-Wextra', '-std=c++11', '-DBOOST_LOG_DYN_LINK=1'])
+
+env.Append(LIBS = ['python2.7', 'boost_python',
+                   'boost_system', 'boost_log_setup', 'boost_log',
+                   'pthread', 'boost_date_time', 'boost_thread'])
 
 if platform.system() == "Windows":
-   env.Append(LIBS = ['pdcurses', 'python2.7', 'boost_python'])
+   env["LIBS"] += ["pdcurses"]
 elif platform.system() == "Linux":
-   env.Append(LIBS = ['ncurses', 'python2.7', 'boost_python'])
+   env["LIBS"] += ["ncurses"]
+
 
 env.Append(CPPPATH=["include", "/usr/include/python2.7"])
 
