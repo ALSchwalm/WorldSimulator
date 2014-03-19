@@ -8,6 +8,12 @@
 #include <functional>
 #include <utility>
 
+namespace Actor
+{
+    class Individual;
+    using Individual_ptr = std::shared_ptr<Individual>;
+}
+
 namespace Action
 {
 
@@ -52,7 +58,7 @@ namespace Action
             }
         };
 
-        Individual::Individual_ptr owner; //Individual who has this goalTree
+        Actor::Individual_ptr owner; //Individual who has this goalTree
 
         Goal_ptr currentGoal;
         std::set<GoalWrapper, priority> goalHeap;

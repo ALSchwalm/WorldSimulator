@@ -19,6 +19,8 @@ namespace Interface
         public:
             DialogOK(std::string);
             void handleInput();
+        private:
+            std::string text;
         };
     }
 }

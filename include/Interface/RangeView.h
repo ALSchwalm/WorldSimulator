@@ -8,7 +8,6 @@
 #include "Profession/BaseProfession.h"
 #include "Location/BaseLocation.h"
 #include "Interface/View.h"
-#include "Utils/Utils.h"
 
 namespace Interface
 {
@@ -26,4 +25,3 @@ namespace Interface
     };
 }
 #endif
-

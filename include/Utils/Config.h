@@ -1,7 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "Utils/INI.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 
 namespace Utils
 {
@@ -9,11 +10,16 @@ namespace Utils
     {
     public:
         static Config& getInstance();
-        unsigned int getValue(std::string, std::string);
+
+        template<typename T = unsigned int>
+        T getValue(const std::string& name) {
+            return pt.get<T>(name);
+        }
     private:
-        typedef INI <std::string, std::string, int> ini_t;
-        ini_t ini;
-        Config();
+        Config() {
+            boost::property_tree::ini_parser::read_ini("config.ini", pt);
+        }
+        boost::property_tree::ptree pt;
     };
 }
 

@@ -2,70 +2,40 @@
 #define ITEMFACTORY_H_
 
 #include "Item/BaseItem.h"
-#include "Utils/json/json.h"
+#include <boost/python.hpp>
 #include <vector>
-#include <utility>
 
 namespace Item
 {
-	class ItemFactoryBase
-	{
-	public:
-		virtual std::shared_ptr<BaseItem> make() const=0;
-		virtual ~ItemFactoryBase(){};
 
-		bool hasAttribute(const std::string& s) const;
-		ID getID() const {return id;}
-		const itemVector& getRequiredItems() const {return requiredItems;}
+    class ItemFactory
+    {
+    public:
+        template<typename... Args>
+        std::shared_ptr<BaseItem> make(Args... args) const {
+            return extract<std::shared_ptr<BaseItem>>(pyClass(args...));
+        }
 
-	protected:
-		ItemFactoryBase(ID _id, const Json::Value itemRoot);
+        ItemFactory(object _pyClass) : pyClass(_pyClass) {}
 
-		ID id;
-		const std::string name;
-		skillVector requiredSkills;
-		itemVector requiredItems;
-		std::map<std::string, bool> attributes;
-	};
+        bool hasAttribute(const std::string& s) const {
+            dict default_attributes = extract<dict>(pyClass.attr("default_attributes"));
+            return default_attributes.has_key(s);
+        }
 
-	extern std::vector<std::unique_ptr<ItemFactoryBase>> itemFactories;
+        ID getClassID() const {
+            return extract<ID>(pyClass.attr("classID"));
+        }
 
-	template <ItemType i>
-	class ItemFactory;
+        list getRequiredItems() const {
+            return call_method<list>(pyClass.ptr(), "getRequiredItems");
+        }
 
-	template<>
-	class ItemFactory<FOOD> : public ItemFactoryBase
-	{
-	public:
-		ItemFactory(ID _id, const Json::Value itemRoot);
-		std::shared_ptr<BaseItem> make() const override;
-	};
+    private:
+        object pyClass;
+    };
 
-	template<>
-	class ItemFactory<CONTAINER> : public ItemFactoryBase
-	{
-	public:
-		ItemFactory(ID _id, const Json::Value itemRoot);
-		std::shared_ptr<BaseItem> make() const override;
-	};
-
-	template<>
-	class ItemFactory<WEAPON> : public ItemFactoryBase
-	{
-	public:
-		ItemFactory(ID _id, const Json::Value itemRoot);
-		std::shared_ptr<BaseItem> make() const override;
-	};
-
-	template<>
-	class ItemFactory<TOOL> : public ItemFactoryBase
-	{
-	public:
-		ItemFactory(ID _id, const Json::Value itemRoot);
-		std::shared_ptr<BaseItem> make() const override;
-	private:
-		skillVector usedSkills;
-	};
+    extern std::vector<std::unique_ptr<ItemFactory>> itemFactories;
 }
 
 #endif

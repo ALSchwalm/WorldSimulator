@@ -2,84 +2,86 @@
 #define BASEITEM_H_
 
 #include "Owner/Owner.h"
-#include "Skill/Skill.h"
-#include "Item/ItemUtils.h"
-#include <memory>
-#include <map>
+#include <boost/python.hpp>
 #include <string>
-#include <vector>
-
-namespace Individual
-{
-    class Individual;
-    typedef std::shared_ptr<Actor::Individual> Individual_ptr;
-}
+#include <memory>
 
 namespace Item
 {
-    enum ItemType
-    {
-        FOOD,
-        WEAPON,
-        CONTAINER,
+    using namespace boost::python;
+    using ID = unsigned long;
+
+    enum class ItemType {
         TOOL,
+        WEAPON,
+        FOOD,
+        CONTAINER,
 
-        ITEM_ERROR
+        ERROR
     };
-
 
     class BaseItem
     {
     public:
-
-        virtual ~BaseItem(){};
-
         const std::string& getName() {return name;}
-        ID& getID() const {return id;}
+        virtual ID getClassID() const=0;
 
-        //Some types may have multiple attribute maps, so allow them to set all appropriate maps
-        //for example, container has BaseItem and BaseLocation attributes, so it sets both in
-        //its setAttribute() member
-        virtual void setAttribute(std::string s, bool val=true) {attributes[s] = val;}
+        virtual ItemType getItemType() const { return ItemType::ERROR; }
 
-        virtual ItemType getItemType()=0;
+        dict getAttributes() {return attributes;}
+        void setAttributes(dict attr) { attributes = attr;}
 
-        const Owner::Owner& getOwner() {return owner;}
+        template<typename T>
+        void setAttribute(const std::string& name, T val) { attributes[name] = val;}
+
+        bool hasAttribute(const std::string& name) const {
+            return attributes.has_key(name);
+        }
+
+        template<typename T>
+        const T& getAttribute(const std::string& name) const {
+            return extract<T&>(attributes[name]);
+        }
+
+        const Owner::Owner& getOwner() const {return owner;}
         void setOwner(const Owner::Owner _owner) {owner=_owner;}
 
-        bool hasAttribute(const std::string& s);
-
-    protected:
-
-        BaseItem(ID _id, std::string _name, Actor::Individual_ptr _owner) :
-        	id(_id),
-        	name(_name),
-            owner(_owner){}
-
-        BaseItem(ID _id, std::string _name) : BaseItem(_id, _name, nullptr){}
-
-        BaseItem(ID _id, std::string _name, std::map<std::string, bool> _attributes) :
-        	id(_id),
-        	name(_name),
-        	attributes(_attributes){}
-
-
+        virtual list getRequiredItems() const=0;
 
         BaseItem(const BaseItem&) = delete;
         BaseItem& operator=(const BaseItem&) = delete;
+        virtual ~BaseItem(){};
 
-    private:
-        ID id;
+    protected:
+        BaseItem(std::string _name) : name(_name) {}
+        BaseItem() : BaseItem("Unnamed Item") {}
+
         std::string name;
-        std::map<std::string, bool> attributes;
         Owner::Owner owner;
-
+        dict attributes;
     };
 
-    typedef std::shared_ptr<BaseItem> Item_ptr;
-    typedef std::vector<Item_ptr> ItemList;
+    using Item_ptr = std::shared_ptr<BaseItem>;
+    using ItemList = std::vector<Item_ptr>;
 
+    class BaseItemPy : public virtual BaseItem
+    {
+    public:
+        BaseItemPy(PyObject *p) : self(p) {}
+        BaseItemPy(PyObject *p, std::string _name) : BaseItem(_name), self(p) {}
 
+        ID getClassID() const override {
+            return call_method<ID>(self, "getClassID");
+        }
+
+        list getRequiredItems() const override {
+            return call_method<list>(self, "getRequiredItems");
+        }
+
+    protected:
+        PyObject *self;
+
+    };
 }
 
 #endif

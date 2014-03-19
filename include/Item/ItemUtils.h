@@ -1,27 +1,37 @@
 #ifndef ITEMUTILS_H_
 #define ITEMUTILS_H_
 
-#include "Utils/json/json.h"
-
+#include "Item/ItemFactory.h"
+#include <boost/python.hpp>
 #include <utility>
 #include <vector>
 #include <memory>
 
 namespace Item
 {
-	class ItemFactoryBase;
+    class ItemFactory;
 
-	typedef const std::string ID;
-	typedef std::vector< std::pair<ID, double>> skillVector;
-	typedef std::vector< std::pair<ID, unsigned int>> itemVector;
+    using ID = unsigned long;
+    using skillVector = std::vector< std::pair<ID, double>>;
+    using itemVector = std::vector< std::pair<ID, unsigned int>>;
 
-    bool AddItemFactory(ID _id, const Json::Value itemRoot);
+    bool AddItemFactory(boost::python::object);
 
-    std::vector<std::unique_ptr<Item::ItemFactoryBase>>::iterator
-    	getItemFactoryFromAttribute(const std::string& attribute, bool value=true);
+    template<typename T>
+    std::vector<std::unique_ptr<Item::ItemFactory>>::iterator
+    getItemFactoryFromAttribute(const std::string& attribute, const T& val)
+    {
+    	auto factory=itemFactories.begin();
+    	for (; factory != itemFactories.end(); ++factory) {
+            if ( (*factory)->hasAttribute(attribute) ) {
+                return factory;
+            }
+    	}
+    	return factory;
+    }
 
-    std::vector<std::unique_ptr<Item::ItemFactoryBase>>::iterator
-    	getItemFactoryFromID(ID _id);
+    std::vector<std::unique_ptr<Item::ItemFactory>>::iterator
+    getItemFactoryFromID(ID _id);
 }
 
 #endif

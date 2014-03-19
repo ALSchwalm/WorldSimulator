@@ -20,7 +20,7 @@ namespace Location {
     public:
         Village(std::string _name);
 
-        LocationType getLocationType(){return Location::VILLAGE;}
+        LocationType getLocationType() const {return Location::VILLAGE;}
 
     private:
 
