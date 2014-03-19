@@ -4,7 +4,6 @@
 #include "Interface/GeneralView.h"
 #include "Interface/CLI/HelpView.h"
 #include "Location/World.h"
-#include "Time/Date.h"
 #include "Time/DateManager.h"
 #include <iostream>
 #include <cstdlib>
@@ -38,21 +37,21 @@ namespace Interface
 
     void update_date()
     {
-        mvwprintw(mainwin, LINES-1, 1, Time::now().getDateAsString(1).c_str());
+        mvwprintw(mainwin, LINES-1, 1, Time::now().toString().c_str());
         wrefresh(mainwin);
     }
 
 
     void refreshView()
     {
-        static Time::Date prev_time = Time::DateManager::getInstance().now;
+        static Time::Date prev_time = Time::DateManager::getInstance().now();
         if (helpView)
             helpView->refreshView();
         else
             displayView->refreshView();
         wrefresh(CLI::lineWin);
 
-        if (Time::now() != prev_time && Time::now().getDay() != prev_time.getDay())
+        if (Time::now() != prev_time)
         {
             prev_time = Time::now();
             update_date();

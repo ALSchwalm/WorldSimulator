@@ -19,12 +19,12 @@ namespace Event {
     }
 
     BirthEvent::BirthEvent(
-            Time::Date d,
-            std::shared_ptr<Actor::Individual> i,
-            std::shared_ptr<Location::BaseLocation> l) :
-            BaseEvent(d, "Birth"),
-            birthPlace(l),
-            individual(i)
+        Time::Date d,
+        std::shared_ptr<Actor::Individual> i,
+        std::shared_ptr<Location::BaseLocation> l) :
+        BaseEvent(d, "Birth"),
+        birthPlace(l),
+        individual(i)
     {
     }
 

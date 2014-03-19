@@ -10,11 +10,15 @@ DateManager & DateManager::getInstance()
 }
 
 DateManager::DateManager() :
-        now (Date(1, Month::January, Day::Sunday))
+        date()
 {
 
 }
 
 void DateManager::nextMinute() {
-    ++now;
+    date.setMinute(date.getMinute()+ 1);
+}
+
+Date DateManager::now() {
+    return date;
 }

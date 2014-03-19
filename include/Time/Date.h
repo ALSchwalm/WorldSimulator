@@ -1,80 +1,67 @@
-/*
- * Date.h
- *
- *  Created on: Mar 4, 2013
- *      Author: Adam
- */
-
 #ifndef DATE_H_
 #define DATE_H_
 
-#include <iostream>
+#include <boost/operators.hpp>
+#include <ctime>
+#include <cstring>
 
-namespace Time {
+namespace Time
+{
+    struct Date : boost::less_than_comparable<Date>,
+                  boost::equality_comparable<Date> {
 
-    enum Month
-    {
-        January,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December,
+        Date(const std::tm& tm) {
+            this->tm = tm;
+        }
 
-        NUM_OF_MONTHS
+        Date() {
+            memset(&tm, sizeof(tm), 0);
+            tm.tm_year = -1899;
+            tm.tm_mday = 1;
+        }
+
+        int setYear(int year)     {tm.tm_year = year; mktime(&tm);  return tm.tm_year;}
+        int setMonth(int month)   {tm.tm_mon = month; mktime(&tm);  return tm.tm_mon;}
+        int setDay(int day)       {tm.tm_mday = day; mktime(&tm);   return tm.tm_mday;}
+        int setHour(int hour)     {tm.tm_hour = hour; mktime(&tm);  return tm.tm_hour;}
+        int setMinute(int minute) {tm.tm_min = minute; mktime(&tm); return tm.tm_min;}
+        int setSecond(int second) {tm.tm_sec = second; mktime(&tm); return tm.tm_sec;}
+
+        int getYear()   const {return tm.tm_year;}
+        int getMonth()  const {return tm.tm_mon;}
+        int getDay()    const {return tm.tm_mday;}
+        int getHour()   const {return tm.tm_hour;}
+        int getMinute() const {return tm.tm_min;}
+        int getSecond() const {return tm.tm_sec;}
+
+        bool operator<(const Date& d) const {
+            auto left = tm;
+            auto right = d.tm;
+            return std::mktime(&left) < std::mktime(&right);
+        }
+
+        bool operator==(const Date& d) const {
+            return getYear() == d.getYear() &&
+                getMonth() == d.getMonth() &&
+                getDay() == d.getDay() &&
+                getHour() == d.getHour() &&
+                getMinute() == d.getMinute() &&
+                getSecond() == d.getSecond();
+        }
+
+        Date operator=(const tm& tm) {
+            return this->tm = tm;
+        }
+
+        std::string toString() const {
+            char mbstr[100];
+            std::strftime(mbstr, 100, "%B %e %Y %R", &tm);
+            return std::string(mbstr);
+        }
+
+        static_assert(sizeof(std::time_t) >= 8, "Insufficient time_t size");
+        std::tm tm;
     };
+}
 
-    enum Day
-    {
-        Sunday,
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-
-        NUM_OF_DAYS
-    };
-
-
-
-    class Date {
-    friend Date operator+(Date, int);
-
-    public:
-        Date(unsigned int year, Month month, Day day, unsigned short hour=0, unsigned short minute=0);
-
-        unsigned int getYear() const {return year;}
-        Month getMonth() const {return month;}
-        Day getDay() const {return day;}
-
-        bool operator==(const Date&) const;
-        bool operator!=(const Date&) const;
-        Date& operator++();
-
-        std::string getDateAsString(bool concise=0) const;
-
-        friend std::ostream& operator<<(std::ostream& out, Date& d);
-
-    private:
-
-        static const unsigned int DAYS_PER_MONTH = 30;
-
-        unsigned int year;
-        Month month;
-        Day day;
-        unsigned short hour;
-        unsigned short minute;
-        unsigned int dayValue; //as in, the 18th day of the month
-    };
-
-
-} /* namespace Time */
-#endif /* DATE_H_ */
+#endif

@@ -2,6 +2,8 @@
 #define DATEMANAGER_H_
 
 #include "Time/Date.h"
+#include <string>
+#include <ctime>
 
 namespace Time
 {
@@ -11,15 +13,17 @@ namespace Time
 
         void nextMinute();
 
-        Date now;
+        Date now();
 
     private:
         DateManager();
-
+        Date date;
     };
 
     //shorthand for Time::DateManager::getInstance().now
-    inline const Date& now() {return DateManager::getInstance().now;}
+    inline Date now() {
+        return DateManager::getInstance().now();
+    }
 }
 
 

@@ -9,11 +9,10 @@
 #define BASE_EVENT_H_
 
 #include "Event/Event.h"
-#include "Time/Date.h"
 #include "Time/TimeManager.h"
+#include "Time/DateManager.h"
 #include <memory>
 #include <string>
-
 
 namespace Action
 {
@@ -37,7 +36,11 @@ namespace Event
         Action::Task* getSourceTask() const { return sourceTask; }
 
         void setExecutionDate(Time::Date newDate) {executionDate = newDate;}
-        void setSoonestExecution() {executionDate = Time::now()+1;}
+        void setSoonestExecution() {
+            auto newTime = Time::now();
+            newTime.setMinute(newTime.getMinute()+1);
+            executionDate = newTime;
+        }
         void setSourceTask(Action::Task* s) {sourceTask = s;}
 
         virtual void run()=0;
@@ -47,7 +50,7 @@ namespace Event
 
     protected:
         BaseEvent(std::string s) :
-            executionDate(Time::Date(0, Time::Month::January, Time::Day::Monday)),
+            executionDate(),
             name(s),
             sourceTask(nullptr){}
 
