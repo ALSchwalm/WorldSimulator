@@ -8,7 +8,7 @@ class Item(BaseItem):
         BaseItem.__init__(self)
 
 
-class Knife(Item):
+class Knife(BaseWeapon):
     def __init__(self):
         Item.__init__(self, Knife.__name__)
 
@@ -23,7 +23,7 @@ class Knife(Item):
         ]
 
 
-class Dagger(Item):
+class Dagger(BaseWeapon):
     related_items = [Knife]
     def __init__(self):
         Item.__init__(self, Dagger.__name__)

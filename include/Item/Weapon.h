@@ -5,17 +5,22 @@
 
 namespace Item
 {
-    class BaseWeapon : public BaseItem
+    class BaseWeapon : public virtual BaseItem
     {
     public:
         ItemType getItemType() const override {return ItemType::WEAPON;}
 
+        virtual ~BaseWeapon(){}
+
     private:
+
     };
 
-    class BaseWeaponPy : public BaseItemPy
+    class BaseWeaponPy : public BaseItemPy, public BaseWeapon
     {
-
+    public:
+        BaseWeaponPy(PyObject *p, std::string _name) : BaseItem(_name),
+                                                       BaseItemPy(p) {}
     };
 }
 

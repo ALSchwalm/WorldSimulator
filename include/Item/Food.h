@@ -5,18 +5,22 @@
 
 namespace Item
 {
-    class BaseFood : public BaseItem
+    class BaseFood : public virtual BaseItem
     {
     public:
         ItemType getItemType() const override {return ItemType::FOOD;}
+
+        virtual ~BaseFood(){}
 
     private:
 
     };
 
-    class BaseFoodPy : public BaseItemPy
+    class BaseFoodPy : public BaseItemPy, public BaseFood
     {
-
+    public:
+        BaseFoodPy(PyObject *p, std::string _name) : BaseItem(_name),
+                                                     BaseItemPy(p) {}
     };
 }
 

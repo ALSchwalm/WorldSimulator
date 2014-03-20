@@ -38,7 +38,7 @@ if UNITTEST:
    src_list.remove("src/main.cpp")
    src_list += ["tests/"+test.name for test in Glob("tests/*.cpp")]
    BIN_NAME = "unittest"
-   env["LIBS"] += ["gtest_main", "gtest", "pthread"]
+   env["LIBS"] += ["boost_unit_test_framework"]
 
 if SHARED_LIB:
    lib_env = env.Clone()

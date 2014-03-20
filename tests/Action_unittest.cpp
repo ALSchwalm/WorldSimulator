@@ -1,35 +1,35 @@
 #include "Profession/SimpleProfession.h"
-#include "Item/BaseItem.h"
-#include "Item/Weapon.h"
-#include "Item/ItemFactory.h"
-#include "Utils/Defaults.h"
+#include "Item/Food.h"
 #include "Actor/ActorUtils.h"
 #include "Action/Task.h"
 #include "Action/GoalCreator.h"
 #include "Location/Village.h"
 #include "Location/Location.h"
 #include "Event/EventQueue.h"
+#include "ItemImpl.h"
 
-#include "gtest/gtest.h"
+#include <boost/test/unit_test.hpp>
+BOOST_AUTO_TEST_SUITE(Action)
 
 #include <vector>
 
-TEST(ActionTest, GetFood)
+BOOST_AUTO_TEST_CASE(GetFood)
 {
-	auto location   = std::make_shared<Location::Village>("TestLocation");
-	auto location2  = std::make_shared<Location::Village>("TestLocation2");
+    auto location   = std::make_shared<Location::Village>("TestLocation");
+    auto location2  = std::make_shared<Location::Village>("TestLocation2");
 
-	Location::addLocations(location, location2);
+    Location::addLocations(location, location2);
 
-	auto individual = std::make_shared<Actor::Individual>("TestPerson", Profession::BAKER, location, false);
+    auto individual = std::make_shared<Actor::Individual>("TestPerson", Profession::BAKER, location, false);
 
-	auto item = std::make_shared<Item::Food>("1");
-	item->setAttribute("edible");
-	location2->addItem(item);
+    auto item = std::make_shared<Test::ItemImpl<Item::BaseFood>>("1");
+    item->setAttribute("edible", true);
+    location2->addItem(item);
 
-	Actor::addGoal<Action::GET_FOOD>(individual, 0);
+    Actor::addGoal<Action::GET_FOOD>(individual, 0);
 
-	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent() != nullptr);
-	EXPECT_TRUE(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE);
-
+    BOOST_CHECK(Event::EventQueue::getInstance().getNextEvent() != nullptr);
+    BOOST_CHECK(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

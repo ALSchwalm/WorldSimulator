@@ -3,7 +3,7 @@
 ################
 
 TAGS
-tests/unittest
+build/unittest
 build/simulator
 *.out
 
