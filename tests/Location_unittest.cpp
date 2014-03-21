@@ -1,74 +1,87 @@
-#include "gtest/gtest.h"
-
-#include <algorithm>
-
 #include "Location/BaseLocation.h"
 #include "Location/Village.h"
 #include "Location/World.h"
 #include "Location/Location.h"
 #include "Item/Weapon.h"
+#include "ItemImpl.h"
 
-TEST(LocationTest, HasAttribute)
+#include <algorithm>
+#include <boost/test/unit_test.hpp>
+BOOST_AUTO_TEST_SUITE(Location)
+
+BOOST_AUTO_TEST_CASE(HasAttribute)
 {
+    auto location = std::make_shared<Location::Village>("TestVillage");
 
-	auto location = std::make_shared<Location::Village>("TestVillage");
+    location->setAttribute("test");
 
-	location->setAttribute("test");
-
-	EXPECT_TRUE(location->hasAttribute("test"));
-	EXPECT_FALSE(location->hasAttribute("other"));
+    BOOST_CHECK(location->hasAttribute("test"));
+    BOOST_CHECK(!location->hasAttribute("other"));
 }
 
-TEST(LocationTest, AddItems)
+BOOST_AUTO_TEST_CASE(AddItems)
 {
 
-	auto location = std::make_shared<Location::Village>("TestVillage");
-	auto item = std::make_shared<Item::Weapon>("ID");
-	auto item2 = std::make_shared<Item::Weapon>("ID");
+    auto location = std::make_shared<Location::Village>("TestVillage");
+    auto item = std::make_shared<Test::ItemImpl<Item::BaseWeapon>>("ID");
+    auto item2 = std::make_shared<Test::ItemImpl<Item::BaseWeapon>>("ID");
 
-	location->addItem(item);
+    location->addItem(item);
 
-	EXPECT_TRUE(std::count(location->getItems().begin(), location->getItems().end(), item) == 1 );
-	EXPECT_FALSE(std::count(location->getItems().begin(), location->getItems().end(), item2) != 0);
+    BOOST_CHECK_EQUAL(std::count(location->getItems().begin(), location->getItems().end(), item), 1 );
+    BOOST_CHECK(std::count(location->getItems().begin(), location->getItems().end(), item2) == 0);
 }
 
-TEST(LocationTest, RemoveItems)
+BOOST_AUTO_TEST_CASE(RemoveItems)
 {
 
-	auto location = std::make_shared<Location::Village>("TestVillage");
-	auto item = std::make_shared<Item::Weapon>("ID");
-	auto item2 = std::make_shared<Item::Weapon>("ID");
+    auto location = std::make_shared<Location::Village>("TestVillage");
+    auto item = std::make_shared<Test::ItemImpl<Item::BaseWeapon>>("ID");
+    auto item2 = std::make_shared<Test::ItemImpl<Item::BaseWeapon>>("ID");
 
-	location->addItem(item);
+    location->addItem(item);
 
-	EXPECT_TRUE(location->removeItem(item));
-	EXPECT_FALSE(location->removeItem(item));
-	EXPECT_FALSE(location->removeItem(item2));
+    BOOST_CHECK(location->removeItem(item));
+    BOOST_CHECK(!location->removeItem(item));
+    BOOST_CHECK(!location->removeItem(item2));
 }
 
-TEST(LocationTest, AddLocationStandard)
+BOOST_AUTO_TEST_CASE(AddLocationStandard)
 {
 
-	auto location = std::make_shared<Location::Village>("TestVillage");
-	auto location2 = std::make_shared<Location::Village>("TestVillage2");
+    auto location = std::make_shared<Location::Village>("TestVillage");
+    auto location2 = std::make_shared<Location::Village>("TestVillage2");
 
-	Location::addLocations(location, location2);
+    Location::addLocations(location, location2);
 
-	EXPECT_TRUE(std::count(location->getLocations().begin(), location->getLocations().end(), location2) == 1);
-	EXPECT_TRUE(std::count(location2->getLocations().begin(), location->getLocations().end(), location) == 1);
-	EXPECT_FALSE(std::count(location->getLocations().begin(), location->getLocations().end(), location) != 0);
-	EXPECT_FALSE(std::count(location2->getLocations().begin(), location->getLocations().end(), location2) != 0);
+    BOOST_CHECK_EQUAL(std::count(location->getLocations().begin(), location->getLocations().end(), location2), 1);
+    BOOST_CHECK_EQUAL(std::count(location2->getLocations().begin(), location->getLocations().end(), location), 1);
+    BOOST_CHECK_EQUAL(std::count(location->getLocations().begin(),
+                                 location->getLocations().end(), location), 0);
+
+    BOOST_CHECK_EQUAL(std::count(location2->getLocations().begin(),
+                                 location->getLocations().end(), location2), 0);
 }
 
-TEST(LocationTest, AddLocationWorld)
+BOOST_AUTO_TEST_CASE(AddLocationWorld)
 {
 
-	auto location = std::make_shared<Location::Village>("TestVillage");
+    auto location = std::make_shared<Location::Village>("TestVillage");
 
-	Location::addLocations(Location::World::getInstance(), location);
+    Location::addLocations(Location::World::getInstance(), location);
 
-	EXPECT_TRUE(std::count(location->getLocations().begin(), location->getLocations().end(), Location::World::getInstance()) == 1);
-	EXPECT_TRUE(std::count(Location::World::getInstance()->getLocations().begin(), Location::World::getInstance()->getLocations().end(), location) == 1);
-	EXPECT_FALSE(std::count(location->getLocations().begin(), location->getLocations().end(), location) != 0);
-	EXPECT_FALSE(std::count(Location::World::getInstance()->getLocations().begin(), Location::World::getInstance()->getLocations().end(), Location::World::getInstance()) != 0);
+    BOOST_CHECK_EQUAL(std::count(location->getLocations().begin(),
+                                 location->getLocations().end(),
+                                 Location::World::getInstance()), 1);
+
+    BOOST_CHECK_EQUAL(std::count(Location::World::getInstance()->getLocations().begin(),
+                                 Location::World::getInstance()->getLocations().end(),
+                                 location), 1);
+
+    BOOST_CHECK_EQUAL(std::count(location->getLocations().begin(), location->getLocations().end(), location), 0);
+    BOOST_CHECK_EQUAL(std::count(Location::World::getInstance()->getLocations().begin(),
+                                 Location::World::getInstance()->getLocations().end(),
+                                 Location::World::getInstance()), 0);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

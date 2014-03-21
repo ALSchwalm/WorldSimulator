@@ -1,14 +1,15 @@
-#include "gtest/gtest.h"
 #include "Item/Crafting/Crafting.h"
 #include "Item/Weapon.h"
 #include "Item/Tool.h"
 #include "Item/Container.h"
 #include "Profession/SimpleProfession.h"
 #include "Item/ItemUtils.h"
-
+#include <boost/test/unit_test.hpp>
 #include <memory>
 
-TEST(CraftingTest, CraftTool)
+BOOST_AUTO_TEST_SUITE(Crafting)
+
+BOOST_AUTO_TEST_CASE(CraftTool)
 {/*
 	Utils::loadPlugins();
 	auto individual = std::make_shared<Actor::Individual>("TestIndividaul", Profession::BAKER);
@@ -27,3 +28,5 @@ TEST(CraftingTest, CraftTool)
 	//Test that items are required
 	EXPECT_TRUE(Item::Crafting::createItem<Item::Container<Item::HOUSE>>(individual) == nullptr);*/
 }
+
+BOOST_AUTO_TEST_SUITE_END()

@@ -24,8 +24,11 @@ namespace Utils
         list classes = extract<list>(eval("[obj for (name, obj) "
                                           "in inspect.getmembers(sys.modules[__name__]) "
                                           "if inspect.isclass(obj) "
-                                          "and obj != BaseItem "
-                                          "and obj != BaseContainer]", main_namespace));
+                                          "and obj not in ["
+                                          "BaseItem, BaseContainer,"
+                                          "BaseWeapon, BaseFood, "
+                                          "BaseTool, "
+                                          "]]", main_namespace));
 
         for(unsigned int i=0; i < len(classes); ++i) {
             Item::AddItemFactory(classes[i]);

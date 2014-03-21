@@ -1,15 +1,18 @@
-#include "Item/Weapon.h"
 #include "Profession/SimpleProfession.h"
 #include "Actor/Individual.h"
-#include "gtest/gtest.h"
+#include "Item/Weapon.h"
+#include "ItemImpl.h"
 
+#include <boost/test/unit_test.hpp>
+BOOST_AUTO_TEST_SUITE(Owner)
 
-TEST(OwnerTest, Comparison)
+BOOST_AUTO_TEST_CASE(OwnerTest)
 {
 	auto individual = std::make_shared<Actor::Individual>("TestIndividual", Profession::BAKER);
-	auto item = std::make_shared<Item::Weapon>("ID", individual);
+	auto item = std::make_shared<Test::ItemImpl<Item::BaseWeapon>>("ID");
+        item->setOwner(individual);
 
-	EXPECT_TRUE(item->getOwner() == individual);
-	EXPECT_FALSE(item->getOwner() != individual);
-
+	BOOST_CHECK(item->getOwner() == individual);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

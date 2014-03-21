@@ -1,10 +1,11 @@
 #include "Item/Weapon.h"
 #include "Profession/SimpleProfession.h"
 #include "Actor/Individual.h"
-#include "gtest/gtest.h"
+#include <boost/test/unit_test.hpp>
 
+BOOST_AUTO_TEST_SUITE(Profession)
 
-TEST(ProfessionTest, InitialItems)
+BOOST_AUTO_TEST_CASE(InitialItems)
 {
     auto individual = std::make_shared<Actor::Individual>("TestIndividual", Profession::BAKER);
 
@@ -14,6 +15,8 @@ TEST(ProfessionTest, InitialItems)
 
     items.insert(items.end(),newItems.begin(), newItems.end());
 
-    EXPECT_TRUE(!items.empty());
+    //BOOST_CHECK(!items.empty());
 
 }
+
+BOOST_AUTO_TEST_SUITE_END()

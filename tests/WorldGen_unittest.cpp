@@ -4,26 +4,28 @@
 #include "Location/World.h"
 #include "Utils/Defaults.h"
 #include <time.h>
-#include "gtest/gtest.h"
+#include <boost/test/unit_test.hpp>
 
-TEST(WorldGenTest, SeedLocations)
+BOOST_AUTO_TEST_SUITE(WorldGen)
+
+BOOST_AUTO_TEST_CASE(SeedLocations)
 {
 	Utils::loadPlugins();
 	srand (time(NULL));
 
 	WorldGen::LocationGen::seed();
 
-	EXPECT_GE(Location::World::getInstance()->getLocations().size(), WorldGen::LocationGen::MIN_REGIONS);
-	EXPECT_LE(Location::World::getInstance()->getLocations().size(), WorldGen::LocationGen::MAX_REGIONS);
+	BOOST_CHECK_GE(Location::World::getInstance()->getLocations().size(), WorldGen::LocationGen::MIN_REGIONS);
+	BOOST_CHECK_LE(Location::World::getInstance()->getLocations().size(), WorldGen::LocationGen::MAX_REGIONS);
 
 	for (auto region : Location::World::getInstance()->getLocations())
 	{
-		EXPECT_GE(region->getLocations().size(), WorldGen::LocationGen::MIN_CITIES_PER_REGION);
-		EXPECT_LE(region->getLocations().size(), WorldGen::LocationGen::MAX_CITIES_PER_REGION);
+		BOOST_CHECK_GE(region->getLocations().size(), WorldGen::LocationGen::MIN_CITIES_PER_REGION);
+		BOOST_CHECK_LE(region->getLocations().size(), WorldGen::LocationGen::MAX_CITIES_PER_REGION);
 	}
 }
 
-TEST(WorldGenTest, SeedPopulation)
+BOOST_AUTO_TEST_CASE(SeedPopulation)
 {
 	WorldGen::PopulationGen::seed();
 
@@ -34,15 +36,15 @@ TEST(WorldGenTest, SeedPopulation)
 			unsigned int total = 0;
 			for (auto house : city->getLocationsByType(Location::CONTAINER))
 				total += house->getIndividuals().size();
-			EXPECT_GE(total, WorldGen::PopulationGen::INITIAL_MIN_POPULATION);
-			EXPECT_LE(total, WorldGen::PopulationGen::INITIAL_MAX_POPULATION);
+			BOOST_CHECK_GE(total, WorldGen::PopulationGen::INITIAL_MIN_POPULATION);
+			BOOST_CHECK_LE(total, WorldGen::PopulationGen::INITIAL_MAX_POPULATION);
 		}
 
 	}
 }
 
 
-TEST(WorldGenTest, SeedItems)
+BOOST_AUTO_TEST_CASE(SeedItems)
 {
     WorldGen::ItemGen::seed();
 
@@ -58,3 +60,5 @@ TEST(WorldGenTest, SeedItems)
         }
     }
 }
+
+BOOST_AUTO_TEST_SUITE_END()
