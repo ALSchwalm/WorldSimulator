@@ -3,6 +3,7 @@
 #include "Profession/BaseProfession.h"
 #include "Profession/SimpleProfession.h"
 #include "Utils/Config.h"
+#include "Utils/Utils.h"
 
 namespace Profession
 {
@@ -39,7 +40,7 @@ namespace Profession
 
     std::shared_ptr<BaseProfession> getRandomProfession()
     {
-        ProfessionType profession = static_cast<ProfessionType>(rand()%(NUM_OF_PROFESSIONS-2));
+        ProfessionType profession = static_cast<ProfessionType>(Utils::uniform(0, NUM_OF_PROFESSIONS-2));
         return createProfessionFromType(profession);
     }
 

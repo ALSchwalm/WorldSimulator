@@ -10,7 +10,7 @@
 #include "Actor/ActorUtils.h"
 #include "Utils/Markov.h"
 #include "Utils/Config.h"
-#include <cstdlib>
+#include "Utils/Utils.h"
 #include <memory>
 
 namespace WorldGen
@@ -30,11 +30,11 @@ void seed()
         {
             if (city->hasAttribute("habitable"))
             {
-                int population =  rand() % (INITIAL_MAX_POPULATION - INITIAL_MIN_POPULATION) + INITIAL_MIN_POPULATION;
+                int population =  Utils::uniform(INITIAL_MIN_POPULATION, INITIAL_MAX_POPULATION);
 
                 for (unsigned int family_size = 0; population > 0; population -= family_size)
                 {
-                    family_size = population % 5 + 1;
+                    family_size = Utils::uniform(1, 6);
 
                     if (Item::getItemFactoryFromAttribute("habitable", true) != Item::itemFactories.end()) {
                         auto&& factory = *Item::getItemFactoryFromAttribute("habitable", true);

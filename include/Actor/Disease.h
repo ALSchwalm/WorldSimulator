@@ -3,8 +3,8 @@
 
 #include "Actor/Stats.h"
 #include "Utils/Markov.h"
+#include "Utils/Utils.h"
 #include <string>
-#include <cstdlib>
 #include <array>
 
 namespace Actor
@@ -26,7 +26,7 @@ namespace Actor
             spreadFactor(_spreadFactor)
         {
             for (unsigned int i=0; i < NUM_OF_STATS; ++i)
-                effects[i] = -1*(rand()%10);
+                effects[i] = Utils::uniform(-10, 1);
         }
 
         Disease() : Disease(Utils::Markov::getInstance().getProperWord(),

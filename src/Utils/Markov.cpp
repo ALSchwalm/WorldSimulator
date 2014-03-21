@@ -6,10 +6,10 @@
  */
 
 #include "Utils/Markov.h"
+#include "Utils/Utils.h"
 #include <algorithm>
 #include <fstream>
 #include <random>
-#include <time.h>
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
@@ -27,7 +27,6 @@ Markov & Markov::getInstance()
 
 Markov::Markov()
 {
-    srand (time(NULL));
     using namespace std;
 
     ifstream fFile;
@@ -63,11 +62,11 @@ std::string Markov::getWord(unsigned int size, bool properName) const
     const std::string letters = "abcdefghijklmnopqrstuvwxyz";
     std::string word = "";
 
-    int letter = letters[rand()%letters.size()];
+    int letter = letters[Utils::uniform(0, letters.size())];
 
     for (unsigned int i=0; i < size; ++i)
     {
-        letter = MarkovMap[letter][rand()%MarkovMap[letter].size()];
+        letter = MarkovMap[letter][Utils::uniform(0, MarkovMap[letter].size())];
         word += letter;
     }
 
@@ -79,7 +78,7 @@ std::string Markov::getWord(unsigned int size, bool properName) const
 
 std::string Markov::getWord(bool properName) const
 {
-    unsigned int size = (rand() % 11) + 5;
+    unsigned int size = Utils::uniform(5, 15);
 
     return getWord(size, properName);
 }
@@ -96,7 +95,7 @@ std::string Markov::getProperWord(unsigned int size) const
 
 std::string Markov::getRegionName() const
 {
-    if (rand()%2 == 1)
+    if (Utils::uniform(0, 2))
     {
         return "Region of " + getProperWord();
     }
@@ -108,7 +107,7 @@ std::string Markov::getRegionName() const
 
 std::string Markov::getVillageName() const
 {
-    if (rand()%2 == 1)
+    if (Utils::uniform(0, 2))
     {
         return "Village of " + getProperWord();
     }
@@ -129,4 +128,3 @@ std::string Markov::getIndividualName(std::string familyName) const
         return getProperWord() + " " + getProperWord();
     }
 }
-

@@ -1,14 +1,11 @@
 #include "Location/BaseLocation.h"
 #include "Location/Region.h"
-
-#include <cstdlib>
+#include "Utils/Utils.h"
 
 using namespace Location;
 
 
 RegionType Region::getRandomRegionType()
 {
-    return static_cast<RegionType>(rand() % RegionType::NUM_OF_REGIONS);
+    return static_cast<RegionType>(Utils::uniform(0, RegionType::NUM_OF_REGIONS));
 }
-
-
