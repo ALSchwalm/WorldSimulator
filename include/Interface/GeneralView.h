@@ -10,15 +10,10 @@
 #include "Interface/View.h"
 #include "Location/Location.h"
 #include <memory>
-#include <cstdlib>
+#include <boost/lexical_cast.hpp>
 
 namespace Interface
 {
-
-    static void toChar(char* val, int num) {
-        sprintf(val, "%d", num);
-    }
-
     /*
     * GeneralView's 'refreshView' member is partially
     * specialized for every type used, to account for
@@ -41,7 +36,7 @@ namespace Interface
     template<>
     inline void GeneralView<Location::Location_ptr>::refreshView()
     {
-        char val[256];
+        std::string val;
 
         mvwprintw(this->nameWin, 2, 4, "Statistic:");
         mvwprintw(this->nameWin, 4, 4, "Adjacent locations");
@@ -50,14 +45,14 @@ namespace Interface
 
         mvwprintw(this->dataWin, 2, 4, "Value:");
 
-        toChar(val, viewSubject->getLocations().size());
-        mvwprintw(this->dataWin, 4, 4, val);
+        val = boost::lexical_cast<std::string>(viewSubject->getLocations().size());
+        mvwprintw(this->dataWin, 4, 4, val.c_str());
 
-        toChar(val, viewSubject->getIndividuals().size());
-        mvwprintw(this->dataWin, 5, 4, val);
+        val = boost::lexical_cast<std::string>(viewSubject->getIndividuals().size());
+        mvwprintw(this->dataWin, 5, 4, val.c_str());
 
-        toChar(val, viewSubject->getItems().size());
-        mvwprintw(this->dataWin, 6, 4, val);
+        val = boost::lexical_cast<std::string>(viewSubject->getItems().size());
+        mvwprintw(this->dataWin, 6, 4, val.c_str());
 
         wrefresh(this->nameWin);
         wrefresh(this->dataWin);
@@ -66,7 +61,7 @@ namespace Interface
     template<>
     inline void GeneralView<Actor::Individual_ptr>::refreshView()
     {
-        char val[256];
+        std::string val;
 
         mvwprintw(this->nameWin, 2, 4, "Statistic:");
         mvwprintw(this->nameWin, 4, 4, "Current Location");
@@ -77,11 +72,11 @@ namespace Interface
 
         mvwprintw(this->dataWin, 4, 4, viewSubject->getCurrentLocation()->getName().c_str());
 
-        toChar(val, viewSubject->getItems().size());
-        mvwprintw(this->dataWin, 5, 4, val);
+        val = boost::lexical_cast<std::string>(viewSubject->getItems().size());
+        mvwprintw(this->dataWin, 5, 4, val.c_str());
 
-        toChar(val, viewSubject->getAge());
-        mvwprintw(this->dataWin, 6, 4, val);
+        val = boost::lexical_cast<std::string>(viewSubject->getAge());
+        mvwprintw(this->dataWin, 6, 4, val.c_str());
 
         wrefresh(this->nameWin);
         wrefresh(this->dataWin);
