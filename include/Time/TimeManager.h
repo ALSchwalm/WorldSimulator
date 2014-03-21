@@ -2,10 +2,13 @@
 #define TIMEMANAGER_H_
 
 #include "Time/DateManager.h"
-
+#include <chrono>
 
 namespace Time
 {
+
+    using namespace std::chrono;
+
     class TimeManager
     {
 
@@ -14,19 +17,18 @@ namespace Time
 
         static TimeManager& getInstance();
 
-        void capFPS(); //one of these is off by a bit. 2 FPS cap -> 2 actual FPS, but 100 FPS cap -> 111 actual FPS
-        int getFPS();
+        void capRefresh();
         void tick();
 
     private:
         TimeManager();
 
-        double timeLastFrame;
-        double timeLastFPS;
-        double timeLastTick;
-        double timeRemainder;
+        system_clock::time_point timeLastFrame;
+        system_clock::time_point timeLastTick;
+        system_clock::duration timeRemainder;
 
-        static const unsigned int MAX_FPS;				//These values set by ini file
+        static const unsigned int REFRESH_RATE;
+        static const system_clock::duration REFRESH_TIME;
         static const unsigned int MINUTES_PER_SECOND;
 
     };

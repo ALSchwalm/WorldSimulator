@@ -1,15 +1,6 @@
-
-#if _WIN32
-# include <windows.h>
-#elif __linux__
-# include <unistd.h>
-# define Sleep(x) sleep(x/1000)
-#endif
-
 #include "Time/TimeManager.h"
 #include "Utils/Config.h"
-#include <time.h>
-
+#include <thread>
 
 using namespace Time;
 
@@ -19,51 +10,47 @@ TimeManager & TimeManager::getInstance()
     return timeManager;
 }
 
-const unsigned int TimeManager::MAX_FPS = Utils::Config::getInstance().getValue("Time.MAX_FPS");
-const unsigned int TimeManager::MINUTES_PER_SECOND = Utils::Config::getInstance().getValue("Time.MINUTES_PER_SECOND");
+const unsigned int TimeManager::REFRESH_RATE =
+    Utils::Config::getInstance().getValue("Time.REFRESH_RATE");
+
+const system_clock::duration TimeManager::REFRESH_TIME =
+    std::chrono::milliseconds((long)(1.0/TimeManager::REFRESH_RATE * 1000));
+
+const unsigned int TimeManager::MINUTES_PER_SECOND =
+    Utils::Config::getInstance().getValue("Time.MINUTES_PER_SECOND");
 
 
-TimeManager::TimeManager()
+TimeManager::TimeManager() :
+    timeLastFrame(system_clock::now()),
+    timeLastTick(system_clock::now()) {}
+
+void TimeManager::capRefresh()
 {
-    timeLastFrame = ((float)clock())/CLOCKS_PER_SEC;
-    timeLastFPS = ((float)clock())/CLOCKS_PER_SEC;
-    timeLastTick = ((float)clock())/CLOCKS_PER_SEC;
-    timeRemainder = 0;
-}
+    auto currentTime = system_clock::now();
 
-void TimeManager::capFPS()
-{
-    double currentTime = ((float)clock())/CLOCKS_PER_SEC;
-    if (  (currentTime - timeLastFrame) < 1.0f/MAX_FPS ) //inverse of FPS is SPF, which is the unit of deltatime, as capFPS is called every frame
+    if ((currentTime - timeLastFrame) <  REFRESH_TIME)
     {
-        Sleep( ((1.0f/MAX_FPS) - (currentTime - timeLastFrame)) *1000);
+        auto duration = REFRESH_TIME - (currentTime - timeLastFrame);
+        std::this_thread::sleep_for(duration);
     }
-    timeLastFrame = ((float)clock())/CLOCKS_PER_SEC;
-}
-
-int TimeManager::getFPS()
-{
-    double currentTime = ((float)clock())/CLOCKS_PER_SEC;
-    double deltaTime = (currentTime - timeLastFPS);
-    timeLastFPS = currentTime;
-    return 1 / deltaTime; //the reverse of the logic for capFPS, inverse SPF is FPS
+    timeLastFrame = system_clock::now();
 }
 
 void TimeManager::tick()
 {
-    double dCurrentTime = ((float)clock())/CLOCKS_PER_SEC;
+    auto currentTime = system_clock::now();
 
-    timeRemainder += (dCurrentTime - timeLastTick);
+    timeRemainder += (currentTime - timeLastTick);
 
-    if (timeRemainder > 1.0f / MINUTES_PER_SECOND)
+    if (timeRemainder.count() > 1.0f / MINUTES_PER_SECOND)
     {
-        unsigned int tempDivisor = timeRemainder  / (1.0f / MINUTES_PER_SECOND);
-        for (unsigned int i = 0; i < tempDivisor; i++)
+        unsigned int minutesPassed = timeRemainder  / milliseconds((long)(1.0f/MINUTES_PER_SECOND*1000));
+        for (unsigned int i = 0; i < minutesPassed; i++)
         {
             DateManager::getInstance().nextMinute();
         }
-        timeRemainder -= tempDivisor * (1.0f / MINUTES_PER_SECOND);
+        timeRemainder -= milliseconds((long)(minutesPassed * (1.0f / MINUTES_PER_SECOND) * 1000));
 
     }
-    timeLastTick = ((float)clock())/CLOCKS_PER_SEC;
+    timeLastTick = system_clock::now();
 }

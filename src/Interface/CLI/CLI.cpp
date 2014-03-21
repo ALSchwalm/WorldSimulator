@@ -23,6 +23,7 @@ namespace Interface
             mvaddstr(1, 2, "Command:");
 
             lineWin = subwin(CLIwin, 1, COLS-12, 1, 11);
+            nodelay(lineWin, true);
             refresh();
         }
 
@@ -92,6 +93,3 @@ namespace Interface
 
     }
 }
-
-
-

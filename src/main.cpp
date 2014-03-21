@@ -33,7 +33,7 @@ int main()
         while(true)
         {
             Time::TimeManager::getInstance().tick();
-            Time::TimeManager::getInstance().capFPS();
+            Time::TimeManager::getInstance().capRefresh();
             Interface::refreshView();
             Interface::CLI::handleInput();
         }
