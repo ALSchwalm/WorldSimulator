@@ -7,7 +7,7 @@ import fnmatch
 import glob
 from subprocess import Popen
 
-UNITTEST = ARGUMENTS.get("unittest", 0)
+UNITTEST = ARGUMENTS.get("unittest", True)
 SHARED_LIB = ARGUMENTS.get("lib", True)
 CXX = ARGUMENTS.get('CXX', 'g++')
 BIN_NAME = "simulator"
@@ -29,16 +29,14 @@ elif platform.system() == "Linux":
 
 env.Append(CPPPATH=["include", "/usr/include/python2.7"])
 
+def create_objs(SRCS):
+    return [env.Object(src) for src in SRCS]
+
 src_list = []
 for root, dirnames, filenames in os.walk('src/'):
     for filename in fnmatch.filter(filenames, '*.cpp'):
         src_list.append(os.path.join(root, filename))
 
-if UNITTEST:
-   src_list.remove("src/main.cpp")
-   src_list += ["tests/"+test.name for test in Glob("tests/*.cpp")]
-   BIN_NAME = "unittest"
-   env["LIBS"] += ["boost_unit_test_framework"]
 
 if SHARED_LIB:
    lib_env = env.Clone()
@@ -49,7 +47,14 @@ if SHARED_LIB:
                          source = lib_src_list,
                          SHLIBPREFIX='')
 
+if UNITTEST:
+   test_src_list = list(src_list)
+   test_src_list.remove("src/main.cpp")
+   test_src_list += ["tests/"+test.name for test in Glob("tests/*.cpp")]
+   env["LIBS"] += ["boost_unit_test_framework"]
+   env.Program(target =BUILD_PATH + "unittest", source = create_objs(test_src_list))
+
 if platform.system() == "Windows":
-    env.Program(target = BUILD_PATH + BIN_NAME + ".exe", source = src_list)
+    env.Program(target = BUILD_PATH + BIN_NAME + ".exe", source = create_objs(src_list))
 elif platform.system() == "Linux":
-    env.Program(target =BUILD_PATH + BIN_NAME, source = src_list)
+    env.Program(target =BUILD_PATH + BIN_NAME, source = create_objs(src_list))
