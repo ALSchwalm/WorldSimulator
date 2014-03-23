@@ -26,10 +26,12 @@ BOOST_AUTO_TEST_CASE(HasAttribute)
 BOOST_AUTO_TEST_CASE(Container)
 {
     auto container = std::make_shared<Test::ItemImpl<Item::BaseContainer>>("ID");
+    auto location = std::make_shared<Location::Village>("TestVillage");
     auto item = std::make_shared<Test::ItemImpl<Item::BaseWeapon>>("ID");
 
     container->addItem(item);
-    Location::addLocations(Location::World::getInstance(), container);
+
+    Location::connectLocations(location, container);
 
     BOOST_CHECK_EQUAL(container->getLocations().size(), 1u);
     BOOST_CHECK_EQUAL(container->getItems().size(),  1u);

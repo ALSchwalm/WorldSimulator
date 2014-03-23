@@ -6,10 +6,16 @@
 namespace Location
 {
 
-    inline void addLocations(Location_ptr locationOne, Location_ptr locationTwo)
+    inline void connectLocations(Location_ptr locationOne, Location_ptr locationTwo)
     {
         locationOne->addLocation(locationTwo);
         locationTwo->addLocation(locationOne);
+    }
+
+    inline void separateLocations(Location_ptr locationOne, Location_ptr locationTwo)
+    {
+        locationOne->removeLocation(locationTwo);
+        locationTwo->removeLocation(locationOne);
     }
 
 }

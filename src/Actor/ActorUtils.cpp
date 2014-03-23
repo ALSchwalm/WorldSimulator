@@ -34,12 +34,7 @@ namespace Actor
                                                         Relationship::HUSBAND,
                                                         family[1],
                                                         Relationship::WIFE);
-
             --size;
-        }
-        else
-        {
-            return family;
         }
 
         for (; size > 0; --size){

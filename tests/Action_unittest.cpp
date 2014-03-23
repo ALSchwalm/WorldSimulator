@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(GetFood)
     auto location   = std::make_shared<Location::Village>("TestLocation");
     auto location2  = std::make_shared<Location::Village>("TestLocation2");
 
-    Location::addLocations(location, location2);
+    Location::connectLocations(location, location2);
 
     auto individual = std::make_shared<Actor::Individual>("TestPerson", Profession::BAKER, location, false);
 

@@ -11,7 +11,7 @@
 namespace Actor
 {
     const std::vector<Individual_ptr> createFamily(unsigned int size=4,
-                                                    Location::Location_ptr l=nullptr);
+                                                   Location::Location_ptr l=nullptr);
 
     /*
     * Goal creation is started here, then passed to the goal tree. The goal tree

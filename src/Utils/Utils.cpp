@@ -11,7 +11,9 @@
 namespace Utils {
     namespace Logging {
         void initialize() {
-            boost::log::add_file_log("sample.log");
+            boost::log::add_file_log(
+                boost::log::keywords::file_name = "logfile.log",
+                boost::log::keywords::format = "[%TimeStamp%]: %Message%");
         }
     }
 }

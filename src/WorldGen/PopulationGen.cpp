@@ -11,7 +11,7 @@
 #include "Utils/Markov.h"
 #include "Utils/Config.h"
 #include "Utils/Utils.h"
-#include <memory>
+#include <boost/log/trivial.hpp>
 
 namespace WorldGen
 {
@@ -31,8 +31,8 @@ void seed()
             if (city->hasAttribute("habitable"))
             {
                 int population =  Utils::uniform(INITIAL_MIN_POPULATION, INITIAL_MAX_POPULATION);
-
-                for (unsigned int family_size = 0; population > 0; population -= family_size)
+                BOOST_LOG_TRIVIAL(info) << "Adding " << population << " individuals to: " << city->getName();
+                for (unsigned int family_size = 0; population >= 0; population -= family_size)
                 {
                     family_size = Utils::uniform(1, 6);
 
@@ -44,11 +44,16 @@ void seed()
                             Actor::createFamily(family_size, house);
 
                             city->addItem(house);
-                            Location::addLocations(city, house);
+                            Location::connectLocations(city, house);
                         }
                         else {
+                            BOOST_LOG_TRIVIAL(debug) << "Unable to find habitable container." <<
+                                " Adding to city directly.";
                             Actor::createFamily(family_size, city);
                         }
+                    }
+                    else {
+                        BOOST_LOG_TRIVIAL(warning) << "Unable to find habitable item.";
                     }
                 }
             }

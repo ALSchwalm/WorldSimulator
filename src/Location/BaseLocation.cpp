@@ -10,9 +10,14 @@ void BaseLocation::addLocation(Location::Location_ptr l)
     else if (l.get() != this)
         locations.insert(l);
 }
-void BaseLocation::operator+=(Location::Location_ptr rhs)
+
+void BaseLocation::removeLocation(Location::Location_ptr l)
 {
-    addLocation(rhs);
+    if (l == nullptr)
+        return;
+    else
+        locations.erase(std::find(locations.begin(), locations.end(), l),
+                        locations.end());
 }
 
 
@@ -29,7 +34,7 @@ bool BaseLocation::removeItem(Item::Item_ptr i)
     }
 }
 
-bool BaseLocation::hasAttribute(const std::string& s) {
+bool BaseLocation::hasAttribute(const std::string& s) const {
 	auto location = attributes.find(s);
 	if (location != attributes.end())
 	{

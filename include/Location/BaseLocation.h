@@ -58,7 +58,7 @@ namespace Location
         virtual LocationType getLocationType() const=0;
 
         virtual void setAttribute(std::string s, bool value=true) {attributes[s] = value;}
-        bool hasAttribute(const std::string& s);
+        bool hasAttribute(const std::string& s) const;
 
         const Actor::IndividualList& getIndividuals() {return individuals;}
         const Item::ItemList& getItems() {return items;}
@@ -67,18 +67,16 @@ namespace Location
         const std::unordered_set<Location_ptr> getLocationsByAttribute(std::string s);
         const std::unordered_set<Location_ptr> getLocationsByType(LocationType);
 
-        bool removeItem(Item::Item_ptr i);
 
         void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
         //Typically, locations are wrapped in shared_ptr so add<Type> is more appropriate
         virtual void addItem(Item::Item_ptr i) { items.push_back(i); }
-        virtual void operator+=(Item::Item_ptr rhs)	{items.push_back(rhs);}
+        bool removeItem(Item::Item_ptr i);
 
         virtual void addIndividual(Actor::Individual_ptr i){individuals.push_back(i);}
-        virtual void operator+=(Actor::Individual_ptr rhs){individuals.push_back(rhs);	}
 
         void addLocation(Location::Location_ptr l);
-        void operator+=(Location::Location_ptr rhs);
+        void removeLocation(Location::Location_ptr l);
 
         //FIXME These should only be used by GoalCreator
         Location_ptr cameFrom;

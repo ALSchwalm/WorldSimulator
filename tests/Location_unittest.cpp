@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE(AddLocationStandard)
     auto location = std::make_shared<Location::Village>("TestVillage");
     auto location2 = std::make_shared<Location::Village>("TestVillage2");
 
-    Location::addLocations(location, location2);
+    Location::connectLocations(location, location2);
 
     BOOST_CHECK_EQUAL(std::count(location->getLocations().begin(), location->getLocations().end(), location2), 1);
     BOOST_CHECK_EQUAL(std::count(location2->getLocations().begin(), location->getLocations().end(), location), 1);
@@ -63,25 +63,17 @@ BOOST_AUTO_TEST_CASE(AddLocationStandard)
                                  location->getLocations().end(), location2), 0);
 }
 
-BOOST_AUTO_TEST_CASE(AddLocationWorld)
+
+BOOST_AUTO_TEST_CASE(RemoveLocation)
 {
+    std::shared_ptr<BaseLocation>location = std::make_shared<Location::Village>("TestVillage");
+    std::shared_ptr<BaseLocation>location2 = std::make_shared<Location::Village>("TestVillage2");
 
-    auto location = std::make_shared<Location::Village>("TestVillage");
+    Location::connectLocations(location, location2);
+    Location::separateLocations(location, location2);
 
-    Location::addLocations(Location::World::getInstance(), location);
-
-    BOOST_CHECK_EQUAL(std::count(location->getLocations().begin(),
-                                 location->getLocations().end(),
-                                 Location::World::getInstance()), 1);
-
-    BOOST_CHECK_EQUAL(std::count(Location::World::getInstance()->getLocations().begin(),
-                                 Location::World::getInstance()->getLocations().end(),
-                                 location), 1);
-
-    BOOST_CHECK_EQUAL(std::count(location->getLocations().begin(), location->getLocations().end(), location), 0);
-    BOOST_CHECK_EQUAL(std::count(Location::World::getInstance()->getLocations().begin(),
-                                 Location::World::getInstance()->getLocations().end(),
-                                 Location::World::getInstance()), 0);
+    BOOST_CHECK_EQUAL(location->getLocations().size(), 0);
+    BOOST_CHECK_EQUAL(location2->getLocations().size(), 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
