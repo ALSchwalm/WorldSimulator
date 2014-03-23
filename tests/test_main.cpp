@@ -15,10 +15,14 @@
 
 namespace keywords = boost::log::keywords;
 
+
 bool setup() {
+    boost::log::register_simple_formatter_factory< boost::log::trivial::severity_level, char >("Severity");
+    boost::log::add_common_attributes();
+
     boost::log::add_file_log(
         keywords::file_name = "unittests.log",
-        keywords::format = "[%TimeStamp%]: %Message%");
+        keywords::format = "[%TimeStamp%] <%Severity%> %Message%");
     Py_Initialize();
     return Utils::loadPlugins();
 }

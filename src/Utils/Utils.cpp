@@ -11,9 +11,12 @@
 namespace Utils {
     namespace Logging {
         void initialize() {
+            boost::log::register_simple_formatter_factory< boost::log::trivial::severity_level, char >("Severity");
+            boost::log::add_common_attributes();
+
             boost::log::add_file_log(
                 boost::log::keywords::file_name = "logfile.log",
-                boost::log::keywords::format = "[%TimeStamp%]: %Message%");
+                boost::log::keywords::format = "[%TimeStamp%] <%Severity%> %Message%");
         }
     }
 }
