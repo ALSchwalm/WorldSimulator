@@ -1,43 +1,42 @@
 from simulator import *
-from abc import abstractmethod
 
-class Item(BaseItem):
+class Sword(BaseWeapon):
     related_items = []
-    default_attributes = {"a" : False}
-    def __init__(self):
-        BaseItem.__init__(self)
-
-
-class Knife(BaseWeapon):
+    default_attributes = {}
     def __init__(self):
         Item.__init__(self, Knife.__name__)
+        additional_attributes = {}
+        self.attributes = dict(Knife.default_attributes.items() +
+                               additional_attributes.items())
 
-    def make():
-        self.attributes = {"a" : True}
-
-    default_attributes = {"a" : False}
-
-    def getRequiredItems(self):
-        return [
-            (Dagger, lambda item: True)
-        ]
-
+        self.requiredItems = []
+        self.damageModifiers = {
+            damage_type.piercing : 2,
+            damage_type.slashing : 2,
+            damage_type.blunt    : 0.5
+        }
 
 class Dagger(BaseWeapon):
-    related_items = [Knife]
+    related_items = []
+    default_attributes = {}
     def __init__(self):
         Item.__init__(self, Dagger.__name__)
-        self.attributes = {"a" : False}
+        additional_attributes = {}
+        self.attributes = dict(Dagger.default_attributes.items() +
+                               additional_attributes.items())
 
-    default_attributes = {"a" : False}
-
-    def getRequiredItems(self):
-        return [
-            (Dagger, lambda item: item.attributes["a"])
-        ]
+        self.requiredItems = []
+        self.damageModifiers = {
+            damage_type.piercing : 2,
+            damage_type.slashing : 2,
+            damage_type.blunt    : 0.5
+        }
 
 class House(BaseContainer):
+    default_attributes = {"habitable" : True}
     def __init__(self):
         BaseContainer.__init__(self, House.__name__)
-
-    default_attributes = {"habitable" : False}
+        additional_attributes = {}
+        self.requiredItems = []
+        self.attributes = dict(House.default_attributes.items() +
+                               additional_attributes.items())

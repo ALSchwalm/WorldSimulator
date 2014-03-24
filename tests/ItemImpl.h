@@ -18,9 +18,6 @@ namespace Test
             return 1;
         }
 
-        list getRequiredItems() const override {
-            return list();
-        }
     };
 
     template<>
@@ -32,10 +29,6 @@ namespace Test
 
         ID getClassID() const override {
             return 1;
-        }
-
-        list getRequiredItems() const override {
-            return list();
         }
     };
 }

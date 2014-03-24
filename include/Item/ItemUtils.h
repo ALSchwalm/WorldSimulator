@@ -23,7 +23,7 @@ namespace Item
     {
     	auto factory=itemFactories.begin();
     	for (; factory != itemFactories.end(); ++factory) {
-            if ( (*factory)->hasAttribute(attribute) ) {
+            if ( (*factory)->hasAttribute(attribute, val) ) {
                 return factory;
             }
     	}

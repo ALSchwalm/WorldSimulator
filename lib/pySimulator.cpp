@@ -16,8 +16,10 @@ BOOST_PYTHON_MODULE(simulator) {
         .add_property("attributes",
                       &Item::BaseItem::getAttributes,
                       &Item::BaseItem::setAttributes)
-        .def("getClassID", &Item::BaseItem::getClassID)
-        .def("getRequiredItems", &Item::BaseItem::getRequiredItems);
+        .add_property("requiredItems",
+                      &Item::BaseItem::getRequiredItems,
+                      &Item::BaseItem::setRequiredItems)
+        .def("getClassID", &Item::BaseItem::getClassID);
 
     class_<Item::BaseContainer,
            boost::noncopyable,
@@ -32,7 +34,16 @@ BOOST_PYTHON_MODULE(simulator) {
     class_<Item::BaseWeapon,
            boost::noncopyable,
            bases<Item::BaseItem>,
-           std::shared_ptr<Item::BaseWeaponPy>>("BaseWeapon", init<std::string>());
+           std::shared_ptr<Item::BaseWeaponPy>>("BaseWeapon", init<std::string>())
+        .add_property("damageModifiers",
+                      &Item::BaseWeapon::getDamageModifiers,
+                      &Item::BaseWeapon::setDamageModifiers);
+
+    enum_<Item::DamageType>("damage_type")
+        .value("piercing", Item::DamageType::PIERCING)
+        .value("slashing", Item::DamageType::SLASHING)
+        .value("blunt", Item::DamageType::BLUNT);
+
 
     class_<Item::BaseFood,
            boost::noncopyable,

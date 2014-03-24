@@ -5,15 +5,25 @@
 
 namespace Item
 {
+    enum class DamageType
+    {
+        PIERCING,
+        SLASHING,
+        BLUNT
+    };
+
     class BaseWeapon : public virtual BaseItem
     {
     public:
         ItemType getItemType() const override {return ItemType::WEAPON;}
 
+        dict getDamageModifiers() {return damageModifiers;}
+        void setDamageModifiers(dict modifiers) {damageModifiers = modifiers;}
+
         virtual ~BaseWeapon(){}
 
     private:
-
+        dict damageModifiers;
     };
 
     class BaseWeaponPy : public BaseItemPy, public BaseWeapon

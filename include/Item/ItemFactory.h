@@ -18,9 +18,13 @@ namespace Item
 
         ItemFactory(object _pyClass) : pyClass(_pyClass) {}
 
-        bool hasAttribute(const std::string& s) const {
+        template<typename T = bool>
+        bool hasAttribute(const std::string& s, const T& val = true) const {
             dict default_attributes = extract<dict>(pyClass.attr("default_attributes"));
-            return default_attributes.has_key(s);
+            if (!default_attributes.has_key(s))
+                return false;
+            else
+                return default_attributes[s] == val;
         }
 
         ID getClassID() const {
