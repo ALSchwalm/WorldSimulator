@@ -18,42 +18,42 @@ namespace Actor
 
         //Construct father
         family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                    Profession::BAKER,
-                                                    l,
-                                                    true));
+                                                      nullptr,
+                                                      l,
+                                                      true));
         --size;
         if (size > 0)
         {
             //Construct mother
             family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                        Profession::BAKER,
-                                                        l,
-                                                        false));
+                                                          nullptr,
+                                                          l,
+                                                          false));
 
             Relationship::createASymetricRelationship(family[0],
-                                                        Relationship::HUSBAND,
-                                                        family[1],
-                                                        Relationship::WIFE);
+                                                      Relationship::HUSBAND,
+                                                      family[1],
+                                                      Relationship::WIFE);
             --size;
         }
 
         for (; size > 0; --size){
             //Construct children
             auto child = std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                      Profession::BAKER, /*TODO change to child*/
+                                                      nullptr,
                                                       l,
                                                       Utils::uniform(0, 2));
             family.push_back(child);
 
             Relationship::createASymetricRelationship(family[0],
-                                                        Relationship::FATHER,
-                                                        child,
-                                                        Relationship::CHILD);
+                                                      Relationship::FATHER,
+                                                      child,
+                                                      Relationship::CHILD);
 
             Relationship::createASymetricRelationship(family[1],
-                                                        Relationship::MOTHER,
-                                                        child,
-                                                        Relationship::CHILD);
+                                                      Relationship::MOTHER,
+                                                      child,
+                                                      Relationship::CHILD);
         }
 
         if (l)

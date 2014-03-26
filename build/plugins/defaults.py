@@ -1,10 +1,15 @@
 from simulator import *
 
+class Baker(BaseProfession):
+    def __init__(self):
+        BaseProfession.__init__(self, Baker.__name__)
+        self.skillMap = {}
+
 class Sword(BaseWeapon):
     related_items = []
     default_attributes = {}
     def __init__(self):
-        Item.__init__(self, Knife.__name__)
+        BaseWeapon.__init__(self, Knife.__name__)
         additional_attributes = {}
         self.attributes = dict(Knife.default_attributes.items() +
                                additional_attributes.items())
@@ -20,7 +25,7 @@ class Dagger(BaseWeapon):
     related_items = []
     default_attributes = {}
     def __init__(self):
-        Item.__init__(self, Dagger.__name__)
+        BaseWeapon.__init__(self, Dagger.__name__)
         additional_attributes = {}
         self.attributes = dict(Dagger.default_attributes.items() +
                                additional_attributes.items())

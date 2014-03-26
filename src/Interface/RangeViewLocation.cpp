@@ -91,7 +91,7 @@ namespace Interface {
         {
             mvwprintw(this->nameWin, i, 1, boost::lexical_cast<std::string>(i-3).c_str());
             mvwprintw(this->nameWin, i, 4, individual->getName().c_str());
-            mvwprintw(this->dataWin, i, 4, Profession::toString(individual->getProfession()->getProfessionType()).c_str());
+            mvwprintw(this->dataWin, i, 4, individual->getProfession()->getName().c_str());
             ++i;
         }
         wrefresh(this->nameWin);

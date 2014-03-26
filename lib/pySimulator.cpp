@@ -3,6 +3,8 @@
 #include "Item/Tool.h"
 #include "Item/Weapon.h"
 #include "Item/Food.h"
+#include "Skill/Skill.h"
+#include "Profession/BaseProfession.h"
 #include <boost/python.hpp>
 #include <memory>
 #include <string>
@@ -49,5 +51,23 @@ BOOST_PYTHON_MODULE(simulator) {
            boost::noncopyable,
            bases<Item::BaseItem>,
            std::shared_ptr<Item::BaseFoodPy>>("BaseFood", init<std::string>());
+
+//----- Professions ------------
+
+    enum_<Skill::SkillType>("skill_type")
+        .value("marksmanship", Skill::SkillType::MARKSMANSHIP)
+        .value("blacksmithing",Skill::SkillType::BLACKSMITHING)
+        .value("woodworking", Skill::SkillType::WOODWORKING)
+        .value("baking", Skill::SkillType::BAKING)
+        .value("cooking", Skill::SkillType::COOKING)
+        .value("farming", Skill::SkillType::FARMING);
+
+    class_<Profession::BaseProfession,
+           boost::noncopyable,
+           std::shared_ptr<Profession::BaseProfessionPy>>("BaseProfession",
+                                                          init<std::string>())
+        .add_property("skillModifiers",
+                      &Profession::BaseProfession::getSkillModifiers,
+                      &Profession::BaseProfession::setSkillModifiers);
 
 }

@@ -9,7 +9,7 @@
 
 namespace Skill
 {
-    enum skills
+    enum class SkillType
     {
         MARKSMANSHIP,
         BLACKSMITHING,
@@ -21,7 +21,7 @@ namespace Skill
         NUM_OF_SKILLS
     };
 
-    typedef std::map<Skill::skills, float> skillMap;
+    typedef std::map<Skill::SkillType, float> skillMap;
 
 }
 

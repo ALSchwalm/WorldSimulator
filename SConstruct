@@ -7,8 +7,8 @@ import fnmatch
 import glob
 from subprocess import Popen
 
-UNITTEST = ARGUMENTS.get("unittest", True)
-SHARED_LIB = ARGUMENTS.get("lib", True)
+UNITTEST = int(ARGUMENTS.get("unittest", True))
+SHARED_LIB = int(ARGUMENTS.get("lib", True))
 CXX = ARGUMENTS.get('CXX', 'g++')
 BIN_NAME = "simulator"
 BUILD_PATH = "build/"
@@ -46,7 +46,7 @@ if SHARED_LIB:
    lib_env.SharedLibrary(target=BUILD_PATH + LIB_NAME,
                          source = lib_src_list,
                          SHLIBPREFIX='')
-
+print("Unittest: ", UNITTEST)
 if UNITTEST:
    test_src_list = list(src_list)
    test_src_list.remove("src/main.cpp")

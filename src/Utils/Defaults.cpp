@@ -24,10 +24,11 @@ namespace Utils
         list classes = extract<list>(eval("[obj for (name, obj) "
                                           "in inspect.getmembers(sys.modules[__name__]) "
                                           "if inspect.isclass(obj) "
+                                          "and issubclass(obj, BaseItem) "
                                           "and obj not in ["
-                                          "BaseItem, BaseContainer,"
-                                          "BaseWeapon, BaseFood, "
-                                          "BaseTool, "
+                                             "BaseItem, BaseContainer,"
+                                             "BaseWeapon, BaseFood, "
+                                             "BaseTool, "
                                           "]]", main_namespace));
 
         for(unsigned int i=0; i < len(classes); ++i) {

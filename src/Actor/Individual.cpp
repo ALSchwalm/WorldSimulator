@@ -9,15 +9,15 @@ namespace Actor
 {
 
     Individual::Individual(std::string _name,
-                Profession::ProfessionType p,
-                Location_ptr _location,
-                bool _isMale) :
-                    profession(Profession::createProfessionFromType(p)),
-                    age(0),
-                    name(_name),
-                    isMale(_isMale),
-                    currentLocation(_location),
-                    goalTree()
+                           Profession::Profession_ptr p,
+                           Location_ptr _location,
+                           bool _isMale) :
+        profession(p),
+        age(0),
+        name(_name),
+        isMale(_isMale),
+        currentLocation(_location),
+        goalTree()
     {
         stats[HEALTH] =         1;
         stats[SPEED] =          1;
@@ -28,15 +28,7 @@ namespace Actor
         stats[FATIGUE] =        0;
     }
 
-
-    std::vector<Item::Item_ptr> Individual::getInitialItems()
-    {
-        std::vector<Item::Item_ptr> items;
-        profession->addInitialItems(items);
-        return items;
-    }
-
-    float Individual::getSkillLevel(Skill::skills s)
+    float Individual::getSkillLevel(Skill::SkillType s)
     {
         try {
             /*

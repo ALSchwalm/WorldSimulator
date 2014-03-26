@@ -1,31 +1,50 @@
 #ifndef BASEPROFESSION_H_
 #define BASEPROFESSION_H_
 
-#include "Profession/Profession.h"
 #include "Skill/Skill.h"
+#include "Item/BaseItem.h"
+#include <boost/python.hpp>
 #include <memory>
 
 namespace Profession
 {
+    using namespace boost::python;
 
     class BaseProfession
     {
     public:
-        virtual ProfessionType getProfessionType()=0;
-        virtual void addInitialItems(std::vector<Item::Item_ptr> &)=0;
-        float getSkillLevel(Skill::skills s) noexcept;
+        float getSkillLevel(Skill::SkillType s);
+
+        dict getSkillModifiers() {return skillModifiers;}
+        void setSkillModifiers(dict modifiers) {skillModifiers = modifiers;}
+
+        const std::string& getName() const {return name;}
 
         virtual ~BaseProfession(){}
+
     protected:
-        BaseProfession(){}
+        BaseProfession(std::string _name) : name(_name) {}
+        BaseProfession() : BaseProfession("Unnamed Profession") {}
 
-        bool setSkill(Skill::skills s, const float f);
-        Skill::skillMap skillMap;
-
+        bool setSkill(Skill::SkillType s, const float f);
+        dict skillModifiers;
+        const std::string name;
     };
 
     typedef std::shared_ptr<BaseProfession> Profession_ptr;
 
+
+    class BaseProfessionPy : public virtual BaseProfession
+    {
+    public:
+        BaseProfessionPy(PyObject *p) : self(p) {}
+        BaseProfessionPy(PyObject *p, std::string _name) :
+            BaseProfession(_name), self(p) {}
+
+    protected:
+        PyObject *self;
+
+    };
 }
 
 #endif

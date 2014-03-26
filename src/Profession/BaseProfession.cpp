@@ -3,20 +3,19 @@
 
 namespace Profession
 {
-    float BaseProfession::getSkillLevel(Skill::skills s) noexcept
+    float BaseProfession::getSkillLevel(Skill::SkillType s)
     {
         try {
-            return skillMap.at(s);
+            return extract<float>(skillModifiers[s]);
         }
-
-        catch (std::exception& e){
+        catch( error_already_set ) {
             return 0.0f;
         }
     }
 
-    bool BaseProfession::setSkill(Skill::skills s, const float f)
+    bool BaseProfession::setSkill(Skill::SkillType s, const float f)
     {
-        skillMap[s] = f;
+        skillModifiers[s] = f;
         return true;
     }
 

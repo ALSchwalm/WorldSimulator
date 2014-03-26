@@ -1,4 +1,4 @@
-#include "Profession/SimpleProfession.h"
+#include "Profession/BaseProfession.h"
 #include "Item/Food.h"
 #include "Actor/ActorUtils.h"
 #include "Action/Task.h"
