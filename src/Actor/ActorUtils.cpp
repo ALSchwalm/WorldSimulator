@@ -1,6 +1,7 @@
 
 #include "Actor/ActorUtils.h"
 #include "Relationship/Relationship.h"
+#include "Profession/ProfessionFactory.h"
 #include "Utils/Markov.h"
 #include "Utils/Utils.h"
 #include <memory>
@@ -18,7 +19,7 @@ namespace Actor
 
         //Construct father
         family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                      nullptr,
+                                                      Profession::getRandomProfession(),
                                                       l,
                                                       true));
         --size;
@@ -26,7 +27,7 @@ namespace Actor
         {
             //Construct mother
             family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                          nullptr,
+                                                          Profession::getRandomProfession(),
                                                           l,
                                                           false));
 
@@ -40,7 +41,7 @@ namespace Actor
         for (; size > 0; --size){
             //Construct children
             auto child = std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                      nullptr,
+                                                      Profession::getRandomProfession(),
                                                       l,
                                                       Utils::uniform(0, 2));
             family.push_back(child);
