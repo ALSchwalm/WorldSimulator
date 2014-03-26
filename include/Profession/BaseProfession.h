@@ -18,6 +18,8 @@ namespace Profession
         dict getSkillModifiers() {return skillModifiers;}
         void setSkillModifiers(dict modifiers) {skillModifiers = modifiers;}
 
+        virtual list getRelatedItems()=0;
+
         const std::string& getName() const {return name;}
 
         virtual ~BaseProfession(){}
@@ -37,13 +39,18 @@ namespace Profession
     class BaseProfessionPy : public virtual BaseProfession
     {
     public:
-        BaseProfessionPy(PyObject *p) : self(p) {}
+        BaseProfessionPy(PyObject *p) : self(p), obj(handle<>(borrowed(self))) {}
         BaseProfessionPy(PyObject *p, std::string _name) :
-            BaseProfession(_name), self(p) {}
+            BaseProfession(_name), self(p),
+            obj(handle<>(borrowed(self))) {}
+
+        list getRelatedItems() override {
+            return extract<list>(obj.attr("related_items"));
+        }
 
     protected:
         PyObject *self;
-
+        object obj;
     };
 }
 

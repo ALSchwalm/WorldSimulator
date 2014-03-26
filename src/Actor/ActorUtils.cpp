@@ -9,7 +9,8 @@
 namespace Actor
 {
 
-    const std::vector<Individual_ptr> createFamily(unsigned int size, Location::Location_ptr l)
+    const std::vector<Individual_ptr> createFamily(unsigned int size,
+                                                   Location::Location_ptr location)
     {
         std::vector<Individual_ptr> family;
         if (size==0)
@@ -19,7 +20,7 @@ namespace Actor
 
         //Construct father
         family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                      l,
+                                                      location,
                                                       Profession::getRandomProfession(),
                                                       true));
         --size;
@@ -27,7 +28,7 @@ namespace Actor
         {
             //Construct mother
             family.push_back(std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                          l,
+                                                          location,
                                                           Profession::getRandomProfession(),
                                                           false));
 
@@ -41,7 +42,7 @@ namespace Actor
         for (; size > 0; --size){
             //Construct children
             auto child = std::make_shared<Individual>(Utils::Markov::getInstance().getIndividualName(familyName),
-                                                      l,
+                                                      location,
                                                       Profession::getRandomProfession(),
                                                       Utils::uniform(0, 2));
             family.push_back(child);
@@ -57,11 +58,11 @@ namespace Actor
                                                       Relationship::CHILD);
         }
 
-        if (l)
+        if (location)
         {
             for (auto member : family)
             {
-                l->addIndividual(member);
+                location->addIndividual(member);
             }
         }
 

@@ -1,17 +1,11 @@
 from simulator import *
 
-class Baker(BaseProfession):
-    def __init__(self):
-        BaseProfession.__init__(self, Baker.__name__)
-        self.skillMap = {}
-
 class Sword(BaseWeapon):
-    related_items = []
     default_attributes = {}
     def __init__(self):
-        BaseWeapon.__init__(self, Knife.__name__)
+        BaseWeapon.__init__(self, Sword.__name__)
         additional_attributes = {}
-        self.attributes = dict(Knife.default_attributes.items() +
+        self.attributes = dict(Sword.default_attributes.items() +
                                additional_attributes.items())
 
         self.requiredItems = []
@@ -21,8 +15,13 @@ class Sword(BaseWeapon):
             damage_type.blunt    : 0.5
         }
 
+class Baker(BaseProfession):
+    related_items = [Sword]
+    def __init__(self):
+        BaseProfession.__init__(self, Baker.__name__)
+        self.skillMap = {}
+
 class Dagger(BaseWeapon):
-    related_items = []
     default_attributes = {}
     def __init__(self):
         BaseWeapon.__init__(self, Dagger.__name__)

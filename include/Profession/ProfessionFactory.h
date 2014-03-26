@@ -15,6 +15,10 @@ namespace Profession
             return extract<std::shared_ptr<BaseProfession>>(pyClass());
         }
 
+        list getRelatedItems() {
+            return extract<list>(pyClass.attr("related_items"));
+        }
+
         ProfessionFactory(object _pyClass) : pyClass(_pyClass) {}
 
     private:
