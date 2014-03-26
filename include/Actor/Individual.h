@@ -1,7 +1,7 @@
 #ifndef BASEINDIVIDUAL_H_
 #define BASEINDIVIDUAL_H_
 
-#include "Profession/BaseProfession.h"
+#include "Profession/ProfessionUtils.h"
 #include "Event/Event.h"
 #include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
@@ -52,9 +52,9 @@ namespace Actor
 
     public:
         Individual(std::string _name,
-                    Profession::Profession_ptr p,
-                    Location_ptr _location = nullptr,
-                    bool _isMale=true);
+                   Location_ptr _location = nullptr,
+                   Profession::Profession_ptr p = Profession::getRandomProfession(),
+                   bool _isMale = true);
 
         Individual& operator=(const Individual&) = delete;
         Individual(const Individual&) = delete;

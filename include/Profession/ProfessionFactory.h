@@ -22,8 +22,6 @@ namespace Profession
     };
 
     extern std::vector<std::unique_ptr<ProfessionFactory>> professionFactories;
-
-    Profession_ptr getRandomProfession();
 }
 
 #endif

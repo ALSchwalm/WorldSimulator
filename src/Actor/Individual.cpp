@@ -1,5 +1,5 @@
 #include "Actor/Individual.h"
-#include "Profession/BaseProfession.h"
+#include "Profession/ProfessionFactory.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
 #include <algorithm>
@@ -9,8 +9,8 @@ namespace Actor
 {
 
     Individual::Individual(std::string _name,
-                           Profession::Profession_ptr p,
                            Location_ptr _location,
+                           Profession::Profession_ptr p,
                            bool _isMale) :
         profession(p),
         age(0),

@@ -1,4 +1,3 @@
-#include "Profession/BaseProfession.h"
 #include "Item/Food.h"
 #include "Actor/ActorUtils.h"
 #include "Action/Task.h"
@@ -20,7 +19,7 @@ BOOST_AUTO_TEST_CASE(GetFood)
 
     Location::connectLocations(location, location2);
 
-    auto individual = std::make_shared<Actor::Individual>("TestPerson", Profession::BAKER, location, false);
+    auto individual = std::make_shared<Actor::Individual>("TestPerson", location);
 
     auto item = std::make_shared<Test::ItemImpl<Item::BaseFood>>("1");
     item->setAttribute("edible", true);
