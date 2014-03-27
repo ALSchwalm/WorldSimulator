@@ -15,12 +15,6 @@ class Sword(BaseWeapon):
             damage_type.blunt    : 0.5
         }
 
-class Baker(BaseProfession):
-    related_items = [Sword]
-    def __init__(self):
-        BaseProfession.__init__(self, Baker.__name__)
-        self.skillMap = {}
-
 class Dagger(BaseWeapon):
     default_attributes = {}
     def __init__(self):
