@@ -22,9 +22,6 @@ namespace Action
 
 namespace Event
 {
-
-    typedef std::shared_ptr<BaseEvent> Event_ptr;
-
     class BaseEvent
     {
     public:
@@ -69,6 +66,9 @@ namespace Event
          */
         Action::Task* sourceTask;
     };
+
+    typedef std::shared_ptr<BaseEvent> Event_ptr;
+    typedef std::vector<Event_ptr> EventHistory;
 
 }
 #endif /* EVENT_H_ */

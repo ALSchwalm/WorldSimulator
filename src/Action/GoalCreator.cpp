@@ -1,5 +1,6 @@
 
 #include "Action/GoalCreator.h"
+#include "Action/Task.h"
 #include "Event/MoveEvent.h"
 #include "Event/PickupEvent.h"
 #include <memory>

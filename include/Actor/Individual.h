@@ -5,6 +5,7 @@
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
 #include "Actor/Disease.h"
+#include "Event/BaseEvent.h"
 #include <map>
 #include <memory>
 #include <array>
@@ -14,11 +15,6 @@ using std::shared_ptr;
 namespace Skill
 {
     enum class SkillType: int;
-}
-
-namespace Event
-{
-    class BaseEvent;
 }
 
 namespace Item
@@ -89,7 +85,7 @@ namespace Actor
         const Skill::skillMap& getSkillMap() {return skillMap;}
         float getSkillLevel(Skill::SkillType s);
 
-        void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
+        void addEvent(Event::Event_ptr e) {history.push_back(e);}
         void addItem(Item::Item_ptr i) {items.push_back(i);}
 
         void addRelationship(Location_ptr location, Relationship::RelationshipType rel);

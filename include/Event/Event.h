@@ -6,8 +6,6 @@
 
 namespace Event
 {
-    class BaseEvent;
-
     enum EventType
     {
         BIRTH,
@@ -20,8 +18,5 @@ namespace Event
         EVENT_ERROR,
         NUM_OF_EVENTS
     };
-
-    typedef std::vector<std::shared_ptr<BaseEvent>> EventHistory;
-
 }
 #endif
