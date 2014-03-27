@@ -61,7 +61,7 @@ namespace Item
         BaseItem(std::string _name) : name(_name) {}
         BaseItem() : BaseItem("Unnamed Item") {}
 
-        std::string name;
+        const std::string name;
         Owner::Owner owner;
         dict attributes;
         list requiredItems;

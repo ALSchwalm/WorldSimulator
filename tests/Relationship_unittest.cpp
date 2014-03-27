@@ -1,5 +1,4 @@
 #include "Actor/Individual.h"
-#include "Profession/SimpleProfession.h"
 #include "Location/Village.h"
 #include "Relationship/Relationship.h"
 #include <boost/test/unit_test.hpp>
@@ -11,8 +10,8 @@ BOOST_AUTO_TEST_SUITE(Relationship)
 BOOST_AUTO_TEST_CASE(Relationships)
 {
 
-	auto individual_one = std::make_shared<Actor::Individual>("Person1", Profession::BAKER);
-	auto individual_two = std::make_shared<Actor::Individual>("Person2", Profession::BAKER);
+	auto individual_one = std::make_shared<Actor::Individual>("Person1");
+	auto individual_two = std::make_shared<Actor::Individual>("Person2");
 	auto location = std::make_shared<Location::Village>("Village");
 
 	individual_one->addRelationship(location, Relationship::RelationshipType::BIRTHPLACE);

@@ -33,11 +33,11 @@ namespace WorldGen
 
                 for (auto individual : location->getIndividuals())
                 {
-                    for (auto item : individual->getInitialItems())
+                    /*for (auto item : individual->getInitialItems())
                     {
                         item->setOwner(individual);
                         location->addItem(item);
-                    }
+                        }*/
                 }
 
 
@@ -46,5 +46,3 @@ namespace WorldGen
         }
     }
 }
-
-

@@ -2,7 +2,6 @@
 #include "Item/Weapon.h"
 #include "Item/Tool.h"
 #include "Item/Container.h"
-#include "Profession/SimpleProfession.h"
 #include "Item/ItemUtils.h"
 #include <boost/test/unit_test.hpp>
 #include <memory>

@@ -1,12 +1,11 @@
 from simulator import *
 
 class Sword(BaseWeapon):
-    related_items = []
     default_attributes = {}
     def __init__(self):
-        Item.__init__(self, Knife.__name__)
+        BaseWeapon.__init__(self, Sword.__name__)
         additional_attributes = {}
-        self.attributes = dict(Knife.default_attributes.items() +
+        self.attributes = dict(Sword.default_attributes.items() +
                                additional_attributes.items())
 
         self.requiredItems = []
@@ -17,10 +16,9 @@ class Sword(BaseWeapon):
         }
 
 class Dagger(BaseWeapon):
-    related_items = []
     default_attributes = {}
     def __init__(self):
-        Item.__init__(self, Dagger.__name__)
+        BaseWeapon.__init__(self, Dagger.__name__)
         additional_attributes = {}
         self.attributes = dict(Dagger.default_attributes.items() +
                                additional_attributes.items())

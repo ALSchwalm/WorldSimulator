@@ -2,6 +2,7 @@
 #define CONVERSION_H
 
 #include "Item/BaseItem.h"
+#include "Profession/BaseProfession.h"
 #include <boost/python/handle.hpp>
 #include <boost/python/converter/shared_ptr_deleter.hpp>
 #include <boost/python/converter/from_python.hpp>
@@ -52,15 +53,22 @@ struct std_shared_ptr_from_python
 
 namespace Utils
 {
-    using namespace boost::python;
-    using namespace Item;
-
     void setupConversions() {
+        using namespace boost::python;
+        using namespace Item;
+        using namespace Profession;
+
         ///Conversion   shared_ptr<BaseItem> <-> PyObject
         converter::std_shared_ptr_from_python<BaseItem>();
         objects::class_value_wrapper<
             std::shared_ptr<BaseItem>
             , objects::make_ptr_instance<BaseItem, objects::pointer_holder<std::shared_ptr<BaseItem>,BaseItem> >
+            >();
+
+        converter::std_shared_ptr_from_python<BaseProfession>();
+        objects::class_value_wrapper<
+            std::shared_ptr<BaseProfession>
+            , objects::make_ptr_instance<BaseProfession, objects::pointer_holder<std::shared_ptr<BaseProfession>,BaseProfession> >
             >();
     }
 }

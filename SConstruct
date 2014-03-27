@@ -7,8 +7,8 @@ import fnmatch
 import glob
 from subprocess import Popen
 
-UNITTEST = ARGUMENTS.get("unittest", True)
-SHARED_LIB = ARGUMENTS.get("lib", True)
+UNITTEST = int(ARGUMENTS.get("unittest", True))
+SHARED_LIB = int(ARGUMENTS.get("lib", True))
 CXX = ARGUMENTS.get('CXX', 'g++')
 BIN_NAME = "simulator"
 BUILD_PATH = "build/"
@@ -19,7 +19,8 @@ env.Append(CXXFLAGS=['-Wall', '-Wextra', '-std=c++11', '-DBOOST_LOG_DYN_LINK=1']
 
 env.Append(LIBS = ['python2.7', 'boost_python',
                    'boost_system', 'boost_log_setup', 'boost_log',
-                   'pthread', 'boost_date_time', 'boost_thread'])
+                   'pthread', 'boost_date_time', 'boost_thread',
+                   'boost_filesystem'])
 
 if platform.system() == "Windows":
    env["LIBS"] += ["pdcurses"]

@@ -1,7 +1,7 @@
 #ifndef BASEINDIVIDUAL_H_
 #define BASEINDIVIDUAL_H_
 
-#include "Profession/Profession.h"
+#include "Profession/ProfessionUtils.h"
 #include "Event/Event.h"
 #include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
@@ -52,9 +52,9 @@ namespace Actor
 
     public:
         Individual(std::string _name,
-                    Profession::ProfessionType p,
-                    Location_ptr _location = nullptr,
-                    bool _isMale=true);
+                   Location_ptr _location = nullptr,
+                   Profession::Profession_ptr p = Profession::getRandomProfession(),
+                   bool _isMale = true);
 
         Individual& operator=(const Individual&) = delete;
         Individual(const Individual&) = delete;
@@ -76,7 +76,7 @@ namespace Actor
 
         //TODO decide whether this should be added with the profession skill
         const Skill::skillMap& getSkillMap() {return skillMap;}
-        float getSkillLevel(Skill::skills s);
+        float getSkillLevel(Skill::SkillType s);
 
         void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
         void addItem(Item::Item_ptr i) {items.push_back(i);}
@@ -86,12 +86,10 @@ namespace Actor
 
         void setAttribute(std::string s) {attributes[s] = true;}
         bool hasAttribute(std::string s) const {return attributes.find(s) != attributes.end();}
-        void setSkill(Skill::skills s, float f){skillMap[s] = f;}
+        void setSkill(Skill::SkillType s, float f){skillMap[s] = f;}
         bool removeItem(Item::Item_ptr i);
 
         unsigned int calculatePriority(Individual_ptr, Action::GoalType);
-
-        std::vector<Item::Item_ptr> getInitialItems();
 
     };
 
