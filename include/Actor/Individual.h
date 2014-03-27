@@ -2,19 +2,30 @@
 #define BASEINDIVIDUAL_H_
 
 #include "Profession/ProfessionUtils.h"
-#include "Event/Event.h"
-#include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
 #include "Actor/Disease.h"
-#include "Skill/Skill.h"
-#include <string>
 #include <map>
-#include <utility>
 #include <memory>
 #include <array>
 
 using std::shared_ptr;
+
+namespace Skill
+{
+    enum class SkillType: int;
+}
+
+namespace Event
+{
+    class BaseEvent;
+}
+
+namespace Item
+{
+    class BaseItem;
+    typedef shared_ptr<BaseItem> Item_ptr;
+}
 
 namespace Location
 {
