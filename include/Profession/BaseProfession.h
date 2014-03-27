@@ -39,18 +39,17 @@ namespace Profession
     class BaseProfessionPy : public virtual BaseProfession
     {
     public:
-        BaseProfessionPy(PyObject *p) : self(p), obj(handle<>(borrowed(self))) {}
+        BaseProfessionPy(PyObject *p) : self(p) {}
         BaseProfessionPy(PyObject *p, std::string _name) :
-            BaseProfession(_name), self(p),
-            obj(handle<>(borrowed(self))) {}
+            BaseProfession(_name), self(p) {}
 
         list getRelatedItems() override {
+            object obj(handle<>(borrowed(self)));
             return extract<list>(obj.attr("related_items"));
         }
 
     protected:
         PyObject *self;
-        object obj;
     };
 }
 
