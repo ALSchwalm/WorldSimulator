@@ -9,6 +9,7 @@
 
 #include "Interface/View.h"
 #include "Location/Location.h"
+#include "Actor/Individual.h"
 #include <memory>
 #include <boost/lexical_cast.hpp>
 

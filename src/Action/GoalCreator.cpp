@@ -1,11 +1,13 @@
 
 #include "Action/GoalCreator.h"
 #include "Action/Task.h"
+#include "Actor/Individual.h"
 #include "Event/MoveEvent.h"
 #include "Event/PickupEvent.h"
 #include <memory>
 #include <algorithm>
 #include <unordered_set>
+#include <set>
 
 namespace Action
 {
@@ -106,9 +108,9 @@ std::vector<Task_ptr> getItem(Actor::Individual_ptr individual,
 
 //Returns an empty vector if unable to find item
 std::vector<Task_ptr> findItemFromAttributes(Actor::Individual_ptr individual,
-        std::vector<std::string> attributeList,
-        unsigned int maxDistance,
-        Goal_ptr goal)
+                                             std::vector<std::string> attributeList,
+                                             unsigned int maxDistance,
+                                             Goal_ptr goal)
 {
 
     auto startLocation = individual->getCurrentLocation();

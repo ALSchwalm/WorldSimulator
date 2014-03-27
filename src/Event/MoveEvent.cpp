@@ -1,5 +1,6 @@
 #include "Event/MoveEvent.h"
 #include "Action/Task.h"
+#include "Actor/Individual.h"
 
 namespace Event {
     MoveEvent::MoveEvent(

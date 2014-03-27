@@ -1,4 +1,5 @@
 #include "Interface/RangeView.h"
+#include "Actor/Individual.h"
 #include <boost/lexical_cast.hpp>
 
 namespace Interface {
