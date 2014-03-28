@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(GetFood)
     item->setAttribute("edible", true);
     location2->addItem(item);
 
-    Actor::addGoal<Action::GET_FOOD>(individual, 0);
+    Actor::addGoal<Action::Type::GET_FOOD>(individual, 0);
 
     BOOST_CHECK(Event::EventQueue::getInstance().getNextEvent() != nullptr);
     BOOST_CHECK(Event::EventQueue::getInstance().getNextEvent()->getEventType() == Event::EventType::MOVE);

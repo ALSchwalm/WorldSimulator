@@ -16,7 +16,8 @@ namespace Action
 
 struct distance
 {
-    bool operator() ( const Location::Location_ptr& lhs, const Location::Location_ptr& rhs) const
+    bool operator() ( const Location::Location_ptr& lhs,
+                      const Location::Location_ptr& rhs) const
     {
         return lhs->distance < rhs->distance;
     }
@@ -50,9 +51,12 @@ Item::Item_ptr getItemFromAttributes(Location::Location_ptr location,
 
 
 template<>
-Goal_ptr createGoal<GET_FOOD>(Actor::Individual_ptr individual, unsigned int priority)
+Goal_ptr createGoal<GoalType::GET_FOOD>(Actor::Individual_ptr individual,
+                                        unsigned int priority)
 {
-    auto currentGoal = std::make_shared<Action::Goal>(GET_FOOD, individual->getGoalTree(), priority);
+    auto currentGoal = std::make_shared<Action::Goal>(GoalType::GET_FOOD,
+                                                      individual->getGoalTree(),
+                                                      priority);
     auto get_food = getFood(individual, currentGoal);
     if (get_food.size() == 0)
         return nullptr;
@@ -61,9 +65,13 @@ Goal_ptr createGoal<GET_FOOD>(Actor::Individual_ptr individual, unsigned int pri
 }
 
 template<>
-Goal_ptr createGoal<GET_ITEM>(Actor::Individual_ptr individual, unsigned int priority, Item::Item_ptr item)
+Goal_ptr createGoal<GoalType::GET_ITEM>(Actor::Individual_ptr individual,
+                                        unsigned int priority,
+                                        Item::Item_ptr item)
 {
-    auto currentGoal = std::make_shared<Action::Goal>(GET_ITEM, individual->getGoalTree(), priority);
+    auto currentGoal = std::make_shared<Action::Goal>(GoalType::GET_ITEM,
+                                                      individual->getGoalTree(),
+                                                      priority);
     auto get_item = getItem(individual, item, currentGoal);
     if (get_item.size() == 0)
         return nullptr;
@@ -77,7 +85,9 @@ std::vector<Task_ptr> getFood(Actor::Individual_ptr individual, Goal_ptr goal)
     std::vector<std::string> attributeList;
     attributeList.push_back("edible");
 
-    std::vector<Action::Task_ptr> taskList = findItemFromAttributes(individual, attributeList, 5, goal);
+    std::vector<Action::Task_ptr> taskList = findItemFromAttributes(individual,
+                                                                    attributeList,
+                                                                    5, goal);
     std::reverse(taskList.begin(), taskList.end());
     return taskList;
 }
@@ -100,7 +110,8 @@ std::vector<Task_ptr> getItem(Actor::Individual_ptr individual,
         taskList.push_back(std::make_shared<Action::Task>(newEvent, goal));
     }
 
-    auto newEvent = std::make_shared<Event::PickupEvent>(search_result.first, individual);
+    auto newEvent = std::make_shared<Event::PickupEvent>(search_result.first,
+                                                         individual);
     taskList.push_back(std::make_shared<Action::Task>(newEvent, goal));
 
     return taskList;
