@@ -2,19 +2,26 @@
 #define BASEINDIVIDUAL_H_
 
 #include "Profession/ProfessionUtils.h"
-#include "Event/Event.h"
-#include "Item/BaseItem.h"
 #include "Action/GoalTree.h"
 #include "Relationship/Relationship.h"
 #include "Actor/Disease.h"
-#include "Skill/Skill.h"
-#include <string>
+#include "Event/BaseEvent.h"
 #include <map>
-#include <utility>
 #include <memory>
 #include <array>
 
 using std::shared_ptr;
+
+namespace Skill
+{
+    enum class SkillType: int;
+}
+
+namespace Item
+{
+    class BaseItem;
+    typedef shared_ptr<BaseItem> Item_ptr;
+}
 
 namespace Location
 {
@@ -78,7 +85,7 @@ namespace Actor
         const Skill::skillMap& getSkillMap() {return skillMap;}
         float getSkillLevel(Skill::SkillType s);
 
-        void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
+        void addEvent(Event::Event_ptr e) {history.push_back(e);}
         void addItem(Item::Item_ptr i) {items.push_back(i);}
 
         void addRelationship(Location_ptr location, Relationship::RelationshipType rel);

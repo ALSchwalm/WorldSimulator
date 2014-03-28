@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <memory>
-#include "Action/Task.h"
 #include "Item/BaseItem.h"
 
 namespace Actor
@@ -20,13 +19,15 @@ namespace Action
     typedef std::shared_ptr<Task> Task_ptr;
 
 
-    enum GoalType
+    enum class GoalType
     {
         GET_FOOD,
         GET_ITEM,
 
         NUM_OF_GOALS
     };
+
+    using Type = GoalType;
 
     class Goal
     {

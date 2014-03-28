@@ -1,24 +1,21 @@
-/*
- * Location.h
- *
- *  Created on: Mar 4, 2013
- *      Author: Adam
- */
-
 #ifndef BASELOCATION_H_
 #define BASELOCATION_H_
 
-#include "Actor/Individual.h"
-#include "Event/Event.h"
+#include "Event/BaseEvent.h"
 #include "Item/BaseItem.h"
-#include <memory>
 #include <unordered_set>
+#include <vector>
+#include <map>
 #include <cassert>
+
+namespace Actor
+{
+    class Individual;
+    using Individual_ptr = std::shared_ptr<Individual>;
+}
 
 namespace Location
 {
-    typedef std::shared_ptr<BaseLocation> Location_ptr;
-
     enum LocationType
     {
         VILLAGE,
@@ -50,6 +47,8 @@ namespace Location
 
     class BaseLocation
     {
+    protected:
+        typedef std::shared_ptr<BaseLocation> Location_ptr;
     public:
         virtual ~BaseLocation(){};
 
@@ -60,7 +59,7 @@ namespace Location
         virtual void setAttribute(std::string s, bool value=true) {attributes[s] = value;}
         bool hasAttribute(const std::string& s) const;
 
-        const Actor::IndividualList& getIndividuals() {return individuals;}
+        const std::vector<Actor::Individual_ptr>& getIndividuals() {return individuals;}
         const Item::ItemList& getItems() {return items;}
         const Event::EventHistory & getHistory(){return history;}
         const std::unordered_set<Location_ptr>& getLocations() {return locations;}
@@ -68,21 +67,22 @@ namespace Location
         const std::unordered_set<Location_ptr> getLocationsByType(LocationType);
 
 
-        void addEvent(shared_ptr<Event::BaseEvent> e) {history.push_back(e);}
+        void addEvent(Event::Event_ptr e) {history.push_back(e);}
         //Typically, locations are wrapped in shared_ptr so add<Type> is more appropriate
         virtual void addItem(Item::Item_ptr i) { items.push_back(i); }
         bool removeItem(Item::Item_ptr i);
 
         virtual void addIndividual(Actor::Individual_ptr i){individuals.push_back(i);}
 
-        void addLocation(Location::Location_ptr l);
-        void removeLocation(Location::Location_ptr l);
+        void addLocation(Location_ptr l);
+        void removeLocation(Location_ptr l);
 
         //FIXME These should only be used by GoalCreator
         Location_ptr cameFrom;
         unsigned int distance;
 
     protected:
+
         BaseLocation(std::string _name) : distance(0), name(_name) {}
         BaseLocation(std::string _name, std::map<std::string, bool> _attributes) :
         	name(_name),
@@ -103,8 +103,9 @@ namespace Location
         std::vector<Actor::Individual_ptr> individuals;
         std::vector<Item::Item_ptr> items;
 
-
     };
+
+    typedef std::shared_ptr<BaseLocation> Location_ptr;
 
 } /* namespace Location */
 #endif /* LOCATION_H_ */

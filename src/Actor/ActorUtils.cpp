@@ -1,5 +1,6 @@
 
 #include "Actor/ActorUtils.h"
+#include "Location/BaseLocation.h"
 #include "Relationship/Relationship.h"
 #include "Profession/ProfessionUtils.h"
 #include "Utils/Markov.h"

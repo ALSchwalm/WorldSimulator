@@ -1,16 +1,20 @@
-/*
- * BirthEvent.h
- *
- *  Created on: Mar 2, 2013
- *      Author: Adam
- */
-
 #ifndef BIRTHEVENT_H_
 #define BIRTHEVENT_H_
 
 #include <Event/Event.h>
 #include <Event/BaseEvent.h>
-#include <Location/BaseLocation.h>
+
+namespace Location
+{
+    class BaseLocation;
+    using Location_ptr = std::shared_ptr<BaseLocation>;
+}
+
+namespace Actor
+{
+    class Individual;
+    using Individual_ptr = std::shared_ptr<Individual>;
+}
 
 namespace Event
 {

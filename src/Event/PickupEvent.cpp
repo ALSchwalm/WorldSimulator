@@ -1,5 +1,6 @@
 #include "Event/PickupEvent.h"
 #include "Item/ItemManager.h"
+#include "Action/Task.h"
 
 namespace Event {
     PickupEvent::PickupEvent(Item::Item_ptr _item, Actor::Individual_ptr _individual) :

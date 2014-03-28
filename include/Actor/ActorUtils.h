@@ -3,9 +3,14 @@
 #define ACTORUTILS_H_
 
 #include "Actor/Individual.h"
-#include "Location/BaseLocation.h"
 #include <vector>
-#include <utility>
+#include <memory>
+
+namespace Location
+{
+    class BaseLocation;
+    typedef std::shared_ptr<BaseLocation> Location_ptr;
+}
 
 namespace Actor
 {

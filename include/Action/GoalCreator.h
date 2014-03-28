@@ -1,7 +1,6 @@
 #ifndef GOALCREATOR_H_
 #define GOALCREATOR_H_
 
-#include "Action/Goal.h"
 #include <memory>
 
 namespace Actor
@@ -19,6 +18,9 @@ namespace Location
 
 namespace Action
 {
+    enum class GoalType;
+    class Goal;
+    typedef std::shared_ptr<Goal> Goal_ptr;
 
     namespace GoalCreator
     {

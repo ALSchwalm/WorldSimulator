@@ -1,12 +1,8 @@
-/*
- * BirthEvent.cpp
- *
- *  Created on: Mar 2, 2013
- *      Author: Adam
- */
-
 #include "Event/BirthEvent.h"
+#include "Action/Task.h"
 #include "Relationship/Relationship.h"
+#include "Actor/Individual.h"
+#include "Location/BaseLocation.h"
 
 namespace Event {
     BirthEvent::BirthEvent(

@@ -28,16 +28,8 @@ void World::addItem(Item::Item_ptr)
 {
     throw(std::runtime_error("Attempt to add item to 'world' instance."));
 }
-void World::operator+=(Item::Item_ptr)
-{
-    throw(std::runtime_error("Attempt to add item to 'world' instance."));
-}
-void World::addIndividual(Actor::Individual_ptr)
-{
-    throw(std::runtime_error("Attempt to add individual to 'world' instance."));
-}
 
-void World::operator+=(Actor::Individual_ptr)
+void World::addIndividual(Actor::Individual_ptr)
 {
     throw(std::runtime_error("Attempt to add individual to 'world' instance."));
 }
